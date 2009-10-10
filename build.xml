@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+
+<!-- ////////////////////////////////////////////////////////////////////// -->
+<!-- Copyright (c) 2002 by Naohide Sano, All Rights Reserved.               -->
+<!--                                                                        -->
+<!-- Written by Naohide Sano                                                -->
+<!--                                                                        -->
+<!-- vavi-util-archive                                                      -->
+<!--                                                                        -->
+<!-- @author	Naohide Sano                                                -->
+<!-- @version	0.00	020522	nsano	initial version                     -->
+<!--                                                                        -->
+<!-- ////////////////////////////////////////////////////////////////////// -->
+
+<project default="compile" basedir="."
+         xmlns:ivy="antlib:org.apache.ivy.ant">
+
+  <!-- クラスパスの定義 -->
+  <path id="project.class.path">
+    <!-- 必要なライブラリを定義する -->
+  </path>
+
+  <!-- ターゲットの定義 -->
+
+  <!-- clean -->
+  <target name="clean" description="ビルド環境のクリア">
+    <delete>
+     <fileset dir="src">
+      <include name="**/*.class" />
+     </fileset>
+    </delete>
+  </target>
+
+  <!-- prepare -->
+  <target name="prepare" description="ビルド環境の準備">
+    <ivy:settings file="ivy-settings.xml" />
+    <ivy:convertpom pomFile="pom.xml" ivyFile="ivy.xml" />
+    <ivy:retrieve />
+  </target>
+
+  <!-- javac -->
+  <target name="compile" depends="prepare" description="コンパイル">
+    <javac debug="on" destdir="target/classes">
+      <classpath refid="project.class.path" />
+      <include name="**/*.java" />
+      <src path="src/main/java" />
+    </javac>
+  </target>
+
+  <!-- ivy report -->
+  <target name="ivy-report" depends="prepare">
+    <ivy:report todir="target/ivy-reports"/>
+  </target>
+
+</project>
+
+<!-- -->
