@@ -52,12 +52,16 @@ class CabHeader {
     /** per-cabinet reserved area */
     private byte[] perCabinetReservedArea = null;
     /** name of previous cabinet file in a set */
+    @SuppressWarnings("unused")
     private String previousCabinet = null;
     /** name of previous disk in a set */
+    @SuppressWarnings("unused")
     private String previousDisk = null;
     /** name of next cabinet in a set */
+    @SuppressWarnings("unused")
     private String nextCabinet = null;
     /** name of next disk in a set */
+    @SuppressWarnings("unused")
     private String nextDisk = null;
     /** */
     private int folderNumber;

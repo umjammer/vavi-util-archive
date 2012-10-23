@@ -12,7 +12,7 @@ import vavi.util.archive.Archive;
 
 
 /**
- * Archive ‚Ì Service Provider Interface ‚Å‚·D
+ * Archive ã® Service Provider Interface ã§ã™ï¼
  * 
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 021222 nsano initial version <br>
@@ -22,7 +22,7 @@ import vavi.util.archive.Archive;
 public interface ArchiveSpi {
 
     /**
-     * ‰ğ“€‚Å‚«‚é‚©‚Ç‚¤‚©’²‚×‚Ü‚·D
+     * è§£å‡ã§ãã‚‹ã‹ã©ã†ã‹èª¿ã¹ã¾ã™ï¼
      */
     boolean canExtractInput(Object target) throws IOException;
 

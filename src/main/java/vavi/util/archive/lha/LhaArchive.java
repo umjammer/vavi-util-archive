@@ -18,7 +18,7 @@ import vavi.util.archive.Entry;
 
 
 /**
- * LHA ƒA[ƒJƒCƒu‚ğˆ—‚·‚éƒT[ƒrƒXƒvƒƒoƒCƒ_‚Å‚·D
+ * LHA ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ã‚’å‡¦ç†ã™ã‚‹ã‚µãƒ¼ãƒ“ã‚¹ãƒ—ãƒ­ãƒã‚¤ãƒ€ã§ã™ï¼
  * 
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 021103 nsano initial version <br>
@@ -36,14 +36,14 @@ public class LhaArchive implements Archive {
     }
 
     /**
-     * ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã¾ã™ã€‚
      */
     public void close() throws IOException {
         archive.close();
     }
 
     /**
-     * ƒtƒ@ƒCƒ‹ƒGƒ“ƒgƒŠ‚Ì—ñ‹“‚ğ•Ô‚µ‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ã‚¨ãƒ³ãƒˆãƒªã®åˆ—æŒ™ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public Entry[] entries() {
         LhaHeader[] headers = archive.getEntries();
@@ -55,8 +55,8 @@ public class LhaArchive implements Archive {
     }
 
     /**
-     * w’è‚³‚ê‚½–¼‘O‚Ìƒtƒ@ƒCƒ‹ƒGƒ“ƒgƒŠ‚ğ•Ô‚µ‚Ü‚·B
-     * Œ©‚Â‚©‚ç‚È‚¢ê‡‚Í null ‚ğ•Ô‚µ‚Ü‚·B
+     * æŒ‡å®šã•ã‚ŒãŸåå‰ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚¨ãƒ³ãƒˆãƒªã‚’è¿”ã—ã¾ã™ã€‚
+     * è¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯ null ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public Entry getEntry(String name) {
         LhaHeader[] headers = archive.getEntries();
@@ -69,22 +69,22 @@ public class LhaArchive implements Archive {
     }
 
     /**
-     * w’è‚³‚ê‚½ ƒtƒ@ƒCƒ‹ƒGƒ“ƒgƒŠ‚Ì“à—e‚ğ“Ç‚İ‚Ş‚½‚ß‚Ì“ü—ÍƒXƒgƒŠ[ƒ€‚ğ
-     * •Ô‚µ‚Ü‚·B
+     * æŒ‡å®šã•ã‚ŒãŸ ãƒ•ã‚¡ã‚¤ãƒ«ã‚¨ãƒ³ãƒˆãƒªã®å†…å®¹ã‚’èª­ã¿è¾¼ã‚€ãŸã‚ã®å…¥åŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ ã‚’
+     * è¿”ã—ã¾ã™ã€‚
      */
     public InputStream getInputStream(Entry entry) throws IOException {
         return archive.getInputStream((LhaHeader) entry.getWrappedObject());
     }
 
     /**
-     * ƒtƒ@ƒCƒ‹‚ÌƒpƒX–¼‚ğ•Ô‚µ‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹åã‚’è¿”ã—ã¾ã™ã€‚
      */
     public String getName() {
         return null;
     }
 
     /**
-     * ƒtƒ@ƒCƒ‹’†‚ÌƒGƒ“ƒgƒŠ‚Ì”‚ğ•Ô‚µ‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ä¸­ã®ã‚¨ãƒ³ãƒˆãƒªã®æ•°ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public int size() {
         return archive.size();

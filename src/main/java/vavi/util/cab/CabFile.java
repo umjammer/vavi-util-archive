@@ -25,10 +25,12 @@ class CabFile {
     /** size of this file */
     private int fileSize = 0;
     /** offset of this file within the folder, not accounting for compression */
+    @SuppressWarnings("unused")
     private int uncompressedOffsetInCFFOLDER = 0;
     /** index of the CabFolder we belong to */
     private int folderIndex = 0;
     /** modification date */
+    @SuppressWarnings("unused")
     private Date date = null;
     /** attrs */
     private int attrs = 0;

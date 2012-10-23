@@ -30,6 +30,7 @@ class CabFolder {
     /** */
     public static final int COMPRESSION_LZX = 3;
     /** offset of first data block within this folder */
+    @SuppressWarnings("unused")
     private int firstBlockOffset = 0;
     /** number of data blocks */
     private int numBlocks = 0;

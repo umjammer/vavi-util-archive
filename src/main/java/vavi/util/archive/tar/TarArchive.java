@@ -20,7 +20,7 @@ import vavi.util.archive.Entry;
 
 
 /**
- * TAR ƒA[ƒJƒCƒu‚ğˆ—‚·‚éƒT[ƒrƒXƒvƒƒoƒCƒ_‚Å‚·D
+ * TAR ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ã‚’å‡¦ç†ã™ã‚‹ã‚µãƒ¼ãƒ“ã‚¹ãƒ—ãƒ­ãƒã‚¤ãƒ€ã§ã™ï¼
  * 
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 040106 nsano initial version <br>
@@ -55,21 +55,21 @@ public class TarArchive implements Archive {
     }
 
     /**
-     * ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã¾ã™ã€‚
      */
     public void close() throws IOException {
         archive.close();
     }
 
     /**
-     * ƒtƒ@ƒCƒ‹ƒGƒ“ƒgƒŠ‚Ì—ñ‹“‚ğ•Ô‚µ‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ã‚¨ãƒ³ãƒˆãƒªã®åˆ—æŒ™ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public Entry[] entries() {
         return entries;
     }
 
     /**
-     * w’è‚³‚ê‚½–¼‘O‚Ì TAR ƒtƒ@ƒCƒ‹ƒGƒ“ƒgƒŠ‚ğ•Ô‚µ‚Ü‚·B
+     * æŒ‡å®šã•ã‚ŒãŸåå‰ã® TAR ãƒ•ã‚¡ã‚¤ãƒ«ã‚¨ãƒ³ãƒˆãƒªã‚’è¿”ã—ã¾ã™ã€‚
      */
     public Entry getEntry(String name) {
         for (int i = 0; i < entries.length; i++) {
@@ -81,8 +81,8 @@ public class TarArchive implements Archive {
     }
 
     /**
-     * w’è‚³‚ê‚½ ƒtƒ@ƒCƒ‹ƒGƒ“ƒgƒŠ‚Ì“à—e‚ğ“Ç‚İ‚Ş‚½‚ß‚Ì“ü—ÍƒXƒgƒŠ[ƒ€‚ğ
-     * •Ô‚µ‚Ü‚·B
+     * æŒ‡å®šã•ã‚ŒãŸ ãƒ•ã‚¡ã‚¤ãƒ«ã‚¨ãƒ³ãƒˆãƒªã®å†…å®¹ã‚’èª­ã¿è¾¼ã‚€ãŸã‚ã®å…¥åŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ ã‚’
+     * è¿”ã—ã¾ã™ã€‚
      */
     public InputStream getInputStream(Entry entry) throws IOException {
         for (int i = 0; i < entries.length; i++) {
@@ -97,21 +97,21 @@ public class TarArchive implements Archive {
     }
 
     /**
-     * ƒtƒ@ƒCƒ‹‚ÌƒpƒX–¼‚ğ•Ô‚µ‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹åã‚’è¿”ã—ã¾ã™ã€‚
      */
     public String getName() {
         return name;
     }
 
     /**
-     * ƒtƒ@ƒCƒ‹‚ÌƒpƒX–¼‚ğæ“¾‚µ‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹åã‚’å–å¾—ã—ã¾ã™ã€‚
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * ƒtƒ@ƒCƒ‹’†‚ÌƒGƒ“ƒgƒŠ‚Ì”‚ğ•Ô‚µ‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ä¸­ã®ã‚¨ãƒ³ãƒˆãƒªã®æ•°ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public int size() {
         return entries.length;

@@ -17,8 +17,8 @@ import vavi.util.archive.Entry;
 
 
 /**
- * RAR ƒA[ƒJƒCƒu‚ðˆ—‚·‚éƒT[ƒrƒXƒvƒƒoƒCƒ_‚Å‚·D
- * (COM ƒo[ƒWƒ‡ƒ“)
+ * RAR ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ã‚’å‡¦ç†ã™ã‚‹ã‚µãƒ¼ãƒ“ã‚¹ãƒ—ãƒ­ãƒã‚¤ãƒ€ã§ã™ï¼Ž
+ * (COM ãƒãƒ¼ã‚¸ãƒ§ãƒ³)
  * 
  * @target 1.1
  * 

@@ -22,13 +22,12 @@ import vavi.util.archive.spi.CommonEntry;
 
 
 /**
- * StuffItWrapper.dll ‚Ìƒ‰ƒbƒp[ƒNƒ‰ƒX‚Å‚·B
+ * StuffItWrapper.dll ã®ãƒ©ãƒƒãƒ‘ãƒ¼ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
  * 
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 030226 nsano initial version <br>
  *          0.01 030228 nsano implements archive <br>
  */
-@SuppressWarnings("unused")
 public class NativeStuffItArchive implements Archive {
 
     /** */
@@ -47,14 +46,14 @@ System.err.println("StuffIt.dll: " + getVersion());
     }
 
     /**
-     * ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã¾ã™ã€‚
      */
     public void close() throws IOException {
         closeArchive();
     }
 
     /**
-     * ƒtƒ@ƒCƒ‹ƒGƒ“ƒgƒŠ‚Ì—ñ‹“‚ğ•Ô‚µ‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ã‚¨ãƒ³ãƒˆãƒªã®åˆ—æŒ™ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public Entry[] entries() {
         Entry[] entries = new Entry[this.entries.size()];
@@ -63,7 +62,7 @@ System.err.println("StuffIt.dll: " + getVersion());
     }
 
     /**
-     * w’è‚³‚ê‚½–¼‘O‚Ì ZIP ƒtƒ@ƒCƒ‹ƒGƒ“ƒgƒŠ‚ğ•Ô‚µ‚Ü‚·B
+     * æŒ‡å®šã•ã‚ŒãŸåå‰ã® ZIP ãƒ•ã‚¡ã‚¤ãƒ«ã‚¨ãƒ³ãƒˆãƒªã‚’è¿”ã—ã¾ã™ã€‚
      */
     public Entry getEntry(String name) {
         for (Entry entry : entries) {
@@ -75,8 +74,8 @@ System.err.println("StuffIt.dll: " + getVersion());
     }
 
     /**
-     * w’è‚³‚ê‚½ ƒtƒ@ƒCƒ‹ƒGƒ“ƒgƒŠ‚Ì“à—e‚ğ“Ç‚İ‚Ş‚½‚ß‚Ì“ü—ÍƒXƒgƒŠ[ƒ€‚ğ
-     * •Ô‚µ‚Ü‚·B
+     * æŒ‡å®šã•ã‚ŒãŸ ãƒ•ã‚¡ã‚¤ãƒ«ã‚¨ãƒ³ãƒˆãƒªã®å†…å®¹ã‚’èª­ã¿è¾¼ã‚€ãŸã‚ã®å…¥åŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ ã‚’
+     * è¿”ã—ã¾ã™ã€‚
      */
     public InputStream getInputStream(Entry entry) throws IOException {
 
@@ -98,14 +97,14 @@ Debug.println("commandLine: " + commandLine);
     }
 
     /**
-     * ƒtƒ@ƒCƒ‹‚ÌƒpƒX–¼‚ğ•Ô‚µ‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹åã‚’è¿”ã—ã¾ã™ã€‚
      */
     public String getName() {
         return file.getPath();
     }
 
     /**
-     * ƒtƒ@ƒCƒ‹’†‚ÌƒGƒ“ƒgƒŠ‚Ì”‚ğ•Ô‚µ‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ä¸­ã®ã‚¨ãƒ³ãƒˆãƒªã®æ•°ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public int size() {
         return entries.size();
@@ -150,19 +149,19 @@ Debug.println("commandLine: " + commandLine);
 
     // for Native method ------------------------------------------------------
 
-    /** ƒCƒ“ƒXƒ^ƒ“ƒX¯•Êq */
+    /** ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹è­˜åˆ¥å­ */
     private int instance;
 
-    // ƒCƒ“ƒ^[ƒtƒF[ƒX
+    // ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
 
-    /** ƒRƒ}ƒ“ƒh•¶š—ñ‚ğ—^‚¦‚ÄCŠeí‚Ì‘ŒÉ‘€ì‚ğs‚¢‚Ü‚·B */
+    /** ã‚³ãƒãƒ³ãƒ‰æ–‡å­—åˆ—ã‚’ä¸ãˆã¦ï¼Œå„ç¨®ã®æ›¸åº«æ“ä½œã‚’è¡Œã„ã¾ã™ã€‚ */
     private native void exec(String command) throws IOException;
-    /** ƒo[ƒWƒ‡ƒ“‚ğ•Ô‚µ‚Ü‚·B */
+    /** ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’è¿”ã—ã¾ã™ã€‚ */
     private native int getVersion();
 
-    /** ‘ŒÉƒtƒ@ƒCƒ‹‚ğŠJ‚«‚Ü‚·B */
+    /** æ›¸åº«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ãã¾ã™ã€‚ */
     private native void openArchive(String filename, int mode) throws IOException;
-    /** ‘ŒÉƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚Ü‚·B */
+    /** æ›¸åº«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã¾ã™ã€‚ */
     private native void closeArchive() throws IOException;
 
     /** */

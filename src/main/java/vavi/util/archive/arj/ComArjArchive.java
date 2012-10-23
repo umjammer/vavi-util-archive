@@ -17,8 +17,8 @@ import vavi.util.archive.Entry;
 
 
 /**
- * ARJ ƒA[ƒJƒCƒu‚ğˆ—‚·‚éƒT[ƒrƒXƒvƒƒoƒCƒ_‚Å‚·D
- * (COM ƒo[ƒWƒ‡ƒ“)
+ * ARJ ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ã‚’å‡¦ç†ã™ã‚‹ã‚µãƒ¼ãƒ“ã‚¹ãƒ—ãƒ­ãƒã‚¤ãƒ€ã§ã™ï¼
+ * (COM ãƒãƒ¼ã‚¸ãƒ§ãƒ³)
  * 
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 041002 nsano initial version <br>

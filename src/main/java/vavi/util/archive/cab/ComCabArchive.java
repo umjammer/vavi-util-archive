@@ -17,8 +17,8 @@ import vavi.util.archive.Entry;
 
 
 /**
- * CAB ƒA[ƒJƒCƒu‚ðˆ—‚·‚éƒT[ƒrƒXƒvƒƒoƒCƒ_‚Å‚·D
- * (COM ƒo[ƒWƒ‡ƒ“)
+ * CAB ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ã‚’å‡¦ç†ã™ã‚‹ã‚µãƒ¼ãƒ“ã‚¹ãƒ—ãƒ­ãƒã‚¤ãƒ€ã§ã™ï¼Ž
+ * (COM ãƒãƒ¼ã‚¸ãƒ§ãƒ³)
  * 
  * @target 1.1
  * 

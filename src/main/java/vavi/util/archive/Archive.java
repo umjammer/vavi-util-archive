@@ -11,7 +11,7 @@ import java.io.InputStream;
 
 
 /**
- * �A�[�J�C�u��\���C���^�[�t�F�[�X�ł��D
+ * アーカイブを表すインターフェースです．
  * 
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 021103 nsano initial version <br>
@@ -21,33 +21,33 @@ import java.io.InputStream;
 public interface Archive {
 
     /**
-     * �t�@�C������܂��B
+     * ファイルを閉じます。
      */
     void close() throws IOException;
 
     /**
-     * �t�@�C���G���g���̗񋓂�Ԃ��܂��B
+     * ファイルエントリの列挙を返します。
      */
     Entry[] entries();
 
     /**
-     * �w�肳�ꂽ���O�� ZIP �t�@�C���G���g����Ԃ��܂��B
+     * 指定された名前の ZIP ファイルエントリを返します。
      */
     Entry getEntry(String name);
 
     /**
-     * �w�肳�ꂽ �t�@�C���G���g���̓��e��ǂݍ��ނ��߂̓��̓X�g���[����
-     * �Ԃ��܂��B
+     * 指定された ファイルエントリの内容を読み込むための入力ストリームを
+     * 返します。
      */
     InputStream getInputStream(Entry entry) throws IOException;
 
     /**
-     * �t�@�C���̃p�X����Ԃ��܂��B
+     * ファイルのパス名を返します。
      */
     String getName();
 
     /**
-     * �t�@�C�����̃G���g���̐���Ԃ��܂��B
+     * ファイル中のエントリの数を返します。
      */
     int size();
 }

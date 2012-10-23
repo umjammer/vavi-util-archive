@@ -16,7 +16,7 @@ import vavi.util.archive.spi.InputStreamSpi;
 
 
 /**
- * BZip2 ƒA[ƒJƒCƒu‚ğˆ—‚·‚éƒT[ƒrƒXƒvƒƒoƒCƒ_‚Å‚·D
+ * BZip2 ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ã‚’å‡¦ç†ã™ã‚‹ã‚µãƒ¼ãƒ“ã‚¹ãƒ—ãƒ­ãƒã‚¤ãƒ€ã§ã™ï¼
  * 
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 040105 nsano initial version <br>
@@ -27,8 +27,8 @@ public class BZip2InputStreamSpi implements InputStreamSpi {
     private Object target;
 
     /**
-     * L’£‚Å‚«‚é‚©‚Ç‚¤‚©’²‚×‚Ü‚·D
-     * @param target ¡‚Ì‚Æ‚±‚ë InputStream ‚µ‚©ó‚¯•t‚¯‚Ü‚¹‚ñ
+     * ä¼¸å¼µã§ãã‚‹ã‹ã©ã†ã‹èª¿ã¹ã¾ã™ï¼
+     * @param target ä»Šã®ã¨ã“ã‚ InputStream ã—ã‹å—ã‘ä»˜ã‘ã¾ã›ã‚“
      */
     public boolean canExpandInput(Object target) throws IOException {
 

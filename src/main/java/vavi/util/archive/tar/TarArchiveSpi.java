@@ -17,7 +17,7 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 
 /**
- * TAR ƒA[ƒJƒCƒu‚ğˆ—‚·‚éƒT[ƒrƒXƒvƒƒoƒCƒ_‚Å‚·D
+ * TAR ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ã‚’å‡¦ç†ã™ã‚‹ã‚µãƒ¼ãƒ“ã‚¹ãƒ—ãƒ­ãƒã‚¤ãƒ€ã§ã™ï¼
  * 
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 040106 nsano initial version <br>
@@ -31,8 +31,8 @@ public class TarArchiveSpi implements ArchiveSpi {
     private static final int SKIP = 257;
 
     /**
-     * ‰ğ“€‚Å‚«‚é‚©‚Ç‚¤‚©’²‚×‚Ü‚·D
-     * @param target ¡‚Ì‚Æ‚±‚ë InputStream ‚µ‚©ó‚¯•t‚¯‚Ü‚¹‚ñ
+     * è§£å‡ã§ãã‚‹ã‹ã©ã†ã‹èª¿ã¹ã¾ã™ï¼
+     * @param target ä»Šã®ã¨ã“ã‚ InputStream ã—ã‹å—ã‘ä»˜ã‘ã¾ã›ã‚“
      */
     public boolean canExtractInput(Object target) throws IOException {
 
@@ -74,7 +74,7 @@ Debug.println(is);
 
 Debug.println("tar magic:\n" + StringUtil.getDump(b));
         return "ustar".equals(new String(b, "ISO-8859-1")) ||
-            (b[0] == 0x00 &&	// TODO magic –³‚¢“z‚ª‚¢‚é
+            (b[0] == 0x00 &&	// TODO magic ç„¡ã„å¥´ãŒã„ã‚‹
              b[1] == 0x00 &&
              b[2] == 0x00 &&
              b[3] == 0x00 &&

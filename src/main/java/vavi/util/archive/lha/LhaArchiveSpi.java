@@ -17,7 +17,7 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 
 /**
- * LHA ƒA[ƒJƒCƒu‚ğˆ—‚·‚éƒT[ƒrƒXƒvƒƒoƒCƒ_‚Å‚·D
+ * LHA ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ã‚’å‡¦ç†ã™ã‚‹ã‚µãƒ¼ãƒ“ã‚¹ãƒ—ãƒ­ãƒã‚¤ãƒ€ã§ã™ï¼
  * 
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 021222 nsano initial version <br>
@@ -28,7 +28,7 @@ public class LhaArchiveSpi implements ArchiveSpi {
     private Object target;
 
     /**
-     * ‰ğ“€‚Å‚«‚é‚©‚Ç‚¤‚©’²‚×‚Ü‚·D
+     * è§£å‡ã§ãã‚‹ã‹ã©ã†ã‹èª¿ã¹ã¾ã™ï¼
      */
     public boolean canExtractInput(Object target) throws IOException {
 

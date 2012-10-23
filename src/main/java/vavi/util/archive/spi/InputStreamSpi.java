@@ -11,7 +11,7 @@ import java.io.InputStream;
 
 
 /**
- * Archive ‚Ì Service Provider Interface ‚Å‚·D
+ * Archive ã® Service Provider Interface ã§ã™ï¼
  * 
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 040105 nsano initial version <br>
@@ -20,7 +20,7 @@ import java.io.InputStream;
 public interface InputStreamSpi {
 
     /**
-     * ‰ğ“€‚Å‚«‚é‚©‚Ç‚¤‚©’²‚×‚Ü‚·D
+     * è§£å‡ã§ãã‚‹ã‹ã©ã†ã‹èª¿ã¹ã¾ã™ï¼
      */
     boolean canExpandInput(Object target) throws IOException;
 

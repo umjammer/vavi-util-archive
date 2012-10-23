@@ -26,7 +26,7 @@ import vavix.util.ComUtil;
 
 
 /**
- * KBA front endD
+ * KBA front endï¼
  * 
  * @target 1.1
  * 
@@ -164,7 +164,7 @@ Debug.println("findNext: " + ComUtil.toObject(result));
     }
 
     /**
-     * ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã¾ã™ã€‚
      */
     public void close() throws IOException {
         Variant result = Dispatch.invoke(module, "CloseArc", Dispatch.Method, new Object[] {}, new int[1]);
@@ -173,7 +173,7 @@ Debug.println(ComUtil.toObject(result));
     }
 
     /**
-     * ƒtƒ@ƒCƒ‹ƒGƒ“ƒgƒŠ‚Ì—ñ‹“‚ğ•Ô‚µ‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ã‚¨ãƒ³ãƒˆãƒªã®åˆ—æŒ™ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public Entry[] entries() {
         Entry[] entries = new Entry[this.entries.size()];
@@ -182,8 +182,8 @@ Debug.println(ComUtil.toObject(result));
     }
 
     /**
-     * w’è‚³‚ê‚½–¼‘O‚Ì RAR ƒtƒ@ƒCƒ‹ƒGƒ“ƒgƒŠ‚ğ•Ô‚µ‚Ü‚·B
-     * Œ©‚Â‚©‚ç‚È‚¢ê‡‚Í null ‚ğ•Ô‚µ‚Ü‚·B
+     * æŒ‡å®šã•ã‚ŒãŸåå‰ã® RAR ãƒ•ã‚¡ã‚¤ãƒ«ã‚¨ãƒ³ãƒˆãƒªã‚’è¿”ã—ã¾ã™ã€‚
+     * è¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯ null ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public Entry getEntry(String name) {
         for (Entry entry : entries) {
@@ -196,8 +196,8 @@ Debug.println(ComUtil.toObject(result));
     }
 
     /**
-     * w’è‚³‚ê‚½ ƒtƒ@ƒCƒ‹ƒGƒ“ƒgƒŠ‚Ì“à—e‚ğ“Ç‚İ‚Ş‚½‚ß‚Ì“ü—ÍƒXƒgƒŠ[ƒ€‚ğ
-     * •Ô‚µ‚Ü‚·B
+     * æŒ‡å®šã•ã‚ŒãŸ ãƒ•ã‚¡ã‚¤ãƒ«ã‚¨ãƒ³ãƒˆãƒªã®å†…å®¹ã‚’èª­ã¿è¾¼ã‚€ãŸã‚ã®å…¥åŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ ã‚’
+     * è¿”ã—ã¾ã™ã€‚
      */
     public InputStream getInputStream(Entry entry) throws IOException {
         Variant result = Dispatch.invoke(module, "ArcCmd", Dispatch.Method, new Object[] { getCommandString(entry) }, new int[1]);
@@ -217,21 +217,21 @@ Debug.println("result: " + resultString);
         }
     }
 
-    /** COM ‚É“n‚·ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚ğ•Ô‚µ‚Ä‚­‚¾‚³‚¢B */
+    /** COM ã«æ¸¡ã™ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã‚’è¿”ã—ã¦ãã ã•ã„ã€‚ */
     protected abstract String getCommandString(Entry entry);
 
-    /** ‰ğ“€‚³‚ê‚½ƒtƒ@ƒCƒ‹ƒl[ƒ€‚ğ•Ô‚µ‚Ä‚­‚¾‚³‚¢B */
+    /** è§£å‡ã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒ¼ãƒ ã‚’è¿”ã—ã¦ãã ã•ã„ã€‚ */
     protected abstract String getTemporaryFileName(Entry entry);
 
     /**
-     * ƒtƒ@ƒCƒ‹‚ÌƒpƒX–¼‚ğ•Ô‚µ‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹åã‚’è¿”ã—ã¾ã™ã€‚
      */
     public String getName() {
         return file.getPath();
     }
 
     /**
-     * ƒtƒ@ƒCƒ‹’†‚ÌƒGƒ“ƒgƒŠ‚Ì”‚ğ•Ô‚µ‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ä¸­ã®ã‚¨ãƒ³ãƒˆãƒªã®æ•°ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public int size() {
         return entries.size();

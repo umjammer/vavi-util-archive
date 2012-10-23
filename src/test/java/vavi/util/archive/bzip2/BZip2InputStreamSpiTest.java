@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 public class BZip2InputStreamSpiTest {
 
     public void test01() throws Exception {
-        
+        fail("Not yet implemented");
     }
 }
 

@@ -17,7 +17,7 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 
 /**
- * ARJ ƒA[ƒJƒCƒu‚ğˆ—‚·‚éƒT[ƒrƒXƒvƒƒoƒCƒ_‚Å‚·D
+ * ARJ ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ã‚’å‡¦ç†ã™ã‚‹ã‚µãƒ¼ãƒ“ã‚¹ãƒ—ãƒ­ãƒã‚¤ãƒ€ã§ã™ï¼
  * 
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 041002 nsano initial version <br>
@@ -28,8 +28,8 @@ public class ArjArchiveSpi implements ArchiveSpi {
     private Object target;
 
     /**
-     * ‰ğ“€‚Å‚«‚é‚©‚Ç‚¤‚©’²‚×‚Ü‚·D
-     * @param target ¡‚Ì‚Æ‚±‚ë File ‚µ‚©ó‚¯•t‚¯‚Ü‚¹‚ñ
+     * è§£å‡ã§ãã‚‹ã‹ã©ã†ã‹èª¿ã¹ã¾ã™ï¼
+     * @param target ä»Šã®ã¨ã“ã‚ File ã—ã‹å—ã‘ä»˜ã‘ã¾ã›ã‚“
      */
     public boolean canExtractInput(Object target) throws IOException {
 
@@ -56,7 +56,7 @@ public class ArjArchiveSpi implements ArchiveSpi {
                b[2] == 'J';
     }
 
-    /** TODO ƒvƒƒpƒeƒB‚Å‘I‘ğ‰Â”\‚ÉH */
+    /** TODO ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã§é¸æŠå¯èƒ½ã«ï¼Ÿ */
     public Archive createArchiveInstance() throws IOException {
         return new ComArjArchive((File) target);
     }

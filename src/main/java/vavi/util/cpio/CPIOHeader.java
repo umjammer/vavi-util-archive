@@ -62,6 +62,8 @@ import java.io.InputStream;
  */
 public class CPIOHeader {
 
+    private boolean isDebug = false;
+    
     public static final int FMT_UNKNOWN = 0;
     public static final int FMT_BINARY = 1;
     public static final int FMT_BINSWAP = 2;
@@ -113,7 +115,7 @@ public class CPIOHeader {
             result = (this.filesize % 2);
             break;
         }
-        if (false) {
+        if (isDebug) {
             System.err.println("FILEPAD: size=" + this.filesize + "  pad=" + result);
         }
         return result;
@@ -137,7 +139,7 @@ public class CPIOHeader {
             break;
         }
 
-        if (false) {
+        if (isDebug) {
             System.err.println("NAMEPAD: size=" + size + "(nm=" + this.namesize + ")  pad=" + result);
         }
         return result;
@@ -191,7 +193,7 @@ public class CPIOHeader {
         this.hdrBytes = new byte[this.hdrSize];
         System.arraycopy(prime, 0, this.hdrBytes, 0, 6);
         numRead = in.read(this.hdrBytes, 6, (this.hdrSize - 6));
-        if (false) {
+        if (isDebug) {
             System.err.println("FORMAT:  " + this.format);
             System.err.println("HDRSIZE: " + this.hdrSize);
         }
@@ -202,7 +204,7 @@ public class CPIOHeader {
 
         this.parseHeader(this.hdrBytes);
 
-        if (false) {
+        if (isDebug) {
             System.err.println("NMSIZE:  " + this.namesize);
         }
 
@@ -258,15 +260,15 @@ public class CPIOHeader {
         this.mtime = readInt(hdr, offset, "mtime");
         offset += 4;
 
-        if (false)
+        if (isDebug)
             System.err.println("MTIME: " + this.mtime);
         this.namesize = readShort(hdr, offset, "namesize");
         offset += 2;
 
-        if (false)
+        if (isDebug)
             System.err.println("NAMESIZE: " + this.namesize);
         this.filesize = readInt(hdr, offset, "filesize");
-        if (false)
+        if (isDebug)
             System.err.println("FILESIZE: " + this.filesize);
     }
 
@@ -309,7 +311,7 @@ public class CPIOHeader {
         this.checksum = readHex(hdr, offset, 8, "checksum");
         offset += 8;
 
-        if (false) {
+        if (isDebug) {
             System.err.println("NAMESIZE: " + this.namesize);
             System.err.println("FILESIZE: " + this.filesize);
             System.err.println("MTIME:    " + this.mtime);
@@ -351,7 +353,7 @@ public class CPIOHeader {
         this.filesize = readOctal(hdr, offset, 11, "filesize");
         offset += 11;
 
-        if (false) {
+        if (isDebug) {
             System.err.println("NAMESIZE: " + this.namesize);
             System.err.println("FILESIZE: " + this.filesize);
             System.err.println("MTIME:    " + this.mtime);
@@ -371,7 +373,7 @@ public class CPIOHeader {
             b1 = buf[offset + 0];
         }
 
-        if (false) {
+        if (isDebug) {
             System.err.printf("READSHORT: IN [1, 0] = [ %02X, %02X ]\n", b1, b0);
             System.err.println("READSHORT: [0]'" + buf[offset + 0] + " [1]'" + buf[offset + 1] + "' b0=" + b0 + "  b1=" + b1);
         }
@@ -382,13 +384,13 @@ public class CPIOHeader {
         if (b1 < 0) {
             b1 = b1 + 256;
         }
-        if (false) {
+        if (isDebug) {
             System.err.println("READSHORT: ADJUSTED b0=" + b0 + "  b1=" + b1);
         }
 
         result = (b1 << 8) + b0;
 
-        if (false) {
+        if (isDebug) {
             System.err.println("READSHORT: result = " + result + "  swap = " + (this.format == FMT_BINSWAP));
         }
 
@@ -399,7 +401,7 @@ public class CPIOHeader {
         int result = 0;
 
         int b3, b2, b1, b0;
-        if (false)
+        if (isDebug)
             System.err.printf("READINT: DATA [3, 2, 1, 0] = [ %02X, %02X, %02X, %02X ]\n", buf[offset + 0], buf[offset + 1], buf[offset + 2], buf[offset + 3]);
         if (this.format == FMT_BINSWAP) {
             b0 = buf[offset + 2];
@@ -413,7 +415,7 @@ public class CPIOHeader {
             b3 = buf[offset + 0];
         }
 
-        if (false) {
+        if (isDebug) {
             System.err.printf("READINT: READ [3, 2, 1, 0] = [ %02X, %02X, %02X, %02X ]\n", b3, b2, b1, b0);
         }
         if (b0 < 0) {
@@ -429,13 +431,13 @@ public class CPIOHeader {
             b3 = b3 + 256;
         }
 
-        if (false) {
+        if (isDebug) {
             System.err.println("READINT: IN [3, 2, 1, 0] = [ " + b3 + "," + b2 + "," + b1 + "," + b0 + " ]");
         }
 
         result = (b3 << 24) + (b2 << 16) + (b1 << 8) + b0;
 
-        if (false) {
+        if (isDebug) {
             System.err.println("READINT: result = " + result);
         }
 
@@ -481,7 +483,7 @@ public class CPIOHeader {
             result = (result * 16) + dig;
         }
 
-        if (false) {
+        if (isDebug) {
             System.err.println("PARSE HEX: '" + field + "'  '" + (new String(buf, offset, length)) + "' result = " + result);
         }
 

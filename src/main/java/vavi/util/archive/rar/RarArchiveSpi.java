@@ -17,7 +17,7 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 
 /**
- * RAR ƒA[ƒJƒCƒu‚ğˆ—‚·‚éƒT[ƒrƒXƒvƒƒoƒCƒ_‚Å‚·D
+ * RAR ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ã‚’å‡¦ç†ã™ã‚‹ã‚µãƒ¼ãƒ“ã‚¹ãƒ—ãƒ­ãƒã‚¤ãƒ€ã§ã™ï¼
  * 
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 021222 nsano initial version <br>
@@ -30,8 +30,8 @@ public class RarArchiveSpi implements ArchiveSpi {
     private Object target;
 
     /**
-     * ‰ğ“€‚Å‚«‚é‚©‚Ç‚¤‚©’²‚×‚Ü‚·D
-     * @param target ¡‚Ì‚Æ‚±‚ë File ‚µ‚©ó‚¯•t‚¯‚Ü‚¹‚ñ
+     * è§£å‡ã§ãã‚‹ã‹ã©ã†ã‹èª¿ã¹ã¾ã™ï¼
+     * @param target ä»Šã®ã¨ã“ã‚ File ã—ã‹å—ã‘ä»˜ã‘ã¾ã›ã‚“
      */
     public boolean canExtractInput(Object target) throws IOException {
 

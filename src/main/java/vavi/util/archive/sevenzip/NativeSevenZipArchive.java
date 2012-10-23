@@ -29,7 +29,7 @@ import vavi.util.win32.DateUtil;
 
 
 /**
- * 7-zip32.dll ‚Ìƒ‰ƒbƒp[ƒNƒ‰ƒX‚Å‚·B
+ * 7-zip32.dll ã®ãƒ©ãƒƒãƒ‘ãƒ¼ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
  * 
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 030228 nsano initial version <br>
@@ -69,14 +69,14 @@ System.err.println("time: " + new Date(entry.getTime()));
     }
 
     /**
-     * ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã¾ã™ã€‚
      */
     public void close() throws IOException {
         closeArchive();
     }
 
     /**
-     * ƒtƒ@ƒCƒ‹ƒGƒ“ƒgƒŠ‚Ì—ñ‹“‚ğ•Ô‚µ‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ã‚¨ãƒ³ãƒˆãƒªã®åˆ—æŒ™ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public Entry[] entries() {
         Entry[] entries = new Entry[this.entries.size()];
@@ -85,7 +85,7 @@ System.err.println("time: " + new Date(entry.getTime()));
     }
 
     /**
-     * w’è‚³‚ê‚½–¼‘O‚Ì ZIP ƒtƒ@ƒCƒ‹ƒGƒ“ƒgƒŠ‚ğ•Ô‚µ‚Ü‚·B
+     * æŒ‡å®šã•ã‚ŒãŸåå‰ã® ZIP ãƒ•ã‚¡ã‚¤ãƒ«ã‚¨ãƒ³ãƒˆãƒªã‚’è¿”ã—ã¾ã™ã€‚
      */
     public Entry getEntry(String name) {
         for (Entry entry : entries) {
@@ -97,8 +97,8 @@ System.err.println("time: " + new Date(entry.getTime()));
     }
 
     /**
-     * w’è‚³‚ê‚½ ƒtƒ@ƒCƒ‹ƒGƒ“ƒgƒŠ‚Ì“à—e‚ğ“Ç‚İ‚Ş‚½‚ß‚Ì“ü—ÍƒXƒgƒŠ[ƒ€‚ğ
-     * •Ô‚µ‚Ü‚·B
+     * æŒ‡å®šã•ã‚ŒãŸ ãƒ•ã‚¡ã‚¤ãƒ«ã‚¨ãƒ³ãƒˆãƒªã®å†…å®¹ã‚’èª­ã¿è¾¼ã‚€ãŸã‚ã®å…¥åŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ ã‚’
+     * è¿”ã—ã¾ã™ã€‚
      */
     public InputStream getInputStream(Entry entry) throws IOException {
 
@@ -135,14 +135,14 @@ try {
     }
 
     /**
-     * ƒtƒ@ƒCƒ‹‚ÌƒpƒX–¼‚ğ•Ô‚µ‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹åã‚’è¿”ã—ã¾ã™ã€‚
      */
     public String getName() {
         return file.getPath();
     }
 
     /**
-     * ƒtƒ@ƒCƒ‹’†‚ÌƒGƒ“ƒgƒŠ‚Ì”‚ğ•Ô‚µ‚Ü‚·B
+     * ãƒ•ã‚¡ã‚¤ãƒ«ä¸­ã®ã‚¨ãƒ³ãƒˆãƒªã®æ•°ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public int size() {
         return entries.size();
@@ -167,62 +167,54 @@ Debug.printStackTrace(e);
 
     // for Native method ------------------------------------------------------
 
-    /** ƒCƒ“ƒXƒ^ƒ“ƒX¯•Êq */
-    @SuppressWarnings("unused")
+    /** ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹è­˜åˆ¥å­ */
     private int instance;
 
-    /** getFileName ‚ª‚¤‚Ü‚­‚¢‚©‚ñ‚©‚ç‘ã—p */
+    /** getFileName ãŒã†ã¾ãã„ã‹ã‚“ã‹ã‚‰ä»£ç”¨ */
     private String currentFilename;
 
-    // ƒCƒ“ƒ^[ƒtƒF[ƒX
+    // ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
 
-    /** ƒRƒ}ƒ“ƒh•¶š—ñ‚ğ—^‚¦‚ÄCŠeí‚Ì‘ŒÉ‘€ì‚ğs‚¢‚Ü‚·B */
+    /** ã‚³ãƒãƒ³ãƒ‰æ–‡å­—åˆ—ã‚’ä¸ãˆã¦ï¼Œå„ç¨®ã®æ›¸åº«æ“ä½œã‚’è¡Œã„ã¾ã™ã€‚ */
     private native void exec(String command) throws IOException;
-    /** ƒo[ƒWƒ‡ƒ“‚ğ•Ô‚µ‚Ü‚·B */
+    /** ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’è¿”ã—ã¾ã™ã€‚ */
     private native int getVersion();
-    /** “®ì’†‚©”Û‚©‚ğ“¾‚Ü‚·B */
-    @SuppressWarnings("unused")
+    /** å‹•ä½œä¸­ã‹å¦ã‹ã‚’å¾—ã¾ã™ã€‚ */
     private native boolean isRunning();
 
-    /** w’èƒtƒ@ƒCƒ‹‚ª‘ŒÉ‚Æ‚µ‚Ä³‚µ‚¢‚©‚Ç‚¤‚©‚ğ•Ô‚µ‚Ü‚·B */
-    @SuppressWarnings("unused")
+    /** æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ãŒæ›¸åº«ã¨ã—ã¦æ­£ã—ã„ã‹ã©ã†ã‹ã‚’è¿”ã—ã¾ã™ã€‚ */
     private native boolean checkArchive(String filename, int mode);
-    /** w’è‚³‚ê‚½‘ŒÉƒtƒ@ƒCƒ‹‚ÉŠi”[‚³‚ê‚Ä‚¢‚éƒtƒ@ƒCƒ‹”‚ğ“¾‚Ü‚·B */
-    @SuppressWarnings("unused")
+    /** æŒ‡å®šã•ã‚ŒãŸæ›¸åº«ãƒ•ã‚¡ã‚¤ãƒ«ã«æ ¼ç´ã•ã‚Œã¦ã„ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«æ•°ã‚’å¾—ã¾ã™ã€‚ */
     private native int getFileCount(String filename) throws IOException;
-    /** ‘ŒÉƒtƒ@ƒCƒ‹‚ğŠJ‚«‚Ü‚·B */
+    /** æ›¸åº«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ãã¾ã™ã€‚ */
     private native void openArchive(String filename, int mode) throws IOException;
-    /** ‘ŒÉƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚Ü‚·B */
+    /** æ›¸åº«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã¾ã™ã€‚ */
     private native void closeArchive() throws IOException;
-    /** Å‰‚ÌŠi”[ƒtƒ@ƒCƒ‹‚Ìî•ñ‚ğ“¾‚Ü‚·B */
+    /** æœ€åˆã®æ ¼ç´ãƒ•ã‚¡ã‚¤ãƒ«ã®æƒ…å ±ã‚’å¾—ã¾ã™ã€‚ */
     private native boolean findFirst(String key) throws IOException;
-    /** 2 ”Ô–ÚˆÈ~‚ÌŠi”[ƒtƒ@ƒCƒ‹‚Ìî•ñ‚ğ“¾‚Ü‚·B */
+    /** 2 ç•ªç›®ä»¥é™ã®æ ¼ç´ãƒ•ã‚¡ã‚¤ãƒ«ã®æƒ…å ±ã‚’å¾—ã¾ã™ã€‚ */
     private native boolean findNext();
 
-    /** Ši”[ƒtƒ@ƒCƒ‹‚Ìƒtƒ@ƒCƒ‹–¼‚ğ“¾‚Ü‚·B */
-    @SuppressWarnings("unused")
+    /** æ ¼ç´ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å¾—ã¾ã™ã€‚ */
     private native String getCurrentFileName() throws IOException;
-    /** Ši”[ƒtƒ@ƒCƒ‹‚Ìˆ³k–@‚ğ“¾‚Ü‚·B */
+    /** æ ¼ç´ãƒ•ã‚¡ã‚¤ãƒ«ã®åœ§ç¸®æ³•ã‚’å¾—ã¾ã™ã€‚ */
     private native int getCurrentMethod() throws IOException;
-    /** Ši”[ƒtƒ@ƒCƒ‹‚ÌƒTƒCƒY‚ğ“¾‚Ü‚·B */
+    /** æ ¼ç´ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚µã‚¤ã‚ºã‚’å¾—ã¾ã™ã€‚ */
     private native long getCurrentOriginalSize() throws IOException;
-    /** Ši”[ƒtƒ@ƒCƒ‹‚Ìˆ³kƒTƒCƒY‚ğ“¾‚Ü‚·B */
+    /** æ ¼ç´ãƒ•ã‚¡ã‚¤ãƒ«ã®åœ§ç¸®ã‚µã‚¤ã‚ºã‚’å¾—ã¾ã™ã€‚ */
     private native long getCurrentCompressedSize() throws IOException;
-    /** Ši”[ƒtƒ@ƒCƒ‹‚Ì“ú•t‚ğ DOS Œ`®‚Å“¾‚Ü‚·B */
+    /** æ ¼ç´ãƒ•ã‚¡ã‚¤ãƒ«ã®æ—¥ä»˜ã‚’ DOS å½¢å¼ã§å¾—ã¾ã™ã€‚ */
     private native int getCurrentDate() throws IOException;
-    /** Ši”[ƒtƒ@ƒCƒ‹‚Ì‚ğ DOS Œ`®‚Å“¾‚Ü‚·B */
+    /** æ ¼ç´ãƒ•ã‚¡ã‚¤ãƒ«ã®æ™‚åˆ»ã‚’ DOS å½¢å¼ã§å¾—ã¾ã™ã€‚ */
     private native int getCurrentTime() throws IOException;
-    /** Ši”[ƒtƒ@ƒCƒ‹‚Ìƒ`ƒFƒbƒNƒTƒ€‚ğ“¾‚Ü‚·B */
+    /** æ ¼ç´ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒã‚§ãƒƒã‚¯ã‚µãƒ ã‚’å¾—ã¾ã™ã€‚ */
     private native long getCurrentCRC() throws IOException;
 
-    /** ŒŸõ‚Éƒ}ƒbƒ`‚µ‚½ƒtƒ@ƒCƒ‹‚ÌƒTƒCƒY‚Ì‡Œv‚ğ“¾‚Ü‚·B */
-    @SuppressWarnings("unused")
+    /** æ¤œç´¢ã«ãƒãƒƒãƒã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚µã‚¤ã‚ºã®åˆè¨ˆã‚’å¾—ã¾ã™ã€‚ */
     private native long getSelectedSize() throws IOException;
-    /** ŒŸõ‚Éƒ}ƒbƒ`‚µ‚½ƒtƒ@ƒCƒ‹‚Ìˆ³kƒTƒCƒY‚Ì‡Œv‚ğ“¾‚Ü‚·B */
-    @SuppressWarnings("unused")
+    /** æ¤œç´¢ã«ãƒãƒƒãƒã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã®åœ§ç¸®ã‚µã‚¤ã‚ºã®åˆè¨ˆã‚’å¾—ã¾ã™ã€‚ */
     private native long getSelectedCompressedSize() throws IOException;
-    /** ŒŸõ‚Éƒ}ƒbƒ`‚µ‚½ƒtƒ@ƒCƒ‹‚Ì‘S‘Ì‚Ìˆ³k—¦‚ğ“¾‚Ü‚·B */
-    @SuppressWarnings("unused")
+    /** æ¤œç´¢ã«ãƒãƒƒãƒã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã®å…¨ä½“ã®åœ§ç¸®ç‡ã‚’å¾—ã¾ã™ã€‚ */
     private native int getSelectedRatio() throws IOException;
 
     /** */

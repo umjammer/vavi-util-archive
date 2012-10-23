@@ -21,9 +21,13 @@ public class RPMInputStream extends Object {
 
     private CPIOInputStream cpio = null;
 
+    @SuppressWarnings("unused")
     private String name = null;
+    @SuppressWarnings("unused")
     private String version = null;
+    @SuppressWarnings("unused")
     private String release = null;
+    @SuppressWarnings("unused")
     private String arch = null;
 
     private RPMLead lead = new RPMLead();
@@ -32,6 +36,7 @@ public class RPMInputStream extends Object {
 
     private RPMIndexEntry[] sigEntries = new RPMIndexEntry[0];
 
+    @SuppressWarnings("unused")
     private byte[] sigBuffer = new byte[0];
 
     private RPMHeader headerHeader = new RPMHeader();
@@ -194,6 +199,7 @@ public class RPMInputStream extends Object {
     }
 
     private RPMIndexEntry readRPMIndexEntry() throws InvalidRPMFileException {
+        @SuppressWarnings("unused")
         int numRead = 0;
         String item = "tag";
         RPMIndexEntry result = new RPMIndexEntry();

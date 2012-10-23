@@ -11,7 +11,7 @@ import vavi.util.archive.Entry;
 
 
 /**
- * ‹¤’Ê“I‚ÈƒA[ƒJƒCƒuƒGƒ“ƒgƒŠ‚Å‚·D
+ * å…±é€šçš„ãªã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ã‚¨ãƒ³ãƒˆãƒªã§ã™ï¼
  * 
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 030211 nsano initial version <br>
@@ -43,70 +43,70 @@ public class CommonEntry implements Entry {
     }
 
     /**
-     * ƒGƒ“ƒgƒŠ‚ÌƒRƒƒ“ƒg•¶š—ñ‚ğ•Ô‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªã®ã‚³ãƒ¡ãƒ³ãƒˆæ–‡å­—åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public String getComment() {
         return comment;
     }
 
     /**
-     * ˆ³k‚³‚ê‚½ƒGƒ“ƒgƒŠƒf[ƒ^‚ÌƒTƒCƒY‚ğ•Ô‚µ‚Ü‚·B
+     * åœ§ç¸®ã•ã‚ŒãŸã‚¨ãƒ³ãƒˆãƒªãƒ‡ãƒ¼ã‚¿ã®ã‚µã‚¤ã‚ºã‚’è¿”ã—ã¾ã™ã€‚
      */
     public long getCompressedSize() {
         return compressedSize;
     }
 
     /**
-     * ˆ³k‰ğœ‚³‚ê‚½ƒGƒ“ƒgƒŠƒf[ƒ^‚Ì CRC-32 ƒ`ƒFƒbƒNƒTƒ€‚ğ•Ô‚µ‚Ü‚·B
+     * åœ§ç¸®è§£é™¤ã•ã‚ŒãŸã‚¨ãƒ³ãƒˆãƒªãƒ‡ãƒ¼ã‚¿ã® CRC-32 ãƒã‚§ãƒƒã‚¯ã‚µãƒ ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public long getCrc() {
         return crc;
     }
 
     /**
-     * ƒGƒ“ƒgƒŠ‚Ì•â‘«ƒtƒB[ƒ‹ƒhƒf[ƒ^‚ğ•Ô‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªã®è£œè¶³ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ãƒ‡ãƒ¼ã‚¿ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public Object getExtra() {
         return extra;
     }
 
     /**
-     * ƒGƒ“ƒgƒŠ‚Ìˆ³kƒƒ\ƒbƒh‚ğ•Ô‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªã®åœ§ç¸®ãƒ¡ã‚½ãƒƒãƒ‰ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public int getMethod() {
         return method;
     }
 
     /**
-     * ƒGƒ“ƒgƒŠ‚Ì–¼‘O‚ğ•Ô‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªã®åå‰ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public String getName() {
         return name;
     }
 
     /**
-     * ƒGƒ“ƒgƒŠ‚Ì–¼‘O‚ğİ’è‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªã®åå‰ã‚’è¨­å®šã—ã¾ã™ã€‚
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * ƒGƒ“ƒgƒŠƒf[ƒ^‚Ìˆ³k‰ğœ‚ÌƒTƒCƒY‚ğ•Ô‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªãƒ‡ãƒ¼ã‚¿ã®åœ§ç¸®è§£é™¤æ™‚ã®ã‚µã‚¤ã‚ºã‚’è¿”ã—ã¾ã™ã€‚
      */
     public long getSize() {
         return size;
     }
 
     /**
-     * ƒGƒ“ƒgƒŠ‚ÌC³ŠÔ‚ğ•Ô‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªã®ä¿®æ­£æ™‚é–“ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public long getTime() {
         return time;
     }
 
     /**
-     * ‚±‚ê‚ªƒfƒBƒŒƒNƒgƒŠƒGƒ“ƒgƒŠ‚Å‚ ‚éê‡‚ÉAtrue ‚ğ•Ô‚µ‚Ü‚·B
+     * ã“ã‚ŒãŒãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚¨ãƒ³ãƒˆãƒªã§ã‚ã‚‹å ´åˆã«ã€true ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public boolean isDirectory() {
         return directory;
@@ -118,57 +118,57 @@ public class CommonEntry implements Entry {
     }
 
     /**
-     * ƒGƒ“ƒgƒŠ‚É”CˆÓw’è‚ÌƒRƒƒ“ƒg•¶š—ñ‚ğİ’è‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªã«ä»»æ„æŒ‡å®šã®ã‚³ãƒ¡ãƒ³ãƒˆæ–‡å­—åˆ—ã‚’è¨­å®šã—ã¾ã™ã€‚
      */
     public void setComment(String comment) {
         this.comment = comment;
     }
 
     /**
-     * ˆ³k‚³‚ê‚½ƒGƒ“ƒgƒŠƒf[ƒ^‚ÌƒTƒCƒY‚ğİ’è‚µ‚Ü‚·B
+     * åœ§ç¸®ã•ã‚ŒãŸã‚¨ãƒ³ãƒˆãƒªãƒ‡ãƒ¼ã‚¿ã®ã‚µã‚¤ã‚ºã‚’è¨­å®šã—ã¾ã™ã€‚
      */
     public void setCompressedSize(long csize) {
         this.compressedSize = csize;
     }
 
     /**
-     * ˆ³k‰ğœ‚³‚ê‚½ƒGƒ“ƒgƒŠƒf[ƒ^‚Ì CRC-32 ƒ`ƒFƒbƒNƒTƒ€‚ğİ’è‚µ‚Ü‚·B
+     * åœ§ç¸®è§£é™¤ã•ã‚ŒãŸã‚¨ãƒ³ãƒˆãƒªãƒ‡ãƒ¼ã‚¿ã® CRC-32 ãƒã‚§ãƒƒã‚¯ã‚µãƒ ã‚’è¨­å®šã—ã¾ã™ã€‚
      */
     public void setCrc(long crc) {
         this.crc = crc;
     }
 
     /**
-     * ƒGƒ“ƒgƒŠ‚É”CˆÓw’è‚Ì•â‘«ƒtƒB[ƒ‹ƒhƒf[ƒ^‚ğİ’è‚µ‚Ü‚·B
-     * @param extra Cloneable ‚Å‚È‚­‚Ä‚Í‚¢‚¯‚Ü‚¹‚ñ
+     * ã‚¨ãƒ³ãƒˆãƒªã«ä»»æ„æŒ‡å®šã®è£œè¶³ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ãƒ‡ãƒ¼ã‚¿ã‚’è¨­å®šã—ã¾ã™ã€‚
+     * @param extra Cloneable ã§ãªãã¦ã¯ã„ã‘ã¾ã›ã‚“
      */
     public void setExtra(Object extra) {
         this.extra = extra;
     }
 
     /**
-     * ƒGƒ“ƒgƒŠ‚Ìˆ³kƒƒ\ƒbƒh‚ğİ’è‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªã®åœ§ç¸®ãƒ¡ã‚½ãƒƒãƒ‰ã‚’è¨­å®šã—ã¾ã™ã€‚
      */
     public void setMethod(int method) {
         this.method = method;
     }
 
     /**
-     * ƒGƒ“ƒgƒŠƒf[ƒ^‚Ìˆ³k‰ğœ‚ÌƒTƒCƒY‚ğİ’è‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªãƒ‡ãƒ¼ã‚¿ã®åœ§ç¸®è§£é™¤æ™‚ã®ã‚µã‚¤ã‚ºã‚’è¨­å®šã—ã¾ã™ã€‚
      */
     public void setSize(long size) {
         this.size = size;
     }
 
     /**
-     * ƒGƒ“ƒgƒŠ‚ÌC³ŠÔ‚ğİ’è‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªã®ä¿®æ­£æ™‚é–“ã‚’è¨­å®šã—ã¾ã™ã€‚
      */
     public void setTime(long time) {
         this.time = time;
     }
 
     /**
-     * ‚±‚ÌƒGƒ“ƒgƒŠ‚ÌƒRƒs[‚ğ•Ô‚µ‚Ü‚·B
+     * ã“ã®ã‚¨ãƒ³ãƒˆãƒªã®ã‚³ãƒ”ãƒ¼ã‚’è¿”ã—ã¾ã™ã€‚
      * (deep copy, else extra(shallow copy))
      */
     public Object clone() {

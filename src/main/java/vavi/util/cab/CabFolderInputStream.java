@@ -23,6 +23,7 @@ import vavi.io.LittleEndianDataInputStream;
  */
 class CabFolderInputStream extends InputStream {
     /** */
+    @SuppressWarnings("unused")
     private CabFolder folder;
     /** */
     private LittleEndianDataInputStream in;

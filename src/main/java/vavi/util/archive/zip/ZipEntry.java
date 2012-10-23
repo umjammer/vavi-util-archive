@@ -10,7 +10,7 @@ import vavi.util.archive.Entry;
 
 
 /**
- * ZIP ˆ³k‚ÌƒT[ƒrƒXƒvƒƒoƒCƒ_‚Å‚·D
+ * ZIP åœ§ç¸®ã®ã‚µãƒ¼ãƒ“ã‚¹ãƒ—ãƒ­ãƒã‚¤ãƒ€ã§ã™ï¼
  * 
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 021104 nsano initial version <br>
@@ -26,119 +26,119 @@ public class ZipEntry implements Entry {
     }
 
     /**
-     * ƒGƒ“ƒgƒŠ‚ÌƒRƒƒ“ƒg•¶š—ñ‚ğ•Ô‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªã®ã‚³ãƒ¡ãƒ³ãƒˆæ–‡å­—åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public String getComment() {
         return entry.getComment();
     }
 
     /**
-     * ˆ³k‚³‚ê‚½ƒGƒ“ƒgƒŠƒf[ƒ^‚ÌƒTƒCƒY‚ğ•Ô‚µ‚Ü‚·B
+     * åœ§ç¸®ã•ã‚ŒãŸã‚¨ãƒ³ãƒˆãƒªãƒ‡ãƒ¼ã‚¿ã®ã‚µã‚¤ã‚ºã‚’è¿”ã—ã¾ã™ã€‚
      */
     public long getCompressedSize() {
         return entry.getCompressedSize();
     }
 
     /**
-     * ˆ³k‰ğœ‚³‚ê‚½ƒGƒ“ƒgƒŠƒf[ƒ^‚Ì CRC-32 ƒ`ƒFƒbƒNƒTƒ€‚ğ•Ô‚µ‚Ü‚·B
+     * åœ§ç¸®è§£é™¤ã•ã‚ŒãŸã‚¨ãƒ³ãƒˆãƒªãƒ‡ãƒ¼ã‚¿ã® CRC-32 ãƒã‚§ãƒƒã‚¯ã‚µãƒ ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public long getCrc() {
         return entry.getCrc();
     }
 
     /**
-     * ƒGƒ“ƒgƒŠ‚Ì•â‘«ƒtƒB[ƒ‹ƒhƒf[ƒ^‚ğ•Ô‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªã®è£œè¶³ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ãƒ‡ãƒ¼ã‚¿ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public Object getExtra() {
         return entry.getExtra();
     }
 
     /**
-     * ƒGƒ“ƒgƒŠ‚Ìˆ³kƒƒ\ƒbƒh‚ğ•Ô‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªã®åœ§ç¸®ãƒ¡ã‚½ãƒƒãƒ‰ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public int getMethod() {
         return entry.getMethod();
     }
 
     /**
-     * ƒGƒ“ƒgƒŠ‚Ì–¼‘O‚ğ•Ô‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªã®åå‰ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public String getName() {
         return entry.getName();
     }
 
     /**
-     * ƒGƒ“ƒgƒŠƒf[ƒ^‚Ìˆ³k‰ğœ‚ÌƒTƒCƒY‚ğ•Ô‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªãƒ‡ãƒ¼ã‚¿ã®åœ§ç¸®è§£é™¤æ™‚ã®ã‚µã‚¤ã‚ºã‚’è¿”ã—ã¾ã™ã€‚
      */
     public long getSize() {
         return entry.getSize();
     }
 
     /**
-     * ƒGƒ“ƒgƒŠ‚ÌC³ŠÔ‚ğ•Ô‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªã®ä¿®æ­£æ™‚é–“ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public long getTime() {
         return entry.getTime();
     }
 
     /**
-     * ‚±‚ê‚ªƒfƒBƒŒƒNƒgƒŠƒGƒ“ƒgƒŠ‚Å‚ ‚éê‡‚ÉAtrue ‚ğ•Ô‚µ‚Ü‚·B
+     * ã“ã‚ŒãŒãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚¨ãƒ³ãƒˆãƒªã§ã‚ã‚‹å ´åˆã«ã€true ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public boolean isDirectory() {
         return entry.isDirectory();
     }
 
     /**
-     * ƒGƒ“ƒgƒŠ‚É”CˆÓw’è‚ÌƒRƒƒ“ƒg•¶š—ñ‚ğİ’è‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªã«ä»»æ„æŒ‡å®šã®ã‚³ãƒ¡ãƒ³ãƒˆæ–‡å­—åˆ—ã‚’è¨­å®šã—ã¾ã™ã€‚
      */
     public void setComment(String comment) {
         entry.setComment(comment);
     }
 
     /**
-     * ˆ³k‚³‚ê‚½ƒGƒ“ƒgƒŠƒf[ƒ^‚ÌƒTƒCƒY‚ğİ’è‚µ‚Ü‚·B
+     * åœ§ç¸®ã•ã‚ŒãŸã‚¨ãƒ³ãƒˆãƒªãƒ‡ãƒ¼ã‚¿ã®ã‚µã‚¤ã‚ºã‚’è¨­å®šã—ã¾ã™ã€‚
      */
     public void setCompressedSize(long csize) {
         entry.setCompressedSize(csize);
     }
 
     /**
-     * ˆ³k‰ğœ‚³‚ê‚½ƒGƒ“ƒgƒŠƒf[ƒ^‚Ì CRC-32 ƒ`ƒFƒbƒNƒTƒ€‚ğİ’è‚µ‚Ü‚·B
+     * åœ§ç¸®è§£é™¤ã•ã‚ŒãŸã‚¨ãƒ³ãƒˆãƒªãƒ‡ãƒ¼ã‚¿ã® CRC-32 ãƒã‚§ãƒƒã‚¯ã‚µãƒ ã‚’è¨­å®šã—ã¾ã™ã€‚
      */
     public void setCrc(long crc) {
         entry.setCrc(crc);
     }
 
     /**
-     * ƒGƒ“ƒgƒŠ‚É”CˆÓw’è‚Ì•â‘«ƒtƒB[ƒ‹ƒhƒf[ƒ^‚ğİ’è‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªã«ä»»æ„æŒ‡å®šã®è£œè¶³ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ãƒ‡ãƒ¼ã‚¿ã‚’è¨­å®šã—ã¾ã™ã€‚
      */
     public void setExtra(Object extra) {
         entry.setExtra((byte[]) extra);
     }
 
     /**
-     * ƒGƒ“ƒgƒŠ‚Ìˆ³kƒƒ\ƒbƒh‚ğİ’è‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªã®åœ§ç¸®ãƒ¡ã‚½ãƒƒãƒ‰ã‚’è¨­å®šã—ã¾ã™ã€‚
      */
     public void setMethod(int method) {
         entry.setMethod(method);
     }
 
     /**
-     * ƒGƒ“ƒgƒŠƒf[ƒ^‚Ìˆ³k‰ğœ‚ÌƒTƒCƒY‚ğİ’è‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªãƒ‡ãƒ¼ã‚¿ã®åœ§ç¸®è§£é™¤æ™‚ã®ã‚µã‚¤ã‚ºã‚’è¨­å®šã—ã¾ã™ã€‚
      */
     public void setSize(long size) {
         entry.setSize(size);
     }
 
     /**
-     * ƒGƒ“ƒgƒŠ‚ÌC³ŠÔ‚ğİ’è‚µ‚Ü‚·B
+     * ã‚¨ãƒ³ãƒˆãƒªã®ä¿®æ­£æ™‚é–“ã‚’è¨­å®šã—ã¾ã™ã€‚
      */
     public void setTime(long time) {
         entry.setTime(time);
     }
 
     /**
-     * ‚±‚ÌƒGƒ“ƒgƒŠ‚ÌƒRƒs[‚ğ•Ô‚µ‚Ü‚·B
+     * ã“ã®ã‚¨ãƒ³ãƒˆãƒªã®ã‚³ãƒ”ãƒ¼ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public Object clone() {
         return entry.clone();

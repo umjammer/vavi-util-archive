@@ -8,7 +8,7 @@ package vavi.util.archive;
 
 
 /**
- * �A�[�J�C�u���ꂽ 1 �G���g����\���N���X�ł��D
+ * アーカイブされた 1 エントリを表すクラスです．
  * 
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 021103 nsano initial version <br>
@@ -16,82 +16,82 @@ package vavi.util.archive;
 public interface Entry extends Cloneable {
 
     /**
-     * �G���g���̃R�����g�������Ԃ��܂��B
+     * エントリのコメント文字列を返します。
      */
     String getComment();
 
     /**
-     * ���k���ꂽ�G���g���f�[�^�̃T�C�Y��Ԃ��܂��B
+     * 圧縮されたエントリデータのサイズを返します。
      */
     long getCompressedSize();
 
     /**
-     * ���k�������ꂽ�G���g���f�[�^�� CRC-32 �`�F�b�N�T����Ԃ��܂��B
+     * 圧縮解除されたエントリデータの CRC-32 チェックサムを返します。
      */
     long getCrc();
 
     /**
-     * �G���g���̕⑫�t�B�[���h�f�[�^��Ԃ��܂��B
+     * エントリの補足フィールドデータを返します。
      */
     Object getExtra();
 
     /**
-     * �G���g���̈��k���\�b�h��Ԃ��܂��B
+     * エントリの圧縮メソッドを返します。
      */
     int getMethod();
 
     /**
-     * �G���g���̖��O��Ԃ��܂��B
+     * エントリの名前を返します。
      */
     String getName();
 
     /**
-     * �G���g���f�[�^�̈��k�������̃T�C�Y��Ԃ��܂��B
+     * エントリデータの圧縮解除時のサイズを返します。
      */
     long getSize();
 
     /**
-     * �G���g���̏C�����Ԃ�Ԃ��܂��B
+     * エントリの修正時間を返します。
      */
     long getTime();
 
     /**
-     * ���ꂪ�f�B���N�g���G���g���ł���ꍇ�ɁAtrue ��Ԃ��܂��B
+     * これがディレクトリエントリである場合に、true を返します。
      */
     boolean isDirectory();
 
     /**
-     * �G���g���ɔC�ӎw��̃R�����g�������ݒ肵�܂��B
+     * エントリに任意指定のコメント文字列を設定します。
      */
     void setComment(String comment);
 
     /**
-     * ���k���ꂽ�G���g���f�[�^�̃T�C�Y��ݒ肵�܂��B
+     * 圧縮されたエントリデータのサイズを設定します。
      */
     void setCompressedSize(long csize);
 
     /**
-     * ���k�������ꂽ�G���g���f�[�^�� CRC-32 �`�F�b�N�T����ݒ肵�܂��B
+     * 圧縮解除されたエントリデータの CRC-32 チェックサムを設定します。
      */
     void setCrc(long crc);
 
     /**
-     * �G���g���ɔC�ӎw��̕⑫�t�B�[���h�f�[�^��ݒ肵�܂��B
+     * エントリに任意指定の補足フィールドデータを設定します。
      */
     void setExtra(Object extra);
 
     /**
-     * �G���g���̈��k���\�b�h��ݒ肵�܂��B
+     * エントリの圧縮メソッドを設定します。
      */
     void setMethod(int method);
 
     /**
-     * �G���g���f�[�^�̈��k�������̃T�C�Y��ݒ肵�܂��B
+     * エントリデータの圧縮解除時のサイズを設定します。
      */
     void setSize(long size);
 
     /**
-     * �G���g���̏C�����Ԃ�ݒ肵�܂��B
+     * エントリの修正時間を設定します。
      */
     void setTime(long time);
 
