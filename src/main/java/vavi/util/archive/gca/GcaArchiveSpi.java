@@ -52,6 +52,8 @@ public class GcaArchiveSpi implements ArchiveSpi {
         }
         is.reset();
 
+        is.close();
+
         return b[0] == 'G' &&
                b[1] == 'C' &&
                b[2] == 'A';

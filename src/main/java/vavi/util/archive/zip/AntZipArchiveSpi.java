@@ -51,6 +51,8 @@ public class AntZipArchiveSpi implements ArchiveSpi {
         }
         is.reset();
 
+        is.close();
+
         return b[0] == 'P' &&
                b[1] == 'K';
     }

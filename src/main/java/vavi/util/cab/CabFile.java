@@ -85,7 +85,9 @@ class CabFile {
 
     /** */
     public void read(InputStream is) throws IOException {
+        @SuppressWarnings("resource")
         LittleEndianDataInputStream ledis = new LittleEndianDataInputStream(is);
+        @SuppressWarnings("resource")
         UtilInputStream uis = new UtilInputStream(is);
 
         fileSize = ledis.readInt();

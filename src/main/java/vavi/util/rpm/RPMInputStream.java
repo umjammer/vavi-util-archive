@@ -252,7 +252,7 @@ public class RPMInputStream extends Object {
                 offset += numRead;
             }
 
-            List<Object> values = new ArrayList<Object>();
+            List<Object> values = new ArrayList<>();
 
             for (int cnt = 0; cnt < entry.count; ++cnt) {
                 switch (entry.type) {

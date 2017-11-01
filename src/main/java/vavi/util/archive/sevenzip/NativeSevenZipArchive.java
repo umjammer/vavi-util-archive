@@ -37,7 +37,7 @@ import vavi.util.win32.DateUtil;
 public class NativeSevenZipArchive implements Archive {
 
     /** */
-    private List<CommonEntry> entries = new ArrayList<CommonEntry>();
+    private List<CommonEntry> entries = new ArrayList<>();
 
     /** */
     private File file;

@@ -35,7 +35,7 @@ import vavi.util.archive.spi.CommonEntry;
 public class ShellGcaArchive implements Archive {
 
     /** */
-    private List<CommonEntry> entries = new ArrayList<CommonEntry>();
+    private List<CommonEntry> entries = new ArrayList<>();
 
     /** */
     private File file;

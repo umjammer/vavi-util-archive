@@ -50,6 +50,8 @@ public class LhaArchiveSpi implements ArchiveSpi {
             l += is.read(b, l, 5 - l);
         }
         is.reset();
+        
+        is.close();
 
         return b[0] == '-' &&
                b[1] == 'l' &&

@@ -150,7 +150,9 @@ class CabHeader {
     /** fills in all fields in the header and positions the stream at the first folder */
     public void read(InputStream is) throws IOException {
 
+        @SuppressWarnings("resource")
         LittleEndianDataInputStream ledis = new LittleEndianDataInputStream(is);
+        @SuppressWarnings("resource")
         UtilInputStream uis = new UtilInputStream(is);
 
         ledis.readFully(reserved1);

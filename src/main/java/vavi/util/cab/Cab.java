@@ -23,7 +23,7 @@ public class Cab {
     private CabHeader header;
 
     /** */
-    private List<CabFolder> folders = new ArrayList<CabFolder>();
+    private List<CabFolder> folders = new ArrayList<>();
     
     /**
      * @return Returns the folders.

@@ -53,6 +53,7 @@ public class StuffItArchiveSpi implements ArchiveSpi {
         }
         is.reset();
 
+        is.close();
 Debug.println("\n" + StringUtil.getDump(b));
         return new String(b).equals("StuffIt ") ||
                new String(b).equals("SIT!rRau");

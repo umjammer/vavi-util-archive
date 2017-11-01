@@ -50,6 +50,8 @@ public class CabArchiveSpi implements ArchiveSpi {
             l += is.read(b, l, 4 - l);
         }
         is.reset();
+        
+        is.close();
 
         return b[0] == 'M' &&
                b[1] == 'S' &&

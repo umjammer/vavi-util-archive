@@ -39,7 +39,7 @@ class CabFolder {
     /** per-folder reserved area */
     private byte[] reservedArea = null;
     /** */
-    private List<CabFile> files = new ArrayList<CabFile>();
+    private List<CabFile> files = new ArrayList<>();
     /** */
     private int reservedSize;
 
@@ -71,6 +71,7 @@ class CabFolder {
     /** */
     public void read(InputStream is) throws IOException {
         
+        @SuppressWarnings("resource")
         LittleEndianDataInputStream ledis = new LittleEndianDataInputStream(is);
 
         firstBlockOffset = ledis.readInt();

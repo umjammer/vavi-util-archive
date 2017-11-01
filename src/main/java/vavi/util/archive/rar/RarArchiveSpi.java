@@ -53,6 +53,8 @@ public class RarArchiveSpi implements ArchiveSpi {
         }
         is.reset();
 
+        is.close();
+        
         return b[0] == 'R' &&
                b[1] == 'a' &&
                b[2] == 'r' &&

@@ -58,7 +58,7 @@ public abstract class ComArchive implements Archive {
     private String type;
 
     /** */
-    private List<Entry> entries = new ArrayList<Entry>();
+    private List<Entry> entries = new ArrayList<>();
 
     /** KBA manager */
     private Dispatch manager;

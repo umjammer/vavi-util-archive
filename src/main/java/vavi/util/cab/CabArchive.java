@@ -34,7 +34,7 @@ public class CabArchive implements Archive {
     private File file;
 
     /** */
-    private List<Entry> entries = new ArrayList<Entry>();
+    private List<Entry> entries = new ArrayList<>();
 
     /** */
     public CabArchive(String fileName) throws IOException {

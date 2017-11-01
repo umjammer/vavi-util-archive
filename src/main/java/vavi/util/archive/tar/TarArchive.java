@@ -40,7 +40,7 @@ public class TarArchive implements Archive {
     public TarArchive(InputStream is) throws IOException {
         this.archive = new TarArchiveInputStream(is);
 
-        List<Entry> list = new ArrayList<Entry>();
+        List<Entry> list = new ArrayList<>();
         while (true) {
             org.apache.commons.compress.archivers.tar.TarArchiveEntry e = archive.getNextTarEntry();
             if (e == null) {

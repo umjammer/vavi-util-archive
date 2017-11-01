@@ -53,6 +53,8 @@ public class SevenZipArchiveSpi implements ArchiveSpi {
         }
         is.reset();
 
+        is.close();
+
 Debug.println("\n" + StringUtil.getDump(b));
         return b[0] == '7' &&
                b[1] == 'z' &&

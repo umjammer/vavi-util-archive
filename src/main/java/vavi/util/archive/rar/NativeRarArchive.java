@@ -33,7 +33,7 @@ import vavi.util.win32.DateUtil;
 public class NativeRarArchive implements Archive {
 
     /** */
-    private List<CommonEntry> entries = new ArrayList<CommonEntry>();
+    private List<CommonEntry> entries = new ArrayList<>();
 
     /** */
     private File file;
@@ -94,7 +94,7 @@ System.err.println("time: " + new Date(entry.getTime()));
 
     /** TODO */
     private static final String commandLineBase = "e \"{0}\" \"{1}\" \"{2}\"";
-    
+
     /**
      * 指定された ファイルエントリの内容を読み込むための入力ストリームを
      * 返します。

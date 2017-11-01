@@ -184,7 +184,7 @@ public class CommonEntry implements Entry {
             clone.directory = directory;
             return clone;
         } catch (Exception e) {
-            throw (RuntimeException) new IllegalStateException().initCause(e);
+            throw new IllegalStateException(e);
         }
     }
 

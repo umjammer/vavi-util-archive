@@ -36,7 +36,7 @@ import vavi.util.archive.spi.CommonEntry;
 public class ShellRarArchive implements Archive {
 
     /** */
-    private List<CommonEntry> entries = new ArrayList<CommonEntry>();
+    private List<CommonEntry> entries = new ArrayList<>();
 
     /** */
     public ShellRarArchive(File file) throws IOException {
