@@ -7,49 +7,44 @@
 <!--                                                                        -->
 <!-- vavi-util-archive                                                      -->
 <!--                                                                        -->
-<!-- @author	Naohide Sano                                                -->
-<!-- @version	0.00	020522	nsano	initial version                     -->
+<!-- @author Naohide Sano                                                   -->
+<!-- @version 0.00 020522 nsano initial version                             -->
 <!--                                                                        -->
 <!-- ////////////////////////////////////////////////////////////////////// -->
 
-<project default="compile" basedir="."
-         xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="vavi-util-archive" default="prepare" basedir="."
+  xmlns:artifact="urn:maven-artifact-ant">
 
-  <!-- クラスパスの定義 -->
+  <path id="maven-ant-tasks.classpath">
+    <fileset dir="${user.home}/lib/java/maven-ant-tasks">
+      <include name="*.jar" />
+    </fileset>
+  </path>
+  <typedef resource="org/apache/maven/artifact/ant/antlib.xml"
+           uri="urn:maven-artifact-ant"
+           classpathref="maven-ant-tasks.classpath" />
+
+  <property file="local.properties" />
+
+  <xmlproperty file="pom.xml" />
+
+  <!-- Path Definitions -->
   <path id="project.class.path">
-    <!-- 必要なライブラリを定義する -->
+    <pathelement location="${javac.dest.test}" />
+    <pathelement location="${javac.dest}" />
+    <fileset refid="maven-ant-tasks.dependency.fileset" />
   </path>
 
-  <!-- ターゲットの定義 -->
-
-  <!-- clean -->
-  <target name="clean" description="ビルド環境のクリア">
-    <delete>
-     <fileset dir="src">
-      <include name="**/*.class" />
-     </fileset>
-    </delete>
-  </target>
-
   <!-- prepare -->
-  <target name="prepare" description="ビルド環境の準備">
-    <ivy:settings file="ivy-settings.xml" />
-    <ivy:convertpom pomFile="pom.xml" ivyFile="ivy.xml" />
-    <ivy:retrieve />
-  </target>
-
-  <!-- javac -->
-  <target name="compile" depends="prepare" description="コンパイル">
-    <javac debug="on" destdir="target/classes">
-      <classpath refid="project.class.path" />
-      <include name="**/*.java" />
-      <src path="src/main/java" />
-    </javac>
-  </target>
-
-  <!-- ivy report -->
-  <target name="ivy-report" depends="prepare">
-    <ivy:report todir="target/ivy-reports"/>
+  <target name="prepare" description="Preparing">
+    <artifact:pom file="pom.xml" id="maven.project" />
+    <artifact:dependencies fileSetId="maven-ant-tasks.dependency.fileset">
+      <pom refid="maven.project" />
+    </artifact:dependencies>
+    <artifact:mvn pom="pom.xml">
+      <arg value="package" />
+      <arg value="-Dmaven.test.skip=true"/>
+    </artifact:mvn>
   </target>
 
 </project>
