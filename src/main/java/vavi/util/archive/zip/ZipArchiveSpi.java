@@ -25,9 +25,6 @@ import vavi.util.archive.spi.ArchiveSpi;
  */
 public class ZipArchiveSpi implements ArchiveSpi {
 
-    /** */
-    private Object target;
-
     /**
      * 解凍できるかどうか調べます．
      */
@@ -36,8 +33,6 @@ public class ZipArchiveSpi implements ArchiveSpi {
         if (!(target instanceof File)) {
             throw new IllegalArgumentException("not supported type " + target);
         }
-
-        this.target = target;
 
         InputStream is =
             new BufferedInputStream(new FileInputStream((File) target));
@@ -58,8 +53,8 @@ public class ZipArchiveSpi implements ArchiveSpi {
     }
 
     /** */
-    public Archive createArchiveInstance() throws IOException {
-        return new ZipArchive((File) target);
+    public Archive createArchiveInstance(Object obj) throws IOException {
+        return new ZipArchive((File) obj);
     }
 }
 

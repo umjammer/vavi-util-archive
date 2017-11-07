@@ -26,9 +26,6 @@ import vavi.util.archive.spi.ArchiveSpi;
  */
 public class RarArchiveSpi implements ArchiveSpi {
 
-    /** */
-    private Object target;
-
     /**
      * 解凍できるかどうか調べます．
      * @param target 今のところ File しか受け付けません
@@ -38,8 +35,6 @@ public class RarArchiveSpi implements ArchiveSpi {
         if (!(target instanceof File)) {
             throw new IllegalArgumentException("not supported type " + target);
         }
-
-        this.target = target;
 
         InputStream is =
             new BufferedInputStream(new FileInputStream((File) target));
@@ -54,7 +49,7 @@ public class RarArchiveSpi implements ArchiveSpi {
         is.reset();
 
         is.close();
-        
+
         return b[0] == 'R' &&
                b[1] == 'a' &&
                b[2] == 'r' &&
@@ -62,9 +57,9 @@ public class RarArchiveSpi implements ArchiveSpi {
     }
 
     /** */
-    public Archive createArchiveInstance() throws IOException {
-//      return new ComRarArchive((File) target);
-        return new NativeRarArchive((File) target);
+    public Archive createArchiveInstance(Object obj) throws IOException {
+//      return new ComRarArchive((File) obj);
+        return new NativeRarArchive((File) obj);
     }
 }
 
