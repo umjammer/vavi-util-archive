@@ -51,7 +51,7 @@ public class CabArchive implements Archive {
             }
         }
     }
-    
+
     /** */
     public void close() throws IOException {
         is.close();

@@ -19,19 +19,19 @@ import vavi.util.archive.Entry;
 /**
  * RAR アーカイブを処理するサービスプロバイダです．
  * (COM バージョン)
- * 
+ *
  * @target 1.1
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 030211 nsano initial version <br>
  */
 public class ComRarArchive extends ComArchive {
-    
+
     /** */
     public ComRarArchive(File file) throws IOException {
         super(file, TYPE_RAR);
     }
-    
+
     /** */
     private static final MessageFormat commandLineBase = new MessageFormat("x -o -q \"{0}\" \"{1}\" \"{2}\"");
 
@@ -45,7 +45,7 @@ public class ComRarArchive extends ComArchive {
         });
 Debug.println("commandLine: " + commandLine);
 
-	    return commandLine;
+        return commandLine;
     }
 
     /** */
@@ -54,7 +54,7 @@ Debug.println("commandLine: " + commandLine);
     }
 
     //----
-    
+
     /** */
     public static void main(String[] args) throws Exception {
         ComRarArchive rar = new ComRarArchive(new File(args[0]));

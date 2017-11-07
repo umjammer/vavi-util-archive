@@ -18,7 +18,7 @@ import java.io.OutputStream;
 
 /**
  * LzmaInputStream.
- * 
+ *
  * @author Igor Pavlov
  * @author myspace
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)

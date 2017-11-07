@@ -11,7 +11,7 @@ import java.io.IOException;
 
 /**
  * LzmaException.
- * 
+ *
  * @author Igor Pavlov
  * @author myspace
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)

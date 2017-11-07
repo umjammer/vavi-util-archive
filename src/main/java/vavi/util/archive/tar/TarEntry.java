@@ -13,7 +13,7 @@ import vavi.util.archive.Entry;
 
 /**
  * TAR 圧縮のサービスプロバイダです．
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 040106 nsano initial version <br>
  */

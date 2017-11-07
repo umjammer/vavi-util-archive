@@ -23,7 +23,7 @@ import vavi.util.archive.spi.CommonEntry;
 
 /**
  * StuffItWrapper.dll のラッパークラスです。
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 030226 nsano initial version <br>
  *          0.01 030228 nsano implements archive <br>
@@ -110,7 +110,7 @@ Debug.println("commandLine: " + commandLine);
         return entries.size();
     }
 
-    /** 
+    /**
      * from JNI
      * @param filename TODO unicode
      * @param time TODO unused

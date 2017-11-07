@@ -16,7 +16,7 @@ import vavi.io.UtilInputStream;
 
 /**
  * Encapsulates a CFHEADER entry.
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 040929 nsano initial version <br>
  */

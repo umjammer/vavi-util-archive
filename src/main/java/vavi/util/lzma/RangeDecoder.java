@@ -12,7 +12,7 @@ import java.io.InputStream;
 
 /**
  * RangeDecoder.
- * 
+ *
  * @author Igor Pavlov
  * @author myspace
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)

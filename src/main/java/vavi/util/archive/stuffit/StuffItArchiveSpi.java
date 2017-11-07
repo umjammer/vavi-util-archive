@@ -20,7 +20,7 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 /**
  * StuffIt アーカイブを処理するサービスプロバイダです．
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 060106 nsano initial version <br>
  */

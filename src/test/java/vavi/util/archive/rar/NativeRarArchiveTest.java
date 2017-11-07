@@ -15,7 +15,7 @@ import vavi.util.archive.Entry;
 
 
 /**
- * NativeRarArchiveTest. 
+ * NativeRarArchiveTest.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2012/02/16 umjammer initial version <br>

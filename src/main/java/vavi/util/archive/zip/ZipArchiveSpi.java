@@ -18,7 +18,7 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 /**
  * ZIP アーカイブを処理するサービスプロバイダです．
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 021222 nsano initial version <br>
  *          0.01 030128 nsano implements <br>

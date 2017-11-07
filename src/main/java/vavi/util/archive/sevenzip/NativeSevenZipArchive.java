@@ -30,7 +30,7 @@ import vavi.util.win32.DateUtil;
 
 /**
  * 7-zip32.dll のラッパークラスです。
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 030228 nsano initial version <br>
  */
@@ -106,7 +106,7 @@ System.err.println("time: " + new Date(entry.getTime()));
         String temporaryDirectoryString = temporaryDirectory.getAbsolutePath();
 Debug.println("temporaryDirectory: " + temporaryDirectoryString);
 
-    	String commandLine = MessageFormat.format("x -hide -y \"{0}\" -o\"{1}\" \"{2}\"",
+        String commandLine = MessageFormat.format("x -hide -y \"{0}\" -o\"{1}\" \"{2}\"",
                                                   file.getPath(),
                                                   temporaryDirectoryString,
                                                   entry.getName());
@@ -125,13 +125,13 @@ try {
  throw e;
 }
 
-    	String temporaryFileName = temporaryDirectoryString + File.separator + entry.getName();
-    	File temporaryFile = new File(temporaryFileName);
-    	if (temporaryFile.exists()) {
-    	    return new BufferedInputStream(new FileInputStream(temporaryFile));
-    	} else {
-    	    throw new IOException("cannpt extract: " + temporaryFileName);
-    	}
+        String temporaryFileName = temporaryDirectoryString + File.separator + entry.getName();
+        File temporaryFile = new File(temporaryFileName);
+        if (temporaryFile.exists()) {
+            return new BufferedInputStream(new FileInputStream(temporaryFile));
+        } else {
+            throw new IOException("cannpt extract: " + temporaryFileName);
+        }
     }
 
     /**
@@ -161,7 +161,7 @@ try {
             errorCodeTable = new Properties();
             errorCodeTable.load(NativeGcaArchive.class.getResourceAsStream(path));
         } catch (Exception e) {
-Debug.printStackTrace(e);            
+Debug.printStackTrace(e);
         }
     }
 
