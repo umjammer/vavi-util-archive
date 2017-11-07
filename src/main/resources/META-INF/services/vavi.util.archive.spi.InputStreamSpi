@@ -6,7 +6,7 @@
 # 0.00 040106 nsano initial version
 #
 
-vavi.util.archive.vavi.BinhexInputStreamSpi
-vavi.util.archive.vavi.GZipInputStreamSpi
-vavi.util.archive.vavi.BZip2InputStreamSpi
-vavi.util.archive.vavi.TarInputStreamSpi
+vavi.util.archive.binhex.BinhexInputStreamSpi
+vavi.util.archive.gzip.GZipInputStreamSpi
+vavi.util.archive.bzip2.BZip2InputStreamSpi
+vavi.util.archive.tar.TarInputStreamSpi
