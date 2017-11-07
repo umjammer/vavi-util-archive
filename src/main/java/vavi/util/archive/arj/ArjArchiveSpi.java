@@ -24,9 +24,6 @@ import vavi.util.archive.spi.ArchiveSpi;
  */
 public class ArjArchiveSpi implements ArchiveSpi {
 
-    /** */
-    private Object target;
-
     /**
      * 解凍できるかどうか調べます．
      * @param target 今のところ File しか受け付けません
@@ -36,8 +33,6 @@ public class ArjArchiveSpi implements ArchiveSpi {
         if (!(target instanceof File)) {
             throw new IllegalArgumentException("not supported type " + target);
         }
-
-        this.target = target;
 
         InputStream is =
             new BufferedInputStream(new FileInputStream((File) target));
@@ -59,8 +54,8 @@ public class ArjArchiveSpi implements ArchiveSpi {
     }
 
     /** TODO プロパティで選択可能に？ */
-    public Archive createArchiveInstance() throws IOException {
-        return new ComArjArchive((File) target);
+    public Archive createArchiveInstance(Object obj) throws IOException {
+        return new ComArjArchive((File) obj);
     }
 }
 

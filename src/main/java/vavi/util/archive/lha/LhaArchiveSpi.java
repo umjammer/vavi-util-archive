@@ -24,9 +24,6 @@ import vavi.util.archive.spi.ArchiveSpi;
  */
 public class LhaArchiveSpi implements ArchiveSpi {
 
-    /** */
-    private Object target;
-
     /**
      * 解凍できるかどうか調べます．
      */
@@ -35,8 +32,6 @@ public class LhaArchiveSpi implements ArchiveSpi {
         if (!(target instanceof File)) {
             throw new IllegalArgumentException("not supported type " + target);
         }
-
-        this.target = target;
 
         InputStream is =
             new BufferedInputStream(new FileInputStream((File) target));
@@ -60,8 +55,8 @@ public class LhaArchiveSpi implements ArchiveSpi {
     }
 
     /** */
-    public Archive createArchiveInstance() throws IOException {
-        return new LhaArchive((File) target);
+    public Archive createArchiveInstance(Object obj) throws IOException {
+        return new LhaArchive((File) obj);
     }
 }
 

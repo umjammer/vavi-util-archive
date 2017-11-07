@@ -36,7 +36,7 @@ public class BZip2InputStreamSpi implements InputStreamSpi {
             throw new IllegalArgumentException("not supported type " + target);
         }
 
-        this.target = target;
+        this.target = target; // TODO weird
 
         InputStream is = (InputStream) target;
 

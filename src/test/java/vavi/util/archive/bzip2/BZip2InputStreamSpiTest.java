@@ -6,7 +6,13 @@
 
 package vavi.util.archive.bzip2;
 
-import static org.junit.Assert.*;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.InputStream;
+
+import org.junit.Test;
+
+import vavi.util.archive.spi.InputStreamSpi;
 
 
 /**
@@ -17,8 +23,18 @@ import static org.junit.Assert.*;
  */
 public class BZip2InputStreamSpiTest {
 
+    @Test
     public void test01() throws Exception {
-        fail("Not yet implemented");
+        InputStreamSpi spi = new BZip2InputStreamSpi();
+        spi.canExpandInput(new BufferedInputStream(new FileInputStream("tmp/test.tar.bz2")));
+        InputStream is = spi.createInputStreamInstance();
+        byte[] b = new byte[8192];
+        while (true) {
+            int r = is.read(b, 0, b.length);
+            if (r < 0) {
+                break;
+            }
+        }
     }
 }
 

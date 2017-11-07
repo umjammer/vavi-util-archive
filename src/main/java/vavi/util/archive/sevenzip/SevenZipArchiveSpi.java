@@ -26,9 +26,6 @@ import vavi.util.archive.spi.ArchiveSpi;
  */
 public class SevenZipArchiveSpi implements ArchiveSpi {
 
-    /** */
-    private Object target;
-
     /**
      * 解凍できるかどうか調べます．
      * @param target 今のところ File しか受け付けません
@@ -38,8 +35,6 @@ public class SevenZipArchiveSpi implements ArchiveSpi {
         if (!(target instanceof File)) {
             throw new IllegalArgumentException("not supported type " + target);
         }
-
-        this.target = target;
 
         InputStream is =
             new BufferedInputStream(new FileInputStream((File) target));
@@ -67,8 +62,8 @@ Debug.println("\n" + StringUtil.getDump(b));
     }
 
     /** TODO プロパティで選択可能に？ */
-    public Archive createArchiveInstance() throws IOException {
-        return new NativeSevenZipArchive((File) target);
+    public Archive createArchiveInstance(Object obj) throws IOException {
+        return new NativeSevenZipArchive((File) obj);
     }
 }
 

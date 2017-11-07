@@ -27,7 +27,7 @@ public interface ArchiveSpi {
     boolean canExtractInput(Object target) throws IOException;
 
     /** */
-    Archive createArchiveInstance() throws IOException;
+    Archive createArchiveInstance(Object obj) throws IOException;
 }
 
 /* */

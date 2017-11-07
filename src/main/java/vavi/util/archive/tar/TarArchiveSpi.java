@@ -25,9 +25,6 @@ import vavi.util.archive.spi.ArchiveSpi;
 public class TarArchiveSpi implements ArchiveSpi {
 
     /** */
-    private Object target;
-
-    /** */
     private static final int SKIP = 257;
 
     /**
@@ -39,8 +36,6 @@ public class TarArchiveSpi implements ArchiveSpi {
         if (!(target instanceof InputStream)) {
             throw new IllegalArgumentException("not supported type " + target.getClass());
         }
-
-        this.target = target;
 
         InputStream is = (InputStream) target;
 
@@ -93,8 +88,8 @@ Debug.println("tar magic:\n" + StringUtil.getDump(b));
     }
 
     /** */
-    public Archive createArchiveInstance() throws IOException {
-        return new TarArchive((InputStream) target);
+    public Archive createArchiveInstance(Object obj) throws IOException {
+        return new TarArchive((InputStream) obj);
     }
 }
 

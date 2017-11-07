@@ -27,7 +27,7 @@ public class AntZipArchive implements Archive {
 
     /** */
     private org.apache.tools.zip.ZipFile archive;
-    
+
     private String name;
 
     /** */

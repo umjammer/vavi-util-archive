@@ -24,7 +24,7 @@ public interface InputStreamSpi {
      */
     boolean canExpandInput(Object target) throws IOException;
 
-    /** */
+    /** TODO should have input argument */
     InputStream createInputStreamInstance() throws IOException;
 }
 
