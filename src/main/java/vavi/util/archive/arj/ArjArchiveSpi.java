@@ -19,7 +19,7 @@ import vavi.util.archive.spi.ArchiveSpi;
 /**
  * ARJ アーカイブを処理するサービスプロバイダです．
  *
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 041002 nsano initial version <br>
  */
 public class ArjArchiveSpi implements ArchiveSpi {

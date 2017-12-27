@@ -21,7 +21,7 @@ import java.io.OutputStream;
  *
  * @author Igor Pavlov
  * @author myspace
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040916 nsano modified <br>
  */
 public class LzmaInputStream extends FilterInputStream {

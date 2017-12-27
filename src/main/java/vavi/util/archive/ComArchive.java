@@ -30,7 +30,7 @@ import vavix.util.ComUtil;
  * 
  * @target 1.1
  * 
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030211 nsano initial version <br>
  */
 public abstract class ComArchive implements Archive {

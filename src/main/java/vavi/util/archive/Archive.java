@@ -13,7 +13,7 @@ import java.io.InputStream;
 /**
  * アーカイブを表すインターフェースです．
  *
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021103 nsano initial version <br>
  *          0.01 021222 nsano add canExtractInput <br>
  *          0.02 021222 nsano separate canExtractInput to spi <br>

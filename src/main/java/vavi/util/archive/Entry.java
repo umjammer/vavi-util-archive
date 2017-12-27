@@ -10,7 +10,7 @@ package vavi.util.archive;
 /**
  * アーカイブされた 1 エントリを表すクラスです．
  *
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021103 nsano initial version <br>
  */
 public interface Entry extends Cloneable {

@@ -19,7 +19,7 @@ import vavi.util.archive.spi.ArchiveSpi;
 /**
  * RAR アーカイブを処理するサービスプロバイダです．
  * 
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021222 nsano initial version <br>
  *          0.01 030128 nsano implements <br>
  *          0.02 030211 nsano use ComRarArchive <br>
