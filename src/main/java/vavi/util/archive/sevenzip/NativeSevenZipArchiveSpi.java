@@ -24,7 +24,7 @@ import vavi.util.archive.spi.ArchiveSpi;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030228 nsano initial version <br>
  */
-public class SevenZipArchiveSpi implements ArchiveSpi {
+public class NativeSevenZipArchiveSpi implements ArchiveSpi {
 
     /**
      * 解凍できるかどうか調べます．
@@ -61,7 +61,7 @@ Debug.println("\n" + StringUtil.getDump(b));
                b[7] == (byte) 0x02;
     }
 
-    /** TODO プロパティで選択可能に？ */
+    /** */
     public Archive createArchiveInstance(Object obj) throws IOException {
         return new NativeSevenZipArchive((File) obj);
     }
