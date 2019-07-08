@@ -24,7 +24,7 @@ import vavi.util.archive.spi.ArchiveSpi;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 060106 nsano initial version <br>
  */
-public class StuffItArchiveSpi implements ArchiveSpi {
+public abstract class StuffItArchiveSpi implements ArchiveSpi {
 
     /**
      * 解凍できるかどうか調べます．
@@ -54,10 +54,8 @@ Debug.println("\n" + StringUtil.getDump(b));
                new String(b).equals("SIT!rRau");
     }
 
-    /** TODO プロパティで選択可能に？ */
-    public Archive createArchiveInstance(Object obj) throws IOException {
-        return new NativeStuffItArchive((File) obj);
-    }
+    /** */
+    public abstract Archive createArchiveInstance(Object obj) throws IOException;
 }
 
 /* */

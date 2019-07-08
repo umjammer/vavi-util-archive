@@ -20,16 +20,16 @@
 
 
 /*
- * StuffIt ���b�p
+ * StuffIt ラッパ
  *
- * @author    <a href=mailto:vavivavi@yahoo.co.jp>nsano</a>
- * @version    0.00    060108    nsano    initial version <br>
+ * @author <a href=mailto:vavivavi@yahoo.co.jp>nsano</a>
+ * @version 0.00 060108 nsano initial version <br>
  */
 
 //-----------------------------------------------------------------------------
 
 /**
- * �A�[�J�C�u�̃n���h�����擾���܂��B
+ * アーカイブのハンドルを取得します。
  */
 static stuffit5_Reader getArchiveHandle(JNIEnv *env, jobject obj) {
     jclass class = (*env)->GetObjectClass(env, obj);
@@ -38,7 +38,7 @@ static stuffit5_Reader getArchiveHandle(JNIEnv *env, jobject obj) {
 }
 
 /**
- * ��O�𓊂��܂��B
+ * 例外を投げます。
  * @param exception "java/lang/Exception"
  */
 static void throwExceptionWithStringMessage(JNIEnv *env, char *exception, char *_message) {
