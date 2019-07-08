@@ -14,7 +14,8 @@ vavi.util.archive.lha.LhaArchiveSpi
 #vavi.util.archive.rar.RarArchiveSpi
 #vavi.util.archive.gca.GcaArchiveSpi
 #vavi.util.archive.sevenzip.SevenZipArchiveSpi
-vavi.util.archive.cab.CabArchiveSpi
+vavi.util.archive.cab.PureJavaCabArchiveSpi
 #vavi.util.archive.arj.ArjArchiveSpi
 #vavi.util.archive.tar.TarArchiveSpi
-#vavi.util.archive.vavi.AntZipArchiveSpi
+#vavi.util.archive.zip.AntZipArchiveSpi
+vavi.util.archive.zip.ZipArchiveSpi

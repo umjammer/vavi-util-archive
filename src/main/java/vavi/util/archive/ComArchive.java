@@ -27,9 +27,9 @@ import vavix.util.ComUtil;
 
 /**
  * KBA front end．
- * 
+ *
  * @target 1.1
- * 
+ *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030211 nsano initial version <br>
  */
@@ -207,7 +207,7 @@ Debug.println("result: " + resultString);
         if (result.getInt() != 0) {
             throw new IOException(resultString);
         }
-        
+
         String temporaryFileName = getTemporaryFileName(entry);
         File temporaryFile = new File(temporaryFileName);
         if (temporaryFile.exists()) {

@@ -2,23 +2,28 @@
 
 # vavi-util-archive
 
- archiving method libraries
+ archiving, compress method libraries
 
-name | mathod | parent | status | comment
------|--------|--------|--------|--------
-arj | archiving | | | |
-binhex | archiving | | | |
-bzip2 | archiving | | | |
-cab | archiving | | | |
-gca | archiving | | | |
-gzip | archiving | | | |
-lha | archiving | | | |
-rar | archiving | | | |
-sevenzip | archiving | | | |
-stuffit | archiving | | | |
-tar | archiving | | | |
-zip | archiving | | | |
-cab | archiving | | | |
-cpio | compression | | | |
-lzma | compression | | | |
-rpm | archiving | | | |
+|name | mathod | read | write | comment | library |
+|-----|--------|--------|--------|---------|---------|
+|arj | archiving | | | ||
+|binhex | archiving | | | | []binhex](http://www.klomp.org/JBinHex/JBinHex.html) |
+|bzip2 | archiving | | | ||
+|cab | archiving | | | ||
+|gca | archiving | | | ||
+|gzip | archiving | ✅ | | ||
+|lha | archiving | ✅ | | | []lha](http://homepage1.nifty.com/dangan/Content/Program/Java/jLHA/jLHA.html) |
+|rar | archiving | | | ||
+|sevenzip | archiving | | | ||
+|stuffit | archiving | | | ||
+|tar | archiving | | | ||
+|zip | archiving | ✅ | | ||
+|cab | archiving | | | ||
+|cpio | compression | | | ||
+|lzma | compression | | | ||
+|rpm | archiving | | | ||
+
+# Library
+
+* commons-vfs
+* https://truevfs.java.net/
