@@ -8,7 +8,6 @@ package vavi.util.archive.cab;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.MessageFormat;
 
 import vavi.util.Debug;
@@ -51,17 +50,6 @@ Debug.println("commandLine: " + commandLine);
     /** */
     protected String getTemporaryFileName(Entry entry) {
         return System.getProperty("java.io.tmpdir") + entry.getName();
-    }
-
-    //----
-
-    /** */
-    public static void main(String[] args) throws Exception {
-        ComCabArchive rar = new ComCabArchive(new File(args[0]));
-        Entry entry = rar.getEntry(args[1]);
-System.err.println("entry: " + entry);
-        InputStream is = rar.getInputStream(entry);
-System.err.println("is: " + is);
     }
 }
 

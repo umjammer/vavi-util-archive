@@ -21,7 +21,7 @@ import vavi.util.win32.DateUtil;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040929 nsano initial version <br>
  */
-class CabFile {
+public class CabFile {
     /** size of this file */
     private int fileSize = 0;
     /** offset of this file within the folder, not accounting for compression */

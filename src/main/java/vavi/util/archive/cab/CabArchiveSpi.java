@@ -22,7 +22,7 @@ import vavi.util.archive.spi.ArchiveSpi;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 041002 nsano initial version <br>
  */
-public class CabArchiveSpi implements ArchiveSpi {
+public abstract class CabArchiveSpi implements ArchiveSpi {
 
     /**
      * 解凍できるかどうか調べます．
@@ -54,10 +54,8 @@ public class CabArchiveSpi implements ArchiveSpi {
                b[3] == 'F';
     }
 
-    /** TODO プロパティで選択可能に？ */
-    public Archive createArchiveInstance(Object obj) throws IOException {
-        return new ComCabArchive((File) obj);
-    }
+    /** */
+    public abstract Archive createArchiveInstance(Object obj) throws IOException;
 }
 
 /* */
