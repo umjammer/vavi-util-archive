@@ -18,13 +18,13 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 /**
  * RAR アーカイブを処理するサービスプロバイダです．
- * 
+ *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021222 nsano initial version <br>
  *          0.01 030128 nsano implements <br>
  *          0.02 030211 nsano use ComRarArchive <br>
  */
-public class RarArchiveSpi implements ArchiveSpi {
+public abstract class RarArchiveSpi implements ArchiveSpi {
 
     /**
      * 解凍できるかどうか調べます．
@@ -57,10 +57,7 @@ public class RarArchiveSpi implements ArchiveSpi {
     }
 
     /** */
-    public Archive createArchiveInstance(Object obj) throws IOException {
-//      return new ComRarArchive((File) obj);
-        return new NativeRarArchive((File) obj);
-    }
+    public abstract Archive createArchiveInstance(Object obj) throws IOException;
 }
 
 /* */
