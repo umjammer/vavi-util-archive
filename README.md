@@ -4,23 +4,31 @@
 
  archiving, compress method libraries
 
-|binhex | archiving | | | | [binhex](https://github.com/umjammer/JBinHex) |
-|bzip2 | archiving | | | ||
-|cab | archiving | | | ||
-|gca | archiving | | | ||
-|gzip | archiving | ✅ | | ||
-|lha | archiving | ✅ | | | [lha](https://github.com/umjammer/jlha) |
-|rar | archiving | | | ||
-|sevenzip | archiving | | | ||
-|stuffit | archiving | | | ||
-|tar | archiving | | | ||
-|zip | archiving | ✅ | | ||
-|cab | archiving | | | ||
-|cpio | compression | | | ||
-|lzma | compression | | | ||
-|rpm | archiving | | | ||
+## Status
 
-# Library
+|name | mathod | read | write | comment | library |
+|-----|--------|--------|--------|---------|---------|
+|arj | archiving | | - | ||
+|binhex | archiving | 🚧 | - | | [binhex](https://github.com/umjammer/JBinHex) |
+|bzip2 | archiving | 🚧 | - | ||
+|cab | archiving | 🚧 | - | ||
+|gca | archiving | | - | ||
+|gzip | archiving | ✅ | - | ||
+|lha | archiving | ✅ | - | | [lha](https://github.com/umjammer/jlha) |
+|rar | archiving | 🚧 | - | ||
+|sevenzip | archiving | | - | ||
+|stuffit | archiving | | - | ||
+|tar | archiving | 🚧 | - | ||
+|zip | archiving | ✅ | - | ||
+|cab | archiving | 🚧 | - | ||
+|cpio | compression | 🚧 | - | ||
+|lzma | compression | 🚧 | - | ||
+|rpm | archiving | 🚧 | - | ||
+
+## Library
+
+
+## TBD
 
 * [commons-vfs](https://commons.apache.org/proper/commons-vfs/)
 * [truevfs](https://github.com/christian-schlichtherle/truevfs)
