@@ -22,7 +22,7 @@ import vavi.util.archive.spi.ArchiveSpi;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 041002 nsano initial version <br>
  */
-public class ArjArchiveSpi implements ArchiveSpi {
+public class ComArjArchiveSpi implements ArchiveSpi {
 
     /**
      * 解凍できるかどうか調べます．
@@ -53,7 +53,7 @@ public class ArjArchiveSpi implements ArchiveSpi {
                b[2] == 'J';
     }
 
-    /** TODO プロパティで選択可能に？ */
+    /** */
     public Archive createArchiveInstance(Object obj) throws IOException {
         return new ComArjArchive((File) obj);
     }
