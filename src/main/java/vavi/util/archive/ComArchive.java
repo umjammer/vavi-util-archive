@@ -27,10 +27,10 @@ import vavix.util.ComUtil;
 
 /**
  * KBA front end．
- * 
+ *
  * @target 1.1
- * 
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ *
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030211 nsano initial version <br>
  */
 public abstract class ComArchive implements Archive {
@@ -95,8 +95,8 @@ Debug.println("ish: "   + Dispatch.get(manager, "IshOk").getBoolean());
         Variant result = Dispatch.invoke(manager, "ArcClass", Dispatch.Method, new Object[] { type }, new int[1]);
 Debug.println("arcClass: " + ComUtil.toObject(result));
 
-    	// each module
-    	activex = new ActiveXComponent("KBA." + type);
+        // each module
+        activex = new ActiveXComponent("KBA." + type);
 Debug.println("activex: " + "KBA." + type);
         module = activex.getObject();
 
@@ -115,13 +115,13 @@ Debug.println("openArc: " + ComUtil.toObject(result));
             throw new FileNotFoundException(file.toString());
         }
 
-    	result = Dispatch.invoke(module, "Find", Dispatch.Method, new Object[] { "*" }, new int[1]);
-    	if (!result.getBoolean()) {
+        result = Dispatch.invoke(module, "Find", Dispatch.Method, new Object[] { "*" }, new int[1]);
+        if (!result.getBoolean()) {
 Debug.println("no content");
             return;
-    	}
-	
-    	do {
+        }
+    
+        do {
             CommonEntry entry = new CommonEntry();
 
             Variant value = Dispatch.get(module, "FileName");
@@ -207,7 +207,7 @@ Debug.println("result: " + resultString);
         if (result.getInt() != 0) {
             throw new IOException(resultString);
         }
-        
+
         String temporaryFileName = getTemporaryFileName(entry);
         File temporaryFile = new File(temporaryFileName);
         if (temporaryFile.exists()) {

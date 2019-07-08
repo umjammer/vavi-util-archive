@@ -4,7 +4,7 @@
  * Programmed by Naohide Sano
  */
 
-package vavi.util.archive.arj;
+package vavi.util.archive.sevenzip;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -12,17 +12,19 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import vavi.util.Debug;
+import vavi.util.StringUtil;
 import vavi.util.archive.Archive;
 import vavi.util.archive.spi.ArchiveSpi;
 
 
 /**
- * ARJ アーカイブを処理するサービスプロバイダです．
+ * SevenZip アーカイブを処理するサービスプロバイダです．
  * 
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
- * @version 0.00 041002 nsano initial version <br>
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
+ * @version 0.00 030228 nsano initial version <br>
  */
-public class ArjArchiveSpi implements ArchiveSpi {
+public class NativeSevenZipArchiveSpi implements ArchiveSpi {
 
     /**
      * 解凍できるかどうか調べます．
@@ -37,25 +39,31 @@ public class ArjArchiveSpi implements ArchiveSpi {
         InputStream is =
             new BufferedInputStream(new FileInputStream((File) target));
 
-        byte[] b = new byte[4];
+        byte[] b = new byte[8];
 
-        is.mark(4);
+        is.mark(8);
         int l = 0;
-        while (l < 4) {
-            l += is.read(b, l, 4 - l);
+        while (l < 8) {
+            l += is.read(b, l, 8 - l);
         }
         is.reset();
 
         is.close();
 
-        return b[0] == 'A' && // TODO
-               b[1] == 'R' &&
-               b[2] == 'J';
+Debug.println("\n" + StringUtil.getDump(b));
+        return b[0] == '7' &&
+               b[1] == 'z' &&
+               b[2] == (byte) 0xbc &&
+               b[3] == (byte) 0xaf &&
+               b[4] == (byte) 0x27 &&
+               b[5] == (byte) 0x1c &&
+               b[6] == (byte) 0x00 &&
+               b[7] == (byte) 0x02;
     }
 
-    /** TODO プロパティで選択可能に？ */
+    /** */
     public Archive createArchiveInstance(Object obj) throws IOException {
-        return new ComArjArchive((File) obj);
+        return new NativeSevenZipArchive((File) obj);
     }
 }
 

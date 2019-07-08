@@ -16,11 +16,11 @@ import vavi.io.LittleEndianDataInputStream;
 
 /**
  * Encapsulates a CFFOLDER entry.
- * 
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ *
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040929 nsano initial version <br>
  */
-class CabFolder {
+public class CabFolder {
     /** */
     public static final int COMPRESSION_NONE = 0;
     /** */
@@ -47,14 +47,14 @@ class CabFolder {
     public void addFile(CabFile file) {
         files.add(file);
     }
-    
+
     /**
      * @return Returns the files.
      */
     public List<CabFile> getFiles() {
         return files;
     }
-    
+
     /** */
     public CabFolder(int reservedSize) {
         this.reservedSize = reservedSize;
@@ -70,7 +70,7 @@ class CabFolder {
 
     /** */
     public void read(InputStream is) throws IOException {
-        
+
         @SuppressWarnings("resource")
         LittleEndianDataInputStream ledis = new LittleEndianDataInputStream(is);
 

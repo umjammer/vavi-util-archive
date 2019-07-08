@@ -15,7 +15,7 @@ import java.io.InputStream;
  *       All header fields are either shorts or long in native byte order. Thus,
  *       all fields must be byte swapped in the 'C771' case. The header is
  *       extended past the filename to the nearest 2-byte boundary.
- *    
+ *
  *    OldAscii
  *       Original ascii header starts with ascii &quot;070707&quot; (six bytes).
  *       Header length is 76 bytes. All fields are octal string values.
@@ -63,7 +63,7 @@ import java.io.InputStream;
 public class CPIOHeader {
 
     private boolean isDebug = false;
-    
+
     public static final int FMT_UNKNOWN = 0;
     public static final int FMT_BINARY = 1;
     public static final int FMT_BINSWAP = 2;

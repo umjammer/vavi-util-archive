@@ -13,32 +13,32 @@ import java.io.InputStream;
 
 /**
  * LimitStream.
- * 
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ *
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040929 nsano initial version <br>
  */
 class LimitStream extends FilterInputStream {
     int limit;
-    
+
     /** */
     public LimitStream(InputStream is, int limit) {
         super(is);
         this.limit = limit;
     }
-    
+
     /** */
     public int read() throws IOException {
         if (limit == 0) {
             return -1;
         }
-        
+
         int ret = super.read();
         if (ret != -1) {
             limit--;
         }
         return ret;
     }
-    
+
     /** */
     public int read(byte[] b, int off, int len) throws IOException {
         if (len > limit) {
@@ -47,7 +47,7 @@ class LimitStream extends FilterInputStream {
         if (limit == 0) {
             return -1;
         }
-        
+
         int ret = super.read(b, off, len);
         limit -= ret;
         return ret;

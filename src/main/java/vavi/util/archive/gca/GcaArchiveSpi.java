@@ -18,12 +18,12 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 /**
  * GCA アーカイブを処理するサービスプロバイダです．
- * 
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ *
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030128 nsano initial version <br>
  *          0.01 030128 nsano implements <br>
  */
-public class GcaArchiveSpi implements ArchiveSpi {
+public abstract class GcaArchiveSpi implements ArchiveSpi {
 
     /**
      * 解凍できるかどうか調べます．
@@ -54,10 +54,8 @@ public class GcaArchiveSpi implements ArchiveSpi {
                b[2] == 'A';
     }
 
-    /** TODO プロパティで選択可能に？ */
-    public Archive createArchiveInstance(Object obj) throws IOException {
-        return new NativeGcaArchive((File) obj);
-    }
+    /** */
+    public abstract Archive createArchiveInstance(Object obj) throws IOException;
 }
 
 /* */

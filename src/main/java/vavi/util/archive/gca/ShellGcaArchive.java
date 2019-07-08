@@ -25,10 +25,10 @@ import vavi.util.archive.spi.CommonEntry;
 
 /**
  * GCA アーカイブを処理するサービスプロバイダです．
- * 
+ *
  * TODO ファイル名が長い時最初 ... になってフォーマットが崩れる
- * 
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ *
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030128 nsano initial version <br>
  *          0.01 030228 nsano refine <br>
  */
@@ -130,7 +130,7 @@ Debug.println(e);
     }
 
     //----
-    
+
     /** */
     public static void main(String[] args) throws Exception {
         new ShellGcaArchive(new File(args[0]));

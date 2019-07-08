@@ -14,8 +14,8 @@ import vavi.util.archive.Entry;
 
 /**
  * LHA 圧縮のサービスプロバイダです．
- * 
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ *
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021103 nsano initial version <br>
  *          0.01 030211 nsano implements #isDirectory() <br>
  *          0.02 030211 nsano jLha 0.06 compatible <br>

@@ -17,8 +17,8 @@ import vavi.util.archive.spi.InputStreamSpi;
 
 /**
  * BZip2 アーカイブを処理するサービスプロバイダです．
- * 
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ *
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040105 nsano initial version <br>
  */
 public class BZip2InputStreamSpi implements InputStreamSpi {

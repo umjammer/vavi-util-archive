@@ -11,12 +11,12 @@
 
 
 /*
- * RAR ƒ‰ƒbƒp
+ * RAR ãƒ©ãƒƒãƒ‘
  *
- * @todo	_archiveHandle ‚ğg—p‚·‚é‚Æ‚«‚ÉƒƒbƒN‚·‚é•K—v‚ª‚ ‚é???
+ * @todo _archiveHandle ã‚’ä½¿ç”¨ã™ã‚‹ã¨ãã«ãƒ­ãƒƒã‚¯ã™ã‚‹å¿…è¦ãŒã‚ã‚‹???
  *
- * @author	<a href=mailto:vavivavi@yahoo.co.jp>nsano</a>
- * @version	0.00	071110	nsano	initial version <br>
+ * @author <a href=mailto:vavivavi@yahoo.co.jp>nsano</a>
+ * @version 0.00 071110 nsano initial version <br>
  */
 
 //-----------------------------------------------------------------------------
@@ -26,7 +26,7 @@
 //-----------------------------------------------------------------------------
 
 /**
- * ƒA[ƒJƒCƒu‚Ìƒnƒ“ƒhƒ‹‚ğæ“¾‚µ‚Ü‚·B
+ * ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ã®ãƒãƒ³ãƒ‰ãƒ«ã‚’å–å¾—ã—ã¾ã™ã€‚
  */
 static HARC getArchiveHandle(JNIEnv *env, jobject obj) {
     jclass class = (*env)->GetObjectClass(env, obj);
@@ -35,7 +35,7 @@ static HARC getArchiveHandle(JNIEnv *env, jobject obj) {
 }
 
 /**
- * —áŠO‚ğ“Š‚°‚Ü‚·B
+ * ä¾‹å¤–ã‚’æŠ•ã’ã¾ã™ã€‚
  * @param exception "java/lang/Exception"
  */
 static void throwExceptionWithStringMessage(JNIEnv *env, char *exception, char *_message) {
@@ -45,7 +45,7 @@ static void throwExceptionWithStringMessage(JNIEnv *env, char *exception, char *
 }
 
 /**
- * —áŠO‚ğ“Š‚°‚Ü‚·B
+ * ä¾‹å¤–ã‚’æŠ•ã’ã¾ã™ã€‚
  * @param exception "java/lang/Exception"
  */
 static void throwExceptionWithIntMessage(JNIEnv *env, char *exception, int _message) {
@@ -56,7 +56,7 @@ static void throwExceptionWithIntMessage(JNIEnv *env, char *exception, int _mess
 }
 
 /**
- * ˆ³k•û–@‚Ì”’l‚ğ•Ô‚µ‚Ü‚·B
+ * åœ§ç¸®æ–¹æ³•ã®æ•°å€¤ã‚’è¿”ã—ã¾ã™ã€‚
  */
 static int getMethodNumber(char *method) {
 fprintf(stderr, "method: %s\n", method);
@@ -71,7 +71,7 @@ fflush(stderr);
 //-----------------------------------------------------------------------------
 
 /**
- * ƒRƒ}ƒ“ƒh•¶š—ñ‚ğ—^‚¦‚ÄCŠeí‚Ì‘ŒÉ‘€ì‚ğs‚¢‚Ü‚·B
+ * ã‚³ãƒãƒ³ãƒ‰æ–‡å­—åˆ—ã‚’ä¸ãˆã¦ï¼Œå„ç¨®ã®æ›¸åº«æ“ä½œã‚’è¡Œã„ã¾ã™ã€‚
  *
  * Class:     vavi_util_archive_vavi_NativeRarArchive
  * Method:    exec
@@ -89,7 +89,7 @@ JNIEXPORT void JNICALL Java_vavi_util_archive_vavi_NativeRarArchive_exec(JNIEnv 
 }
 
 /**
- * ƒo[ƒWƒ‡ƒ“‚ğ•Ô‚µ‚Ü‚·B
+ * ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’è¿”ã—ã¾ã™ã€‚
  *
  * Class:     vavi_util_archive_vavi_NativeRarArchive
  * Method:    getVersion
@@ -103,7 +103,7 @@ JNIEXPORT jint JNICALL Java_vavi_util_archive_vavi_NativeRarArchive_getVersion(J
 }
 
 /**
- * “®ì’†‚©”Û‚©‚ğ“¾‚Ü‚·B
+ * å‹•ä½œä¸­ã‹å¦ã‹ã‚’å¾—ã¾ã™ã€‚
  *
  * Class:     vavi_util_archive_vavi_NativeRarArchive
  * Method:    isRunning
@@ -114,7 +114,7 @@ JNIEXPORT jboolean JNICALL Java_vavi_util_archive_vavi_NativeRarArchive_isRunnin
 }
 
 /**
- * w’èƒtƒ@ƒCƒ‹‚ª‘ŒÉ‚Æ‚µ‚Ä³‚µ‚¢‚©‚Ç‚¤‚©‚ğ•Ô‚µ‚Ü‚·B
+ * æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ãŒæ›¸åº«ã¨ã—ã¦æ­£ã—ã„ã‹ã©ã†ã‹ã‚’è¿”ã—ã¾ã™ã€‚
  *
  * Class:     vavi_util_archive_vavi_NativeRarArchive
  * Method:    checkArchive
@@ -130,7 +130,7 @@ JNIEXPORT jboolean JNICALL Java_vavi_util_archive_vavi_NativeRarArchive_checkArc
 }
 
 /**
- * w’è‚³‚ê‚½‘ŒÉƒtƒ@ƒCƒ‹‚ÉŠi”[‚³‚ê‚Ä‚¢‚éƒtƒ@ƒCƒ‹”‚ğ“¾‚Ü‚·B
+ * æŒ‡å®šã•ã‚ŒãŸæ›¸åº«ãƒ•ã‚¡ã‚¤ãƒ«ã«æ ¼ç´ã•ã‚Œã¦ã„ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«æ•°ã‚’å¾—ã¾ã™ã€‚
  *
  * Class:     vavi_util_archive_vavi_NativeRarArchive
  * Method:    getFileCount
@@ -149,7 +149,7 @@ JNIEXPORT jint JNICALL Java_vavi_util_archive_vavi_NativeRarArchive_getFileCount
 }
 
 /**
- * ‘ŒÉƒtƒ@ƒCƒ‹‚ğŠJ‚«‚Ü‚·B
+ * æ›¸åº«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ãã¾ã™ã€‚
  *
  * Class:     vavi_util_archive_vavi_NativeRarArchive
  * Method:    openArchive
@@ -174,7 +174,7 @@ JNIEXPORT void JNICALL Java_vavi_util_archive_vavi_NativeRarArchive_openArchive(
 }
 
 /**
- * ‘ŒÉƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚Ü‚·B
+ * æ›¸åº«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã¾ã™ã€‚
  *
  * Class:     vavi_util_archive_vavi_NativeRarArchive
  * Method:    closeArchive
@@ -192,7 +192,7 @@ JNIEXPORT void JNICALL Java_vavi_util_archive_vavi_NativeRarArchive_closeArchive
 }
 
 /**
- * Å‰‚ÌŠi”[ƒtƒ@ƒCƒ‹‚Ìî•ñ‚ğ“¾‚Ü‚·B
+ * æœ€åˆã®æ ¼ç´ãƒ•ã‚¡ã‚¤ãƒ«ã®æƒ…å ±ã‚’å¾—ã¾ã™ã€‚
  *
  * Class:     vavi_util_archive_vavi_NativeRarArchive
  * Method:    findFirst
@@ -215,7 +215,7 @@ JNIEXPORT jboolean JNICALL Java_vavi_util_archive_vavi_NativeRarArchive_findFirs
 
     if (result == 0) {
 
-        // getFileName ‚ª‚¤‚Ü‚­‚¢‚Á‚Ä‚È‚¢‚Ì‚Å‘ã—p
+        // getFileName ãŒã†ã¾ãã„ã£ã¦ãªã„ã®ã§ä»£ç”¨
         jstring filename = (*env)->NewStringUTF(env, _entry.szFileName);
 //fprintf(stderr, "filename: %s\n", _entry.szFileName);
         jclass class = (*env)->GetObjectClass(env, obj);
@@ -230,7 +230,7 @@ JNIEXPORT jboolean JNICALL Java_vavi_util_archive_vavi_NativeRarArchive_findFirs
 }
 
 /**
- * 2 ”Ô–ÚˆÈ~‚ÌŠi”[ƒtƒ@ƒCƒ‹‚Ìî•ñ‚ğ“¾‚Ü‚·B
+ * 2 ç•ªç›®ä»¥é™ã®æ ¼ç´ãƒ•ã‚¡ã‚¤ãƒ«ã®æƒ…å ±ã‚’å¾—ã¾ã™ã€‚
  *
  * Class:     vavi_util_archive_vavi_NativeRarArchive
  * Method:    findNext
@@ -246,7 +246,7 @@ JNIEXPORT jboolean JNICALL Java_vavi_util_archive_vavi_NativeRarArchive_findNext
 
     if (result == 0) {
 
-        // getFileName ‚ª‚¤‚Ü‚­‚¢‚Á‚Ä‚È‚¢‚Ì‚Å‘ã—p
+        // getFileName ãŒã†ã¾ãã„ã£ã¦ãªã„ã®ã§ä»£ç”¨
         jstring filename = (*env)->NewStringUTF(env, _entry.szFileName);
 //fprintf(stderr, "filename: %s\n", _entry.szFileName);
         jclass class = (*env)->GetObjectClass(env, obj);
@@ -261,9 +261,9 @@ JNIEXPORT jboolean JNICALL Java_vavi_util_archive_vavi_NativeRarArchive_findNext
 }
 
 /**
- * Ši”[ƒtƒ@ƒCƒ‹‚Ìƒtƒ@ƒCƒ‹–¼‚ğ“¾‚Ü‚·B
+ * æ ¼ç´ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å¾—ã¾ã™ã€‚
  *
- * @@@ ‚È‚ñ‚©‚¤‚Ü‚¢‚±‚Æ‚¢‚Á‚Ä‚È‚¢
+ * @@@ ãªã‚“ã‹ã†ã¾ã„ã“ã¨ã„ã£ã¦ãªã„
  *
  * Class:     vavi_util_archive_vavi_NativeRarArchive
  * Method:    getCurrentFileName
@@ -294,7 +294,7 @@ fflush(stderr);
 }
 
 /**
- * Ši”[ƒtƒ@ƒCƒ‹‚Ìˆ³k–@‚ğ“¾‚Ü‚·B
+ * æ ¼ç´ãƒ•ã‚¡ã‚¤ãƒ«ã®åœ§ç¸®æ³•ã‚’å¾—ã¾ã™ã€‚
  *
  * Class:     vavi_util_archive_vavi_NativeRarArchive
  * Method:    getCurrentMethod
@@ -317,7 +317,7 @@ JNIEXPORT jint JNICALL Java_vavi_util_archive_vavi_NativeRarArchive_getCurrentMe
 }
 
 /**
- * Ši”[ƒtƒ@ƒCƒ‹‚ÌƒTƒCƒY‚ğ“¾‚Ü‚·B
+ * æ ¼ç´ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚µã‚¤ã‚ºã‚’å¾—ã¾ã™ã€‚
  *
  * Class:     vavi_util_archive_vavi_NativeRarArchive
  * Method:    getCurrentOriginalSize
@@ -337,7 +337,7 @@ JNIEXPORT jlong JNICALL Java_vavi_util_archive_vavi_NativeRarArchive_getCurrentO
 }
 
 /**
- * Ši”[ƒtƒ@ƒCƒ‹‚Ìˆ³kƒTƒCƒY‚ğ“¾‚Ü‚·B
+ * æ ¼ç´ãƒ•ã‚¡ã‚¤ãƒ«ã®åœ§ç¸®ã‚µã‚¤ã‚ºã‚’å¾—ã¾ã™ã€‚
  *
  * Class:     vavi_util_archive_vavi_NativeRarArchive
  * Method:    getCurrentCompressedSize
@@ -357,7 +357,7 @@ JNIEXPORT jlong JNICALL Java_vavi_util_archive_vavi_NativeRarArchive_getCurrentC
 }
 
 /**
- * Ši”[ƒtƒ@ƒCƒ‹‚Ì“ú•t‚ğ DOS Œ`®‚Å“¾‚Ü‚·B
+ * æ ¼ç´ãƒ•ã‚¡ã‚¤ãƒ«ã®æ—¥ä»˜ã‚’ DOS å½¢å¼ã§å¾—ã¾ã™ã€‚
  *
  * Class:     vavi_util_archive_vavi_NativeRarArchive
  * Method:    getCurrentDate
@@ -377,7 +377,7 @@ JNIEXPORT jint JNICALL Java_vavi_util_archive_vavi_NativeRarArchive_getCurrentDa
 }
 
 /**
- * Ši”[ƒtƒ@ƒCƒ‹‚Ì‚ğ DOS Œ`®‚Å“¾‚Ü‚·B
+ * æ ¼ç´ãƒ•ã‚¡ã‚¤ãƒ«ã®æ™‚åˆ»ã‚’ DOS å½¢å¼ã§å¾—ã¾ã™ã€‚
  *
  * Class:     vavi_util_archive_vavi_NativeRarArchive
  * Method:    getCurrentTime
@@ -397,7 +397,7 @@ JNIEXPORT jint JNICALL Java_vavi_util_archive_vavi_NativeRarArchive_getCurrentTi
 }
 
 /**
- * Ši”[ƒtƒ@ƒCƒ‹‚Ìƒ`ƒFƒbƒNƒTƒ€‚ğ“¾‚Ü‚·B
+ * æ ¼ç´ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒã‚§ãƒƒã‚¯ã‚µãƒ ã‚’å¾—ã¾ã™ã€‚
  *
  * Class:     vavi_util_archive_vavi_NativeRarArchive
  * Method:    getCurrentCRC
@@ -417,7 +417,7 @@ JNIEXPORT jlong JNICALL Java_vavi_util_archive_vavi_NativeRarArchive_getCurrentC
 }
 
 /**
- * ŒŸõ‚Éƒ}ƒbƒ`‚µ‚½ƒtƒ@ƒCƒ‹‚ÌƒTƒCƒY‚Ì‡Œv‚ğ“¾‚Ü‚·B
+ * æ¤œç´¢ã«ãƒãƒƒãƒã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚µã‚¤ã‚ºã®åˆè¨ˆã‚’å¾—ã¾ã™ã€‚
  *
  * Class:     vavi_util_archive_vavi_NativeRarArchive
  * Method:    getSelectedSize
@@ -437,7 +437,7 @@ JNIEXPORT jlong JNICALL Java_vavi_util_archive_vavi_NativeRarArchive_getSelected
 }
 
 /**
- * ŒŸõ‚Éƒ}ƒbƒ`‚µ‚½ƒtƒ@ƒCƒ‹‚Ìˆ³kƒTƒCƒY‚Ì‡Œv‚ğ“¾‚Ü‚·B
+ * æ¤œç´¢ã«ãƒãƒƒãƒã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã®åœ§ç¸®ã‚µã‚¤ã‚ºã®åˆè¨ˆã‚’å¾—ã¾ã™ã€‚
  *
  * Class:     vavi_util_archive_vavi_NativeRarArchive
  * Method:    getSelectedCompressedSize
@@ -457,7 +457,7 @@ JNIEXPORT jlong JNICALL Java_vavi_util_archive_vavi_NativeRarArchive_getSelected
 }
 
 /**
- * ŒŸõ‚Éƒ}ƒbƒ`‚µ‚½ƒtƒ@ƒCƒ‹‚Ì‘S‘Ì‚Ìˆ³k—¦‚ğ“¾‚Ü‚·B
+ * æ¤œç´¢ã«ãƒãƒƒãƒã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã®å…¨ä½“ã®åœ§ç¸®ç‡ã‚’å¾—ã¾ã™ã€‚
  *
  * Class:     vavi_util_archive_vavi_NativeRarArchive
  * Method:    getSelectedRatio

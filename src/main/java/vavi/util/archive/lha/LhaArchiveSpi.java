@@ -19,7 +19,7 @@ import vavi.util.archive.spi.ArchiveSpi;
 /**
  * LHA アーカイブを処理するサービスプロバイダです．
  * 
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021222 nsano initial version <br>
  */
 public class LhaArchiveSpi implements ArchiveSpi {

@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * CAB file structure.
- * 
+ *
  * @author Adam Megacz <adam@ibex.org>
  */
 public class Cab {
@@ -24,7 +24,7 @@ public class Cab {
 
     /** */
     private List<CabFolder> folders = new ArrayList<>();
-    
+
     /**
      * @return Returns the folders.
      */

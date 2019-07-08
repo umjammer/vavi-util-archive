@@ -18,8 +18,8 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 /**
  * TAR アーカイブを処理するサービスプロバイダです．
- * 
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ *
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040106 nsano initial version <br>
  */
 public class TarArchiveSpi implements ArchiveSpi {
@@ -69,7 +69,7 @@ Debug.println(is);
 
 Debug.println("tar magic:\n" + StringUtil.getDump(b));
         return "ustar".equals(new String(b, "ISO-8859-1")) ||
-            (b[0] == 0x00 &&	// TODO magic 無い奴がいる
+            (b[0] == 0x00 &&    // TODO magic 無い奴がいる
              b[1] == 0x00 &&
              b[2] == 0x00 &&
              b[3] == 0x00 &&

@@ -12,8 +12,8 @@ import java.io.InputStream;
 
 /**
  * Archive の Service Provider Interface です．
- * 
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ *
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040105 nsano initial version <br>
  *          0.01 040107 nsano change interface <br>
  */

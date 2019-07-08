@@ -15,7 +15,7 @@ import vavi.util.archive.Entry;
 /**
  * RAR 圧縮のサービスプロバイダです．
  * 
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 120216 nsano initial version <br>
  */
 public class PureJavaRarEntry implements Entry {

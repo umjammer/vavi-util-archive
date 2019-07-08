@@ -21,8 +21,8 @@ import vavi.util.archive.Entry;
 
 /**
  * TAR アーカイブを処理するサービスプロバイダです．
- * 
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ *
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040106 nsano initial version <br>
  */
 public class TarArchive implements Archive {
@@ -50,7 +50,7 @@ public class TarArchive implements Archive {
         }
 
         this.entries = new Entry[list.size()];
-        
+
         list.toArray(entries);
     }
 

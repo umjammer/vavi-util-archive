@@ -1,3 +1,4 @@
+package vavi.util.rpm;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -5,15 +5,21 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>vavi</groupId>
   <artifactId>vavi-util-archive</artifactId>
   <name>Vavi Archiving API</name>
+  <version>1.0.6-SNAPSHOT</version>
+
   <organization>
     <name></name>
   </organization>
-  <version>1.0.5</version>
   <url>https://github.com/umjammer/vavi-util-archive</url>
-  <description>1.0.5
+  <description>1.0.6
+
+    Archives
+
+1.0.5
 
     fix archive spi method signature
 
@@ -37,6 +43,13 @@ TOOD
 
     jni on maven
     registory like IIORegistory</description>
+  <scm>
+    <url>https://github.com/umjammer/vavi-util-archive/</url>
+  </scm>
+  <issueManagement>
+    <url>https://github.com/umjammer/vavi-util-archive/issues</url>
+  </issueManagement>
+
   <build>
     <plugins>
       <plugin>
@@ -50,11 +63,11 @@ TOOD
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>native2ascii-maven-plugin</artifactId>
+        <version>2.0.1</version>
         <executions>
           <execution>
-            <phase>package</phase>
             <goals>
-              <goal>native2ascii</goal>
+              <goal>resources</goal>
             </goals>
             <configuration>
               <includes>
@@ -66,35 +79,19 @@ TOOD
       </plugin>
     </plugins>
   </build>
+
   <repositories>
     <repository>
       <id>jitpack.io</id>
       <url>https://jitpack.io</url>
     </repository>
-    <repository>
-      <id>umjammer-mvn-repo</id>
-      <url>https://raw.github.com/umjammer/umjammer/mvn-repo/</url>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
-    </repository>
   </repositories>
+
   <dependencies>
     <dependency>
       <groupId>com.github.umjammer</groupId>
       <artifactId>vavi-commons</artifactId>
-      <version>1.0.6</version>
-    </dependency>
-    <dependency>
-      <groupId>jlha</groupId>
-      <artifactId>jlha</artifactId>
-      <version>0.0.6</version>
-    </dependency>
-    <dependency>
-      <groupId>jbinhex</groupId>
-      <artifactId>jbinhex</artifactId>
-      <version>0.0.5</version>
+      <version>1.0.7</version>
     </dependency>
     <dependency>
       <groupId>com.github.umjammer</groupId>
@@ -102,26 +99,44 @@ TOOD
       <version>0.3.3</version>
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.5</version>
-      <scope>test</scope>
+      <groupId>com.github.umjammer</groupId>
+      <artifactId>jlha</artifactId>
+      <version>0.0.8</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.umjammer</groupId>
+      <artifactId>jbinhex</artifactId>
+      <version>0.0.6</version>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-compress</artifactId>
-      <version>1.10</version>
+      <version>1.18</version>
+    </dependency>
+<!-- 
+    <dependency>
+      <groupId>de.innosystec</groupId>
+      <artifactId>java-unrar</artifactId>
+      <version>1.7.1-SNAPSHOT</version>
+    </dependency>
+-->
+    <dependency>
+      <groupId>com.github.umjammer</groupId>
+      <artifactId>java-unrar</artifactId>
+      <version>1.7.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.3.0</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.github.axet</groupId>
-      <artifactId>java-unrar</artifactId>
-      <version>1.7.0-1</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.3.0</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
-  <scm>
-    <url>https://github.com/umjammer/vavi-util-archive/</url>
-  </scm>
-  <issueManagement>
-    <url>https://github.com/umjammer/vavi-util-archive/issues</url>
-  </issueManagement>
 </project>

@@ -1,14 +1,11 @@
+package vavi.util.cpio;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import vavi.util.cpio.CPIOEntry;
-import vavi.util.cpio.CPIOInputStream;
 
 
 public class cpio {
@@ -20,24 +17,26 @@ public class cpio {
 
     private int action = ACT_NONE;
 
+    @SuppressWarnings("unused")
     private boolean quiet = false;
     private boolean verbose = false;
     private boolean listMode = false;
 
     private InputStream inStream = null;
 
+    @SuppressWarnings("unused")
     private OutputStream outStream = null;
 
     private File extractBase = null;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         cpio app = new cpio();
         app.processArguments(args);
         app.processCPIO();
     }
 
     // UNDONE put this on top of a GJT command line package!
-    private void processArguments(String[] args) {
+    private void processArguments(String[] args) throws IOException {
         for (int i = 0; i < args.length; ++i) {
             if (args[i].equals("-i")) {
                 this.action = ACT_COPYIN;
@@ -54,12 +53,7 @@ public class cpio {
                 this.action = ACT_PASSTHRU;
             } else if (args[i].equals("-I")) {
                 String archFile = args[++i];
-                try {
-                    this.inStream = new FileInputStream(archFile);
-                } catch (FileNotFoundException ex) {
-                    ex.printStackTrace();
-                    System.exit(1);
-                }
+                this.inStream = new FileInputStream(archFile);
             } else if (args[i].equals("--basedir")) {
                 String baseDir = args[++i];
                 this.extractBase = new File(baseDir);
@@ -75,7 +69,8 @@ public class cpio {
         }
     }
 
-    private void processCPIO() {
+    /** */
+    private void processCPIO() throws IOException {
         if (this.action == ACT_COPYIN) {
             this.processCopyIn();
         } else if (this.action == ACT_COPYOUT) {
@@ -88,49 +83,40 @@ public class cpio {
         }
     }
 
-    private void processCopyIn() {
-        try {
-            CPIOInputStream cin = new CPIOInputStream(this.inStream);
+    /** */
+    private void processCopyIn() throws IOException {
+        CPIOInputStream cin = new CPIOInputStream(this.inStream);
 
-            for (;;) {
-                CPIOEntry entry = cin.getNextEntry();
+        while (true) {
+            CPIOEntry entry = cin.getNextEntry();
 
-                if (entry.getHeader().filename.equals("TRAILER!!!"))
-                    break;
+            if (entry.getHeader().filename.equals("TRAILER!!!"))
+                break;
 
-                // List it
-                if (this.listMode || this.verbose) {
-                    if (this.listMode && this.verbose) {
-                        // 'ls -l' style...
-                        System.err.println(entry.getHeader().filename + "  " + entry.getHeader().filesize + " bytes.");
-                    } else {
-                        System.err.println(entry.getHeader().filename);
-                    }
-                }
-
-                // Extract it
-                if (!this.listMode) {
-                    File destF = new File(this.extractBase, entry.getHeader().filename);
-
-                    try {
-                        FileOutputStream out = new FileOutputStream(destF);
-
-                        cin.copyEntryContents(out);
-
-                        out.close();
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
+            // List it
+            if (this.listMode || this.verbose) {
+                if (this.listMode && this.verbose) {
+                    // 'ls -l' style...
+                    System.err.println(entry.getHeader().filename + "  " + entry.getHeader().filesize + " bytes.");
+                } else {
+                    System.err.println(entry.getHeader().filename);
                 }
             }
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+
+            // Extract it
+            if (!this.listMode) {
+                File destF = new File(this.extractBase, entry.getHeader().filename);
+
+                FileOutputStream out = new FileOutputStream(destF);
+
+                cin.copyEntryContents(out);
+
+                out.close();
+            }
         }
     }
 
+    /** */
     private void usage() {
     }
-
 }
