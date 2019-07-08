@@ -4,15 +4,12 @@
 
  archiving, compress method libraries
 
-|name | mathod | read | write | comment | library |
-|-----|--------|--------|--------|---------|---------|
-|arj | archiving | | | ||
-|binhex | archiving | | | | []binhex](http://www.klomp.org/JBinHex/JBinHex.html) |
+|binhex | archiving | | | | [binhex](https://github.com/umjammer/JBinHex) |
 |bzip2 | archiving | | | ||
 |cab | archiving | | | ||
 |gca | archiving | | | ||
 |gzip | archiving | ✅ | | ||
-|lha | archiving | ✅ | | | []lha](http://homepage1.nifty.com/dangan/Content/Program/Java/jLHA/jLHA.html) |
+|lha | archiving | ✅ | | | [lha](https://github.com/umjammer/jlha) |
 |rar | archiving | | | ||
 |sevenzip | archiving | | | ||
 |stuffit | archiving | | | ||
@@ -25,5 +22,5 @@
 
 # Library
 
-* commons-vfs
-* https://truevfs.java.net/
+* [commons-vfs](https://commons.apache.org/proper/commons-vfs/)
+* [truevfs](https://github.com/christian-schlichtherle/truevfs)
