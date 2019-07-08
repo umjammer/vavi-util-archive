@@ -10,18 +10,18 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import vavi.util.archive.spi.InputStreamSpi;
 
 
 /**
- * BZip2InputStreamSpiTest. 
+ * BZip2InputStreamTest.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 2009/06/12 nsano initial version <br>
  */
-public class BZip2InputStreamSpiTest {
+public class BZip2InputStreamTest {
 
     @Test
     public void test01() throws Exception {

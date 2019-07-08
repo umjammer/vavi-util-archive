@@ -1,3 +1,4 @@
+package vavi.util.rpm;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -50,19 +51,19 @@ public class rpm {
         RPMHeader sigHeader = rin.getSignatureHeader();
         RPMHeader headHeader = rin.getHeaderHeader();
 
-        for (;;) {
+        while (true) {
             try {
                 CPIOEntry entry = rin.getNextFileEntry();
 
                 if (entry.getHeader().filename.equals("TRAILER!!!"))
                     break;
 
-                if (false)
-                    System.err.println(entry.getHeader().filename + "  " + entry.getHeader().filesize + " bytes.");
+System.err.println(entry.getHeader().filename + "  " + entry.getHeader().filesize + " bytes.");
 
                 if (app.extractOnly) {
-                    if (app.verbosity > 0)
-                        System.err.println(entry.getHeader().filename + "  " + entry.getHeader().filesize + " bytes");
+                    if (app.verbosity > 0) {
+System.err.println(entry.getHeader().filename + "  " + entry.getHeader().filesize + " bytes");
+                    }
 
                     String fName = entry.getHeader().filename;
                     fName = fName.replace('/', File.separatorChar);
