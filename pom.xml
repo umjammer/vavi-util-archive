@@ -9,7 +9,7 @@
   <groupId>vavi</groupId>
   <artifactId>vavi-util-archive</artifactId>
   <name>Vavi Archiving API</name>
-  <version>1.0.6-SNAPSHOT</version>
+  <version>1.0.6</version>
 
   <organization>
     <name></name>
