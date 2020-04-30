@@ -11,7 +11,7 @@ import vavi.util.archive.Entry;
 
 /**
  * ZIP 圧縮のサービスプロバイダです．
- * 
+ *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021104 nsano initial version <br>
  */

@@ -9,13 +9,17 @@
   <groupId>vavi</groupId>
   <artifactId>vavi-util-archive</artifactId>
   <name>Vavi Archiving API</name>
-  <version>1.0.6</version>
+  <version>1.0.7</version>
 
   <organization>
     <name></name>
   </organization>
   <url>https://github.com/umjammer/vavi-util-archive</url>
-  <description>1.0.6
+  <description>1.0.7
+
+    follow github advice
+
+1.0.6
 
     Archives
 
@@ -91,12 +95,12 @@ TOOD
     <dependency>
       <groupId>com.github.umjammer</groupId>
       <artifactId>vavi-commons</artifactId>
-      <version>1.0.7</version>
+      <version>1.0.15</version>
     </dependency>
     <dependency>
       <groupId>com.github.umjammer</groupId>
       <artifactId>vavi-commons-sandbox</artifactId>
-      <version>0.3.3</version>
+      <version>0.3.4</version>
     </dependency>
     <dependency>
       <groupId>com.github.umjammer</groupId>
@@ -111,7 +115,7 @@ TOOD
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-compress</artifactId>
-      <version>1.18</version>
+      <version>1.19</version>
     </dependency>
 <!-- 
     <dependency>
@@ -136,6 +140,12 @@ TOOD
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
       <version>5.3.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-commons</artifactId>
+      <version>1.5.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

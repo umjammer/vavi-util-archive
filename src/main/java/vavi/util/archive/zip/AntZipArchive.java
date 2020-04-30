@@ -85,7 +85,7 @@ public class AntZipArchive implements Archive {
     public int size() {
         int count = 0;
         Enumeration<?> e = archive.getEntries();
-        for (int i = 0; e.hasMoreElements(); i++) {
+        while (e.hasMoreElements()) {
             e.nextElement();
             count++;
         }
