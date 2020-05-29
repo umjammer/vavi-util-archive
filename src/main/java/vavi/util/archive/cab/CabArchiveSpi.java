@@ -6,9 +6,6 @@
 
 package vavi.util.archive.cab;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -24,19 +21,8 @@ import vavi.util.archive.spi.ArchiveSpi;
  */
 public abstract class CabArchiveSpi implements ArchiveSpi {
 
-    /**
-     * 解凍できるかどうか調べます．
-     * @param target 今のところ File しか受け付けません
-     */
-    public boolean canExtractInput(Object target) throws IOException {
-
-        if (!(target instanceof File)) {
-            throw new IllegalArgumentException("not supported type " + target);
-        }
-
-        InputStream is =
-            new BufferedInputStream(new FileInputStream((File) target));
-
+    /** */
+    protected boolean canExtractInput(InputStream is, boolean needToClose) throws IOException {
         byte[] b = new byte[4];
 
         is.mark(4);
@@ -46,7 +32,9 @@ public abstract class CabArchiveSpi implements ArchiveSpi {
         }
         is.reset();
 
-        is.close();
+        if (needToClose) {
+            is.close();
+        }
 
         return b[0] == 'M' &&
                b[1] == 'S' &&

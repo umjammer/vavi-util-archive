@@ -11,10 +11,11 @@
 
 #vavi.util.archive.stuffit.StuffItArchiveSpi
 vavi.util.archive.lha.LhaArchiveSpi
-#vavi.util.archive.rar.RarArchiveSpi
+vavi.util.archive.rar.PureJavaRarArchiveSpi
 #vavi.util.archive.gca.GcaArchiveSpi
 #vavi.util.archive.sevenzip.SevenZipArchiveSpi
-vavi.util.archive.cab.PureJavaCabArchiveSpi
+#vavi.util.archive.cab.PureJavaCabArchiveSpi
+vavi.util.archive.cab.DorkboxCabArchiveSpi
 #vavi.util.archive.arj.ArjArchiveSpi
 #vavi.util.archive.tar.TarArchiveSpi
 #vavi.util.archive.zip.AntZipArchiveSpi

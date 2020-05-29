@@ -30,12 +30,20 @@ public class ZipArchiveSpi implements ArchiveSpi {
      */
     public boolean canExtractInput(Object target) throws IOException {
 
-        if (!(target instanceof File)) {
-            throw new IllegalArgumentException("not supported type " + target);
-        }
+        InputStream is;
+        boolean needToClose = false;
 
-        InputStream is =
-            new BufferedInputStream(new FileInputStream((File) target));
+        if (File.class.isInstance(target)) {
+            is = new BufferedInputStream(new FileInputStream(File.class.cast(target)));
+            needToClose = true;
+        } else if (InputStream.class.isInstance(target)) {
+            is = InputStream.class.cast(target);
+            if (!is.markSupported()) {
+                throw new IllegalArgumentException("InputStream should support #mark()");
+            }
+        } else {
+            throw new IllegalArgumentException("not supported type " + target.getClass().getName());
+        }
 
         byte[] b = new byte[2];
 
@@ -46,7 +54,9 @@ public class ZipArchiveSpi implements ArchiveSpi {
         }
         is.reset();
 
-        is.close();
+        if (needToClose) {
+            is.close();
+        }
 
         return b[0] == 'P' &&
                b[1] == 'K';
@@ -54,7 +64,13 @@ public class ZipArchiveSpi implements ArchiveSpi {
 
     /** */
     public Archive createArchiveInstance(Object obj) throws IOException {
-        return new ZipArchive((File) obj);
+        if (File.class.isInstance(obj)) {
+            return new ZipArchive(File.class.cast(obj));
+        } else if (InputStream.class.isInstance(obj)) {
+            return new ZipArchive(InputStream.class.cast(obj));
+        } else {
+            throw new IllegalArgumentException("not supported type " + obj.getClass().getName());
+        }
     }
 }
 

@@ -26,15 +26,24 @@ public class LhaArchiveSpi implements ArchiveSpi {
 
     /**
      * 解凍できるかどうか調べます．
+     * @param target {@link File} and {@link InputStream} are supported.
      */
     public boolean canExtractInput(Object target) throws IOException {
 
-        if (!(target instanceof File)) {
-            throw new IllegalArgumentException("not supported type " + target);
-        }
+        InputStream is;
+        boolean needToClose = false;
 
-        InputStream is =
-            new BufferedInputStream(new FileInputStream((File) target));
+        if (File.class.isInstance(target)) {
+            is = new BufferedInputStream(new FileInputStream(File.class.cast(target)));
+            needToClose = true;
+        } else if (InputStream.class.isInstance(target)) {
+            is = InputStream.class.cast(target);
+            if (!is.markSupported()) {
+                throw new IllegalArgumentException("InputStream should support #mark()");
+            }
+        } else {
+            throw new IllegalArgumentException("not supported type " + target.getClass().getName());
+        }
 
         byte[] b = new byte[5];
 
@@ -46,7 +55,9 @@ public class LhaArchiveSpi implements ArchiveSpi {
         }
         is.reset();
 
-        is.close();
+        if (needToClose) {
+            is.close();
+        }
 
         return b[0] == '-' &&
                b[1] == 'l' &&
@@ -54,9 +65,18 @@ public class LhaArchiveSpi implements ArchiveSpi {
                b[4] == '-';
     }
 
-    /** */
+    /**
+     * @param obj {@link File} and {@link InputStream} are supported.
+     * @throw IllegalArgumentException unsupported type is specified to <code>obj</code>.
+     */
     public Archive createArchiveInstance(Object obj) throws IOException {
-        return new LhaArchive((File) obj);
+        if (File.class.isInstance(obj)) {
+            return new LhaArchive(File.class.cast(obj));
+        } else if (InputStream.class.isInstance(obj)) {
+            return new LhaArchive(InputStream.class.cast(obj));
+        } else {
+            throw new IllegalArgumentException("not supported type " + obj.getClass().getName());
+        }
     }
 }
 
