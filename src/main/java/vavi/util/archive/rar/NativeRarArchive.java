@@ -146,7 +146,7 @@ Debug.println("commandLine: " + commandLine);
     /** コマンド文字列を与えて，各種の書庫操作を行います。 */
     private native void exec(String command) throws IOException;
     /** バージョンを返します。 */
-    private native int getVersion();
+    protected native int getVersion();
     /** 動作中か否かを得ます。 */
     private native boolean isRunning();
 
@@ -188,22 +188,6 @@ Debug.println("commandLine: " + commandLine);
     /** */
     static {
         System.loadLibrary("RarWrapper");
-    }
-
-    // for Native method ------------------------------------------------------
-
-    /** */
-    public static void main(String[] args) throws IOException {
-        NativeRarArchive rar = new NativeRarArchive(new File(args[0]));
-System.err.println("rar: " + rar.getVersion());
-//System.err.println("handle: " + gca.instance);
-//System.err.println("size: " + gca.getSelectedSize());
-//System.err.println("csize: " + gca.getSelectedCompressedSize());
-//System.err.println("ratio: " + gca.getSelectedRatio());
-        Entry entry = rar.getEntry(args[1]);
-        InputStream is = rar.getInputStream(entry);
-System.err.println("is: " + is);
-        System.exit(0);
     }
 }
 

@@ -157,7 +157,7 @@ Debug.println("commandLine: " + commandLine);
     /** コマンド文字列を与えて，各種の書庫操作を行います。 */
     private native void exec(String command) throws IOException;
     /** バージョンを返します。 */
-    private native int getVersion();
+    protected native int getVersion();
 
     /** 書庫ファイルを開きます。 */
     private native void openArchive(String filename, int mode) throws IOException;
@@ -167,25 +167,6 @@ Debug.println("commandLine: " + commandLine);
     /** */
     static {
         System.loadLibrary("StuffItWrapper");
-    }
-
-    // for Native method ------------------------------------------------------
-
-    /** */
-    public static void main(String[] args) throws IOException {
-        NativeStuffItArchive sit = new NativeStuffItArchive(new File(args[0]));
-System.err.println("sit: " + sit.getVersion());
-//System.err.println("handle: " + sit.instance);
-//System.err.println("size: " + sit.getSelectedSize());
-//System.err.println("csize: " + sit.getSelectedCompressedSize());
-//System.err.println("ratio: " + sit.getSelectedRatio());
-//        Entry entry = sit.getEntry(args[1]);
-//        InputStream is = sit.getInputStream(entry);
-//System.err.println("is: " + is);
-        for (Entry entry : sit.entries) {
-            System.err.println("entry: " + entry);
-        }
-        System.exit(0);
     }
 }
 

@@ -7,16 +7,13 @@ import java.io.IOException;
 
 import vavi.util.cpio.CPIOEntry;
 
-import vavi.util.rpm.RPMHeader;
-import vavi.util.rpm.RPMIndexEntry;
-import vavi.util.rpm.RPMInputStream;
-import vavi.util.rpm.RPMLead;
-
 
 public class rpmdump {
 
+    @SuppressWarnings("unused")
     private boolean extractOnly = false;
 
+    @SuppressWarnings("unused")
     private File baseDirF = null;
 
     public static void main(String[] args) {

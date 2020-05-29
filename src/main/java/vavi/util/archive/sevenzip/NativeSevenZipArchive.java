@@ -221,22 +221,6 @@ Debug.printStackTrace(e);
     static {
         System.loadLibrary("SevenZipWrapper");
     }
-
-    // for Native method ------------------------------------------------------
-
-    /** java NativeSevenZipArchive sevenZipFile oneOfEntry */
-    public static void main(String[] args) throws IOException {
-        NativeSevenZipArchive sevenZip = new NativeSevenZipArchive(new File(args[0]));
-        Entry entry = sevenZip.getEntry(args[1]);
-        InputStream is = sevenZip.getInputStream(entry);
-System.err.println("is: " + is);
-//System.err.println("sevenZip: " + sevenZip.getVersion());
-//System.err.println("handle: " + sevenZip.instance);
-//System.err.println("size: " + sevenZip.getSelectedSize());
-//System.err.println("csize: " + sevenZip.getSelectedCompressedSize());
-//System.err.println("ratio: " + sevenZip.getSelectedRatio());
-        System.exit(0);
-    }
 }
 
 /* */

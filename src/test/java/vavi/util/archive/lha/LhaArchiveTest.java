@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import vavi.util.archive.Entry;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -28,11 +28,24 @@ class LhaArchiveTest {
 
     @Test
     void test() throws Exception {
-        LhaArchive archive = new LhaArchive(new File("tmp/ugca010c.lzh"));
-        for (Entry entry : archive.entries()) {
+        LhaArchive archive = new LhaArchive(LhaArchiveTest.class.getResourceAsStream("/test.lzh"));
+        int c = 0;
+        for (Entry<?> entry : archive.entries()) {
             System.err.println(entry.getName());
+            c++;
         }
-        assertTrue(true);
+        assertEquals(7, c);
+    }
+
+    @Test
+    void test2() throws Exception {
+        LhaArchive archive = new LhaArchive(new File("src/test/resources/test.lzh"));
+        int c = 0;
+        for (Entry<?> entry : archive.entries()) {
+            System.err.println(entry.getName());
+            c++;
+        }
+        assertEquals(7, c);
     }
 
     /**
@@ -45,7 +58,7 @@ class LhaArchiveTest {
         if (!Files.exists(dir)) {
             Files.createDirectories(dir);
         }
-        for (Entry entry : archive.entries()) {
+        for (Entry<?> entry : archive.entries()) {
             Path path = dir.resolve(entry.getName());
             if (!Files.exists(path.getParent())) {
                 Files.createDirectories(path.getParent());

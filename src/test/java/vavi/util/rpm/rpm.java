@@ -8,10 +8,6 @@ import java.io.IOException;
 
 import vavi.util.cpio.CPIOEntry;
 
-import vavi.util.rpm.RPMHeader;
-import vavi.util.rpm.RPMInputStream;
-import vavi.util.rpm.RPMLead;
-
 
 public class rpm {
 
@@ -48,8 +44,11 @@ public class rpm {
         }
 
         RPMLead lead = rin.getRPMLead();
+System.err.println(lead);
         RPMHeader sigHeader = rin.getSignatureHeader();
+System.err.println(sigHeader);
         RPMHeader headHeader = rin.getHeaderHeader();
+System.err.println(headHeader);
 
         while (true) {
             try {

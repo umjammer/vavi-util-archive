@@ -149,13 +149,6 @@ Debug.println(e);
     public int size() {
         return 0;
     }
-
-    //----
-    
-    /** */
-    public static void main(String[] args) throws Exception {
-        new ShellRarArchive(new File(args[0]));
-    }
 }
 
 /* */
