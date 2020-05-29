@@ -8,10 +8,10 @@
 
 |name | mathod | read | write | comment | library |
 |-----|--------|--------|--------|---------|---------|
-|arj | archiving | | - | ||
 |binhex | archiving | 🚧 | - | | [binhex](https://github.com/umjammer/JBinHex) |
 |bzip2 | archiving | 🚧 | - | ||
-|cab | archiving | 🚧 | - | ||
+|cab | archiving | 🚧 | - | | [ibex](http://util.ibex.org/src/org/ibex/util/) |
+|cab | archiving | 🚧 | - | | [dorkbox]() |
 |gca | archiving | | - | ||
 |gzip | archiving | ✅ | - | ||
 |lha | archiving | ✅ | - | | [lha](https://github.com/umjammer/jlha) |
@@ -19,8 +19,8 @@
 |sevenzip | archiving | | - | ||
 |stuffit | archiving | | - | ||
 |tar | archiving | 🚧 | - | ||
-|zip | archiving | ✅ | - | ||
-|cab | archiving | 🚧 | - | ||
+|zip | archiving | ✅ | - | | jdk |
+|zip | archiving | ✅ | - | | [ant]() |
 |cpio | compression | 🚧 | - | ||
 |lzma | compression | 🚧 | - | ||
 |rpm | archiving | 🚧 | - | ||
@@ -32,3 +32,4 @@
 
 * [commons-vfs](https://commons.apache.org/proper/commons-vfs/)
 * [truevfs](https://github.com/christian-schlichtherle/truevfs)
+* apache commons-compress

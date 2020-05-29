@@ -8,14 +8,16 @@
 
   <groupId>vavi</groupId>
   <artifactId>vavi-util-archive</artifactId>
-  <name>Vavi Archiving API</name>
-  <version>1.0.7</version>
+  <version>1.0.8</version>
 
-  <organization>
-    <name></name>
-  </organization>
+  <name>Vavi Archiving API</name>
   <url>https://github.com/umjammer/vavi-util-archive</url>
-  <description>1.0.7
+  <description>1.0.8
+
+    demote com  archives into sandbox
+    parametarize real object
+
+1.0.7
 
     follow github advice
 
@@ -48,7 +50,7 @@ TOOD
     jni on maven
     registory like IIORegistory</description>
   <scm>
-    <url>https://github.com/umjammer/vavi-util-archive/</url>
+    <url>https://github.com/umjammer/vavi-util-archive</url>
   </scm>
   <issueManagement>
     <url>https://github.com/umjammer/vavi-util-archive/issues</url>
@@ -81,6 +83,15 @@ TOOD
           </execution>
         </executions>
       </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.2</version>
+          <configuration>
+            <argLine>-Djava.util.logging.config.file=src/test/resources/logging.properties</argLine>
+            <trimStackTrace>false</trimStackTrace>
+          </configuration>
+        </plugin>
     </plugins>
   </build>
 
@@ -95,17 +106,12 @@ TOOD
     <dependency>
       <groupId>com.github.umjammer</groupId>
       <artifactId>vavi-commons</artifactId>
-      <version>1.0.15</version>
-    </dependency>
-    <dependency>
-      <groupId>com.github.umjammer</groupId>
-      <artifactId>vavi-commons-sandbox</artifactId>
-      <version>0.3.4</version>
+      <version>1.1.0</version>
     </dependency>
     <dependency>
       <groupId>com.github.umjammer</groupId>
       <artifactId>jlha</artifactId>
-      <version>0.0.8</version>
+      <version>0.0.9</version>
     </dependency>
     <dependency>
       <groupId>com.github.umjammer</groupId>
@@ -117,17 +123,20 @@ TOOD
       <artifactId>commons-compress</artifactId>
       <version>1.19</version>
     </dependency>
-<!-- 
-    <dependency>
-      <groupId>de.innosystec</groupId>
-      <artifactId>java-unrar</artifactId>
-      <version>1.7.1-SNAPSHOT</version>
-    </dependency>
--->
     <dependency>
       <groupId>com.github.umjammer</groupId>
       <artifactId>java-unrar</artifactId>
       <version>1.7.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.dorkbox</groupId>
+      <artifactId>CabParser</artifactId>
+      <version>2.15.1v-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.ant</groupId>
+      <artifactId>ant</artifactId>
+      <version>1.10.1</version>
     </dependency>
 
     <dependency>
