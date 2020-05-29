@@ -15,7 +15,7 @@ import vavi.util.archive.Entry;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021104 nsano initial version <br>
  */
-public class ZipEntry implements Entry {
+public class ZipEntry implements Entry<java.util.zip.ZipEntry> {
 
     /** */
     private java.util.zip.ZipEntry entry;
@@ -145,7 +145,7 @@ public class ZipEntry implements Entry {
     }
 
     /** */
-    public Object getWrappedObject() {
+    public java.util.zip.ZipEntry getWrappedObject() {
         return entry;
     }
 }

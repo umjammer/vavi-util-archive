@@ -52,9 +52,9 @@ public class PureJavaRarArchive implements Archive {
     /**
      * ファイルエントリの列挙を返します。
      */
-    public Entry[] entries() {
+    public Entry<?>[] entries() {
         List<FileHeader> headers = archive.getFileHeaders();
-        Entry[] entries = new Entry[headers.size()];
+        Entry<?>[] entries = new Entry[headers.size()];
         for (int i = 0; i < headers.size(); i++) {
             entries[i] = new PureJavaRarEntry(headers.get(i));
         }
@@ -65,7 +65,7 @@ public class PureJavaRarArchive implements Archive {
      * 指定された名前のファイルエントリを返します。
      * 見つからない場合は null を返します。
      */
-    public Entry getEntry(String name) {
+    public Entry<?> getEntry(String name) {
         List<FileHeader> headers = archive.getFileHeaders();
         for (int i = 0; i < headers.size(); i++) {
             if (headers.get(i).getFileNameString().equals(name)) {
@@ -79,7 +79,7 @@ public class PureJavaRarArchive implements Archive {
      * 指定された ファイルエントリの内容を読み込むための入力ストリームを
      * 返します。
      */
-    public InputStream getInputStream(final Entry entry) throws IOException {
+    public InputStream getInputStream(final Entry<?> entry) throws IOException {
         return new OutputEngineInputStream(new OutputEngine() {
             private final int BUFFER_SIZE = 4096;
             private InputStream in = new ByteArrayInputStream(new byte[BUFFER_SIZE]);

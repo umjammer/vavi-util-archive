@@ -28,18 +28,18 @@ public interface Archive {
     /**
      * ファイルエントリの列挙を返します。
      */
-    Entry[] entries();
+    Entry<?>[] entries();
 
     /**
      * 指定された名前の ZIP ファイルエントリを返します。
      */
-    Entry getEntry(String name);
+    Entry<?> getEntry(String name);
 
     /**
      * 指定された ファイルエントリの内容を読み込むための入力ストリームを
      * 返します。
      */
-    InputStream getInputStream(Entry entry) throws IOException;
+    InputStream getInputStream(Entry<?> entry) throws IOException;
 
     /**
      * ファイルのパス名を返します。

@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
 
+import org.apache.tools.zip.ZipFile;
+
 import vavi.util.archive.Archive;
 import vavi.util.archive.Entry;
 
@@ -26,13 +28,13 @@ import vavi.util.archive.Entry;
 public class AntZipArchive implements Archive {
 
     /** */
-    private org.apache.tools.zip.ZipFile archive;
+    private ZipFile archive;
 
     private String name;
 
     /** */
     public AntZipArchive(File file) throws IOException {
-        this.archive = new org.apache.tools.zip.ZipFile(file);
+        this.archive = new ZipFile(file);
         this.name = file.getPath();
     }
 
@@ -46,8 +48,8 @@ public class AntZipArchive implements Archive {
     /**
      * ファイルエントリの列挙を返します。
      */
-    public Entry[] entries() {
-        Entry[] entries = new Entry[size()];
+    public Entry<?>[] entries() {
+        Entry<?>[] entries = new Entry[size()];
         Enumeration<?> e = archive.getEntries();
         for (int i = 0; e.hasMoreElements(); i++) {
             entries[i] = new AntZipEntry((org.apache.tools.zip.ZipEntry) e.nextElement());
@@ -59,7 +61,7 @@ public class AntZipArchive implements Archive {
      * 指定された名前の ZIP ファイルエントリを返します。
      * 見つからない場合は null を返します。
      */
-    public Entry getEntry(String name) {
+    public Entry<?> getEntry(String name) {
         return new AntZipEntry(archive.getEntry(name));
     }
 
@@ -67,7 +69,7 @@ public class AntZipArchive implements Archive {
      * 指定された ファイルエントリの内容を読み込むための入力ストリームを
      * 返します。
      */
-    public InputStream getInputStream(Entry entry) throws IOException {
+    public InputStream getInputStream(Entry<?> entry) throws IOException {
         return archive.getInputStream(
             (org.apache.tools.zip.ZipEntry) entry.getWrappedObject());
     }

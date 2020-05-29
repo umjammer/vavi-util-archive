@@ -17,7 +17,7 @@ import vavi.util.archive.Entry;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040106 nsano initial version <br>
  */
-public class TarEntry implements Entry {
+public class TarEntry implements Entry<org.apache.commons.compress.archivers.tar.TarArchiveEntry> {
 
     /** */
     private org.apache.commons.compress.archivers.tar.TarArchiveEntry entry;
@@ -140,7 +140,7 @@ public class TarEntry implements Entry {
     }
 
     /** */
-    public Object getWrappedObject() {
+    public org.apache.commons.compress.archivers.tar.TarArchiveEntry getWrappedObject() {
         return entry;
     }
 }

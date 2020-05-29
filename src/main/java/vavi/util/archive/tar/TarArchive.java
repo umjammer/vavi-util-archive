@@ -31,7 +31,7 @@ public class TarArchive implements Archive {
     private TarArchiveInputStream archive;
 
     /** */
-    private Entry[] entries;
+    private Entry<?>[] entries;
 
     /** */
     private String name;
@@ -40,7 +40,7 @@ public class TarArchive implements Archive {
     public TarArchive(InputStream is) throws IOException {
         this.archive = new TarArchiveInputStream(is);
 
-        List<Entry> list = new ArrayList<>();
+        List<Entry<?>> list = new ArrayList<>();
         while (true) {
             org.apache.commons.compress.archivers.tar.TarArchiveEntry e = archive.getNextTarEntry();
             if (e == null) {
@@ -64,14 +64,14 @@ public class TarArchive implements Archive {
     /**
      * ファイルエントリの列挙を返します。
      */
-    public Entry[] entries() {
+    public Entry<?>[] entries() {
         return entries;
     }
 
     /**
      * 指定された名前の TAR ファイルエントリを返します。
      */
-    public Entry getEntry(String name) {
+    public Entry<?> getEntry(String name) {
         for (int i = 0; i < entries.length; i++) {
             if (entries[i].getName().equals(name)) {
                 return entries[i];
@@ -84,7 +84,7 @@ public class TarArchive implements Archive {
      * 指定された ファイルエントリの内容を読み込むための入力ストリームを
      * 返します。
      */
-    public InputStream getInputStream(Entry entry) throws IOException {
+    public InputStream getInputStream(Entry<?> entry) throws IOException {
         for (int i = 0; i < entries.length; i++) {
             if (entries[i].equals(entry)) {
                 org.apache.tools.tar.TarEntry e =

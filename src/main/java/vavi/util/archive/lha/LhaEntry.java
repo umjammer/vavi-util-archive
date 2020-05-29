@@ -20,7 +20,7 @@ import vavi.util.archive.Entry;
  *          0.01 030211 nsano implements #isDirectory() <br>
  *          0.02 030211 nsano jLha 0.06 compatible <br>
  */
-public class LhaEntry implements Entry {
+public class LhaEntry implements Entry<LhaHeader> {
 
     /** */
     private LhaHeader entry;
@@ -150,7 +150,7 @@ public class LhaEntry implements Entry {
     }
 
     /** */
-    public Object getWrappedObject() {
+    public LhaHeader getWrappedObject() {
         return entry;
     }
 }

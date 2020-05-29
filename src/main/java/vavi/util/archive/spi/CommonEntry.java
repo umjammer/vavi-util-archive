@@ -17,7 +17,7 @@ import vavi.util.archive.Entry;
  * @version 0.00 030211 nsano initial version <br>
  *          0.01 030227 nsano implements clone() <br>
  */
-public class CommonEntry implements Entry {
+public class CommonEntry implements Entry<CommonEntry> {
 
     /** */
     private String comment;
@@ -173,7 +173,7 @@ public class CommonEntry implements Entry {
      */
     public Object clone() {
         try {
-            CommonEntry clone = (CommonEntry) Class.forName(getClass().getName()).newInstance();
+            CommonEntry clone = CommonEntry.class.cast(Class.forName(getClass().getName()).newInstance());
             clone.comment = (comment == null) ? null : new String(comment);
             clone.compressedSize = compressedSize;
             clone.crc = crc;
@@ -189,7 +189,7 @@ public class CommonEntry implements Entry {
     }
 
     /** */
-    public Object getWrappedObject() {
+    public CommonEntry getWrappedObject() {
         return this;
     }
 

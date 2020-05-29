@@ -18,7 +18,7 @@ import vavi.util.archive.Entry;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 120216 nsano initial version <br>
  */
-public class PureJavaRarEntry implements Entry {
+public class PureJavaRarEntry implements Entry<FileHeader> {
 
     /** */
     private FileHeader entry;
@@ -145,7 +145,7 @@ public class PureJavaRarEntry implements Entry {
     }
 
     /** */
-    public Object getWrappedObject() {
+    public FileHeader getWrappedObject() {
         return entry;
     }
 }
