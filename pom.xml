@@ -129,9 +129,9 @@ TOOD
       <version>1.7.0</version>
     </dependency>
     <dependency>
-      <groupId>com.dorkbox</groupId>
+      <groupId>com.github.umjammer</groupId>
       <artifactId>CabParser</artifactId>
-      <version>2.15.1v-SNAPSHOT</version>
+      <version>2.15.1v</version>
     </dependency>
     <dependency>
       <groupId>org.apache.ant</groupId>
