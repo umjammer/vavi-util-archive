@@ -1,5 +1,5 @@
 
-package vavi.util.rpm;
+package vavi.util.codec.rpm;
 
 public class RPMUtil {
     public static String hexString(byte[] buf) {

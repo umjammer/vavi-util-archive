@@ -1,5 +1,5 @@
 
-package vavi.util.rpm;
+package vavi.util.codec.rpm;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
