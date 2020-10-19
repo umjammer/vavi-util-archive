@@ -30,6 +30,8 @@
 
 ## TBD
 
-* [commons-vfs](https://commons.apache.org/proper/commons-vfs/)
-* [truevfs](https://github.com/christian-schlichtherle/truevfs)
-* apache commons-compress
+ * [commons-vfs](https://commons.apache.org/proper/commons-vfs/)
+ * [truevfs](https://github.com/christian-schlichtherle/truevfs)
+ * apache commons-compress
+ * https://github.com/ZIPmagic/ZIPmagic/tree/master/StuffIt%20SDK
+ * https://github.com/cstroe/SevenZip-Java
