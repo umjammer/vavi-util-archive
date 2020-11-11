@@ -1,4 +1,4 @@
-[![](https://jitpack.io/v/umjammer/vavi-util-archive.svg)](https://jitpack.io/#umjammer/vavi-util-archive)
+[![](https://jitpack.io/v/umjammer/vavi-util-archive.svg)](https://jitpack.io/#umjammer/vavi-util-archive) ![Java CI with Maven](https://github.com/umjammer/vavi-util-archive-sandbox/workflows/Java%20CI%20with%20Maven/badge.svg)
 
 # vavi-util-archive
 
