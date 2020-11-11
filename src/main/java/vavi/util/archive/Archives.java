@@ -48,6 +48,7 @@ Debug.println("default stream");
     }
 
     /**
+     * TODO else file
      * @throws IllegalArgumentException
      */
     public static Archive getArchive(File file) throws IOException {

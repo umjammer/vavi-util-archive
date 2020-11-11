@@ -8,6 +8,7 @@ package vavi.util.archive.rar;
 
 import java.io.File;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.fail;
@@ -22,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 class ShellRarArchiveTest {
 
     @Test
+    @Disabled
     void test() {
         fail("Not yet implemented");
     }

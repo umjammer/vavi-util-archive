@@ -4,7 +4,7 @@
  * Modified by Naohide Sano
  */
 
-package vavi.util.lzma;
+package vavi.util.codec.lzma;
 
 import java.io.IOException;
 

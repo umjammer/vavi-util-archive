@@ -1,5 +1,5 @@
 
-package vavi.util.rpm;
+package vavi.util.codec.rpm;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 
-import vavi.util.cpio.CPIOEntry;
-import vavi.util.cpio.CPIOInputStream;
+import vavi.util.codec.cpio.CPIOEntry;
+import vavi.util.codec.cpio.CPIOInputStream;
 
 
 public class RPMInputStream extends Object {

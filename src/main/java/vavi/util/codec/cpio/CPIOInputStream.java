@@ -1,5 +1,5 @@
 
-package vavi.util.cpio;
+package vavi.util.codec.cpio;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-[![](https://jitpack.io/v/umjammer/vavi-util-archive.svg)](https://jitpack.io/#umjammer/vavi-util-archive) ![Java CI with Maven](https://github.com/umjammer/vavi-util-archive-sandbox/workflows/Java%20CI%20with%20Maven/badge.svg)
+[![](https://jitpack.io/v/umjammer/vavi-util-archive.svg)](https://jitpack.io/#umjammer/vavi-util-archive) ![Java CI with Maven](https://github.com/umjammer/vavi-util-archive-sandbox/workflows/Java%20CI%20with%20Maven/badge.svg) ![CodeQL](https://github.com/umjammer/vavi-util-archive/workflows/CodeQL/badge.svg)
 
 # vavi-util-archive
 
@@ -30,6 +30,8 @@
 
 ## TBD
 
-* [commons-vfs](https://commons.apache.org/proper/commons-vfs/)
-* [truevfs](https://github.com/christian-schlichtherle/truevfs)
-* apache commons-compress
+ * [commons-vfs](https://commons.apache.org/proper/commons-vfs/)
+ * [truevfs](https://github.com/christian-schlichtherle/truevfs)
+ * apache commons-compress
+ * https://github.com/ZIPmagic/ZIPmagic/tree/master/StuffIt%20SDK
+ * https://github.com/cstroe/SevenZip-Java

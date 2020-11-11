@@ -26,7 +26,7 @@ public class PureJavaRarArchiveTest {
 
     @Test
     public void test() throws Exception {
-        Archive archive = new PureJavaRarArchive(new File("tmp/test.rar"));
+        Archive archive = new PureJavaRarArchive(new File("src/test/resources/test.rar"));
         for (Entry<?> entry : archive.entries()) {
             System.err.println(entry.getName());
         }
