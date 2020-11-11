@@ -26,7 +26,7 @@ public class BZip2InputStreamTest {
     @Test
     public void test01() throws Exception {
         InputStreamSpi spi = new BZip2InputStreamSpi();
-        spi.canExpandInput(new BufferedInputStream(new FileInputStream("tmp/test.tar.bz2")));
+        spi.canExpandInput(new BufferedInputStream(new FileInputStream("src/test/resources/test.tar.bz2")));
         InputStream is = spi.createInputStreamInstance();
         byte[] b = new byte[8192];
         while (true) {

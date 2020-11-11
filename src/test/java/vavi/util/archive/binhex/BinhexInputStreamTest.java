@@ -24,7 +24,7 @@ class BinhexInputStreamTest {
 
     @Test
     void test() throws Exception {
-        BinHex4InputStream bis = new BinHex4InputStream(new FileInputStream("tmp/p88epr435c.sit.hqx"));
+        BinHex4InputStream bis = new BinHex4InputStream(new FileInputStream("src/test/resources/test.sit.hqx"));
         BinHex4InputStream.Header header = bis.getHeader();
 System.err.println(header.getDataLength());
         bis.close();
