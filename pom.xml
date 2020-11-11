@@ -8,7 +8,7 @@
 
   <groupId>vavi</groupId>
   <artifactId>vavi-util-archive</artifactId>
-  <version>1.0.8</version>
+  <version>1.0.9</version>
 
   <name>Vavi Archiving API</name>
   <url>https://github.com/umjammer/vavi-util-archive</url>
@@ -106,7 +106,7 @@ TOOD
     <dependency>
       <groupId>com.github.umjammer</groupId>
       <artifactId>vavi-commons</artifactId>
-      <version>1.1.0</version>
+      <version>1.1.4</version>
     </dependency>
     <dependency>
       <groupId>com.github.umjammer</groupId>
