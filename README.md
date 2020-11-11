@@ -1,4 +1,4 @@
-[![](https://jitpack.io/v/umjammer/vavi-util-archive.svg)](https://jitpack.io/#umjammer/vavi-util-archive)
+[![](https://jitpack.io/v/umjammer/vavi-util-archive.svg)](https://jitpack.io/#umjammer/vavi-util-archive) ![CodeQL](https://github.com/umjammer/vavi-util-archive/workflows/CodeQL/badge.svg)
 
 # vavi-util-archive
 
