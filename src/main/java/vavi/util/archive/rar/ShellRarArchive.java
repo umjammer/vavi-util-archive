@@ -41,7 +41,7 @@ public class ShellRarArchive implements Archive {
     /** */
     public ShellRarArchive(File file) throws IOException {
         final DateFormat sdf = new SimpleDateFormat("dd-MM-yy HH:mm");
-        Process p = Runtime.getRuntime().exec("unrar v " + file);
+        Process p = Runtime.getRuntime().exec(new String[] { "unrar", "v", file.toString() });
         BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
         r.readLine();
         r.readLine();
