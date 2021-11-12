@@ -47,7 +47,7 @@ public class ShellGcaArchive implements Archive {
 
         final DateFormat sdf =
             new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Process p = Runtime.getRuntime().exec("gcac l " + file);
+        Process p = Runtime.getRuntime().exec(new String[] { "gcac", "l", file.toString() });
         BufferedReader r = new BufferedReader(
             new InputStreamReader(p.getInputStream()));
         r.readLine();
