@@ -7,13 +7,16 @@
 package vavi.util.archive.rar;
 
 import java.io.File;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import org.junit.jupiter.api.Test;
 
 import vavi.util.archive.Archive;
 import vavi.util.archive.Entry;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -27,10 +30,12 @@ public class PureJavaRarArchiveTest {
     @Test
     public void test() throws Exception {
         Archive archive = new PureJavaRarArchive(new File("src/test/resources/test.rar"));
-        for (Entry<?> entry : archive.entries()) {
-            System.err.println(entry.getName());
+        int c = 0;
+        for (Entry entry : archive.entries()) {
+            System.err.println(entry.getName() + "\t" + LocalDateTime.ofInstant(Instant.ofEpochMilli(entry.getTime()), ZoneId.systemDefault()));
+            c++;
         }
-        assertTrue(true);
+        assertEquals(6, c);
     }
 }
 
