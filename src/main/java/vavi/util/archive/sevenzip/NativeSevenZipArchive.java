@@ -22,9 +22,9 @@ import java.util.ResourceBundle;
 import vavi.util.Debug;
 import vavi.util.StringUtil;
 import vavi.util.archive.Archive;
+import vavi.util.archive.CommonEntry;
 import vavi.util.archive.Entry;
 import vavi.util.archive.gca.NativeGcaArchive;
-import vavi.util.archive.spi.CommonEntry;
 import vavi.util.win32.DateUtil;
 
 
@@ -73,16 +73,16 @@ System.err.println("time: " + new Date(entry.getTime()));
         closeArchive();
     }
 
-    public Entry<?>[] entries() {
-        Entry<?>[] entries = new Entry[this.entries.size()];
     @Override
+    public Entry[] entries() {
+        Entry[] entries = new Entry[this.entries.size()];
         this.entries.toArray(entries);
         return entries;
     }
 
-    public Entry<?> getEntry(String name) {
-        for (Entry<?> entry : entries) {
     @Override
+    public Entry getEntry(String name) {
+        for (Entry entry : entries) {
             if (entry.getName().equals(name)) {
                 return entry;
             }
@@ -90,8 +90,8 @@ System.err.println("time: " + new Date(entry.getTime()));
         return null;
     }
 
-    public InputStream getInputStream(Entry<?> entry) throws IOException {
     @Override
+    public InputStream getInputStream(Entry entry) throws IOException {
 
         File temporaryDirectory = new File(System.getProperty("java.io.tmpdir"));
         String temporaryDirectoryString = temporaryDirectory.getAbsolutePath();
@@ -108,8 +108,8 @@ try {
 } catch (IOException e) {
  try {
   int code = Integer.parseInt(e.getMessage());
-  Debug.println(code + ", 0x" + StringUtil.toHex4(code));
-  Debug.println(rb.getString(errorCodeTable.getProperty("0x" + StringUtil.toHex4(code))));
+  Debug.printf("%1$d, 0x%1$04x\n", code);
+  Debug.println(rb.getString(errorCodeTable.getProperty(String.format("0x%04X", code))));
  } catch (Exception e2) {
   Debug.printStackTrace(e2);
  }

@@ -53,10 +53,10 @@ public class ZipArchive implements Archive {
         }
     }
 
-    public Entry<?>[] entries() {
     @Override
+    public Entry[] entries() {
         if (ZipFile.class.isInstance(archive)) {
-            List<Entry<?>> entries = new ArrayList<>();
+            List<Entry> entries = new ArrayList<>();
             Enumeration<? extends java.util.zip.ZipEntry> e = ZipFile.class.cast(archive).entries();
             while (e.hasMoreElements()) {
                 entries.add(new ZipEntry(e.nextElement()));
@@ -65,7 +65,7 @@ public class ZipArchive implements Archive {
         } else if (ZipInputStream.class.isInstance(archive)) {
             try {
                 ZipInputStream zis = ZipInputStream.class.cast(archive);
-                List<Entry<?>> entries = new ArrayList<>();
+                List<Entry> entries = new ArrayList<>();
                 java.util.zip.ZipEntry entry;
                 while ((entry = zis.getNextEntry()) != null) {
                     entries.add(new ZipEntry(entry));
@@ -79,7 +79,7 @@ public class ZipArchive implements Archive {
         }
     }
 
-    public Entry<?> getEntry(String name) {
+    public Entry getEntry(String name) {
         if (ZipFile.class.isInstance(archive)) {
             return new ZipEntry(ZipFile.class.cast(archive).getEntry(name));
         } else if (ZipInputStream.class.isInstance(archive)) {
@@ -100,10 +100,10 @@ public class ZipArchive implements Archive {
         }
     }
 
-    public InputStream getInputStream(Entry<?> entry) throws IOException {
     @Override
+    public InputStream getInputStream(Entry entry) throws IOException {
         if (ZipFile.class.isInstance(archive)) {
-            return ZipFile.class.cast(archive).getInputStream(java.util.zip.ZipEntry.class.cast(entry.getWrappedObject()));
+            return ZipFile.class.cast(archive).getInputStream(ZipEntry.class.cast(entry).getWrappedObject());
         } else if (ZipInputStream.class.isInstance(archive)) {
             ZipInputStream zis = ZipInputStream.class.cast(archive);
             java.util.zip.ZipEntry header;

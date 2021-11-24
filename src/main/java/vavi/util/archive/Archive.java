@@ -36,7 +36,7 @@ public interface Archive {
      * @returns an enumeration of the archived file entries
      * @throws IllegalStateException if the archived file has been closed
      */
-    Entry<?>[] entries();
+    Entry[] entries();
 
     /**
      * Returns the archived file entry for the specified name, or null if not found.
@@ -45,7 +45,7 @@ public interface Archive {
      * @return the archived file entry, or null if not found
      * @throws IllegalStateException if the archived file has been closed
      */
-    Entry<?> getEntry(String name);
+    Entry getEntry(String name);
 
     /**
      * Returns an input stream for reading the contents of the specified archived file entry.
@@ -59,7 +59,7 @@ public interface Archive {
      * @throws IOException if an I/O error has occurred
      * @throws IllegalStateException if the archived file has been closed
      */
-    InputStream getInputStream(Entry<?> entry) throws IOException;
+    InputStream getInputStream(Entry entry) throws IOException;
 
     /**
      * Returns the path name of the archived file.

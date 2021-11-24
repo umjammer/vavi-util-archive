@@ -14,6 +14,7 @@ import java.util.List;
 
 import vavi.util.archive.Archive;
 import vavi.util.archive.Entry;
+import vavi.util.archive.WrappedEntry;
 
 import jp.gr.java_conf.dangan.util.lha.LhaFile;
 import jp.gr.java_conf.dangan.util.lha.LhaHeader;
@@ -54,11 +55,11 @@ public class LhaArchive implements Archive {
         }
     }
 
-    public Entry<?>[] entries() {
     @Override
+    public Entry[] entries() {
         if (LhaFile.class.isInstance(archive)) {
             LhaHeader[] headers = LhaFile.class.cast(archive).getEntries();
-            Entry<?>[] entries = new Entry[headers.length];
+            Entry[] entries = new Entry[headers.length];
             for (int i = 0; i < headers.length; i++) {
                 entries[i] = new LhaEntry(headers[i]);
             }
@@ -66,7 +67,7 @@ public class LhaArchive implements Archive {
         } else if (LhaInputStream.class.isInstance(archive)) {
             try {
                 LhaInputStream lis = LhaInputStream.class.cast(archive);
-                List<Entry<?>> entries = new ArrayList<>();
+                List<Entry> entries = new ArrayList<>();
                 LhaHeader header;
                 while ((header = lis.getNextEntry()) != null) {
                     entries.add(new LhaEntry(header));
@@ -80,8 +81,8 @@ public class LhaArchive implements Archive {
         }
     }
 
-    public Entry<?> getEntry(String name) {
     @Override
+    public Entry getEntry(String name) {
         if (LhaFile.class.isInstance(archive)) {
             LhaHeader[] headers = LhaFile.class.cast(archive).getEntries();
             for (int i = 0; i < headers.length; i++) {
@@ -108,10 +109,10 @@ public class LhaArchive implements Archive {
         }
     }
 
-    public InputStream getInputStream(Entry<?> entry) throws IOException {
     @Override
+    public InputStream getInputStream(Entry entry) throws IOException {
         if (LhaFile.class.isInstance(archive)) {
-            return LhaFile.class.cast(archive).getInputStream(LhaHeader.class.cast(entry.getWrappedObject()));
+            return LhaFile.class.cast(archive).getInputStream(LhaHeader.class.cast(WrappedEntry.class.cast(entry).getWrappedObject()));
         } else if (LhaInputStream.class.isInstance(archive)) {
             LhaInputStream lis = LhaInputStream.class.cast(archive);
             LhaHeader header;

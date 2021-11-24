@@ -48,7 +48,7 @@ System.err.println("gca: " + getVersion());
 //System.err.println("size: " + gca.getSelectedSize());
 //System.err.println("csize: " + gca.getSelectedCompressedSize());
 //System.err.println("ratio: " + gca.getSelectedRatio());
-        Entry<?> entry = gca.getEntry(args[1]);
+        Entry entry = gca.getEntry(args[1]);
         InputStream is = gca.getInputStream(entry);
 System.err.println("is: " + is);
         System.exit(0);

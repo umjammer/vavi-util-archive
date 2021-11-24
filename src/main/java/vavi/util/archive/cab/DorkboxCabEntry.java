@@ -7,7 +7,7 @@
 package vavi.util.archive.cab;
 
 
-import vavi.util.archive.Entry;
+import vavi.util.archive.WrappedEntry;
 
 import dorkbox.cabParser.structure.CabEntry;
 import dorkbox.cabParser.structure.CabFileEntry;
@@ -20,7 +20,7 @@ import dorkbox.cabParser.structure.CabFolderEntry;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 120216 nsano initial version <br>
  */
-public class DorkboxCabEntry implements Entry<CabEntry> {
+public class DorkboxCabEntry implements WrappedEntry<CabEntry> {
 
     /** */
     private CabEntry entry;

@@ -6,7 +6,7 @@
 
 package vavi.util.archive.zip;
 
-import vavi.util.archive.Entry;
+import vavi.util.archive.WrappedEntry;
 
 
 /**
@@ -15,7 +15,7 @@ import vavi.util.archive.Entry;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021104 nsano initial version <br>
  */
-public class ZipEntry implements Entry<java.util.zip.ZipEntry> {
+public class ZipEntry implements WrappedEntry<java.util.zip.ZipEntry> {
 
     /** */
     private java.util.zip.ZipEntry entry;

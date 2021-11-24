@@ -28,7 +28,7 @@ class AntZipArchiveTest {
     void test() throws Exception {
         Archive archive = new AntZipArchive(new File("src/test/resources/test.zip"));
         int c = 0;
-        for (Entry<?> entry : archive.entries()) {
+        for (Entry entry : archive.entries()) {
             System.err.println(entry.getName());
             c++;
         }

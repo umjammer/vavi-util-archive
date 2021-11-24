@@ -7,9 +7,9 @@
 package vavi.util.archive.rar;
 
 
-import de.innosystec.unrar.rarfile.FileHeader;
+import vavi.util.archive.WrappedEntry;
 
-import vavi.util.archive.Entry;
+import de.innosystec.unrar.rarfile.FileHeader;
 
 
 /**
@@ -18,7 +18,7 @@ import vavi.util.archive.Entry;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 120216 nsano initial version <br>
  */
-public class PureJavaRarEntry implements Entry<FileHeader> {
+public class PureJavaRarEntry implements WrappedEntry<FileHeader> {
 
     /** */
     private FileHeader entry;

@@ -19,8 +19,8 @@ import java.util.StringTokenizer;
 
 import vavi.util.Debug;
 import vavi.util.archive.Archive;
+import vavi.util.archive.CommonEntry;
 import vavi.util.archive.Entry;
-import vavi.util.archive.spi.CommonEntry;
 
 
 /**
@@ -83,16 +83,16 @@ Debug.println(e);
     public void close() throws IOException {
     }
 
-    public Entry<?>[] entries() {
-        Entry<?>[] entries = new Entry[this.entries.size()];
     @Override
+    public Entry[] entries() {
+        Entry[] entries = new Entry[this.entries.size()];
         this.entries.toArray(entries);
         return entries;
     }
 
-    public Entry<?> getEntry(String name) {
-        for (Entry<?> entry : entries) {
     @Override
+    public Entry getEntry(String name) {
+        for (Entry entry : entries) {
             if (entry.getName().equals(name)) {
                 return entry;
             }
@@ -100,8 +100,8 @@ Debug.println(e);
         return null;
     }
 
-    public InputStream getInputStream(Entry<?> entry) throws IOException {
     @Override
+    public InputStream getInputStream(Entry entry) throws IOException {
         return null;
     }
 

@@ -20,6 +20,7 @@ import vavi.io.OutputEngine;
 import vavi.io.OutputEngineInputStream;
 import vavi.util.archive.Archive;
 import vavi.util.archive.Entry;
+import vavi.util.archive.WrappedEntry;
 
 
 /**
@@ -47,18 +48,18 @@ public class PureJavaRarArchive implements Archive {
         archive.close();
     }
 
-    public Entry<?>[] entries() {
     @Override
+    public Entry[] entries() {
         List<FileHeader> headers = archive.getFileHeaders();
-        Entry<?>[] entries = new Entry[headers.size()];
+        Entry[] entries = new Entry[headers.size()];
         for (int i = 0; i < headers.size(); i++) {
             entries[i] = new PureJavaRarEntry(headers.get(i));
         }
         return entries;
     }
 
-    public Entry<?> getEntry(String name) {
     @Override
+    public Entry getEntry(String name) {
         List<FileHeader> headers = archive.getFileHeaders();
         for (int i = 0; i < headers.size(); i++) {
             if (headers.get(i).getFileNameString().equals(name)) {
@@ -68,15 +69,15 @@ public class PureJavaRarArchive implements Archive {
         return null;
     }
 
-    public InputStream getInputStream(final Entry<?> entry) throws IOException {
     @Override
+    public InputStream getInputStream(final Entry entry) throws IOException {
         return new OutputEngineInputStream(new OutputEngine() {
             private final int BUFFER_SIZE = 4096;
             private InputStream in = new ByteArrayInputStream(new byte[BUFFER_SIZE]);
             private OutputStream out;
             public void initialize(OutputStream out) throws IOException {
                 try {
-                    archive.extractFile((FileHeader) entry.getWrappedObject(), out);
+                    archive.extractFile(FileHeader.class.cast(WrappedEntry.class.cast(entry).getWrappedObject()), out);
                 } catch (RarException e) {
                     new IOException(e);
                 }

@@ -17,6 +17,7 @@ import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 
 import vavi.util.archive.Archive;
 import vavi.util.archive.Entry;
+import vavi.util.archive.WrappedEntry;
 
 
 /**
@@ -31,7 +32,7 @@ public class TarArchive implements Archive {
     private TarArchiveInputStream archive;
 
     /** */
-    private Entry<?>[] entries;
+    private Entry[] entries;
 
     /** */
     private String name;
@@ -40,7 +41,7 @@ public class TarArchive implements Archive {
     public TarArchive(InputStream is) throws IOException {
         this.archive = new TarArchiveInputStream(is);
 
-        List<Entry<?>> list = new ArrayList<>();
+        List<Entry> list = new ArrayList<>();
         while (true) {
             org.apache.commons.compress.archivers.tar.TarArchiveEntry e = archive.getNextTarEntry();
             if (e == null) {
@@ -59,13 +60,13 @@ public class TarArchive implements Archive {
         archive.close();
     }
 
-    public Entry<?>[] entries() {
     @Override
+    public Entry[] entries() {
         return entries;
     }
 
-    public Entry<?> getEntry(String name) {
     @Override
+    public Entry getEntry(String name) {
         for (int i = 0; i < entries.length; i++) {
             if (entries[i].getName().equals(name)) {
                 return entries[i];
@@ -74,13 +75,13 @@ public class TarArchive implements Archive {
         throw new NoSuchElementException(name);
     }
 
-    public InputStream getInputStream(Entry<?> entry) throws IOException {
     @Override
+    public InputStream getInputStream(Entry entry) throws IOException {
         for (int i = 0; i < entries.length; i++) {
             if (entries[i].equals(entry)) {
                 org.apache.tools.tar.TarEntry e =
                     (org.apache.tools.tar.TarEntry)
-                        entries[i].getWrappedObject();
+                        WrappedEntry.class.cast(entries[i]).getWrappedObject();
                 return new FileInputStream(e.getFile());
             }
         }

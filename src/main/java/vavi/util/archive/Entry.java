@@ -13,7 +13,7 @@ package vavi.util.archive;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021103 nsano initial version <br>
  */
-public interface Entry<T> extends Cloneable {
+public interface Entry extends Cloneable {
 
     /**
      * Returns the comment string for the entry.
@@ -102,9 +102,6 @@ public interface Entry<T> extends Cloneable {
      * エントリの修正時間を設定します。
      */
     void setTime(long time);
-
-    /** TODO */
-    T getWrappedObject();
 }
 
 /* */

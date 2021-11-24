@@ -8,7 +8,7 @@ package vavi.util.archive.tar;
 
 import java.util.Date;
 
-import vavi.util.archive.Entry;
+import vavi.util.archive.WrappedEntry;
 
 
 /**
@@ -17,7 +17,7 @@ import vavi.util.archive.Entry;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040106 nsano initial version <br>
  */
-public class TarEntry implements Entry<org.apache.commons.compress.archivers.tar.TarArchiveEntry> {
+public class TarEntry implements WrappedEntry<org.apache.commons.compress.archivers.tar.TarArchiveEntry> {
 
     /** */
     private org.apache.commons.compress.archivers.tar.TarArchiveEntry entry;

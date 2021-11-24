@@ -45,7 +45,7 @@ class NativeStuffItArchiveTest {
 //        Entry entry = sit.getEntry(args[1]);
 //        InputStream is = sit.getInputStream(entry);
 //System.err.println("is: " + is);
-        for (Entry<?> entry : sit.entries()) {
+        for (Entry entry : sit.entries()) {
             System.err.println("entry: " + entry);
         }
         System.exit(0);

@@ -43,25 +43,24 @@ public class AntZipArchive implements Archive {
         archive.close();
     }
 
-    public Entry<?>[] entries() {
-        Entry<?>[] entries = new Entry[size()];
-        Enumeration<?> e = archive.getEntries();
     @Override
+    public Entry[] entries() {
+        Entry[] entries = new Entry[size()];
+        Enumeration<org.apache.tools.zip.ZipEntry> e = archive.getEntries();
         for (int i = 0; e.hasMoreElements(); i++) {
-            entries[i] = new AntZipEntry((org.apache.tools.zip.ZipEntry) e.nextElement());
+            entries[i] = new AntZipEntry(e.nextElement());
         }
         return entries;
     }
 
-    public Entry<?> getEntry(String name) {
     @Override
+    public Entry getEntry(String name) {
         return new AntZipEntry(archive.getEntry(name));
     }
 
-    public InputStream getInputStream(Entry<?> entry) throws IOException {
-        return archive.getInputStream(
-            (org.apache.tools.zip.ZipEntry) entry.getWrappedObject());
     @Override
+    public InputStream getInputStream(Entry entry) throws IOException {
+        return archive.getInputStream(AntZipEntry.class.cast(entry).getWrappedObject());
     }
 
     @Override
@@ -72,7 +71,7 @@ public class AntZipArchive implements Archive {
     @Override
     public int size() {
         int count = 0;
-        Enumeration<?> e = archive.getEntries();
+        Enumeration<org.apache.tools.zip.ZipEntry> e = archive.getEntries();
         while (e.hasMoreElements()) {
             e.nextElement();
             count++;

@@ -25,7 +25,7 @@ class DorkboxCabArchiveTest {
     @Test
     void test() throws Exception {
         Archive archive = new DorkboxCabArchive(DorkboxCabArchiveTest.class.getResourceAsStream("/test.cab"));
-        for (Entry<?> entry : archive.entries()) {
+        for (Entry entry : archive.entries()) {
             System.err.println(entry.getName());
         }
         assertTrue(true);

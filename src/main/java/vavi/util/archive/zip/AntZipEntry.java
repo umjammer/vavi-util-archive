@@ -6,7 +6,7 @@
 
 package vavi.util.archive.zip;
 
-import vavi.util.archive.Entry;
+import vavi.util.archive.WrappedEntry;
 
 
 /**
@@ -15,7 +15,7 @@ import vavi.util.archive.Entry;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021104 nsano initial version <br>
  */
-public class AntZipEntry implements Entry<org.apache.tools.zip.ZipEntry> {
+public class AntZipEntry implements WrappedEntry<org.apache.tools.zip.ZipEntry> {
 
     /** */
     private org.apache.tools.zip.ZipEntry entry;
