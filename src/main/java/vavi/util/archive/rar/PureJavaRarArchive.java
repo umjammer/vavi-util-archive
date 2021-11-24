@@ -23,7 +23,7 @@ import vavi.util.archive.Entry;
 
 
 /**
- * RAR アーカイブを処理するサービスプロバイダです．
+ * Represents RAR archived file.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 120216 nsano initial version <br>
@@ -42,17 +42,13 @@ public class PureJavaRarArchive implements Archive {
         }
     }
 
-    /**
-     * ファイルを閉じます。
-     */
+    @Override
     public void close() throws IOException {
         archive.close();
     }
 
-    /**
-     * ファイルエントリの列挙を返します。
-     */
     public Entry<?>[] entries() {
+    @Override
         List<FileHeader> headers = archive.getFileHeaders();
         Entry<?>[] entries = new Entry[headers.size()];
         for (int i = 0; i < headers.size(); i++) {
@@ -61,11 +57,8 @@ public class PureJavaRarArchive implements Archive {
         return entries;
     }
 
-    /**
-     * 指定された名前のファイルエントリを返します。
-     * 見つからない場合は null を返します。
-     */
     public Entry<?> getEntry(String name) {
+    @Override
         List<FileHeader> headers = archive.getFileHeaders();
         for (int i = 0; i < headers.size(); i++) {
             if (headers.get(i).getFileNameString().equals(name)) {
@@ -75,11 +68,8 @@ public class PureJavaRarArchive implements Archive {
         return null;
     }
 
-    /**
-     * 指定された ファイルエントリの内容を読み込むための入力ストリームを
-     * 返します。
-     */
     public InputStream getInputStream(final Entry<?> entry) throws IOException {
+    @Override
         return new OutputEngineInputStream(new OutputEngine() {
             private final int BUFFER_SIZE = 4096;
             private InputStream in = new ByteArrayInputStream(new byte[BUFFER_SIZE]);
@@ -107,16 +97,12 @@ public class PureJavaRarArchive implements Archive {
         });
     }
 
-    /**
-     * ファイルのパス名を返します。
-     */
+    @Override
     public String getName() {
         return null;
     }
 
-    /**
-     * ファイル中のエントリの数を返します。
-     */
+    @Override
     public int size() {
         return archive.getFileHeaders().size();
     }

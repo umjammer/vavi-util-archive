@@ -21,7 +21,7 @@ import jp.gr.java_conf.dangan.util.lha.LhaInputStream;
 
 
 /**
- * LHA アーカイブを処理するサービスプロバイダです．
+ * Represents LHA archived file.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021103 nsano initial version <br>
@@ -43,9 +43,7 @@ public class LhaArchive implements Archive {
         this.archive = new LhaInputStream(is);
     }
 
-    /**
-     * ファイルを閉じます。
-     */
+    @Override
     public void close() throws IOException {
         if (LhaFile.class.isInstance(archive)) {
             LhaFile.class.cast(archive).close();
@@ -56,10 +54,8 @@ public class LhaArchive implements Archive {
         }
     }
 
-    /**
-     * ファイルエントリの列挙を返します。
-     */
     public Entry<?>[] entries() {
+    @Override
         if (LhaFile.class.isInstance(archive)) {
             LhaHeader[] headers = LhaFile.class.cast(archive).getEntries();
             Entry<?>[] entries = new Entry[headers.length];
@@ -84,10 +80,8 @@ public class LhaArchive implements Archive {
         }
     }
 
-    /**
-     * 指定された名前のファイルエントリを返します。 見つからない場合は null を返します。
-     */
     public Entry<?> getEntry(String name) {
+    @Override
         if (LhaFile.class.isInstance(archive)) {
             LhaHeader[] headers = LhaFile.class.cast(archive).getEntries();
             for (int i = 0; i < headers.length; i++) {
@@ -114,10 +108,8 @@ public class LhaArchive implements Archive {
         }
     }
 
-    /**
-     * 指定された ファイルエントリの内容を読み込むための入力ストリームを 返します。
-     */
     public InputStream getInputStream(Entry<?> entry) throws IOException {
+    @Override
         if (LhaFile.class.isInstance(archive)) {
             return LhaFile.class.cast(archive).getInputStream(LhaHeader.class.cast(entry.getWrappedObject()));
         } else if (LhaInputStream.class.isInstance(archive)) {
@@ -134,9 +126,7 @@ public class LhaArchive implements Archive {
         }
     }
 
-    /**
-     * ファイルのパス名を返します。
-     */
+    @Override
     public String getName() {
         if (LhaFile.class.isInstance(archive)) {
             return null; // TODO LhaFile.class.cast(archive).;
@@ -147,9 +137,7 @@ public class LhaArchive implements Archive {
         }
     }
 
-    /**
-     * ファイル中のエントリの数を返します。
-     */
+    @Override
     public int size() {
         if (LhaFile.class.isInstance(archive)) {
             return LhaFile.class.cast(archive).size();

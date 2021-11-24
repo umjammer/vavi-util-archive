@@ -12,39 +12,7 @@
 
   <name>Vavi Archiving API</name>
   <url>https://github.com/umjammer/vavi-util-archive</url>
-  <description>1.0.8
-
-    demote com  archives into sandbox
-    parametarize real object
-
-1.0.7
-
-    follow github advice
-
-1.0.6
-
-    Archives
-
-1.0.5
-
-    fix archive spi method signature
-
-1.0.4
-
-    fix archive spi method signature
-
-1.0.3
-
-    maintenance version
-
-1.0.2
-
-    make build pass
-
-1.0.1
-
-    maintenance version
-
+  <description>
 TOOD
 
     jni on maven

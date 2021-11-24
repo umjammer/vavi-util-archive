@@ -17,7 +17,7 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 
 /**
- * ZIP アーカイブを処理するサービスプロバイダです．
+ * The ZIP SPI using the Ant zip library.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021222 nsano initial version <br>
@@ -25,9 +25,7 @@ import vavi.util.archive.spi.ArchiveSpi;
  */
 public class AntZipArchiveSpi implements ArchiveSpi {
 
-    /**
-     * 解凍できるかどうか調べます．
-     */
+    @Override
     public boolean canExtractInput(Object target) throws IOException {
 
         if (!(target instanceof File)) {
@@ -52,7 +50,7 @@ public class AntZipArchiveSpi implements ArchiveSpi {
                b[1] == 'K';
     }
 
-    /** */
+    @Override
     public Archive createArchiveInstance(Object obj) throws IOException {
         return new AntZipArchive((File) obj);
     }

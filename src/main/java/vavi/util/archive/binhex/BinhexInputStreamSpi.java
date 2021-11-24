@@ -15,7 +15,7 @@ import vavi.util.archive.spi.InputStreamSpi;
 
 
 /**
- * BinHex アーカイブを処理するサービスプロバイダです．
+ * The service provider for BinHex archive.
  * 
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040106 nsano initial version <br>
@@ -26,13 +26,13 @@ public class BinhexInputStreamSpi implements InputStreamSpi {
     /** */
     private Object target;
 
-    /** */
+    /** signature */
     private static final String COMMENT =
         "(This file must be converted with BinHex 4.0).";
 
     /**
-     * 解凍できるかどうか調べます．
-     * @param target 今のところ {#link InputStream} しか受け付けません
+     * checks extractable or not.
+     * @param target currently accepts {#link InputStream} only
      */
     public boolean canExpandInput(Object target) throws IOException {
 

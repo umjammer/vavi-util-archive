@@ -8,7 +8,7 @@ package vavi.util.archive;
 
 
 /**
- * アーカイブされた 1 エントリを表すクラスです．
+ * Represents one entry in an archived data.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021103 nsano initial version <br>
@@ -16,12 +16,20 @@ package vavi.util.archive;
 public interface Entry<T> extends Cloneable {
 
     /**
-     * エントリのコメント文字列を返します。
+     * Returns the comment string for the entry.
+     *
+     * @return the comment string for the entry, or null if none
+     * @see #setComment(String)
      */
     String getComment();
 
     /**
-     * 圧縮されたエントリデータのサイズを返します。
+     * Returns the size of the compressed entry data.
+     * <p>
+     * In the case of a stored entry, the compressed size will be the same as the uncompressed size of the entry.
+     * </p>
+     * @return the size of the compressed entry data, or -1 if not known
+     * @see #setCompressedSize(long)
      */
     long getCompressedSize();
 

@@ -100,27 +100,20 @@ Debug.println(e);
         throw new NoSuchElementException(method);
     }
 
-    /**
-     * ファイルを閉じます。
-     */
+    @Override
     public void close() throws IOException {
     }
 
-    /**
-     * ファイルエントリの列挙を返します。
-     */
     public Entry<?>[] entries() {
         Entry<?>[] entries = new Entry[this.entries.size()];
+    @Override
         this.entries.toArray(entries);
         return entries;
     }
 
-    /**
-     * 指定された名前の RAR ファイルエントリを返します。
-     * 見つからない場合は null を返します。
-     */
     public Entry<?> getEntry(String name) {
         for (Entry<?> entry : entries) {
+    @Override
             if (entry.getName().equals(name)) {
                 return entry;
             }
@@ -128,24 +121,17 @@ Debug.println(e);
         return null;
     }
 
-    /**
-     * 指定された ファイルエントリの内容を読み込むための入力ストリームを
-     * 返します。
-     */
     public InputStream getInputStream(Entry<?> entry) throws IOException {
+    @Override
         return null;
     }
 
-    /**
-     * ファイルのパス名を返します。
-     */
+    @Override
     public String getName() {
         return null;
     }
 
-    /**
-     * ファイル中のエントリの数を返します。
-     */
+    @Override
     public int size() {
         return 0;
     }

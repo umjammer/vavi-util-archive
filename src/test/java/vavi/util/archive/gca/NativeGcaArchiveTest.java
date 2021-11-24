@@ -12,10 +12,13 @@ import java.io.InputStream;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 import vavi.util.archive.Entry;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 
 /**
  * NativeGcaArchiveTest.
@@ -27,6 +30,7 @@ class NativeGcaArchiveTest {
 
     @Test
     @Disabled
+    @EnabledOnOs(OS.WINDOWS)
     void test() {
         fail("Not yet implemented");
     }

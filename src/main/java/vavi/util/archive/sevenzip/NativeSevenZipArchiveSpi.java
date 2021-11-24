@@ -19,7 +19,7 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 
 /**
- * SevenZip アーカイブを処理するサービスプロバイダです．
+ * The SPI for SevenZip using native library.
  * 
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030228 nsano initial version <br>
@@ -27,9 +27,9 @@ import vavi.util.archive.spi.ArchiveSpi;
 public class NativeSevenZipArchiveSpi implements ArchiveSpi {
 
     /**
-     * 解凍できるかどうか調べます．
-     * @param target 今のところ File しか受け付けません
+     * @param target currently accept {@link File} only.
      */
+    @Override
     public boolean canExtractInput(Object target) throws IOException {
 
         if (!(target instanceof File)) {
@@ -61,7 +61,7 @@ Debug.println("\n" + StringUtil.getDump(b));
                b[7] == (byte) 0x02;
     }
 
-    /** */
+    @Override
     public Archive createArchiveInstance(Object obj) throws IOException {
         return new NativeSevenZipArchive((File) obj);
     }

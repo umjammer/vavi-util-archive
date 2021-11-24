@@ -12,7 +12,7 @@ import vavi.util.archive.Archive;
 
 
 /**
- * Archive の Service Provider Interface です．
+ * Service Provider Interface for Archive class.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021222 nsano initial version <br>

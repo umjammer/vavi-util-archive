@@ -20,7 +20,7 @@ import vavi.util.archive.Entry;
 
 
 /**
- * TAR アーカイブを処理するサービスプロバイダです．
+ * Represents TAR archived file.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040106 nsano initial version <br>
@@ -54,24 +54,18 @@ public class TarArchive implements Archive {
         list.toArray(entries);
     }
 
-    /**
-     * ファイルを閉じます。
-     */
+    @Override
     public void close() throws IOException {
         archive.close();
     }
 
-    /**
-     * ファイルエントリの列挙を返します。
-     */
     public Entry<?>[] entries() {
+    @Override
         return entries;
     }
 
-    /**
-     * 指定された名前の TAR ファイルエントリを返します。
-     */
     public Entry<?> getEntry(String name) {
+    @Override
         for (int i = 0; i < entries.length; i++) {
             if (entries[i].getName().equals(name)) {
                 return entries[i];
@@ -80,11 +74,8 @@ public class TarArchive implements Archive {
         throw new NoSuchElementException(name);
     }
 
-    /**
-     * 指定された ファイルエントリの内容を読み込むための入力ストリームを
-     * 返します。
-     */
     public InputStream getInputStream(Entry<?> entry) throws IOException {
+    @Override
         for (int i = 0; i < entries.length; i++) {
             if (entries[i].equals(entry)) {
                 org.apache.tools.tar.TarEntry e =
@@ -96,23 +87,17 @@ public class TarArchive implements Archive {
         throw new NoSuchElementException(entry.getName());
     }
 
-    /**
-     * ファイルのパス名を返します。
-     */
+    @Override
     public String getName() {
         return name;
     }
 
-    /**
-     * ファイルのパス名を取得します。
-     */
+    /** */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * ファイル中のエントリの数を返します。
-     */
+    @Override
     public int size() {
         return entries.length;
     }
