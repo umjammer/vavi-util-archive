@@ -19,7 +19,7 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 
 /**
- * StuffIt アーカイブを処理するサービスプロバイダです．
+ * The SPI for StuffIt archived file.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 060106 nsano initial version <br>
@@ -27,9 +27,9 @@ import vavi.util.archive.spi.ArchiveSpi;
 public abstract class StuffItArchiveSpi implements ArchiveSpi {
 
     /**
-     * 解凍できるかどうか調べます．
-     * @param target 今のところ File しか受け付けません
+     * @param target currently accepts {@link File} only
      */
+    @Override
     public boolean canExtractInput(Object target) throws IOException {
 
         if (!(target instanceof File)) {
@@ -54,7 +54,7 @@ Debug.println("\n" + StringUtil.getDump(b));
                new String(b).equals("SIT!rRau");
     }
 
-    /** */
+    @Override
     public abstract Archive createArchiveInstance(Object obj) throws IOException;
 }
 

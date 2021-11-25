@@ -94,7 +94,7 @@ System.err.println("time: " + new Date(entry.getTime()));
 
     /** */
     private static final String commandLineBase = "e \"{0}\" \"{1}\" \"{2}\"";
-    
+
     /**
      * 指定された ファイルエントリの内容を読み込むための入力ストリームを
      * 返します。
