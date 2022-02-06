@@ -10,14 +10,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 
 import vavi.util.archive.Entry;
-
-import static org.junit.jupiter.api.Assertions.fail;
 
 
 /**
@@ -29,13 +26,12 @@ import static org.junit.jupiter.api.Assertions.fail;
 class NativeSevenZipArchiveTest {
 
     @Test
-    @Disabled
     @EnabledOnOs(OS.WINDOWS)
-    void test() {
-        fail("Not yet implemented");
+    void test() throws IOException {
+        main(new String[] { "src/test/resources/test.sit" });
     }
 
-    // for Native method ------------------------------------------------------
+    // ----
 
     /** java NativeSevenZipArchive sevenZipFile oneOfEntry */
     public static void main(String[] args) throws IOException {
