@@ -6,10 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import vavi.util.codec.cpio.CPIOEntry;
-import vavi.util.codec.rpm.RPMHeader;
-import vavi.util.codec.rpm.RPMIndexEntry;
-import vavi.util.codec.rpm.RPMInputStream;
-import vavi.util.codec.rpm.RPMLead;
 
 
 public class rpmdump {

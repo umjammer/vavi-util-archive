@@ -1,22 +1,13 @@
-#
-# Copyright (c) 2002 by Naohide Sano, All rights reserved.
-#
-# ArchiveSpi
-#
-# 0.00 021222 nsano initial version
-# 0.01 030128 nsano add rar
-# 0.02 030228 nsano add 7z
-# 0.03 030316 nsano repackage
-#
-
-#vavi.util.archive.stuffit.StuffItArchiveSpi
+#vavi.util.archive.stuffit.NativeStuffItArchiveSpi
 vavi.util.archive.lha.LhaArchiveSpi
 vavi.util.archive.rar.PureJavaRarArchiveSpi
-#vavi.util.archive.gca.GcaArchiveSpi
-#vavi.util.archive.sevenzip.SevenZipArchiveSpi
-#vavi.util.archive.cab.PureJavaCabArchiveSpi
+#vavi.util.archive.rar.ShellRarArchiveSpi
+#vavi.util.archive.rar.NativeRarArchiveSpi
+#vavi.util.archive.gca.NativeGcaArchiveSpi
+#vavi.util.archive.gca.ShellGcaArchiveSpi
+#vavi.util.archive.sevenzip.NativeSevenZipArchiveSpi
+vavi.util.archive.sevenzip.ApacheSevenZipArchiveSpi
 vavi.util.archive.cab.DorkboxCabArchiveSpi
-#vavi.util.archive.arj.ArjArchiveSpi
 #vavi.util.archive.tar.TarArchiveSpi
 #vavi.util.archive.zip.AntZipArchiveSpi
 vavi.util.archive.zip.ZipArchiveSpi

@@ -1,11 +1,3 @@
-#
-# Copyright (c) 2004 by Naohide Sano, All rights reserved.
-#
-# InputStreamSpi
-#
-# 0.00 040106 nsano initial version
-#
-
 vavi.util.archive.binhex.BinhexInputStreamSpi
 vavi.util.archive.gzip.GZipInputStreamSpi
 vavi.util.archive.bzip2.BZip2InputStreamSpi

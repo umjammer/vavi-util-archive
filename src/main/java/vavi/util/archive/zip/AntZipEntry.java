@@ -6,16 +6,16 @@
 
 package vavi.util.archive.zip;
 
-import vavi.util.archive.Entry;
+import vavi.util.archive.WrappedEntry;
 
 
 /**
- * ZIP 圧縮のサービスプロバイダです．
+ * Wrapper for ZIP archvied file entry.
  * 
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021104 nsano initial version <br>
  */
-public class AntZipEntry implements Entry<org.apache.tools.zip.ZipEntry> {
+public class AntZipEntry implements WrappedEntry<org.apache.tools.zip.ZipEntry> {
 
     /** */
     private org.apache.tools.zip.ZipEntry entry;
@@ -25,126 +25,92 @@ public class AntZipEntry implements Entry<org.apache.tools.zip.ZipEntry> {
         this.entry = entry;
     }
 
-    /**
-     * エントリのコメント文字列を返します。
-     */
+    @Override
     public String getComment() {
         return entry.getComment();
     }
 
-    /**
-     * 圧縮されたエントリデータのサイズを返します。
-     */
+    @Override
     public long getCompressedSize() {
         return entry.getCompressedSize();
     }
 
-    /**
-     * 圧縮解除されたエントリデータの CRC-32 チェックサムを返します。
-     */
+    @Override
     public long getCrc() {
         return entry.getCrc();
     }
 
-    /**
-     * エントリの補足フィールドデータを返します。
-     */
+    @Override
     public Object getExtra() {
         return entry.getExtra();
     }
 
-    /**
-     * エントリの圧縮メソッドを返します。
-     */
+    @Override
     public int getMethod() {
         return entry.getMethod();
     }
 
-    /**
-     * エントリの名前を返します。
-     */
+    @Override
     public String getName() {
         return entry.getName();
     }
 
-    /**
-     * エントリデータの圧縮解除時のサイズを返します。
-     */
+    @Override
     public long getSize() {
         return entry.getSize();
     }
 
-    /**
-     * エントリの修正時間を返します。
-     */
+    @Override
     public long getTime() {
         return entry.getTime();
     }
 
-    /**
-     * これがディレクトリエントリである場合に、true を返します。
-     */
+    @Override
     public boolean isDirectory() {
         return entry.isDirectory();
     }
 
-    /**
-     * エントリに任意指定のコメント文字列を設定します。
-     */
+    @Override
     public void setComment(String comment) {
         entry.setComment(comment);
     }
 
-    /**
-     * 圧縮されたエントリデータのサイズを設定します。
-     */
+    @Override
     public void setCompressedSize(long csize) {
         entry.setCompressedSize(csize);
     }
 
-    /**
-     * 圧縮解除されたエントリデータの CRC-32 チェックサムを設定します。
-     */
+    @Override
     public void setCrc(long crc) {
         entry.setCrc(crc);
     }
 
-    /**
-     * エントリに任意指定の補足フィールドデータを設定します。
-     */
+    @Override
     public void setExtra(Object extra) {
         entry.setExtra((byte[]) extra);
     }
 
-    /**
-     * エントリの圧縮メソッドを設定します。
-     */
+    @Override
     public void setMethod(int method) {
         entry.setMethod(method);
     }
 
-    /**
-     * エントリデータの圧縮解除時のサイズを設定します。
-     */
+    @Override
     public void setSize(long size) {
         entry.setSize(size);
     }
 
-    /**
-     * エントリの修正時間を設定します。
-     */
+    @Override
     public void setTime(long time) {
         entry.setTime(time);
     }
 
-    /**
-     * このエントリのコピーを返します。
-     */
+    @Override
     public Object clone() {
         return entry.clone();
     }
 
-    /** */
+    @Override
     public org.apache.tools.zip.ZipEntry getWrappedObject() {
         return entry;
     }

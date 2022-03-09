@@ -6,10 +6,10 @@
 
 package vavi.util.archive.lha;
 
+import vavi.util.archive.WrappedEntry;
+
 import jp.gr.java_conf.dangan.util.lha.CompressMethod;
 import jp.gr.java_conf.dangan.util.lha.LhaHeader;
-
-import vavi.util.archive.Entry;
 
 
 /**
@@ -20,7 +20,7 @@ import vavi.util.archive.Entry;
  *          0.01 030211 nsano implements #isDirectory() <br>
  *          0.02 030211 nsano jLha 0.06 compatible <br>
  */
-public class LhaEntry implements Entry<LhaHeader> {
+public class LhaEntry implements WrappedEntry<LhaHeader> {
 
     /** */
     private LhaHeader entry;

@@ -10,12 +10,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 import vavi.util.archive.Entry;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * NativeGcaArchiveTest.
@@ -26,12 +26,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class NativeGcaArchiveTest {
 
     @Test
-    @Disabled
-    void test() {
-        fail("Not yet implemented");
+    @EnabledOnOs(OS.WINDOWS)
+    void test() throws IOException {
+        main(new String[] { "src/test/resources/test.gca" });
     }
 
-    // for Native method ------------------------------------------------------
+    // ----
 
     /** */
     public static void main(String[] args) throws IOException {
@@ -44,10 +44,9 @@ System.err.println("gca: " + getVersion());
 //System.err.println("size: " + gca.getSelectedSize());
 //System.err.println("csize: " + gca.getSelectedCompressedSize());
 //System.err.println("ratio: " + gca.getSelectedRatio());
-        Entry<?> entry = gca.getEntry(args[1]);
+        Entry entry = gca.getEntry(args[1]);
         InputStream is = gca.getInputStream(entry);
 System.err.println("is: " + is);
-        System.exit(0);
     }
 }
 

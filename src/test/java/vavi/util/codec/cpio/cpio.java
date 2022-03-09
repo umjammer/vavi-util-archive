@@ -7,9 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import vavi.util.codec.cpio.CPIOEntry;
-import vavi.util.codec.cpio.CPIOInputStream;
-
 
 public class cpio {
 

@@ -20,8 +20,8 @@ import java.util.StringTokenizer;
 
 import vavi.util.Debug;
 import vavi.util.archive.Archive;
+import vavi.util.archive.CommonEntry;
 import vavi.util.archive.Entry;
-import vavi.util.archive.spi.CommonEntry;
 
 
 /**
@@ -41,7 +41,7 @@ public class ShellRarArchive implements Archive {
     /** */
     public ShellRarArchive(File file) throws IOException {
         final DateFormat sdf = new SimpleDateFormat("dd-MM-yy HH:mm");
-        Process p = Runtime.getRuntime().exec("unrar v " + file);
+        Process p = Runtime.getRuntime().exec(new String[] { "unrar", "v", file.toString() });
         BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
         r.readLine();
         r.readLine();
@@ -100,27 +100,20 @@ Debug.println(e);
         throw new NoSuchElementException(method);
     }
 
-    /**
-     * ファイルを閉じます。
-     */
+    @Override
     public void close() throws IOException {
     }
 
-    /**
-     * ファイルエントリの列挙を返します。
-     */
-    public Entry<?>[] entries() {
-        Entry<?>[] entries = new Entry[this.entries.size()];
+    @Override
+    public Entry[] entries() {
+        Entry[] entries = new Entry[this.entries.size()];
         this.entries.toArray(entries);
         return entries;
     }
 
-    /**
-     * 指定された名前の RAR ファイルエントリを返します。
-     * 見つからない場合は null を返します。
-     */
-    public Entry<?> getEntry(String name) {
-        for (Entry<?> entry : entries) {
+    @Override
+    public Entry getEntry(String name) {
+        for (Entry entry : entries) {
             if (entry.getName().equals(name)) {
                 return entry;
             }
@@ -128,24 +121,17 @@ Debug.println(e);
         return null;
     }
 
-    /**
-     * 指定された ファイルエントリの内容を読み込むための入力ストリームを
-     * 返します。
-     */
-    public InputStream getInputStream(Entry<?> entry) throws IOException {
+    @Override
+    public InputStream getInputStream(Entry entry) throws IOException {
         return null;
     }
 
-    /**
-     * ファイルのパス名を返します。
-     */
+    @Override
     public String getName() {
         return null;
     }
 
-    /**
-     * ファイル中のエントリの数を返します。
-     */
+    @Override
     public int size() {
         return 0;
     }

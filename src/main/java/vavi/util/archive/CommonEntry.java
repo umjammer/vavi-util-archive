@@ -4,20 +4,19 @@
  * Programmed by Naohide Sano
  */
 
-package vavi.util.archive.spi;
+package vavi.util.archive;
 
 import vavi.util.StringUtil;
-import vavi.util.archive.Entry;
 
 
 /**
- * 共通的なアーカイブエントリです．
+ * Common arhicve entry.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030211 nsano initial version <br>
  *          0.01 030227 nsano implements clone() <br>
  */
-public class CommonEntry implements Entry<CommonEntry> {
+public class CommonEntry implements Entry {
 
     /** */
     private String comment;
@@ -42,135 +41,101 @@ public class CommonEntry implements Entry<CommonEntry> {
     public CommonEntry() {
     }
 
-    /**
-     * エントリのコメント文字列を返します。
-     */
+    @Override
     public String getComment() {
         return comment;
     }
 
-    /**
-     * 圧縮されたエントリデータのサイズを返します。
-     */
+    @Override
     public long getCompressedSize() {
         return compressedSize;
     }
 
-    /**
-     * 圧縮解除されたエントリデータの CRC-32 チェックサムを返します。
-     */
+    @Override
     public long getCrc() {
         return crc;
     }
 
-    /**
-     * エントリの補足フィールドデータを返します。
-     */
+    @Override
     public Object getExtra() {
         return extra;
     }
 
-    /**
-     * エントリの圧縮メソッドを返します。
-     */
+    @Override
     public int getMethod() {
         return method;
     }
 
-    /**
-     * エントリの名前を返します。
-     */
+    @Override
     public String getName() {
         return name;
     }
 
-    /**
-     * エントリの名前を設定します。
-     */
+    /** Sets the name of this entry. */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * エントリデータの圧縮解除時のサイズを返します。
-     */
+    @Override
     public long getSize() {
         return size;
     }
 
-    /**
-     * エントリの修正時間を返します。
-     */
+    @Override
     public long getTime() {
         return time;
     }
 
-    /**
-     * これがディレクトリエントリである場合に、true を返します。
-     */
+    @Override
     public boolean isDirectory() {
         return directory;
     }
 
-    /** */
+    /** Sets the directory of this entry. */
     public void setDirectory(boolean directory) {
         this.directory = directory;
     }
 
-    /**
-     * エントリに任意指定のコメント文字列を設定します。
-     */
+    @Override
     public void setComment(String comment) {
         this.comment = comment;
     }
 
-    /**
-     * 圧縮されたエントリデータのサイズを設定します。
-     */
+    @Override
     public void setCompressedSize(long csize) {
         this.compressedSize = csize;
     }
 
-    /**
-     * 圧縮解除されたエントリデータの CRC-32 チェックサムを設定します。
-     */
+    @Override
     public void setCrc(long crc) {
         this.crc = crc;
     }
 
-    /**
-     * エントリに任意指定の補足フィールドデータを設定します。
-     * @param extra Cloneable でなくてはいけません
-     */
+    @Override
     public void setExtra(Object extra) {
         this.extra = extra;
     }
 
-    /**
-     * エントリの圧縮メソッドを設定します。
-     */
+    @Override
     public void setMethod(int method) {
         this.method = method;
     }
 
-    /**
-     * エントリデータの圧縮解除時のサイズを設定します。
-     */
+    @Override
     public void setSize(long size) {
         this.size = size;
     }
 
-    /**
-     * エントリの修正時間を設定します。
-     */
+    @Override
     public void setTime(long time) {
         this.time = time;
     }
 
     /**
-     * このエントリのコピーを返します。
+     * Returns copy of this entry.
      * (deep copy, else extra(shallow copy))
      */
+    @Override
     public Object clone() {
         try {
             CommonEntry clone = CommonEntry.class.cast(Class.forName(getClass().getName()).newInstance());
@@ -188,12 +153,7 @@ public class CommonEntry implements Entry<CommonEntry> {
         }
     }
 
-    /** */
-    public CommonEntry getWrappedObject() {
-        return this;
-    }
-
-    /** */
+    @Override
     public String toString() {
         return StringUtil.paramString(this);
     }

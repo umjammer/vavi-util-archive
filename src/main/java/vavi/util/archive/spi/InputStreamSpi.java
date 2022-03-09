@@ -11,7 +11,7 @@ import java.io.InputStream;
 
 
 /**
- * Archive の Service Provider Interface です．
+ * Service Provider Interface for archived InpuStream class.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040105 nsano initial version <br>
@@ -20,7 +20,7 @@ import java.io.InputStream;
 public interface InputStreamSpi {
 
     /**
-     * 解凍できるかどうか調べます．
+     * Checks if extractable or not.
      */
     boolean canExpandInput(Object target) throws IOException;
 

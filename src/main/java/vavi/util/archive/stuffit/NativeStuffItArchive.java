@@ -17,8 +17,8 @@ import java.util.List;
 
 import vavi.util.Debug;
 import vavi.util.archive.Archive;
+import vavi.util.archive.CommonEntry;
 import vavi.util.archive.Entry;
-import vavi.util.archive.spi.CommonEntry;
 
 
 /**
@@ -55,8 +55,8 @@ System.err.println("StuffIt.dll: " + getVersion());
     /**
      * ファイルエントリの列挙を返します。
      */
-    public Entry<?>[] entries() {
-        Entry<?>[] entries = new Entry[this.entries.size()];
+    public Entry[] entries() {
+        Entry[] entries = new Entry[this.entries.size()];
         this.entries.toArray(entries);
         return entries;
     }
@@ -64,8 +64,8 @@ System.err.println("StuffIt.dll: " + getVersion());
     /**
      * 指定された名前の ZIP ファイルエントリを返します。
      */
-    public Entry<?> getEntry(String name) {
-        for (Entry<?> entry : entries) {
+    public Entry getEntry(String name) {
+        for (Entry entry : entries) {
             if (entry.getName().equals(name)) {
                 return entry;
             }
@@ -77,7 +77,7 @@ System.err.println("StuffIt.dll: " + getVersion());
      * 指定された ファイルエントリの内容を読み込むための入力ストリームを
      * 返します。
      */
-    public InputStream getInputStream(Entry<?> entry) throws IOException {
+    public InputStream getInputStream(Entry entry) throws IOException {
 
         String commandLine = MessageFormat.format("e \"{0}\" \"{1}\" \"{2}\"",
                                                   file.getPath(),

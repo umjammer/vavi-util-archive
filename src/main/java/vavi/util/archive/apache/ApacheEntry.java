@@ -1,54 +1,57 @@
 /*
- * Copyright (c) 2004 by Naohide Sano, All rights reserved.
+ * Copyright (c) 2021 by Naohide Sano, All rights reserved.
  *
  * Programmed by Naohide Sano
  */
 
-package vavi.util.archive.tar;
+package vavi.util.archive.apache;
 
-import java.util.Date;
+import org.apache.commons.compress.archivers.ArchiveEntry;
 
 import vavi.util.archive.WrappedEntry;
 
 
 /**
- * Wrapper for the TAR archived file entry.
+ * ApacheEntry.
  *
- * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
- * @version 0.00 040106 nsano initial version <br>
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
+ * @version 0.00 2021/11/17 umjammer initial version <br>
  */
-public class TarEntry implements WrappedEntry<org.apache.commons.compress.archivers.tar.TarArchiveEntry> {
+public class ApacheEntry implements WrappedEntry<ArchiveEntry> {
 
-    /** */
-    private org.apache.commons.compress.archivers.tar.TarArchiveEntry entry;
+    private ArchiveEntry entry;
 
-    /** */
-    public TarEntry(org.apache.commons.compress.archivers.tar.TarArchiveEntry entry) {
+    public ApacheEntry(ArchiveEntry entry) {
         this.entry = entry;
     }
 
     @Override
     public String getComment() {
+        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public long getCompressedSize() {
-        return entry.getSize();
+        // TODO Auto-generated method stub
+        return 0;
     }
 
     @Override
     public long getCrc() {
+        // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
     public Object getExtra() {
+        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public int getMethod() {
+        // TODO Auto-generated method stub
         return 0;
     }
 
@@ -64,7 +67,7 @@ public class TarEntry implements WrappedEntry<org.apache.commons.compress.archiv
 
     @Override
     public long getTime() {
-        return entry.getModTime().getTime();
+        return entry.getLastModifiedDate().getTime();
     }
 
     @Override
@@ -74,41 +77,48 @@ public class TarEntry implements WrappedEntry<org.apache.commons.compress.archiv
 
     @Override
     public void setComment(String comment) {
-        // TODO
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public void setCompressedSize(long csize) {
-        entry.setSize(csize);
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public void setCrc(long crc) {
-        // TODO
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public void setExtra(Object extra) {
-        // TODO
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public void setMethod(int method) {
-        // TODO
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public void setSize(long size) {
-        entry.setSize(size);
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public void setTime(long time) {
-        entry.setModTime(new Date(time));
+        // TODO Auto-generated method stub
+
     }
 
-    /** */
-    public org.apache.commons.compress.archivers.tar.TarArchiveEntry getWrappedObject() {
+    @Override
+    public ArchiveEntry getWrappedObject() {
         return entry;
     }
 }

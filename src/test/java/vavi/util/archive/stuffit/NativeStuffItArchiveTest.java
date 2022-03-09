@@ -9,12 +9,11 @@ package vavi.util.archive.stuffit;
 import java.io.File;
 import java.io.IOException;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 import vavi.util.archive.Entry;
-
-import static org.junit.jupiter.api.Assertions.fail;
 
 
 /**
@@ -26,12 +25,12 @@ import static org.junit.jupiter.api.Assertions.fail;
 class NativeStuffItArchiveTest {
 
     @Test
-    @Disabled
-    void test() {
-        fail("Not yet implemented");
+    @EnabledOnOs(OS.WINDOWS)
+    void test() throws IOException {
+        main(new String[] { "src/test/resources/test.sit" });
     }
 
-    // for Native method ------------------------------------------------------
+    // ----
 
     /** */
     public static void main(String[] args) throws IOException {
@@ -45,7 +44,7 @@ class NativeStuffItArchiveTest {
 //        Entry entry = sit.getEntry(args[1]);
 //        InputStream is = sit.getInputStream(entry);
 //System.err.println("is: " + is);
-        for (Entry<?> entry : sit.entries()) {
+        for (Entry entry : sit.entries()) {
             System.err.println("entry: " + entry);
         }
         System.exit(0);

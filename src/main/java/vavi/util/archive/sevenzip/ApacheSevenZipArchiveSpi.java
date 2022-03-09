@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 by Naohide Sano, All rights reserved.
+ * Copyright (c) 2021 by Naohide Sano, All rights reserved.
  *
  * Programmed by Naohide Sano
  */
@@ -19,12 +19,12 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 
 /**
- * The SPI for SevenZip using native library.
+ * The SPI for 7zip using Apache commons compress.
  * 
- * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
- * @version 0.00 030228 nsano initial version <br>
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
+ * @version 0.00 2021/11/16 umjammer initial version <br>
  */
-public class NativeSevenZipArchiveSpi implements ArchiveSpi {
+public class ApacheSevenZipArchiveSpi implements ArchiveSpi {
 
     /**
      * @param target currently accept {@link File} only.
@@ -63,7 +63,7 @@ Debug.println("\n" + StringUtil.getDump(b));
 
     @Override
     public Archive createArchiveInstance(Object obj) throws IOException {
-        return new NativeSevenZipArchive((File) obj);
+        return new ApacheSevenZipArchive((File) obj);
     }
 }
 

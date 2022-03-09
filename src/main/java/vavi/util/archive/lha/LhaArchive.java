@@ -14,6 +14,7 @@ import java.util.List;
 
 import vavi.util.archive.Archive;
 import vavi.util.archive.Entry;
+import vavi.util.archive.WrappedEntry;
 
 import jp.gr.java_conf.dangan.util.lha.LhaFile;
 import jp.gr.java_conf.dangan.util.lha.LhaHeader;
@@ -21,7 +22,7 @@ import jp.gr.java_conf.dangan.util.lha.LhaInputStream;
 
 
 /**
- * LHA アーカイブを処理するサービスプロバイダです．
+ * Represents LHA archived file.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021103 nsano initial version <br>
@@ -43,9 +44,7 @@ public class LhaArchive implements Archive {
         this.archive = new LhaInputStream(is);
     }
 
-    /**
-     * ファイルを閉じます。
-     */
+    @Override
     public void close() throws IOException {
         if (LhaFile.class.isInstance(archive)) {
             LhaFile.class.cast(archive).close();
@@ -56,13 +55,11 @@ public class LhaArchive implements Archive {
         }
     }
 
-    /**
-     * ファイルエントリの列挙を返します。
-     */
-    public Entry<?>[] entries() {
+    @Override
+    public Entry[] entries() {
         if (LhaFile.class.isInstance(archive)) {
             LhaHeader[] headers = LhaFile.class.cast(archive).getEntries();
-            Entry<?>[] entries = new Entry[headers.length];
+            Entry[] entries = new Entry[headers.length];
             for (int i = 0; i < headers.length; i++) {
                 entries[i] = new LhaEntry(headers[i]);
             }
@@ -70,7 +67,7 @@ public class LhaArchive implements Archive {
         } else if (LhaInputStream.class.isInstance(archive)) {
             try {
                 LhaInputStream lis = LhaInputStream.class.cast(archive);
-                List<Entry<?>> entries = new ArrayList<>();
+                List<Entry> entries = new ArrayList<>();
                 LhaHeader header;
                 while ((header = lis.getNextEntry()) != null) {
                     entries.add(new LhaEntry(header));
@@ -84,10 +81,8 @@ public class LhaArchive implements Archive {
         }
     }
 
-    /**
-     * 指定された名前のファイルエントリを返します。 見つからない場合は null を返します。
-     */
-    public Entry<?> getEntry(String name) {
+    @Override
+    public Entry getEntry(String name) {
         if (LhaFile.class.isInstance(archive)) {
             LhaHeader[] headers = LhaFile.class.cast(archive).getEntries();
             for (int i = 0; i < headers.length; i++) {
@@ -114,12 +109,10 @@ public class LhaArchive implements Archive {
         }
     }
 
-    /**
-     * 指定された ファイルエントリの内容を読み込むための入力ストリームを 返します。
-     */
-    public InputStream getInputStream(Entry<?> entry) throws IOException {
+    @Override
+    public InputStream getInputStream(Entry entry) throws IOException {
         if (LhaFile.class.isInstance(archive)) {
-            return LhaFile.class.cast(archive).getInputStream(LhaHeader.class.cast(entry.getWrappedObject()));
+            return LhaFile.class.cast(archive).getInputStream(LhaHeader.class.cast(WrappedEntry.class.cast(entry).getWrappedObject()));
         } else if (LhaInputStream.class.isInstance(archive)) {
             LhaInputStream lis = LhaInputStream.class.cast(archive);
             LhaHeader header;
@@ -134,9 +127,7 @@ public class LhaArchive implements Archive {
         }
     }
 
-    /**
-     * ファイルのパス名を返します。
-     */
+    @Override
     public String getName() {
         if (LhaFile.class.isInstance(archive)) {
             return null; // TODO LhaFile.class.cast(archive).;
@@ -147,9 +138,7 @@ public class LhaArchive implements Archive {
         }
     }
 
-    /**
-     * ファイル中のエントリの数を返します。
-     */
+    @Override
     public int size() {
         if (LhaFile.class.isInstance(archive)) {
             return LhaFile.class.cast(archive).size();

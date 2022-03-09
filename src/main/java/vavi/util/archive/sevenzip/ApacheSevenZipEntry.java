@@ -1,31 +1,30 @@
 /*
- * Copyright (c) 2012 by Naohide Sano, All rights reserved.
+ * Copyright (c) 2001 by Naohide Sano, All rights reserved.
  *
  * Programmed by Naohide Sano
  */
 
-package vavi.util.archive.rar;
+package vavi.util.archive.sevenzip;
 
+import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
 
 import vavi.util.archive.WrappedEntry;
 
-import de.innosystec.unrar.rarfile.FileHeader;
-
 
 /**
- * Represents RAR archived file.
- * 
+ * The wrapper for a 7zip archive entry.
+ *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
- * @version 0.00 120216 nsano initial version <br>
+ * @version 0.00 021104 nsano initial version <br>
  */
-public class PureJavaRarEntry implements WrappedEntry<FileHeader> {
+public class ApacheSevenZipEntry implements WrappedEntry<SevenZArchiveEntry> {
 
     /** */
-    private FileHeader entry;
+    private SevenZArchiveEntry entry;
 
     /** */
-    public PureJavaRarEntry(FileHeader header) {
-        this.entry = header;
+    public ApacheSevenZipEntry(SevenZArchiveEntry entry) {
+        this.entry = entry;
     }
 
     @Override
@@ -35,12 +34,12 @@ public class PureJavaRarEntry implements WrappedEntry<FileHeader> {
 
     @Override
     public long getCompressedSize() {
-        return entry.getFullPackSize();
+        return -1;
     }
 
     @Override
     public long getCrc() {
-        return entry.getFileCRC();
+        return entry.getCrcValue();
     }
 
     @Override
@@ -50,22 +49,22 @@ public class PureJavaRarEntry implements WrappedEntry<FileHeader> {
 
     @Override
     public int getMethod() {
-        return 0;
+        return -1;
     }
 
     @Override
     public String getName() {
-        return entry.getFileNameString();
+        return entry.getName();
     }
 
     @Override
     public long getSize() {
-        return entry.getDataSize();
+        return entry.getSize();
     }
 
     @Override
     public long getTime() {
-        return entry.getMTime().getTime();
+        return entry.getCreationDate().getTime();
     }
 
     @Override
@@ -75,34 +74,37 @@ public class PureJavaRarEntry implements WrappedEntry<FileHeader> {
 
     @Override
     public void setComment(String comment) {
-        // TODO
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setCompressedSize(long csize) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setCrc(long crc) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setExtra(Object extra) {
-        // TODO
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setMethod(int method) {
-        // TODO
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setSize(long size) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setTime(long time) {
-        // TODO
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -110,8 +112,8 @@ public class PureJavaRarEntry implements WrappedEntry<FileHeader> {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public FileHeader getWrappedObject() {
+    /** */
+    public SevenZArchiveEntry getWrappedObject() {
         return entry;
     }
 }

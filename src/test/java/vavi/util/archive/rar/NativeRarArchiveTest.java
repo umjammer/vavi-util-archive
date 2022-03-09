@@ -12,6 +12,8 @@ import java.io.InputStream;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 import vavi.util.archive.Entry;
 
@@ -28,6 +30,7 @@ class NativeRarArchiveTest {
 
     @Test
     @Disabled
+    @EnabledOnOs(OS.WINDOWS)
     void test() {
         fail("Not yet implemented");
     }
@@ -45,7 +48,7 @@ class NativeRarArchiveTest {
 //System.err.println("size: " + gca.getSelectedSize());
 //System.err.println("csize: " + gca.getSelectedCompressedSize());
 //System.err.println("ratio: " + gca.getSelectedRatio());
-        Entry<?> entry = rar.getEntry(args[1]);
+        Entry entry = rar.getEntry(args[1]);
         InputStream is = rar.getInputStream(entry);
 System.err.println("is: " + is);
         System.exit(0);

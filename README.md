@@ -2,7 +2,7 @@
 
 # vavi-util-archive
 
- archiving, compress method libraries
+🌏 Extract the world!
 
 ## Status
 
@@ -11,7 +11,7 @@
 |binhex | archiving | 🚧 | - | | [binhex](https://github.com/umjammer/JBinHex) |
 |bzip2 | archiving | 🚧 | - | ||
 |cab | archiving | 🚧 | - | | [ibex](http://util.ibex.org/src/org/ibex/util/) |
-|cab | archiving | 🚧 | - | | [dorkbox]() |
+|cab | archiving | 🚧 | - | | [dorkbox](https://github.com/umjammer/CabParser) |
 |gca | archiving | | - | ||
 |gzip | archiving | ✅ | - | ||
 |lha | archiving | ✅ | - | | [lha](https://github.com/umjammer/jlha) |
@@ -27,8 +27,12 @@
 
 ## Library
 
+ * [Giant Java Tree/cpio](https://www.gjt.org/servlets/JCVSlet/list/gjt/org/gjt/archive/cpio) ... Unknown
+ * [Giant Java Tree/rpm](https://www.gjt.org/servlets/JCVSlet/list/gjt/org/gjt/archive/rpm) ... Unknown
+ * [p7zip/lzma](https://p7zip.sourceforge.net/) ... LGPL
+ * [LHA for Java](http://homepage1.nifty.com/dangan/) ... [LICENSE](src/main/java/vavi/util/archive/lha/LISENCE-LHAforJava)
 
-## TBD
+## TODO
 
  * [commons-vfs](https://commons.apache.org/proper/commons-vfs/)
  * [truevfs](https://github.com/christian-schlichtherle/truevfs)

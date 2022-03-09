@@ -1,0 +1,47 @@
+Copyright (C) 2002  Michel Ishizuka  All rights reserved.
+
+以下の条件に同意するならばソースとバイナリ形式の再配布と使用を
+変更の有無にかかわらず許可する。
+
+１．ソースコードの再配布において著作権表示と この条件のリスト
+    および下記の声明文を保持しなくてはならない。
+
+２．バイナリ形式の再配布において著作権表示と この条件のリスト
+    および下記の声明文を使用説明書もしくは その他の配布物内に
+    含む資料に記述しなければならない。
+
+このソフトウェアは石塚美珠瑠によって無保証で提供され、特定の目
+的を達成できるという保証、商品価値が有るという保証にとどまらず、
+いかなる明示的および暗示的な保証もしない。
+石塚美珠瑠は このソフトウェアの使用による直接的、間接的、偶発
+的、特殊な、典型的な、あるいは必然的な損害(使用によるデータの
+損失、業務の中断や見込まれていた利益の遺失、代替製品もしくは
+サービスの導入費等が考えられるが、決してそれだけに限定されない
+損害)に対して、いかなる事態の原因となったとしても、契約上の責
+任や無過失責任を含む いかなる責任があろうとも、たとえそれが不
+正行為のためであったとしても、またはそのような損害の可能性が報
+告されていたとしても一切の責任を負わないものとする。
+
+---
+
+If you agree to the following terms, redistribute and use the source and binary formats
+Allow with or without changes.
+
+1. 1. Copyright notice and list of this condition in redistributing source code
+    And the following statement must be retained.
+
+2. 2. Copyright notice and list of this condition in binary redistribution
+    And the following statement in the instruction manual or other handouts
+    Must be stated in the material it contains.
+
+This software is provided by Mitsuru Ishizuka without warranty and has specific eyes.
+Not only the guarantee that the target can be achieved and the guarantee that the product has commercial value,
+No express or implied warranties are made.
+Mitsuru Ishizuka is a direct, indirect, accidental use of this software
+Targeted, special, typical, or inevitable damage (data from use)
+Loss, interruption of business or loss of expected profit, alternative product or
+Service introduction costs can be considered, but it is by no means limited to that.
+Damage), no matter what the cause of the situation, the contractual liability
+Whatever liability, including liability and strict liability, is unacceptable
+The possibility of such damage, even if it is due to a legitimate act, is reported.
+Even if it is notified, we shall not take any responsibility.

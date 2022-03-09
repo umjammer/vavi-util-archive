@@ -1,10 +1,10 @@
 /*
- * Copyright (c) 2002 by Naohide Sano, All rights reserved.
+ * Copyright (c) 2021 by Naohide Sano, All rights reserved.
  *
  * Programmed by Naohide Sano
  */
 
-package vavi.util.archive.zip;
+package vavi.util.archive.apache;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -17,14 +17,16 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 
 /**
- * The ZIP SPI using the Ant zip library.
- *
- * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
- * @version 0.00 021222 nsano initial version <br>
- *          0.01 030128 nsano implements <br>
+ * The SPI for archives using Apache commons compress.
+ * 
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
+ * @version 0.00 2021/11/16 umjammer initial version <br>
  */
-public class AntZipArchiveSpi implements ArchiveSpi {
+public class ApacheCommonsArchiveSpi implements ArchiveSpi {
 
+    /**
+     * @param target currently accept {@link File} only.
+     */
     @Override
     public boolean canExtractInput(Object target) throws IOException {
 
@@ -35,24 +37,13 @@ public class AntZipArchiveSpi implements ArchiveSpi {
         InputStream is =
             new BufferedInputStream(new FileInputStream((File) target));
 
-        byte[] b = new byte[2];
-
-        is.mark(2);
-        int l = 0;
-        while (l < 2) {
-            l += is.read(b, l, 2 - l);
-        }
-        is.reset();
-
-        is.close();
-
-        return b[0] == 'P' &&
-               b[1] == 'K';
+        // TODO accepts all
+        return true;
     }
 
     @Override
     public Archive createArchiveInstance(Object obj) throws IOException {
-        return new AntZipArchive((File) obj);
+        return new ApacheCommonsArchive((File) obj);
     }
 }
 

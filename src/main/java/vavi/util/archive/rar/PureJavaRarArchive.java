@@ -20,10 +20,11 @@ import vavi.io.OutputEngine;
 import vavi.io.OutputEngineInputStream;
 import vavi.util.archive.Archive;
 import vavi.util.archive.Entry;
+import vavi.util.archive.WrappedEntry;
 
 
 /**
- * RAR アーカイブを処理するサービスプロバイダです．
+ * Represents RAR archived file.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 120216 nsano initial version <br>
@@ -42,30 +43,23 @@ public class PureJavaRarArchive implements Archive {
         }
     }
 
-    /**
-     * ファイルを閉じます。
-     */
+    @Override
     public void close() throws IOException {
         archive.close();
     }
 
-    /**
-     * ファイルエントリの列挙を返します。
-     */
-    public Entry<?>[] entries() {
+    @Override
+    public Entry[] entries() {
         List<FileHeader> headers = archive.getFileHeaders();
-        Entry<?>[] entries = new Entry[headers.size()];
+        Entry[] entries = new Entry[headers.size()];
         for (int i = 0; i < headers.size(); i++) {
             entries[i] = new PureJavaRarEntry(headers.get(i));
         }
         return entries;
     }
 
-    /**
-     * 指定された名前のファイルエントリを返します。
-     * 見つからない場合は null を返します。
-     */
-    public Entry<?> getEntry(String name) {
+    @Override
+    public Entry getEntry(String name) {
         List<FileHeader> headers = archive.getFileHeaders();
         for (int i = 0; i < headers.size(); i++) {
             if (headers.get(i).getFileNameString().equals(name)) {
@@ -75,18 +69,15 @@ public class PureJavaRarArchive implements Archive {
         return null;
     }
 
-    /**
-     * 指定された ファイルエントリの内容を読み込むための入力ストリームを
-     * 返します。
-     */
-    public InputStream getInputStream(final Entry<?> entry) throws IOException {
+    @Override
+    public InputStream getInputStream(final Entry entry) throws IOException {
         return new OutputEngineInputStream(new OutputEngine() {
             private final int BUFFER_SIZE = 4096;
             private InputStream in = new ByteArrayInputStream(new byte[BUFFER_SIZE]);
             private OutputStream out;
             public void initialize(OutputStream out) throws IOException {
                 try {
-                    archive.extractFile((FileHeader) entry.getWrappedObject(), out);
+                    archive.extractFile(FileHeader.class.cast(WrappedEntry.class.cast(entry).getWrappedObject()), out);
                 } catch (RarException e) {
                     new IOException(e);
                 }
@@ -107,16 +98,12 @@ public class PureJavaRarArchive implements Archive {
         });
     }
 
-    /**
-     * ファイルのパス名を返します。
-     */
+    @Override
     public String getName() {
         return null;
     }
 
-    /**
-     * ファイル中のエントリの数を返します。
-     */
+    @Override
     public int size() {
         return archive.getFileHeaders().size();
     }

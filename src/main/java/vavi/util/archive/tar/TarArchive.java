@@ -17,10 +17,11 @@ import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 
 import vavi.util.archive.Archive;
 import vavi.util.archive.Entry;
+import vavi.util.archive.WrappedEntry;
 
 
 /**
- * TAR アーカイブを処理するサービスプロバイダです．
+ * Represents TAR archived file.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040106 nsano initial version <br>
@@ -31,7 +32,7 @@ public class TarArchive implements Archive {
     private TarArchiveInputStream archive;
 
     /** */
-    private Entry<?>[] entries;
+    private Entry[] entries;
 
     /** */
     private String name;
@@ -40,7 +41,7 @@ public class TarArchive implements Archive {
     public TarArchive(InputStream is) throws IOException {
         this.archive = new TarArchiveInputStream(is);
 
-        List<Entry<?>> list = new ArrayList<>();
+        List<Entry> list = new ArrayList<>();
         while (true) {
             org.apache.commons.compress.archivers.tar.TarArchiveEntry e = archive.getNextTarEntry();
             if (e == null) {
@@ -54,24 +55,18 @@ public class TarArchive implements Archive {
         list.toArray(entries);
     }
 
-    /**
-     * ファイルを閉じます。
-     */
+    @Override
     public void close() throws IOException {
         archive.close();
     }
 
-    /**
-     * ファイルエントリの列挙を返します。
-     */
-    public Entry<?>[] entries() {
+    @Override
+    public Entry[] entries() {
         return entries;
     }
 
-    /**
-     * 指定された名前の TAR ファイルエントリを返します。
-     */
-    public Entry<?> getEntry(String name) {
+    @Override
+    public Entry getEntry(String name) {
         for (int i = 0; i < entries.length; i++) {
             if (entries[i].getName().equals(name)) {
                 return entries[i];
@@ -80,39 +75,30 @@ public class TarArchive implements Archive {
         throw new NoSuchElementException(name);
     }
 
-    /**
-     * 指定された ファイルエントリの内容を読み込むための入力ストリームを
-     * 返します。
-     */
-    public InputStream getInputStream(Entry<?> entry) throws IOException {
+    @Override
+    public InputStream getInputStream(Entry entry) throws IOException {
         for (int i = 0; i < entries.length; i++) {
             if (entries[i].equals(entry)) {
                 org.apache.tools.tar.TarEntry e =
                     (org.apache.tools.tar.TarEntry)
-                        entries[i].getWrappedObject();
+                        WrappedEntry.class.cast(entries[i]).getWrappedObject();
                 return new FileInputStream(e.getFile());
             }
         }
         throw new NoSuchElementException(entry.getName());
     }
 
-    /**
-     * ファイルのパス名を返します。
-     */
+    @Override
     public String getName() {
         return name;
     }
 
-    /**
-     * ファイルのパス名を取得します。
-     */
+    /** */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * ファイル中のエントリの数を返します。
-     */
+    @Override
     public int size() {
         return entries.length;
     }

@@ -8,10 +8,9 @@ package vavi.util.archive.rar;
 
 import java.io.File;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 
 /**
@@ -23,9 +22,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 class ShellRarArchiveTest {
 
     @Test
-    @Disabled
-    void test() {
-        fail("Not yet implemented");
+    @EnabledOnOs(OS.WINDOWS)
+    void test() throws Exception {
+        main(new String[] { "src/test/resources/test.rar" });
     }
 
     //----

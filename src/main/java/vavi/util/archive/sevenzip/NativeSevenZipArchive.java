@@ -22,14 +22,14 @@ import java.util.ResourceBundle;
 import vavi.util.Debug;
 import vavi.util.StringUtil;
 import vavi.util.archive.Archive;
+import vavi.util.archive.CommonEntry;
 import vavi.util.archive.Entry;
 import vavi.util.archive.gca.NativeGcaArchive;
-import vavi.util.archive.spi.CommonEntry;
 import vavi.util.win32.DateUtil;
 
 
 /**
- * 7-zip32.dll のラッパークラスです。
+ * The wrapper class for 7-zip32.dll.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030228 nsano initial version <br>
@@ -68,27 +68,21 @@ System.err.println("time: " + new Date(entry.getTime()));
         }
     }
 
-    /**
-     * ファイルを閉じます。
-     */
+    @Override
     public void close() throws IOException {
         closeArchive();
     }
 
-    /**
-     * ファイルエントリの列挙を返します。
-     */
-    public Entry<?>[] entries() {
-        Entry<?>[] entries = new Entry[this.entries.size()];
+    @Override
+    public Entry[] entries() {
+        Entry[] entries = new Entry[this.entries.size()];
         this.entries.toArray(entries);
         return entries;
     }
 
-    /**
-     * 指定された名前の ZIP ファイルエントリを返します。
-     */
-    public Entry<?> getEntry(String name) {
-        for (Entry<?> entry : entries) {
+    @Override
+    public Entry getEntry(String name) {
+        for (Entry entry : entries) {
             if (entry.getName().equals(name)) {
                 return entry;
             }
@@ -96,11 +90,8 @@ System.err.println("time: " + new Date(entry.getTime()));
         return null;
     }
 
-    /**
-     * 指定された ファイルエントリの内容を読み込むための入力ストリームを
-     * 返します。
-     */
-    public InputStream getInputStream(Entry<?> entry) throws IOException {
+    @Override
+    public InputStream getInputStream(Entry entry) throws IOException {
 
         File temporaryDirectory = new File(System.getProperty("java.io.tmpdir"));
         String temporaryDirectoryString = temporaryDirectory.getAbsolutePath();
@@ -117,8 +108,8 @@ try {
 } catch (IOException e) {
  try {
   int code = Integer.parseInt(e.getMessage());
-  Debug.println(code + ", 0x" + StringUtil.toHex4(code));
-  Debug.println(rb.getString(errorCodeTable.getProperty("0x" + StringUtil.toHex4(code))));
+  Debug.printf("%1$d, 0x%1$04x\n", code);
+  Debug.println(rb.getString(errorCodeTable.getProperty(String.format("0x%04X", code))));
  } catch (Exception e2) {
   Debug.printStackTrace(e2);
  }
@@ -134,16 +125,12 @@ try {
         }
     }
 
-    /**
-     * ファイルのパス名を返します。
-     */
+    @Override
     public String getName() {
         return file.getPath();
     }
 
-    /**
-     * ファイル中のエントリの数を返します。
-     */
+    @Override
     public int size() {
         return entries.size();
     }

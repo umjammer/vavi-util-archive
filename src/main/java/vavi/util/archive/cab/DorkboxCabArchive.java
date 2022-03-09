@@ -94,8 +94,8 @@ public class DorkboxCabArchive implements Archive {
     }
 
     /** */
-    public Entry<?>[] entries() {
-        List<Entry<?>> entries = new ArrayList<>();
+    public Entry[] entries() {
+        List<Entry> entries = new ArrayList<>();
         Enumeration<CabEntry> e = cab.entries();
         while (e.hasMoreElements()) {
             entries.add(new DorkboxCabEntry(e.nextElement()));
@@ -104,7 +104,7 @@ public class DorkboxCabArchive implements Archive {
     }
 
     /** */
-    public Entry<?> getEntry(String name) {
+    public Entry getEntry(String name) {
         Enumeration<CabEntry> e = cab.entries();
         while (e.hasMoreElements()) {
             CabEntry entry = e.nextElement();
@@ -116,7 +116,7 @@ public class DorkboxCabArchive implements Archive {
     }
 
     /** reads a CAB file, parses it, and returns an InputStream representing the named file */
-    public InputStream getInputStream(Entry<?> entry) throws IOException {
+    public InputStream getInputStream(Entry entry) throws IOException {
         // TODO Auto-generated method stub
         return null;
     }
