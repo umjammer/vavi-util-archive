@@ -60,7 +60,7 @@ public class AntZipArchive implements Archive {
 
     @Override
     public InputStream getInputStream(Entry entry) throws IOException {
-        return archive.getInputStream(AntZipEntry.class.cast(entry).getWrappedObject());
+        return archive.getInputStream(((AntZipEntry) entry).getWrappedObject());
     }
 
     @Override

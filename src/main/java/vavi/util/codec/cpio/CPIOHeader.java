@@ -4,6 +4,10 @@ package vavi.util.codec.cpio;
 import java.io.IOException;
 import java.io.InputStream;
 
+import vavi.util.Debug;
+
+import static vavi.util.codec.cpio.CPIOInputStream.skip;
+
 
 /**
  * <pre>
@@ -62,8 +66,6 @@ import java.io.InputStream;
  */
 public class CPIOHeader {
 
-    private boolean isDebug = false;
-
     public static final int FMT_UNKNOWN = 0;
     public static final int FMT_BINARY = 1;
     public static final int FMT_BINSWAP = 2;
@@ -92,7 +94,7 @@ public class CPIOHeader {
 
     public String filename = null;
 
-    public CPIOHeader() throws IOException {
+    public CPIOHeader() {
     }
 
     public CPIOHeader(InputStream in) throws IOException {
@@ -115,9 +117,7 @@ public class CPIOHeader {
             result = (this.filesize % 2);
             break;
         }
-        if (isDebug) {
-            System.err.println("FILEPAD: size=" + this.filesize + "  pad=" + result);
-        }
+Debug.println("FILEPAD: size=" + this.filesize + "  pad=" + result);
         return result;
     }
 
@@ -139,14 +139,12 @@ public class CPIOHeader {
             break;
         }
 
-        if (isDebug) {
-            System.err.println("NAMEPAD: size=" + size + "(nm=" + this.namesize + ")  pad=" + result);
-        }
+Debug.println("NAMEPAD: size=" + size + "(nm=" + this.namesize + ")  pad=" + result);
         return result;
     }
 
     public void readHeader(InputStream in) throws IOException {
-        int numRead = -1;
+        int numRead;
 
         byte[] prime = new byte[6];
 
@@ -193,10 +191,8 @@ public class CPIOHeader {
         this.hdrBytes = new byte[this.hdrSize];
         System.arraycopy(prime, 0, this.hdrBytes, 0, 6);
         numRead = in.read(this.hdrBytes, 6, (this.hdrSize - 6));
-        if (isDebug) {
-            System.err.println("FORMAT:  " + this.format);
-            System.err.println("HDRSIZE: " + this.hdrSize);
-        }
+Debug.println("FORMAT:  " + this.format);
+Debug.println("HDRSIZE: " + this.hdrSize);
 
         if ((numRead + 6) != this.hdrBytes.length) {
             throw new IOException("unexpected eof reading header bytes");
@@ -204,9 +200,7 @@ public class CPIOHeader {
 
         this.parseHeader(this.hdrBytes);
 
-        if (isDebug) {
-            System.err.println("NMSIZE:  " + this.namesize);
-        }
+Debug.println("NMSIZE:  " + this.namesize);
 
         this.nameBytes = new byte[this.namesize];
 
@@ -218,7 +212,7 @@ public class CPIOHeader {
 
         this.filename = new String(this.nameBytes, 0, this.namesize - 1);
 
-        in.skip(this.getNamePadding());
+        skip(in, this.getNamePadding());
     }
 
     public void parseHeader(byte[] hdr) throws IOException {
@@ -231,7 +225,7 @@ public class CPIOHeader {
         }
     }
 
-    public void parseBinaryHeader(byte[] hdr) throws IOException {
+    public void parseBinaryHeader(byte[] hdr) {
         int offset = 2;
 
         @SuppressWarnings("unused")
@@ -260,16 +254,13 @@ public class CPIOHeader {
         this.mtime = readInt(hdr, offset, "mtime");
         offset += 4;
 
-        if (isDebug)
-            System.err.println("MTIME: " + this.mtime);
+Debug.println("MTIME: " + this.mtime);
         this.namesize = readShort(hdr, offset, "namesize");
         offset += 2;
 
-        if (isDebug)
-            System.err.println("NAMESIZE: " + this.namesize);
+Debug.println("NAMESIZE: " + this.namesize);
         this.filesize = readInt(hdr, offset, "filesize");
-        if (isDebug)
-            System.err.println("FILESIZE: " + this.filesize);
+Debug.println("FILESIZE: " + this.filesize);
     }
 
     public void parseNewAsciiHeader(byte[] hdr) throws IOException {
@@ -309,13 +300,10 @@ public class CPIOHeader {
         this.namesize = readHex(hdr, offset, 8, "namesize");
         offset += 8;
         this.checksum = readHex(hdr, offset, 8, "checksum");
-        offset += 8;
 
-        if (isDebug) {
-            System.err.println("NAMESIZE: " + this.namesize);
-            System.err.println("FILESIZE: " + this.filesize);
-            System.err.println("MTIME:    " + this.mtime);
-        }
+        Debug.println("NAMESIZE: " + this.namesize);
+Debug.println("FILESIZE: " + this.filesize);
+Debug.println("MTIME:    " + this.mtime);
     }
 
     public void parseOldAsciiHeader(byte[] hdr) throws IOException {
@@ -351,17 +339,14 @@ public class CPIOHeader {
         offset += 6;
 
         this.filesize = readOctal(hdr, offset, 11, "filesize");
-        offset += 11;
 
-        if (isDebug) {
-            System.err.println("NAMESIZE: " + this.namesize);
-            System.err.println("FILESIZE: " + this.filesize);
-            System.err.println("MTIME:    " + this.mtime);
-        }
+        Debug.println("NAMESIZE: " + this.namesize);
+Debug.println("FILESIZE: " + this.filesize);
+Debug.println("MTIME:    " + this.mtime);
     }
 
     private int readShort(byte[] buf, int offset, String field) {
-        int result = 0;
+        int result;
 
         int b1, b0;
 
@@ -373,10 +358,8 @@ public class CPIOHeader {
             b1 = buf[offset + 0];
         }
 
-        if (isDebug) {
-            System.err.printf("READSHORT: IN [1, 0] = [ %02X, %02X ]\n", b1, b0);
-            System.err.println("READSHORT: [0]'" + buf[offset + 0] + " [1]'" + buf[offset + 1] + "' b0=" + b0 + "  b1=" + b1);
-        }
+Debug.printf("READSHORT: IN [1, 0] = [ %02X, %02X ]\n", b1, b0);
+Debug.println("READSHORT: [0]'" + buf[offset + 0] + " [1]'" + buf[offset + 1] + "' b0=" + b0 + "  b1=" + b1);
 
         if (b0 < 0) {
             b0 = b0 + 256;
@@ -384,25 +367,20 @@ public class CPIOHeader {
         if (b1 < 0) {
             b1 = b1 + 256;
         }
-        if (isDebug) {
-            System.err.println("READSHORT: ADJUSTED b0=" + b0 + "  b1=" + b1);
-        }
+Debug.println("READSHORT: ADJUSTED b0=" + b0 + "  b1=" + b1);
 
         result = (b1 << 8) + b0;
 
-        if (isDebug) {
-            System.err.println("READSHORT: result = " + result + "  swap = " + (this.format == FMT_BINSWAP));
-        }
+Debug.println("READSHORT: result = " + result + "  swap = " + (this.format == FMT_BINSWAP));
 
         return result;
     }
 
     private int readInt(byte[] buf, int offset, String field) {
-        int result = 0;
+        int result;
 
         int b3, b2, b1, b0;
-        if (isDebug)
-            System.err.printf("READINT: DATA [3, 2, 1, 0] = [ %02X, %02X, %02X, %02X ]\n", buf[offset + 0], buf[offset + 1], buf[offset + 2], buf[offset + 3]);
+Debug.printf("READINT: DATA [3, 2, 1, 0] = [ %02X, %02X, %02X, %02X ]\n", buf[offset + 0], buf[offset + 1], buf[offset + 2], buf[offset + 3]);
         if (this.format == FMT_BINSWAP) {
             b0 = buf[offset + 2];
             b1 = buf[offset + 3];
@@ -415,9 +393,7 @@ public class CPIOHeader {
             b3 = buf[offset + 0];
         }
 
-        if (isDebug) {
-            System.err.printf("READINT: READ [3, 2, 1, 0] = [ %02X, %02X, %02X, %02X ]\n", b3, b2, b1, b0);
-        }
+Debug.printf("READINT: READ [3, 2, 1, 0] = [ %02X, %02X, %02X, %02X ]\n", b3, b2, b1, b0);
         if (b0 < 0) {
             b0 = b0 + 256;
         }
@@ -431,15 +407,11 @@ public class CPIOHeader {
             b3 = b3 + 256;
         }
 
-        if (isDebug) {
-            System.err.println("READINT: IN [3, 2, 1, 0] = [ " + b3 + "," + b2 + "," + b1 + "," + b0 + " ]");
-        }
+Debug.println("READINT: IN [3, 2, 1, 0] = [ " + b3 + "," + b2 + "," + b1 + "," + b0 + " ]");
 
         result = (b3 << 24) + (b2 << 16) + (b1 << 8) + b0;
 
-        if (isDebug) {
-            System.err.println("READINT: result = " + result);
-        }
+Debug.println("READINT: result = " + result);
 
         return result;
     }
@@ -470,22 +442,20 @@ public class CPIOHeader {
                 throw new IOException("invalid hex character '" + (char) ch + "' in field '" + field + "'");
             }
 
-            int dig = 0;
+            int dig;
 
-            if (ch >= (byte) '0' && ch <= (byte) '9') {
+            if (/*ch >= (byte) '0' &&*/ ch <= (byte) '9') {
                 dig = ch - (byte) '0';
-            } else if (ch >= (byte) 'A' && ch <= (byte) 'F') {
+            } else if (/*ch >= (byte) 'A' &&*/ ch <= (byte) 'F') {
                 dig = 10 + (ch - (byte) 'A');
-            } else if (ch >= (byte) 'a' && ch <= (byte) 'f') {
+            } else /*if (ch >= (byte) 'a' && ch <= (byte) 'f')*/ {
                 dig = 10 + (ch - (byte) 'a');
             }
 
             result = (result * 16) + dig;
         }
 
-        if (isDebug) {
-            System.err.println("PARSE HEX: '" + field + "'  '" + (new String(buf, offset, length)) + "' result = " + result);
-        }
+Debug.println("PARSE HEX: '" + field + "'  '" + (new String(buf, offset, length)) + "' result = " + result);
 
         return result;
     }

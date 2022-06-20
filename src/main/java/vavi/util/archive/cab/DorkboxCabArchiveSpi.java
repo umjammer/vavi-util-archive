@@ -8,9 +8,9 @@ package vavi.util.archive.cab;
 
 import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 
 import vavi.util.archive.Archive;
 
@@ -31,11 +31,11 @@ public class DorkboxCabArchiveSpi extends CabArchiveSpi {
         InputStream is;
         boolean needToClose = false;
 
-        if (File.class.isInstance(target)) {
-            is = new BufferedInputStream(new FileInputStream(File.class.cast(target)));
+        if (target instanceof File) {
+            is = new BufferedInputStream(Files.newInputStream(((File) target).toPath()));
             needToClose = true;
-        } else if (InputStream.class.isInstance(target)) {
-            is = InputStream.class.cast(target);
+        } else if (target instanceof InputStream) {
+            is = (InputStream) target;
             if (!is.markSupported()) {
                 throw new IllegalArgumentException("InputStream should support #mark()");
             }
@@ -48,13 +48,13 @@ public class DorkboxCabArchiveSpi extends CabArchiveSpi {
 
     /**
      * @param obj {@link File} and {@link InputStream} are supported.
-     * @throw IllegalArgumentException unsupported type is specified to <code>obj</code>.
+     * @throws IllegalArgumentException unsupported type is specified to <code>obj</code>.
      */
     public Archive createArchiveInstance(Object obj) throws IOException {
-        if (File.class.isInstance(obj)) {
-            return new DorkboxCabArchive(File.class.cast(obj));
-        } else if (InputStream.class.isInstance(obj)) {
-            return new DorkboxCabArchive(InputStream.class.cast(obj));
+        if (obj instanceof File) {
+            return new DorkboxCabArchive((File) obj);
+        } else if (obj instanceof InputStream) {
+            return new DorkboxCabArchive((InputStream) obj);
         } else {
             throw new IllegalArgumentException("not supported type " + obj.getClass().getName());
         }

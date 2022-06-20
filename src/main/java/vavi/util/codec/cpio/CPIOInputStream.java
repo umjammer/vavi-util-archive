@@ -10,7 +10,7 @@ public class CPIOInputStream {
 
     private boolean debug = false;
 
-    private InputStream in = null;
+    private InputStream in;
 
     private int entrySize = 0;
 
@@ -33,7 +33,7 @@ public class CPIOInputStream {
             }
 
             if (numToSkip > 0) {
-                this.in.skip(numToSkip);
+                skip(this.in, numToSkip);
             }
 
             int padToSkip = this.currEntry.getHeader().getFilePadding();
@@ -42,19 +42,26 @@ public class CPIOInputStream {
                 System.err.println("CPIOStream: SKIP PAD " + padToSkip + " bytes");
             }
 
-            this.in.skip(padToSkip);
+            skip(this.in, padToSkip);
         }
 
         this.currEntry = new CPIOEntry(this.in);
 
         if (this.debug) {
-            System.err.println("CPIOStream: SET CURRENTRY '" + this.currEntry.getHeader().filename + "' size = " + this.currEntry.getHeader().filesize);
+            System.err.println("CPIOStream: SET CURRENTLY '" + this.currEntry.getHeader().filename + "' size = " + this.currEntry.getHeader().filesize);
         }
 
         this.entryOffset = 0;
         this.entrySize = this.currEntry.getHeader().filesize;
 
         return this.currEntry;
+    }
+
+    static void skip(InputStream in, int n) throws IOException {
+        while (n > 0) {
+            int r = (int) in.skip(n);
+            n -= r;
+        }
     }
 
     public int read(byte[] buf, int offset, int num) throws IOException {

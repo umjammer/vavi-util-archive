@@ -4,7 +4,7 @@ package vavi.util.codec.rpm;
 import java.io.PrintStream;
 
 
-public class RPMHeader extends Object {
+public class RPMHeader {
     public byte[] magic = new byte[3];
 
     public byte version = 0;

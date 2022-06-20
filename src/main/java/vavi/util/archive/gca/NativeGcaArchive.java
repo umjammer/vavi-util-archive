@@ -8,9 +8,9 @@ package vavi.util.archive.gca;
 
 import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -113,7 +113,7 @@ Debug.println("commandLine: " + commandLine);
         String temporaryFileName = System.getProperty("java.io.tmpdir") + entry.getName();
         File temporaryFile = new File(temporaryFileName);
         if (temporaryFile.exists()) {
-            return new BufferedInputStream(new FileInputStream(temporaryFile));
+            return new BufferedInputStream(Files.newInputStream(temporaryFile.toPath()));
         } else {
             throw new IOException("cannot extract: " + temporaryFileName);
         }
@@ -185,7 +185,7 @@ Debug.println("commandLine: " + commandLine);
     /** 検索にマッチしたファイルの全体の圧縮率を得ます。 */
     private native int getSelectedRatio() throws IOException;
 
-    /** */
+    /* */
     static {
         System.loadLibrary("GcaWrapper");
     }

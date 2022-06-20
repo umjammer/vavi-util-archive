@@ -8,9 +8,9 @@ package vavi.util.archive.stuffit;
 
 import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +90,7 @@ Debug.println("commandLine: " + commandLine);
         String temporaryFileName = System.getProperty("java.io.tmpdir") + entry.getName();
         File temporaryFile = new File(temporaryFileName);
         if (temporaryFile.exists()) {
-            return new BufferedInputStream(new FileInputStream(temporaryFile));
+            return new BufferedInputStream(Files.newInputStream(temporaryFile.toPath()));
         } else {
             throw new IOException("cannot extract: " + temporaryFileName);
         }
@@ -114,8 +114,8 @@ Debug.println("commandLine: " + commandLine);
      * from JNI
      * @param filename TODO unicode
      * @param time TODO unused
-     * @param size
-     * @param compressedSize
+     * @param size before compress
+     * @param compressedSize after compress
      * @param crc TODO unused
      * @param method TODO unused
      */
@@ -164,7 +164,7 @@ Debug.println("commandLine: " + commandLine);
     /** 書庫ファイルを閉じます。 */
     private native void closeArchive() throws IOException;
 
-    /** */
+    /* */
     static {
         System.loadLibrary("StuffItWrapper");
     }

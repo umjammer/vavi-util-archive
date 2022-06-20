@@ -8,6 +8,7 @@ package vavi.util.archive.binhex;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 import org.gjt.convert.binhex.BinHex4InputStream;
 
@@ -57,13 +58,11 @@ public class BinhexInputStreamSpi implements InputStreamSpi {
         }
         is.reset();
 
-        return COMMENT.equals(new String(b, "ISO-8859-1"));
+        return COMMENT.equals(new String(b, StandardCharsets.ISO_8859_1));
     }
 
-    /** */
-    public InputStream createInputStreamInstance()
-        throws IOException {
-
+    @Override
+    public InputStream createInputStreamInstance() {
         return new BinHex4InputStream((InputStream) target);
     }
 }

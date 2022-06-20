@@ -8,9 +8,9 @@ package vavi.util.archive.apache;
 
 import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -43,14 +43,14 @@ public class ApacheCommonsArchive implements Archive {
 
     /** */
     public ApacheCommonsArchive(File file) throws IOException {
-        this(new BufferedInputStream(new FileInputStream(file)));
+        this(new BufferedInputStream(Files.newInputStream(file.toPath())));
         this.file = file;
     }
 
     /** */
     public ApacheCommonsArchive(InputStream is) throws IOException {
         try (ArchiveInputStream i = new ArchiveStreamFactory().createArchiveInputStream(is)) {
-            ArchiveEntry entry = null;
+            ArchiveEntry entry;
             while ((entry = i.getNextEntry()) != null) {
                 if (!i.canReadEntryData(entry)) {
 Debug.println("skip entry: " + entry);
@@ -64,7 +64,7 @@ Debug.println("skip entry: " + entry);
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() {
     }
 
     @Override
@@ -81,14 +81,15 @@ Debug.println("skip entry: " + entry);
 
     @Override
     public InputStream getInputStream(Entry entry) throws IOException {
-        try (ArchiveInputStream i = new ArchiveStreamFactory().createArchiveInputStream(new BufferedInputStream(new FileInputStream(file)))) {
-            ArchiveEntry e = null;
+        try (ArchiveInputStream i = new ArchiveStreamFactory().createArchiveInputStream(
+                new BufferedInputStream(Files.newInputStream(file.toPath())))) {
+            ArchiveEntry e;
             while ((e = i.getNextEntry()) != null) {
                 if (!i.canReadEntryData(e)) {
 Debug.println("skip entry: " + entry);
                     continue;
                 }
-                if (WrappedEntry.class.cast(entry).getWrappedObject().equals(e)) {
+                if (((WrappedEntry<?>) entry).getWrappedObject().equals(e)) {
                     return i;
                 }
             }

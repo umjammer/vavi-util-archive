@@ -61,9 +61,9 @@ public class PureJavaRarArchive implements Archive {
     @Override
     public Entry getEntry(String name) {
         List<FileHeader> headers = archive.getFileHeaders();
-        for (int i = 0; i < headers.size(); i++) {
-            if (headers.get(i).getFileNameString().equals(name)) {
-                return new PureJavaRarEntry(headers.get(i));
+        for (FileHeader header : headers) {
+            if (header.getFileNameString().equals(name)) {
+                return new PureJavaRarEntry(header);
             }
         }
         return null;
@@ -77,9 +77,9 @@ public class PureJavaRarArchive implements Archive {
             private OutputStream out;
             public void initialize(OutputStream out) throws IOException {
                 try {
-                    archive.extractFile(FileHeader.class.cast(WrappedEntry.class.cast(entry).getWrappedObject()), out);
+                    archive.extractFile((FileHeader) ((WrappedEntry<?>) entry).getWrappedObject(), out);
                 } catch (RarException e) {
-                    new IOException(e);
+                    throw new IOException(e);
                 }
             }
             public void execute() throws IOException {

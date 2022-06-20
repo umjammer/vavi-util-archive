@@ -11,11 +11,11 @@ public class RPMUtil {
     }
 
     public static String hexString(byte[] buf, int off, int len, int sepFreq, String sep) {
-        char[] hexChars = {
+        final char[] hexChars = {
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
         };
 
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
 
         int sepCnt = 1;
         for (int i = off; i < (off + len); ++i) {
@@ -36,9 +36,9 @@ public class RPMUtil {
         int offset = off;
 
         byte[] offBuf = new byte[4];
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
 
-        for (; count < len;) {
+        while (count < len) {
             int num = ((count + incr) > len) ? (len - count) : incr;
 
             result.append(prefix);

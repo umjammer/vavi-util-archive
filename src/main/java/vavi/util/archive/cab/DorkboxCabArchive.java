@@ -9,10 +9,10 @@ package vavi.util.archive.cab;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -48,7 +48,7 @@ public class DorkboxCabArchive implements Archive {
     public DorkboxCabArchive(File file) throws IOException {
         this.size = (int) file.length();
         this.name = file.getName();
-        init(new BufferedInputStream(new FileInputStream(file)));
+        init(new BufferedInputStream(Files.newInputStream(file.toPath())));
     }
 
     /** */
@@ -59,7 +59,7 @@ public class DorkboxCabArchive implements Archive {
     }
 
     /** */
-    private final void init(InputStream is) throws IOException {
+    private void init(InputStream is) throws IOException {
         this.is = is;
         try {
             this.cab = new CabParser(is, new CabStreamSaver() {
@@ -100,7 +100,7 @@ public class DorkboxCabArchive implements Archive {
         while (e.hasMoreElements()) {
             entries.add(new DorkboxCabEntry(e.nextElement()));
         }
-        return entries.toArray(new Entry[entries.size()]);
+        return entries.toArray(new Entry[0]);
     }
 
     /** */
@@ -116,7 +116,7 @@ public class DorkboxCabArchive implements Archive {
     }
 
     /** reads a CAB file, parses it, and returns an InputStream representing the named file */
-    public InputStream getInputStream(Entry entry) throws IOException {
+    public InputStream getInputStream(Entry entry) {
         // TODO Auto-generated method stub
         return null;
     }

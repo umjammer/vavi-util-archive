@@ -40,16 +40,16 @@ public class LhaArchive implements Archive {
     }
 
     /** */
-    public LhaArchive(InputStream is) throws IOException {
+    public LhaArchive(InputStream is) {
         this.archive = new LhaInputStream(is);
     }
 
     @Override
     public void close() throws IOException {
-        if (LhaFile.class.isInstance(archive)) {
-            LhaFile.class.cast(archive).close();
-        } else if (LhaInputStream.class.isInstance(archive)) {
-            LhaInputStream.class.cast(archive).close();
+        if (archive instanceof LhaFile) {
+            ((LhaFile) archive).close();
+        } else if (archive instanceof LhaInputStream) {
+            ((LhaInputStream) archive).close();
         } else {
             throw new IllegalStateException(archive.getClass().getName());
         }
@@ -57,22 +57,22 @@ public class LhaArchive implements Archive {
 
     @Override
     public Entry[] entries() {
-        if (LhaFile.class.isInstance(archive)) {
-            LhaHeader[] headers = LhaFile.class.cast(archive).getEntries();
+        if (archive instanceof LhaFile) {
+            LhaHeader[] headers = ((LhaFile) archive).getEntries();
             Entry[] entries = new Entry[headers.length];
             for (int i = 0; i < headers.length; i++) {
                 entries[i] = new LhaEntry(headers[i]);
             }
             return entries;
-        } else if (LhaInputStream.class.isInstance(archive)) {
+        } else if (archive instanceof LhaInputStream) {
             try {
-                LhaInputStream lis = LhaInputStream.class.cast(archive);
+                LhaInputStream lis = (LhaInputStream) archive;
                 List<Entry> entries = new ArrayList<>();
                 LhaHeader header;
                 while ((header = lis.getNextEntry()) != null) {
                     entries.add(new LhaEntry(header));
                 }
-                return entries.toArray(new Entry[entries.size()]);
+                return entries.toArray(new Entry[0]);
             } catch (IOException e) {
                 throw new IllegalStateException(e);
             }
@@ -83,17 +83,17 @@ public class LhaArchive implements Archive {
 
     @Override
     public Entry getEntry(String name) {
-        if (LhaFile.class.isInstance(archive)) {
-            LhaHeader[] headers = LhaFile.class.cast(archive).getEntries();
-            for (int i = 0; i < headers.length; i++) {
-                if (headers[i].getPath().equals(name)) {
-                    return new LhaEntry(headers[i]);
+        if (archive instanceof LhaFile) {
+            LhaHeader[] headers = ((LhaFile) archive).getEntries();
+            for (LhaHeader header : headers) {
+                if (header.getPath().equals(name)) {
+                    return new LhaEntry(header);
                 }
             }
             return null;
-        } else if (LhaInputStream.class.isInstance(archive)) {
+        } else if (archive instanceof LhaInputStream) {
             try {
-                LhaInputStream lis = LhaInputStream.class.cast(archive);
+                LhaInputStream lis = (LhaInputStream) archive;
                 LhaHeader header;
                 while ((header = lis.getNextEntry()) != null) {
                     if (name.equals(header.getPath())) {
@@ -111,10 +111,10 @@ public class LhaArchive implements Archive {
 
     @Override
     public InputStream getInputStream(Entry entry) throws IOException {
-        if (LhaFile.class.isInstance(archive)) {
-            return LhaFile.class.cast(archive).getInputStream(LhaHeader.class.cast(WrappedEntry.class.cast(entry).getWrappedObject()));
-        } else if (LhaInputStream.class.isInstance(archive)) {
-            LhaInputStream lis = LhaInputStream.class.cast(archive);
+        if (archive instanceof LhaFile) {
+            return ((LhaFile) archive).getInputStream((LhaHeader) ((WrappedEntry<?>) entry).getWrappedObject());
+        } else if (archive instanceof LhaInputStream) {
+            LhaInputStream lis = (LhaInputStream) archive;
             LhaHeader header;
             while ((header = lis.getNextEntry()) != null) {
                 if (entry.getName().equals(header.getPath())) {
@@ -129,10 +129,10 @@ public class LhaArchive implements Archive {
 
     @Override
     public String getName() {
-        if (LhaFile.class.isInstance(archive)) {
+        if (archive instanceof LhaFile) {
             return null; // TODO LhaFile.class.cast(archive).;
-        } else if (LhaInputStream.class.isInstance(archive)) {
-            return LhaInputStream.class.cast(archive).toString();
+        } else if (archive instanceof LhaInputStream) {
+            return archive.toString();
         } else {
             throw new IllegalStateException(archive.getClass().getName());
         }
@@ -140,9 +140,9 @@ public class LhaArchive implements Archive {
 
     @Override
     public int size() {
-        if (LhaFile.class.isInstance(archive)) {
-            return LhaFile.class.cast(archive).size();
-        } else if (LhaInputStream.class.isInstance(archive)) {
+        if (archive instanceof LhaFile) {
+            return ((LhaFile) archive).size();
+        } else if (archive instanceof LhaInputStream) {
             return -1;
         } else {
             throw new IllegalStateException(archive.getClass().getName());

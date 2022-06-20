@@ -10,7 +10,7 @@ import vavi.util.archive.WrappedEntry;
 
 
 /**
- * Wrapper for ZIP archvied file entry.
+ * Wrapper for ZIP archived file entry.
  * 
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021104 nsano initial version <br>

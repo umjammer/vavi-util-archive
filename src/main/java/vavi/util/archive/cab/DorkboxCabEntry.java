@@ -52,7 +52,7 @@ public class DorkboxCabEntry implements WrappedEntry<CabEntry> {
 
     @Override
     public int getMethod() {
-        return isDirectory() ? CabFolderEntry.class.cast(entry).getCompressionMethod() : -1;
+        return isDirectory() ? ((CabFolderEntry) entry).getCompressionMethod() : -1;
     }
 
     @Override
@@ -62,17 +62,17 @@ public class DorkboxCabEntry implements WrappedEntry<CabEntry> {
 
     @Override
     public long getSize() {
-        return isDirectory() ? -1 : CabFileEntry.class.cast(entry).getSize();
+        return isDirectory() ? -1 : ((CabFileEntry) entry).getSize();
     }
 
     @Override
     public long getTime() {
-        return isDirectory() ? -1 : CabFileEntry.class.cast(entry).getDate().getTime();
+        return isDirectory() ? -1 : ((CabFileEntry) entry).getDate().getTime();
     }
 
     @Override
     public boolean isDirectory() {
-        return CabFolderEntry.class.isInstance(entry);
+        return entry instanceof CabFolderEntry;
     }
 
     @Override

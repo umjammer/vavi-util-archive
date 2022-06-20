@@ -38,16 +38,16 @@ public class ZipArchive implements Archive {
     }
 
     /** */
-    public ZipArchive(InputStream in) throws IOException {
+    public ZipArchive(InputStream in) {
         this.archive = new ZipInputStream(in);
     }
 
     @Override
     public void close() throws IOException {
-        if (ZipFile.class.isInstance(archive)) {
-            ZipFile.class.cast(archive).close();
-        } else if (ZipInputStream.class.isInstance(archive)) {
-            ZipInputStream.class.cast(archive).close();
+        if (archive instanceof ZipFile) {
+            ((ZipFile) archive).close();
+        } else if (archive instanceof ZipInputStream) {
+            ((ZipInputStream) archive).close();
         } else {
             throw new IllegalStateException(archive.getClass().getName());
         }
@@ -55,22 +55,22 @@ public class ZipArchive implements Archive {
 
     @Override
     public Entry[] entries() {
-        if (ZipFile.class.isInstance(archive)) {
+        if (archive instanceof ZipFile) {
             List<Entry> entries = new ArrayList<>();
-            Enumeration<? extends java.util.zip.ZipEntry> e = ZipFile.class.cast(archive).entries();
+            Enumeration<? extends java.util.zip.ZipEntry> e = ((ZipFile) archive).entries();
             while (e.hasMoreElements()) {
                 entries.add(new ZipEntry(e.nextElement()));
             }
-            return entries.toArray(new Entry[entries.size()]);
-        } else if (ZipInputStream.class.isInstance(archive)) {
+            return entries.toArray(new Entry[0]);
+        } else if (archive instanceof ZipInputStream) {
             try {
-                ZipInputStream zis = ZipInputStream.class.cast(archive);
+                ZipInputStream zis = (ZipInputStream) archive;
                 List<Entry> entries = new ArrayList<>();
                 java.util.zip.ZipEntry entry;
                 while ((entry = zis.getNextEntry()) != null) {
                     entries.add(new ZipEntry(entry));
                 }
-                return entries.toArray(new Entry[entries.size()]);
+                return entries.toArray(new Entry[0]);
             } catch (IOException e) {
                 throw new IllegalStateException(e);
             }
@@ -80,11 +80,11 @@ public class ZipArchive implements Archive {
     }
 
     public Entry getEntry(String name) {
-        if (ZipFile.class.isInstance(archive)) {
-            return new ZipEntry(ZipFile.class.cast(archive).getEntry(name));
-        } else if (ZipInputStream.class.isInstance(archive)) {
+        if (archive instanceof ZipFile) {
+            return new ZipEntry(((ZipFile) archive).getEntry(name));
+        } else if (archive instanceof ZipInputStream) {
             try {
-                ZipInputStream zis = ZipInputStream.class.cast(archive);
+                ZipInputStream zis = (ZipInputStream) archive;
                 java.util.zip.ZipEntry entry;
                 while ((entry = zis.getNextEntry()) != null) {
                     if (name.equals(entry.getName())) {
@@ -102,10 +102,10 @@ public class ZipArchive implements Archive {
 
     @Override
     public InputStream getInputStream(Entry entry) throws IOException {
-        if (ZipFile.class.isInstance(archive)) {
-            return ZipFile.class.cast(archive).getInputStream(ZipEntry.class.cast(entry).getWrappedObject());
-        } else if (ZipInputStream.class.isInstance(archive)) {
-            ZipInputStream zis = ZipInputStream.class.cast(archive);
+        if (archive instanceof ZipFile) {
+            return ((ZipFile) archive).getInputStream(((ZipEntry) entry).getWrappedObject());
+        } else if (archive instanceof ZipInputStream) {
+            ZipInputStream zis = (ZipInputStream) archive;
             java.util.zip.ZipEntry header;
             while ((header = zis.getNextEntry()) != null) {
                 if (entry.getName().equals(header.getName())) {
@@ -120,10 +120,10 @@ public class ZipArchive implements Archive {
 
     @Override
     public String getName() {
-        if (ZipFile.class.isInstance(archive)) {
-            return ZipFile.class.cast(archive).getName();
-        } else if (ZipInputStream.class.isInstance(archive)) {
-            return ZipInputStream.class.cast(archive).toString();
+        if (archive instanceof ZipFile) {
+            return ((ZipFile) archive).getName();
+        } else if (archive instanceof ZipInputStream) {
+            return archive.toString();
         } else {
             throw new IllegalStateException(archive.getClass().getName());
         }
@@ -131,9 +131,9 @@ public class ZipArchive implements Archive {
 
     @Override
     public int size() {
-        if (ZipFile.class.isInstance(archive)) {
-            return ZipFile.class.cast(archive).size();
-        } else if (ZipInputStream.class.isInstance(archive)) {
+        if (archive instanceof ZipFile) {
+            return ((ZipFile) archive).size();
+        } else if (archive instanceof ZipInputStream) {
             return -1;
         } else {
             throw new IllegalStateException(archive.getClass().getName());

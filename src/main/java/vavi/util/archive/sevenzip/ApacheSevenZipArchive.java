@@ -42,8 +42,8 @@ public class ApacheSevenZipArchive implements Archive {
 
     @Override
     public Entry[] entries() {
-        return (Entry[]) StreamSupport.stream(file.getEntries().spliterator(), false)
-                .map(e -> new ApacheSevenZipEntry(e))
+        return StreamSupport.stream(file.getEntries().spliterator(), false)
+                .map(ApacheSevenZipEntry::new)
                 .toArray(ApacheSevenZipEntry[]::new);
     }
 
@@ -51,14 +51,14 @@ public class ApacheSevenZipArchive implements Archive {
     public Entry getEntry(String name) {
         return StreamSupport.stream(file.getEntries().spliterator(), false)
                 .filter(e -> e.getName().equals(name))
-                .map(e -> new ApacheSevenZipEntry(e))
+                .map(ApacheSevenZipEntry::new)
                 .findFirst()
                 .get();
     }
 
     @Override
     public InputStream getInputStream(Entry entry) throws IOException {
-        return file.getInputStream(SevenZArchiveEntry.class.cast(WrappedEntry.class.cast(entry).getWrappedObject()));
+        return file.getInputStream((SevenZArchiveEntry) ((WrappedEntry<?>) entry).getWrappedObject());
     }
 
     @Override

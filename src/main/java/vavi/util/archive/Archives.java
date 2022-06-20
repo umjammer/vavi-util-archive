@@ -8,10 +8,11 @@ package vavi.util.archive;
 
 import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ServiceLoader;
+import java.util.logging.Level;
 
 import vavi.util.Debug;
 import vavi.util.StringUtil;
@@ -35,27 +36,27 @@ public class Archives {
         InputStream is = new BufferedInputStream(new FileInputStream(file));
 
         for (InputStreamSpi inputStreamSpi : inputStreamSpis) {
-Debug.println("inputStreamSpi: " + StringUtil.getClassName(inputStreamSpi.getClass()));
             if (inputStreamSpi.canExpandInput(is)) {
+Debug.println(Level.FINE, "inputStreamSpi: " + StringUtil.getClassName(inputStreamSpi.getClass()));
                 InputStream inputStream = inputStreamSpi.createInputStreamInstance();
-Debug.println("inputStream: " + inputStream.getClass());
+Debug.println(Level.FINE, "inputStream: " + inputStream.getClass());
                 return inputStream;
             }
         }
 
-Debug.println("default stream");
         return new FileInputStream(file);
+Debug.println("no suitable spi found, use default stream");
     }
 
     /**
      * TODO else file
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException file is not supported
      */
     public static Archive getArchive(File file) throws IOException {
         InputStream is = new BufferedInputStream(getInputStream(file));
         for (ArchiveSpi archiveSpi : archiveSpis) {
-Debug.println("archiveSpi: " + archiveSpi);
-            boolean canExtract = false;
+Debug.println(Level.FINE, "archiveSpi: " + archiveSpi);
+            boolean canExtract;
 
             try {
                 canExtract = archiveSpi.canExtractInput(file);
@@ -71,7 +72,7 @@ Debug.println(e);
 Debug.println(e);
                     archive = archiveSpi.createArchiveInstance(is);
                 }
-Debug.println("archive: " + archive.getClass());
+Debug.println(Level.FINE, "archive: " + archive.getClass());
                 return archive;
             }
         }
@@ -84,7 +85,7 @@ Debug.println("archive: " + archive.getClass());
 
     private static ServiceLoader<InputStreamSpi> inputStreamSpis;
 
-    /** */
+    /* collect spis */
     static {
         try {
             archiveSpis = ServiceLoader.load(vavi.util.archive.spi.ArchiveSpi.class);

@@ -9,6 +9,8 @@ package vavi.util.archive.bzip2;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +28,7 @@ public class BZip2InputStreamTest {
     @Test
     public void test01() throws Exception {
         InputStreamSpi spi = new BZip2InputStreamSpi();
-        spi.canExpandInput(new BufferedInputStream(new FileInputStream("src/test/resources/test.tar.bz2")));
+        spi.canExpandInput(new BufferedInputStream(Files.newInputStream(Paths.get("src/test/resources/test.tar.bz2"))));
         InputStream is = spi.createInputStreamInstance();
         byte[] b = new byte[8192];
         while (true) {
