@@ -33,19 +33,24 @@ public class Archives {
 
     /** */
     public static InputStream getInputStream(File file) throws IOException {
-        InputStream is = new BufferedInputStream(new FileInputStream(file));
+        return getInputStream(Files.newInputStream(file.toPath()));
+    }
+
+    /** */
+    public static InputStream getInputStream(InputStream is) throws IOException {
+        InputStream bis = new BufferedInputStream(is);
 
         for (InputStreamSpi inputStreamSpi : inputStreamSpis) {
-            if (inputStreamSpi.canExpandInput(is)) {
 Debug.println(Level.FINE, "inputStreamSpi: " + StringUtil.getClassName(inputStreamSpi.getClass()));
+            if (inputStreamSpi.canExpandInput(bis)) {
                 InputStream inputStream = inputStreamSpi.createInputStreamInstance();
 Debug.println(Level.FINE, "inputStream: " + inputStream.getClass());
                 return inputStream;
             }
         }
 
-        return new FileInputStream(file);
 Debug.println("no suitable spi found, use default stream");
+        return bis;
     }
 
     /**
