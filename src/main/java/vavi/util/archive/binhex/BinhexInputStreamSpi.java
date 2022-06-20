@@ -9,9 +9,12 @@ package vavi.util.archive.binhex;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
 
 import org.gjt.convert.binhex.BinHex4InputStream;
 
+import vavi.util.Debug;
+import vavi.util.StringUtil;
 import vavi.util.archive.spi.InputStreamSpi;
 
 
@@ -28,8 +31,8 @@ public class BinhexInputStreamSpi implements InputStreamSpi {
     private Object target;
 
     /** signature */
-    private static final String COMMENT =
-        "(This file must be converted with BinHex 4.0).";
+    private static final String COMMENT = "(This file must be converted with BinHex 4.0)";
+    private static final int L = COMMENT.length();
 
     /**
      * checks extractable or not.
@@ -49,15 +52,16 @@ public class BinhexInputStreamSpi implements InputStreamSpi {
             throw new IllegalArgumentException("cannot mark to stream");
         }
 
-        byte[] b = new byte[47];
+        byte[] b = new byte[L];
 
-        is.mark(47);
+        is.mark(L);
         int l = 0;
-        while (l < 47) {
-            l += is.read(b, l, 47 - l);
+        while (l < L) {
+            l += is.read(b, l, L - l);
         }
         is.reset();
 
+Debug.println(Level.FINE, "[" + new String(b, StandardCharsets.ISO_8859_1) + "], " + COMMENT.equals(new String(b, StandardCharsets.ISO_8859_1)) + "\n\n" + StringUtil.getDump(b));
         return COMMENT.equals(new String(b, StandardCharsets.ISO_8859_1));
     }
 
