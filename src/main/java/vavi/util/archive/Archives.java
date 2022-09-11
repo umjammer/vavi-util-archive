@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ServiceLoader;
 import java.util.logging.Level;
 
@@ -34,6 +35,11 @@ public class Archives {
     /** get an archiving stream */
     public static InputStream getInputStream(File file) throws IOException {
         return getInputStream(Files.newInputStream(file.toPath()));
+    }
+
+    /** get an archiving stream */
+    public static InputStream getInputStream(Path path) throws IOException {
+        return getInputStream(Files.newInputStream(path));
     }
 
     /** get an archiving stream */
