@@ -74,7 +74,7 @@ if (entry == null) {
 
     @Override
     public boolean isDirectory() {
-        return entry.isDirectory();
+        return entry == null || entry.isDirectory();
     }
 
     @Override
