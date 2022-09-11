@@ -31,12 +31,12 @@ public class Archives {
     private Archives() {
     }
 
-    /** */
+    /** get an archiving stream */
     public static InputStream getInputStream(File file) throws IOException {
         return getInputStream(Files.newInputStream(file.toPath()));
     }
 
-    /** */
+    /** get an archiving stream */
     public static InputStream getInputStream(InputStream is) throws IOException {
         InputStream bis = new BufferedInputStream(is);
 
@@ -86,8 +86,10 @@ Debug.println(Level.FINE, "archive: " + archive.getClass());
         throw new IllegalArgumentException(file + " is not supported type");
     }
 
+    /** archive spis */
     private static ServiceLoader<ArchiveSpi> archiveSpis;
 
+    /** archiving input stream spis */
     private static ServiceLoader<InputStreamSpi> inputStreamSpis;
 
     /* collect spis */

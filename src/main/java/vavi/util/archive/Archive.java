@@ -41,7 +41,7 @@ public interface Archive {
     /**
      * Returns the archived file entry for the specified name, or null if not found.
      * 
-     * @param name the name of the entry
+     * @param name the name of the entry TODO make spec. e.g zip is need to strip '/' at the head
      * @return the archived file entry, or null if not found
      * @throws IllegalStateException if the archived file has been closed
      */

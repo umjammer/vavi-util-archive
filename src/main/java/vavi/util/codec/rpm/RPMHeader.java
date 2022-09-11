@@ -22,5 +22,4 @@ public class RPMHeader {
         out.println(prefix + "Entries:  " + this.numEntries);
         out.println(prefix + "Size:     " + this.headerSize);
     }
-
 }

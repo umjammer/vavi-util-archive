@@ -81,6 +81,7 @@ public class ZipArchive implements Archive {
         }
     }
 
+    @Override
     public Entry getEntry(String name) {
         if (archive instanceof ZipFile) {
             ZipEntry entry = new ZipEntry(((ZipFile) archive).getEntry(name));

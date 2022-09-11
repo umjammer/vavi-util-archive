@@ -22,7 +22,7 @@ import vavi.util.archive.Archive;
 public interface ArchiveSpi {
 
     /**
-     * 解凍できるかどうか調べます．
+     * Checks a target is extractable or not.
      */
     boolean canExtractInput(Object target) throws IOException;
 
