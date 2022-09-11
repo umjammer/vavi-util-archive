@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.logging.Level;
 
 import vavi.util.Debug;
 import vavi.util.StringUtil;
@@ -50,7 +51,7 @@ public class ApacheSevenZipArchiveSpi implements ArchiveSpi {
 
         is.close();
 
-Debug.println("\n" + StringUtil.getDump(b));
+Debug.println(Level.FINE, "\n" + StringUtil.getDump(b));
         return b[0] == '7' &&
                b[1] == 'z' &&
                b[2] == (byte) 0xbc &&

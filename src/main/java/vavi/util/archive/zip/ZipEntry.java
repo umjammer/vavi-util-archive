@@ -6,6 +6,9 @@
 
 package vavi.util.archive.zip;
 
+import java.util.logging.Level;
+
+import vavi.util.Debug;
 import vavi.util.archive.WrappedEntry;
 
 
@@ -20,8 +23,12 @@ public class ZipEntry implements WrappedEntry<java.util.zip.ZipEntry> {
     /** */
     private java.util.zip.ZipEntry entry;
 
-    /** */
+    /** @param entry TODO vavi-nio-filesystem-archive request to be null */
     public ZipEntry(java.util.zip.ZipEntry entry) {
+if (entry == null) {
+ Debug.println(Level.FINE, "*** entry is null ***");
+ //new Exception("*** DUMMY ***").printStackTrace();
+}
         this.entry = entry;
     }
 

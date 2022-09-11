@@ -10,6 +10,7 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
 
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 
@@ -74,7 +75,7 @@ Debug.println(is);
         }
         is.reset();
 
-Debug.println("tar magic:\n" + StringUtil.getDump(b));
+Debug.println(Level.FINE, "tar magic:\n" + StringUtil.getDump(b));
         return "ustar".equals(new String(b, StandardCharsets.ISO_8859_1)) ||
             (b[0] == 0x00 &&    // TODO magic 無い奴がいる
              b[1] == 0x00 &&

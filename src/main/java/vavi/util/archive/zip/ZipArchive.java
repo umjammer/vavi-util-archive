@@ -12,9 +12,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
+import vavi.util.Debug;
 import vavi.util.archive.Archive;
 import vavi.util.archive.Entry;
 
@@ -81,7 +83,11 @@ public class ZipArchive implements Archive {
 
     public Entry getEntry(String name) {
         if (archive instanceof ZipFile) {
-            return new ZipEntry(((ZipFile) archive).getEntry(name));
+            ZipEntry entry = new ZipEntry(((ZipFile) archive).getEntry(name));
+if (entry.getWrappedObject() == null) {
+ Debug.println(Level.FINE, "entry not found for name: " + name);
+}
+            return entry;
         } else if (archive instanceof ZipInputStream) {
             try {
                 ZipInputStream zis = (ZipInputStream) archive;
@@ -91,6 +97,7 @@ public class ZipArchive implements Archive {
                         return new ZipEntry(entry);
                     }
                 }
+Debug.println(Level.FINE, "entry not found for name: " + name);
                 return null;
             } catch (IOException e) {
                 throw new IllegalStateException(e);
