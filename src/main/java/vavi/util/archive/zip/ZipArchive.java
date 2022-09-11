@@ -9,6 +9,7 @@ package vavi.util.archive.zip;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -23,6 +24,9 @@ import vavi.util.archive.Entry;
 
 /**
  * This class is used to read entries from a zip file.
+ * <p>
+ * system property
+ * <li> "vavi.util.archive.zip.encoding" ... encoding for zip entry names
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021103 nsano initial version <br>
@@ -36,7 +40,8 @@ public class ZipArchive implements Archive {
 
     /** */
     public ZipArchive(File file) throws IOException {
-        this.archive = new ZipFile(file);
+        String encoding = System.getProperty("vavi.util.archive.zip.encoding", "utf-8");
+        this.archive = new ZipFile(file, Charset.forName(encoding));
     }
 
     /** */
