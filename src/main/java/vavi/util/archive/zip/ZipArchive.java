@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -26,7 +27,7 @@ import vavi.util.archive.Entry;
  * This class is used to read entries from a zip file.
  * <p>
  * system property
- * <li> "vavi.util.archive.zip.encoding" ... encoding for zip entry names
+ * <li> "vavi.util.archive.zip.encoding" ({@link #ZIP_ENCODING}) ... encoding for zip entry names
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021103 nsano initial version <br>
@@ -35,13 +36,39 @@ import vavi.util.archive.Entry;
  */
 public class ZipArchive implements Archive {
 
+    /** encoding for zip entry names */
+    public static final String ZIP_ENCODING = "vavi.util.archive.zip.encoding";
+
     /** */
     private Object archive;
 
     /** */
+    private Entry[] entries;
+
+    /** */
     public ZipArchive(File file) throws IOException {
-        String encoding = System.getProperty("vavi.util.archive.zip.encoding", "utf-8");
+        String encoding = System.getProperty(ZIP_ENCODING, StandardCharsets.UTF_8.toString());
         this.archive = new ZipFile(file, Charset.forName(encoding));
+        this.entries = entries();
+    }
+
+    /**
+     * @param failsafeEncoding when open w/ {@link #ZIP_ENCODING}, try again to open using this encoding
+     */
+    public ZipArchive(File file, String failsafeEncoding) throws IOException {
+        try {
+            String encoding = System.getProperty(ZIP_ENCODING, StandardCharsets.UTF_8.toString());
+            this.archive = new ZipFile(file, Charset.forName(encoding));
+            this.entries = entries();
+        } catch (IllegalArgumentException e) {
+            if (e.getMessage().equals("MALFORMED")) {
+Debug.println("zip reading failure by utf-8, retry using " + failsafeEncoding);
+                this.archive = new ZipFile(file, Charset.forName(failsafeEncoding));
+                this.entries = entries();
+            } else {
+                throw e;
+            }
+        }
     }
 
     /** */
@@ -61,7 +88,11 @@ public class ZipArchive implements Archive {
     }
 
     @Override
-    public Entry[] entries() {
+    public final Entry[] entries() {
+        if (this.entries != null) {
+            return entries;
+        }
+
         if (archive instanceof ZipFile) {
             List<Entry> entries = new ArrayList<>();
             Enumeration<? extends java.util.zip.ZipEntry> e = ((ZipFile) archive).entries();
