@@ -56,6 +56,16 @@ public abstract class GcaArchiveSpi implements ArchiveSpi {
 
     /** */
     public abstract Archive createArchiveInstance(Object obj) throws IOException;
+
+    @Override
+    public Class<?>[] getInputTypes() {
+        return new Class[] {File.class};
+    }
+
+    @Override
+    public String[] getFileSuffixes() {
+        return new String[] {"gca", "GCA"};
+    }
 }
 
 /* */

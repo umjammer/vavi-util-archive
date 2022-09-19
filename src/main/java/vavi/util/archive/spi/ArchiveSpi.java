@@ -28,6 +28,12 @@ public interface ArchiveSpi {
 
     /** */
     Archive createArchiveInstance(Object obj) throws IOException;
+
+    /** TODO */
+    Class<?>[] getInputTypes();
+
+    /** TODO */
+    String[] getFileSuffixes();
 }
 
 /* */

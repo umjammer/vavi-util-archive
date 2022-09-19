@@ -6,6 +6,7 @@
 
 package vavi.util.archive.rar;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -46,6 +47,16 @@ public abstract class RarArchiveSpi implements ArchiveSpi {
 
     /** */
     public abstract Archive createArchiveInstance(Object obj) throws IOException;
+
+    @Override
+    public Class<?>[] getInputTypes() {
+        return new Class[] {File.class};
+    }
+
+    @Override
+    public String[] getFileSuffixes() {
+        return new String[] {"rar", "RAR"};
+    }
 }
 
 /* */

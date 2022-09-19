@@ -12,7 +12,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 
 import vavi.util.Debug;
@@ -61,6 +66,7 @@ Debug.println("no suitable spi found, use default stream");
 
     /**
      * TODO else file
+     * TODO option, e.g ZipArchive's failsafe encoding
      * @throws IllegalArgumentException file is not supported
      */
     public static Archive getArchive(File file) throws IOException {
@@ -92,6 +98,16 @@ Debug.println(Level.FINE, "archive: " + archive.getClass());
         throw new IllegalArgumentException(file + " is not supported type");
     }
 
+    /** all suffixes */
+    public static String[] getReaderFileSuffixes() {
+        Set<String> suffixes = new HashSet<>();
+        for (ArchiveSpi archiveSpi : archiveSpis) {
+Debug.println(Level.FINE, archiveSpi.getClass().getName() + ", " + Arrays.toString(archiveSpi.getFileSuffixes()));
+            suffixes.addAll(Arrays.asList(archiveSpi.getFileSuffixes()));
+        }
+        return suffixes.toArray(new String[0]);
+    }
+
     /** archive spis */
     private static ServiceLoader<ArchiveSpi> archiveSpis;
 
@@ -102,10 +118,14 @@ Debug.println(Level.FINE, "archive: " + archive.getClass());
     static {
         try {
             archiveSpis = ServiceLoader.load(vavi.util.archive.spi.ArchiveSpi.class);
-archiveSpis.forEach(System.err::println);
+if (Debug.isLoggable(Level.FINE)) {
+ archiveSpis.forEach(System.err::println);
+}
 
             inputStreamSpis = ServiceLoader.load(vavi.util.archive.spi.InputStreamSpi.class);
-inputStreamSpis.forEach(System.err::println);
+if (Debug.isLoggable(Level.FINE)) {
+ inputStreamSpis.forEach(System.err::println);
+}
         } catch (Exception e) {
 Debug.printStackTrace(e);
             System.exit(1);

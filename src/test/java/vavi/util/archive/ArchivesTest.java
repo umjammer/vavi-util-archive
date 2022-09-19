@@ -2,13 +2,18 @@ package vavi.util.archive;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import vavi.util.Debug;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 
@@ -53,5 +58,13 @@ class ArchivesTest {
         File file = new File("src/test/resources/test." + extension);
         InputStream is = Archives.getInputStream(file);
         assertEquals(archiveClass, is.getClass());
+    }
+
+    @Test
+    void test3() throws Exception {
+        String[] suffixes = Archives.getReaderFileSuffixes();
+Debug.println("suffixes: " + Arrays.toString(suffixes));
+        assertTrue(Arrays.asList(suffixes).contains("zip"));
+        assertFalse(Arrays.asList(suffixes).contains("Z")); // TODO just check the logic, not semantics (means .Z may be included by some compression type)
     }
 }

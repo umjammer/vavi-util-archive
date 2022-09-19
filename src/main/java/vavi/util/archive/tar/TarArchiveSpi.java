@@ -7,6 +7,7 @@
 package vavi.util.archive.tar;
 
 import java.io.EOFException;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -92,6 +93,16 @@ Debug.println(Level.FINE, "tar magic:\n" + StringUtil.getDump(b));
     /** */
     public Archive createArchiveInstance(Object obj) throws IOException {
         return new TarArchive((InputStream) obj);
+    }
+
+    @Override
+    public Class<?>[] getInputTypes() {
+        return new Class[] {InputStream.class};
+    }
+
+    @Override
+    public String[] getFileSuffixes() {
+        return new String[] {"tar", "TAR"};
     }
 }
 

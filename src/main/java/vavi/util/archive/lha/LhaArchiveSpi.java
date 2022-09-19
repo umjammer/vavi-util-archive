@@ -78,6 +78,16 @@ public class LhaArchiveSpi implements ArchiveSpi {
             throw new IllegalArgumentException("not supported type " + obj.getClass().getName());
         }
     }
+
+    @Override
+    public Class<?>[] getInputTypes() {
+        return new Class[] {File.class, InputStream.class};
+    }
+
+    @Override
+    public String[] getFileSuffixes() {
+        return new String[] {"lha", "LHA"};
+    }
 }
 
 /* */

@@ -70,6 +70,16 @@ public class ZipArchiveSpi implements ArchiveSpi {
             throw new IllegalArgumentException("not supported type " + obj.getClass().getName());
         }
     }
+
+    @Override
+    public Class<?>[] getInputTypes() {
+        return new Class[] {File.class};
+    }
+
+    @Override
+    public String[] getFileSuffixes() {
+        return new String[] {"zip", "ZIP", "cbz", "jar", "JAR", "epub"};
+    }
 }
 
 /* */

@@ -6,6 +6,7 @@
 
 package vavi.util.archive.cab;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -44,6 +45,16 @@ public abstract class CabArchiveSpi implements ArchiveSpi {
 
     /** */
     public abstract Archive createArchiveInstance(Object obj) throws IOException;
+
+    @Override
+    public Class<?>[] getInputTypes() {
+        return new Class[] {File.class, InputStream.class};
+    }
+
+    @Override
+    public String[] getFileSuffixes() {
+        return new String[] {"cab", "CAB"};
+    }
 }
 
 /* */
