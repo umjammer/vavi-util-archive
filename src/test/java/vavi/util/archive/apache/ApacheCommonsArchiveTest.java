@@ -24,14 +24,14 @@ class ApacheCommonsArchiveTest {
     @ParameterizedTest
     @ValueSource(strings = {
         "/test.zip",
-        "/test.arj",
+        "/test.arj", // TODO seems not work all
     })
     void test(String name) throws Exception {
         Archive archive = new ApacheCommonsArchive(ApacheCommonsArchiveTest.class.getResourceAsStream(name));
         for (Entry entry : archive.entries()) {
             System.err.println(entry.getName());
         }
-        assertTrue(true);
+        assertTrue(archive.entries().length > 0);
     }
 
     @Test

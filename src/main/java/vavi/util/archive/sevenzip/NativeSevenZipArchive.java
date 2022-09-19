@@ -44,7 +44,7 @@ public class NativeSevenZipArchive implements Archive {
 
     /** */
     public NativeSevenZipArchive(File file) throws IOException {
-System.err.println("7-zip32.dll: " + getVersion());
+Debug.println("7-zip32.dll: " + getVersion());
 
         this.file = file;
 
@@ -62,8 +62,8 @@ System.err.println("7-zip32.dll: " + getVersion());
                 entry.setTime(DateUtil.dosDateTimeToLong(getCurrentDate(),
                                                          getCurrentTime()));
                 entries.add(entry);
-System.err.println(StringUtil.paramString(entry));
-System.err.println("time: " + new Date(entry.getTime()));
+Debug.println(StringUtil.paramString(entry));
+Debug.println("time: " + new Date(entry.getTime()));
             } while (findNext());
         }
     }

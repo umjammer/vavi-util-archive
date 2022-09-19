@@ -53,7 +53,7 @@ public class ApacheSevenZipArchive implements Archive {
                 .filter(e -> e.getName().equals(name))
                 .map(ApacheSevenZipEntry::new)
                 .findFirst()
-                .get();
+                .orElse(null);
     }
 
     @Override

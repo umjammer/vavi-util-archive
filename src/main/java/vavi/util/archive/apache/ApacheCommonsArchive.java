@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.logging.Level;
 
 import org.apache.commons.compress.archivers.ArchiveEntry;
 import org.apache.commons.compress.archivers.ArchiveException;
@@ -53,7 +54,7 @@ public class ApacheCommonsArchive implements Archive {
             ArchiveEntry entry;
             while ((entry = i.getNextEntry()) != null) {
                 if (!i.canReadEntryData(entry)) {
-Debug.println("skip entry: " + entry);
+Debug.println(Level.INFO, "can not read, skip entry: " + (file != null ? file.toPath() + "/" : "") + entry.getName());
                     continue;
                 }
                 entries.add(new ApacheEntry(entry));
@@ -76,7 +77,7 @@ Debug.println("skip entry: " + entry);
 
     @Override
     public Entry getEntry(String name) {
-        return entries.stream().filter(e -> e.getName().equals(name)).findFirst().get();
+        return entries.stream().filter(e -> e.getName().equals(name)).findFirst().orElse(null);
     }
 
     @Override
@@ -86,7 +87,7 @@ Debug.println("skip entry: " + entry);
             ArchiveEntry e;
             while ((e = i.getNextEntry()) != null) {
                 if (!i.canReadEntryData(e)) {
-Debug.println("skip entry: " + entry);
+Debug.println(Level.INFO, "can not read, skip entry: " + file.toPath() + "/" + entry.getName());
                     continue;
                 }
                 if (((WrappedEntry<?>) entry).getWrappedObject().equals(e)) {
