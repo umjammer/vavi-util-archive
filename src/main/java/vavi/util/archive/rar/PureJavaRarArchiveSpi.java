@@ -16,7 +16,7 @@ import vavi.util.archive.Archive;
 
 
 /**
- * RAR アーカイブを処理するサービスプロバイダです．
+ * The SPI for RAR archive using the library 'vavi:java-unrar'.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021222 nsano initial version <br>
@@ -26,24 +26,28 @@ import vavi.util.archive.Archive;
 public class PureJavaRarArchiveSpi extends RarArchiveSpi {
 
     /**
-     * 解凍できるかどうか調べます．
-     * @param target 今のところ File しか受け付けません
+     * @param target currently accept {@link File} only.
      */
+    @Override
     public boolean canExtractInput(Object target) throws IOException {
-        InputStream is;
-        boolean needToClose;
+        if (!isSupported(target)) {
+            return false;
+        }
+
+        InputStream is = null;
+        boolean needToClose = false;
 
         if (target instanceof File) {
             is = new BufferedInputStream(Files.newInputStream(((File) target).toPath()));
             needToClose = true;
         } else {
-            throw new IllegalArgumentException("not supported type " + target.getClass().getName());
+            assert false : target.getClass().getName();
         }
 
         return canExtractInput(is, needToClose);
     }
 
-    /* */
+    @Override
     public Archive createArchiveInstance(Object obj) throws IOException {
         return new PureJavaRarArchive((File) obj);
     }

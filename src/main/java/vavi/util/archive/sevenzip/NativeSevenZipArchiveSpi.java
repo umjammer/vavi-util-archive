@@ -24,7 +24,7 @@ import vavi.util.archive.spi.ArchiveSpi;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030228 nsano initial version <br>
  */
-public class NativeSevenZipArchiveSpi implements ArchiveSpi {
+public class NativeSevenZipArchiveSpi extends SevenZipArchiveSpi {
 
     /**
      * @param target currently accept {@link File} only.
@@ -39,41 +39,12 @@ public class NativeSevenZipArchiveSpi implements ArchiveSpi {
         InputStream is =
             new BufferedInputStream(Files.newInputStream(((File) target).toPath()));
 
-        byte[] b = new byte[8];
-
-        is.mark(8);
-        int l = 0;
-        while (l < 8) {
-            l += is.read(b, l, 8 - l);
-        }
-        is.reset();
-
-        is.close();
-
-Debug.println("\n" + StringUtil.getDump(b));
-        return b[0] == '7' &&
-               b[1] == 'z' &&
-               b[2] == (byte) 0xbc &&
-               b[3] == (byte) 0xaf &&
-               b[4] == (byte) 0x27 &&
-               b[5] == (byte) 0x1c &&
-               b[6] == (byte) 0x00 &&
-               b[7] == (byte) 0x02;
+        return super.canExtractInput(is, true);
     }
 
     @Override
     public Archive createArchiveInstance(Object obj) throws IOException {
         return new NativeSevenZipArchive((File) obj);
-    }
-
-    @Override
-    public Class<?>[] getInputTypes() {
-        return new Class[] {File.class};
-    }
-
-    @Override
-    public String[] getFileSuffixes() {
-        return new String[] {"7z", "7Z"};
     }
 }
 

@@ -15,7 +15,7 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 
 /**
- * RAR アーカイブを処理するサービスプロバイダです．
+ * The SPI for RAR archive.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021222 nsano initial version <br>
@@ -24,7 +24,11 @@ import vavi.util.archive.spi.ArchiveSpi;
  */
 public abstract class RarArchiveSpi implements ArchiveSpi {
 
-    /** */
+    /**
+     * Checks magic (first 4 byte).
+     *
+     * @param is need to support mark
+     */
     protected boolean canExtractInput(InputStream is, boolean needToClose) throws IOException {
         byte[] b = new byte[4];
 
@@ -44,9 +48,6 @@ public abstract class RarArchiveSpi implements ArchiveSpi {
                b[2] == 'r' &&
                b[3] == '!';
     }
-
-    /** */
-    public abstract Archive createArchiveInstance(Object obj) throws IOException;
 
     @Override
     public Class<?>[] getInputTypes() {

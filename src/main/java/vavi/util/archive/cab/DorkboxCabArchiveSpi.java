@@ -28,7 +28,11 @@ public class DorkboxCabArchiveSpi extends CabArchiveSpi {
      * @param target 今のところ File, InputStream しか受け付けません
      */
     public boolean canExtractInput(Object target) throws IOException {
-        InputStream is;
+        if (!isSupported(target)) {
+            return false;
+        }
+
+        InputStream is = null;
         boolean needToClose = false;
 
         if (target instanceof File) {
@@ -40,7 +44,7 @@ public class DorkboxCabArchiveSpi extends CabArchiveSpi {
                 throw new IllegalArgumentException("InputStream should support #mark()");
             }
         } else {
-            throw new IllegalArgumentException("not supported type " + target.getClass().getName());
+            assert false : target.getClass().getName();
         }
 
         return canExtractInput(is, needToClose);

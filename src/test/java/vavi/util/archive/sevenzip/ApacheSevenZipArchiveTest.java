@@ -7,8 +7,15 @@
 package vavi.util.archive.sevenzip;
 
 import java.io.File;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import vavi.util.archive.Archive;
+import vavi.util.archive.Entry;
+import vavi.util.archive.rar.PureJavaRarArchive;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -25,6 +32,18 @@ class ApacheSevenZipArchiveTest {
     void test() throws Exception {
         ApacheSevenZipArchive sevenZip = new ApacheSevenZipArchive(new File("src/test/resources/test.7z"));
         assertEquals(20, sevenZip.entries().length);
+    }
+
+    @Test
+    @Disabled("apache compress 7z accept only 7z?")
+    public void test2() throws Exception {
+        Archive archive = new ApacheSevenZipArchive(new File("src/test/resources/test.rar"));
+        int c = 0;
+        for (Entry entry : archive.entries()) {
+            System.err.println(entry.getName() + "\t" + LocalDateTime.ofInstant(Instant.ofEpochMilli(entry.getTime()), ZoneId.systemDefault()));
+            c++;
+        }
+        assertEquals(6, c);
     }
 }
 

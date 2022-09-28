@@ -28,7 +28,11 @@ public class ZipArchiveSpi implements ArchiveSpi {
     @Override
     public boolean canExtractInput(Object target) throws IOException {
 
-        InputStream is;
+        if (!isSupported(target)) {
+            return false;
+        }
+
+        InputStream is = null;
         boolean needToClose = false;
 
         if (target instanceof File) {
@@ -40,7 +44,7 @@ public class ZipArchiveSpi implements ArchiveSpi {
                 throw new IllegalArgumentException("InputStream should support #mark()");
             }
         } else {
-            throw new IllegalArgumentException("not supported type " + target.getClass().getName());
+            assert false : target.getClass().getName();
         }
 
         byte[] b = new byte[2];
@@ -73,7 +77,7 @@ public class ZipArchiveSpi implements ArchiveSpi {
 
     @Override
     public Class<?>[] getInputTypes() {
-        return new Class[] {File.class};
+        return new Class[] {File.class, InputStream.class};
     }
 
     @Override

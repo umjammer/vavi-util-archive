@@ -34,6 +34,16 @@ public interface ArchiveSpi {
 
     /** TODO */
     String[] getFileSuffixes();
+
+    /** */
+    default boolean isSupported(Object target) {
+        for (Class<?> c : getInputTypes()) {
+            if (c.isInstance(target)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 /* */
