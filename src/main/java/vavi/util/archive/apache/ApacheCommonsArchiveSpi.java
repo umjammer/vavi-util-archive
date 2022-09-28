@@ -18,11 +18,14 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.logging.Level;
 
+import org.apache.commons.compress.archivers.ArchiveException;
+import org.apache.commons.compress.archivers.ArchiveStreamFactory;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
 import vavi.util.Debug;
 import vavi.util.StringUtil;
 import vavi.util.archive.Archive;
 import vavi.util.archive.spi.ArchiveSpi;
+import vavi.util.archive.zip.ZipArchive;
 
 
 /**
@@ -38,21 +41,42 @@ public class ApacheCommonsArchiveSpi implements ArchiveSpi {
      */
     @Override
     public boolean canExtractInput(Object target) throws IOException {
-
-        if (!(target instanceof File)) {
-            throw new IllegalArgumentException("not supported type " + target);
+        if (!isSupported(target)) {
+            return false;
         }
 
-        InputStream is =
-            new BufferedInputStream(Files.newInputStream(((File) target).toPath()));
+        InputStream is = null;
 
-        // TODO accepts all
+        if (target instanceof File) {
+            is = new BufferedInputStream(Files.newInputStream(((File) target).toPath()));
+        } else if (target instanceof InputStream) {
+            is = (InputStream) target;
+            if (!is.markSupported()) {
+                throw new IllegalArgumentException("InputStream should support #mark()");
+            }
+        } else {
+            assert false : target.getClass().getName();
+        }
+
+        try {
+            String type = ArchiveStreamFactory.detect(is);
+Debug.println("detected: " + type);
+        } catch (ArchiveException e) {
+            throw new IOException(e);
+        }
+
         return true;
     }
 
     @Override
     public Archive createArchiveInstance(Object obj) throws IOException {
-        return new ApacheCommonsArchive((File) obj);
+        if (obj instanceof File) {
+            return new ApacheCommonsArchive((File) obj);
+        } else if (obj instanceof InputStream) {
+            return new ApacheCommonsArchive((InputStream) obj);
+        } else {
+            throw new IllegalArgumentException("not supported type " + obj.getClass().getName());
+        }
     }
 
     @Override

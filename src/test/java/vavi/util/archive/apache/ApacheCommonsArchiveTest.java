@@ -6,6 +6,7 @@
 
 package vavi.util.archive.apache;
 
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
+/**
+ * ApacheCommonsArchiveTest.
+ *
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
+ * @version 0.00 2022/03/09 nsano initial version <br>
+ */
 class ApacheCommonsArchiveTest {
 
     @ParameterizedTest
@@ -28,6 +35,19 @@ class ApacheCommonsArchiveTest {
     })
     void test(String name) throws Exception {
         Archive archive = new ApacheCommonsArchive(ApacheCommonsArchiveTest.class.getResourceAsStream(name));
+        for (Entry entry : archive.entries()) {
+            System.err.println(entry.getName());
+        }
+        assertTrue(archive.entries().length > 0);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "/test.zip",
+            "/test.arj", // TODO seems not work all
+    })
+    void test2(String name) throws Exception {
+        Archive archive = new ApacheCommonsArchive(Paths.get("src/test/resources", name).toFile());
         for (Entry entry : archive.entries()) {
             System.err.println(entry.getName());
         }
