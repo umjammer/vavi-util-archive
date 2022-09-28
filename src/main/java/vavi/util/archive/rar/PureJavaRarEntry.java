@@ -14,6 +14,7 @@ import de.innosystec.unrar.rarfile.FileHeader;
 
 /**
  * Represents RAR archived file.
+ * warring the library 'vavi:java-unrar'
  * 
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 120216 nsano initial version <br>

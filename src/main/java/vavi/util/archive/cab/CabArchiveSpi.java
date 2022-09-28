@@ -43,9 +43,6 @@ public abstract class CabArchiveSpi implements ArchiveSpi {
                b[3] == 'F';
     }
 
-    /** */
-    public abstract Archive createArchiveInstance(Object obj) throws IOException;
-
     @Override
     public Class<?>[] getInputTypes() {
         return new Class[] {File.class, InputStream.class};

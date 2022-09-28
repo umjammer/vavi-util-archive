@@ -7,13 +7,11 @@
 package vavi.util.archive.bzip2;
 
 import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
-
 import vavi.util.archive.spi.InputStreamSpi;
 
 
