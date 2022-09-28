@@ -12,10 +12,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.ServiceLoader;
 import java.util.Set;
 import java.util.logging.Level;
@@ -65,6 +63,15 @@ Debug.println("no suitable spi found, use default stream");
     }
 
     /**
+     * get an archive
+     * TODO path is treated as a file
+     */
+    public static Archive getArchive(Path path) throws IOException {
+        return getArchive(path.toFile());
+    }
+
+    /**
+     * get an archive
      * TODO else file
      * TODO option, e.g ZipArchive's failsafe encoding
      * @throws IllegalArgumentException file is not supported
@@ -78,7 +85,7 @@ Debug.println(Level.FINE, "archiveSpi: " + archiveSpi);
             try {
                 canExtract = archiveSpi.canExtractInput(file);
             } catch (IllegalArgumentException e) {
-Debug.println(e);
+Debug.println(archiveSpi.getClass().getSimpleName() + ": " + e);
                 canExtract = archiveSpi.canExtractInput(is);
             }
             if (canExtract) {
@@ -86,7 +93,7 @@ Debug.println(e);
                 try {
                     archive = archiveSpi.createArchiveInstance(file);
                 } catch (IllegalArgumentException e) {
-Debug.println(e);
+Debug.println(archiveSpi.getClass().getSimpleName() + ": " + e);
                     archive = archiveSpi.createArchiveInstance(is);
                 }
 Debug.println(Level.FINE, "archive: " + archive.getClass());
@@ -96,6 +103,38 @@ Debug.println(Level.FINE, "archive: " + archive.getClass());
 
         is.close();
         throw new IllegalArgumentException(file + " is not supported type");
+    }
+
+    /**
+     * get an archive
+     * TODO option, e.g ZipArchive's failsafe encoding
+     * @throws IllegalArgumentException file is not supported
+     */
+    public static Archive getArchive(InputStream is) throws IOException {
+        for (ArchiveSpi archiveSpi : archiveSpis) {
+Debug.println(Level.FINE, "archiveSpi: " + archiveSpi);
+            boolean canExtract = false;
+
+            try {
+                canExtract = archiveSpi.canExtractInput(is);
+            } catch (IllegalArgumentException e) {
+Debug.println(archiveSpi.getClass().getSimpleName() + "::canExtractInput: " + e);
+            }
+            if (canExtract) {
+                Archive archive;
+                try {
+                    archive = archiveSpi.createArchiveInstance(is);
+                } catch (IllegalArgumentException e) {
+Debug.println(archiveSpi.getClass().getSimpleName() + "::createArchiveInstance: " + e);
+                    archive = archiveSpi.createArchiveInstance(is);
+                }
+Debug.println(Level.FINE, "archive: " + archive.getClass());
+                return archive;
+            }
+        }
+
+        is.close();
+        throw new IllegalArgumentException(is.getClass().getName() + " is not supported type");
     }
 
     /** all suffixes */
