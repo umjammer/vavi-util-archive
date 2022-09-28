@@ -1,6 +1,7 @@
 #vavi.util.archive.stuffit.NativeStuffItArchiveSpi
 vavi.util.archive.lha.LhaArchiveSpi
 vavi.util.archive.rar.PureJavaRarArchiveSpi
+#vavi.util.archive.rar.JunrarRarArchiveSpi
 #vavi.util.archive.rar.ShellRarArchiveSpi
 #vavi.util.archive.rar.NativeRarArchiveSpi
 #vavi.util.archive.gca.NativeGcaArchiveSpi

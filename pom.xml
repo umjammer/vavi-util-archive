@@ -116,6 +116,11 @@ TOOD
       <version>1.7.0</version>
     </dependency>
     <dependency>
+      <groupId>com.github.junrar</groupId>
+      <artifactId>junrar</artifactId>
+      <version>7.5.3</version>
+    </dependency>
+    <dependency>
       <groupId>com.github.umjammer</groupId>
       <artifactId>CabParser</artifactId>
       <version>2.15.1v</version>
@@ -144,6 +149,12 @@ TOOD
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-jdk14</artifactId>
+      <version>1.7.36</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
