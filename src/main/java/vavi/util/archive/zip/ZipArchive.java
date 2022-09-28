@@ -6,6 +6,7 @@
 
 package vavi.util.archive.zip;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -99,16 +100,18 @@ Debug.println("zip reading failure by utf-8, retry using " + failsafeEncoding);
             while (e.hasMoreElements()) {
                 entries.add(new ZipEntry(e.nextElement()));
             }
-            return entries.toArray(new Entry[0]);
+            this.entries = entries.toArray(new Entry[0]);
+            return this.entries;
         } else if (archive instanceof ZipInputStream) {
             try {
                 ZipInputStream zis = (ZipInputStream) archive;
                 List<Entry> entries = new ArrayList<>();
                 java.util.zip.ZipEntry entry;
                 while ((entry = zis.getNextEntry()) != null) {
-                    entries.add(new ZipEntry(entry));
+                    entries.add(new ZipEntry(entry, zis));
                 }
-                return entries.toArray(new Entry[0]);
+                this.entries = entries.toArray(new Entry[0]);
+                return this.entries;
             } catch (IOException e) {
                 throw new IllegalStateException(e);
             }
@@ -126,19 +129,16 @@ if (entry.getWrappedObject() == null) {
 }
             return entry;
         } else if (archive instanceof ZipInputStream) {
-            try {
-                ZipInputStream zis = (ZipInputStream) archive;
-                java.util.zip.ZipEntry entry;
-                while ((entry = zis.getNextEntry()) != null) {
-                    if (name.equals(entry.getName())) {
-                        return new ZipEntry(entry);
-                    }
-                }
-Debug.println(Level.FINE, "entry not found for name: " + name);
-                return null;
-            } catch (IOException e) {
-                throw new IllegalStateException(e);
+            if (entries == null) {
+                entries();
             }
+            for (Entry entry : entries) {
+                if (name.equals(entry.getName())) {
+                    return entry;
+                }
+            }
+Debug.println(Level.FINE, "entry not found for name: " + name);
+            return null;
         } else {
             throw new IllegalStateException(archive.getClass().getName());
         }
@@ -149,14 +149,7 @@ Debug.println(Level.FINE, "entry not found for name: " + name);
         if (archive instanceof ZipFile) {
             return ((ZipFile) archive).getInputStream(((ZipEntry) entry).getWrappedObject());
         } else if (archive instanceof ZipInputStream) {
-            ZipInputStream zis = (ZipInputStream) archive;
-            java.util.zip.ZipEntry header;
-            while ((header = zis.getNextEntry()) != null) {
-                if (entry.getName().equals(header.getName())) {
-                    return zis;
-                }
-            }
-            return null;
+            return new ByteArrayInputStream(((ZipEntry) entry).getBytes());
         } else {
             throw new IllegalStateException(archive.getClass().getName());
         }

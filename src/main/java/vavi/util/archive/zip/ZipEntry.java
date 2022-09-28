@@ -6,6 +6,8 @@
 
 package vavi.util.archive.zip;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.logging.Level;
 
 import vavi.util.Debug;
@@ -30,6 +32,30 @@ if (entry == null) {
  //new Exception("*** DUMMY ***").printStackTrace();
 }
         this.entry = entry;
+    }
+
+    /** */
+    private byte[] bytes;
+
+    /** */
+    public byte[] getBytes() {
+        return bytes;
+    }
+
+    /** TODO takes much memory */
+    public ZipEntry(java.util.zip.ZipEntry entry, java.util.zip.ZipInputStream zis) throws IOException {
+        this(entry);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        if (!entry.isDirectory()) {
+            int len;
+            byte[] buffer = new byte[8129];
+            while ((len = zis.read(buffer)) > 0) {
+                baos.write(buffer, 0, len);
+            }
+        }
+        this.bytes = baos.toByteArray();
+Debug.println(Level.FINE, "new stream entry: " + entry.getName() + ", " + bytes.length + " bytes");
     }
 
     @Override

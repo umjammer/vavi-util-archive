@@ -9,12 +9,14 @@ package vavi.util.archive.zip;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import vavi.util.Debug;
 import vavi.util.archive.Archive;
@@ -23,6 +25,8 @@ import vavi.util.properties.annotation.Property;
 import vavi.util.properties.annotation.PropsEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
@@ -36,6 +40,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @PropsEntity(url = "file:local.properties")
 class ZipArchiveTest {
 
+    static {
+        System.setProperty("vavi.util.logging.VaviFormatter.extraClassMethod", "sun\\.util\\.logging\\..*?#.*");
+    }
+
     static boolean localPropertiesExists() {
         return Files.exists(Paths.get("local.properties"));
     }
@@ -46,6 +54,9 @@ class ZipArchiveTest {
     @Property(name = "archive.zip.file2")
     String file2 = "src/test/resources/ms932.zip";
 
+    @Property(name = "archive.zip.fileN")
+    String fileN = "file:src/test/resources/avif.zip";
+
     @BeforeEach
     void setup() throws Exception {
         if (localPropertiesExists()) {
@@ -54,6 +65,7 @@ class ZipArchiveTest {
     }
 
     @Test
+    @DisplayName("path")
     void test1() throws Exception {
         Path path = Paths.get(file1);
         Archive archive = new ZipArchive(path.toFile());
@@ -66,6 +78,7 @@ class ZipArchiveTest {
     }
 
     @Test
+    @DisplayName("path, encoding")
     void test2() throws Exception {
         System.setProperty(ZipArchive.ZIP_ENCODING, "ms932");
         Path path = Paths.get(file2);
@@ -79,6 +92,7 @@ class ZipArchiveTest {
     }
 
     @Test
+    @DisplayName("path, different encoding")
     void test3() throws Exception {
         System.setProperty(ZipArchive.ZIP_ENCODING, "utf-8");
         Path path = Paths.get(file2);
@@ -93,6 +107,7 @@ Debug.println("exception cause: " + e.getMessage());
     }
 
     @Test
+    @DisplayName("path, failsafe encoding")
     void test4() throws Exception {
         System.setProperty(ZipArchive.ZIP_ENCODING, "utf-8");
         Path path = Paths.get(file2);
@@ -129,5 +144,24 @@ Debug.println("zipping: " + dir.relativize(p));
 
         zos.close();
         os.close();
+    }
+
+    @Test
+    @DisplayName("inputStream")
+    void test5() throws Exception {
+        Archive archive = new ZipArchive(new URL(fileN).openStream());
+        for (Entry entry : archive.entries()) {
+            System.out.println(entry.getName());
+        }
+Debug.println("entries after loop: " + archive.entries().length);
+        assertNotEquals(0, archive.entries().length);
+Debug.println("stream after loop: " + archive.getInputStream(archive.entries()[0]));
+        assertNotNull(archive.getInputStream(archive.entries()[0]));
+        for (Entry entry : archive.entries()) {
+            if (!entry.isDirectory() && archive.getInputStream(entry).available() > 0) {
+Debug.println("stream after loop: " + archive.getInputStream(entry).available());
+                break;
+            }
+        }
     }
 }
