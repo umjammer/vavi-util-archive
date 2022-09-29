@@ -57,11 +57,6 @@ Debug.println(Level.FINE, "\n" + StringUtil.getDump(b));
     }
 
     @Override
-    public Class<?>[] getInputTypes() {
-        return new Class[] {File.class};
-    }
-
-    @Override
     public String[] getFileSuffixes() {
         return new String[] {"7z", "7Z"};
     }

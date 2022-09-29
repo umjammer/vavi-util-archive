@@ -46,6 +46,11 @@ public class NativeSevenZipArchiveSpi extends SevenZipArchiveSpi {
     public Archive createArchiveInstance(Object obj) throws IOException {
         return new NativeSevenZipArchive((File) obj);
     }
+
+    @Override
+    public Class<?>[] getInputTypes() {
+        return new Class[] {File.class};
+    }
 }
 
 /* */

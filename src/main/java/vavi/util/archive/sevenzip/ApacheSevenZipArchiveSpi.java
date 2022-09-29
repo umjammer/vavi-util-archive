@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 
 import vavi.util.archive.Archive;
+import vavi.util.archive.lha.LhaArchive;
 
 
 /**
@@ -32,14 +33,38 @@ public class ApacheSevenZipArchiveSpi extends SevenZipArchiveSpi {
             return false;
         }
 
-        InputStream is = new BufferedInputStream(Files.newInputStream(((File) target).toPath()));
+        InputStream is = null;
+        boolean needToClose = false;
 
-        return super.canExtractInput(is, true);
+        if (target instanceof File) {
+            is = new BufferedInputStream(Files.newInputStream(((File) target).toPath()));
+            needToClose = true;
+        } else if (target instanceof InputStream) {
+            is = (InputStream) target;
+            if (!is.markSupported()) {
+                throw new IllegalArgumentException("InputStream should support #mark()");
+            }
+        } else {
+            assert false : target.getClass().getName();
+        }
+
+        return super.canExtractInput(is, needToClose);
     }
 
     @Override
     public Archive createArchiveInstance(Object obj) throws IOException {
-        return new ApacheSevenZipArchive((File) obj);
+        if (obj instanceof File) {
+            return new ApacheSevenZipArchive((File) obj);
+        } else if (obj instanceof InputStream) {
+            return new ApacheSevenZipArchive((InputStream) obj);
+        } else {
+            throw new IllegalArgumentException("not supported type " + obj.getClass().getName());
+        }
+    }
+
+    @Override
+    public Class<?>[] getInputTypes() {
+        return new Class[] {File.class, InputStream.class};
     }
 }
 
