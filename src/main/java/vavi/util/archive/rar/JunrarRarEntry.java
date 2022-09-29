@@ -55,7 +55,7 @@ public class JunrarRarEntry implements WrappedEntry<FileHeader> {
 
     @Override
     public String getName() {
-        return entry.getFileNameString();
+        return entry.getFileName();
     }
 
     @Override

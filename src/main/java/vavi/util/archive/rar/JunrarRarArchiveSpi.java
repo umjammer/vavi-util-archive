@@ -45,6 +45,11 @@ public class JunrarRarArchiveSpi extends RarArchiveSpi {
     public Archive createArchiveInstance(Object obj) throws IOException {
         return new JunrarRarArchive((File) obj);
     }
+
+    @Override
+    public Class<?>[] getInputTypes() {
+        return new Class[] {File.class, InputStream.class};
+    }
 }
 
 /* */
