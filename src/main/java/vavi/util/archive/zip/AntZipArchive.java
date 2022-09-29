@@ -9,12 +9,17 @@ package vavi.util.archive.zip;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.List;
 
+import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipFile;
 
 import vavi.util.archive.Archive;
 import vavi.util.archive.Entry;
+import vavi.util.archive.InputStreamSupport;
 
 
 /**
@@ -25,17 +30,28 @@ import vavi.util.archive.Entry;
  *          0.01 021222 nsano add canExtractInput <br>
  *          0.02 021222 nsano separate canExtractInput to spi <br>
  */
-public class AntZipArchive implements Archive {
+public class AntZipArchive extends InputStreamSupport implements Archive {
 
     /** */
     private ZipFile archive;
 
+    /** */
     private String name;
+
+    /** */
+    private Entry[] entries;
 
     /** */
     public AntZipArchive(File file) throws IOException {
         this.archive = new ZipFile(file);
         this.name = file.getPath();
+    }
+
+    /** */
+    public AntZipArchive(InputStream is) throws IOException {
+        super(is);
+        this.archive = new ZipFile(archiveFileForInputStream);
+        this.name = archiveFileForInputStream.getPath();
     }
 
     @Override
@@ -45,19 +61,23 @@ public class AntZipArchive implements Archive {
 
     @Override
     public Entry[] entries() {
-        Entry[] entries = new Entry[size()];
-        Enumeration<org.apache.tools.zip.ZipEntry> e = archive.getEntries();
-        for (int i = 0; e.hasMoreElements(); i++) {
-            entries[i] = new AntZipEntry(e.nextElement());
+        if (this.entries == null) {
+            List<AntZipEntry> entries = new ArrayList<>();
+            Enumeration<org.apache.tools.zip.ZipEntry> e = archive.getEntries();
+            for (int i = 0; e.hasMoreElements(); i++) {
+                entries.add(new AntZipEntry(e.nextElement()));
+            }
+            this.entries = entries.toArray(new AntZipEntry[0]);
         }
-        return entries;
+        return this.entries;
     }
 
     @Override
     public Entry getEntry(String name) {
-        return new AntZipEntry(archive.getEntry(name));
+        return Arrays.stream(entries()).filter(e -> e.getName().equals(name)).findFirst().orElse(null);
     }
 
+    /** WARNING: available does not work */
     @Override
     public InputStream getInputStream(Entry entry) throws IOException {
         return archive.getInputStream(((AntZipEntry) entry).getWrappedObject());
@@ -70,13 +90,7 @@ public class AntZipArchive implements Archive {
 
     @Override
     public int size() {
-        int count = 0;
-        Enumeration<org.apache.tools.zip.ZipEntry> e = archive.getEntries();
-        while (e.hasMoreElements()) {
-            e.nextElement();
-            count++;
-        }
-        return count;
+        return entries().length;
     }
 }
 
