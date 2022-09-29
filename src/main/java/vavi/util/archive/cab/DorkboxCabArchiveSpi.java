@@ -63,6 +63,11 @@ public class DorkboxCabArchiveSpi extends CabArchiveSpi {
             throw new IllegalArgumentException("not supported type " + obj.getClass().getName());
         }
     }
+
+    @Override
+    public Class<?>[] getInputTypes() {
+        return new Class[] {File.class, InputStream.class};
+    }
 }
 
 /* */

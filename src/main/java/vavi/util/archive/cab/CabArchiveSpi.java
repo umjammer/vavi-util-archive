@@ -6,11 +6,9 @@
 
 package vavi.util.archive.cab;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import vavi.util.archive.Archive;
 import vavi.util.archive.spi.ArchiveSpi;
 
 
@@ -41,11 +39,6 @@ public abstract class CabArchiveSpi implements ArchiveSpi {
                b[1] == 'S' &&
                b[2] == 'C' &&
                b[3] == 'F';
-    }
-
-    @Override
-    public Class<?>[] getInputTypes() {
-        return new Class[] {File.class, InputStream.class};
     }
 
     @Override

@@ -6,25 +6,19 @@
 
 package vavi.util.archive.cab;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
-
-import vavi.util.archive.Archive;
-import vavi.util.archive.Entry;
 
 import dorkbox.cabParser.CabException;
 import dorkbox.cabParser.CabParser;
 import dorkbox.cabParser.CabStreamSaver;
 import dorkbox.cabParser.structure.CabEntry;
-import dorkbox.cabParser.structure.CabFileEntry;
+import vavi.util.archive.Archive;
+import vavi.util.archive.Entry;
+import vavi.util.archive.InputStreamSupport;
 
 
 /**
@@ -33,102 +27,81 @@ import dorkbox.cabParser.structure.CabFileEntry;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040929 nsano initial version <br>
  */
-public class DorkboxCabArchive implements Archive {
+public class DorkboxCabArchive extends InputStreamSupport implements Archive {
 
     /** */
     private CabParser cab;
-    /** */
-    private InputStream is;
-    /** */
-    private int size;
+
     /** */
     private String name;
 
     /** */
+    private Entry[] entries;
+
+    /** */
     public DorkboxCabArchive(File file) throws IOException {
-        this.size = (int) file.length();
+        try {
+            this.cab = new CabParser(file, (CabStreamSaver) null);
+        } catch (CabException e) {
+            throw new IOException(e);
+        }
         this.name = file.getName();
-        init(new BufferedInputStream(Files.newInputStream(file.toPath())));
     }
 
     /** */
     public DorkboxCabArchive(InputStream is) throws IOException {
-        this.size = is.available();
-        this.name = is.toString();
-        init(is);
-    }
-
-    /** */
-    private void init(InputStream is) throws IOException {
-        this.is = is;
+        super(is);
         try {
-            this.cab = new CabParser(is, new CabStreamSaver() {
-                @Override
-                public boolean saveReservedAreaData(byte[] data, int dataLength) {
-                    return false;
-                }
-
-                @Override
-                public OutputStream openOutputStream(CabFileEntry cabFile) {
-                    return new ByteArrayOutputStream((int) cabFile.getSize());
-                }
-
-                @Override
-                public void closeOutputStream(OutputStream outputStream, CabFileEntry cabFile) {
-                    if (outputStream != null) {
-                        try {
-                            outputStream.close();
-                        } catch (IOException ignored) {
-                        }
-                    }
-                }
-            });
+            this.cab = new CabParser(archiveFileForInputStream, (CabStreamSaver) null);
         } catch (CabException e) {
             throw new IOException(e);
         }
+        this.name = archiveFileForInputStream.getName();
     }
 
-    /** */
+    @Override
     public void close() throws IOException {
-        is.close();
     }
 
-    /** */
+    @Override
     public Entry[] entries() {
-        List<Entry> entries = new ArrayList<>();
-        Enumeration<CabEntry> e = cab.entries();
-        while (e.hasMoreElements()) {
-            entries.add(new DorkboxCabEntry(e.nextElement()));
+        if (entries == null) {
+            List<Entry> entries = new ArrayList<>();
+            for (CabEntry e : cab.entries()) {
+                entries.add(new DorkboxCabEntry(e));
+            }
+            this.entries = entries.toArray(new Entry[0]);
         }
-        return entries.toArray(new Entry[0]);
+        return this.entries;
     }
 
-    /** */
+    @Override
     public Entry getEntry(String name) {
-        Enumeration<CabEntry> e = cab.entries();
-        while (e.hasMoreElements()) {
-            CabEntry entry = e.nextElement();
-            if (entry.getName().equals(name)) {
-                return new DorkboxCabEntry(entry);
+        for (Entry e : entries()) {
+            if (e.getName().equals(name)) {
+                return e;
             }
         }
         return null;
     }
 
-    /** reads a CAB file, parses it, and returns an InputStream representing the named file */
+    @Override
     public InputStream getInputStream(Entry entry) {
-        // TODO Auto-generated method stub
-        return null;
+        try {
+            return cab.getInputStream(((DorkboxCabEntry) entry).getWrappedObject());
+        } catch (CabException | IOException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
-    /** */
+    @Override
     public String getName() {
         return name;
     }
 
-    /** */
+    @Override
     public int size() {
-        return size;
+        return entries().length;
     }
 }
 
