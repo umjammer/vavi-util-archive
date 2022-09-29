@@ -1,6 +1,6 @@
 [![](https://jitpack.io/v/umjammer/vavi-util-archive.svg)](https://jitpack.io/#umjammer/vavi-util-archive)
-![Java CI with Maven](https://github.com/umjammer/vavi-util-archive-sandbox/workflows/Java%20CI%20with%20Maven/badge.svg)
-![CodeQL](https://github.com/umjammer/vavi-util-archive/workflows/CodeQL/badge.svg)
+[![Java CI with Maven](https://github.com/umjammer/vavi-util-archive-sandbox/workflows/Java%20CI%20with%20Maven/badge.svg)](https://github.com/umjammer/vavi-util-archive-sandbox/actions)
+[![CodeQL](https://github.com/umjammer/vavi-util-archive/workflows/CodeQL/badge.svg)](https://github.com/umjammer/vavi-util-archive-sandbox/actions)
 ![Java](https://img.shields.io/badge/Java-8-b07219)
 
 # vavi-util-archive
