@@ -25,7 +25,6 @@ import vavi.util.Debug;
 import vavi.util.StringUtil;
 import vavi.util.archive.Archive;
 import vavi.util.archive.spi.ArchiveSpi;
-import vavi.util.archive.zip.ZipArchive;
 
 
 /**
@@ -36,9 +35,6 @@ import vavi.util.archive.zip.ZipArchive;
  */
 public class ApacheCommonsArchiveSpi implements ArchiveSpi {
 
-    /**
-     * @param target currently accept {@link File} only.
-     */
     @Override
     public boolean canExtractInput(Object target) throws IOException {
         if (!isSupported(target)) {
@@ -62,7 +58,8 @@ public class ApacheCommonsArchiveSpi implements ArchiveSpi {
             String type = ArchiveStreamFactory.detect(is);
 Debug.println("detected: " + type);
         } catch (ArchiveException e) {
-            throw new IOException(e);
+Debug.println("not detected: " + e.getMessage());
+            return false;
         }
 
         return true;
