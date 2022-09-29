@@ -24,6 +24,11 @@ public class NativeStuffItArchiveSpi extends StuffItArchiveSpi {
     public Archive createArchiveInstance(Object obj) throws IOException {
         return new NativeStuffItArchive((File) obj);
     }
+
+    @Override
+    public Class<?>[] getInputTypes() {
+        return new Class[] {File.class};
+    }
 }
 
 /* */
