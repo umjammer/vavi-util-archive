@@ -47,6 +47,11 @@ public class ShellRarArchiveSpi extends RarArchiveSpi {
     public Archive createArchiveInstance(Object obj) throws IOException {
         return new ShellRarArchive((File) obj);
     }
+
+    @Override
+    public Class<?>[] getInputTypes() {
+        return new Class[] {File.class};
+    }
 }
 
 /* */

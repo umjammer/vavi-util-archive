@@ -7,6 +7,8 @@
 package vavi.util.archive.rar;
 
 
+import java.io.File;
+
 import vavi.util.archive.WrappedEntry;
 
 import de.innosystec.unrar.rarfile.FileHeader;
@@ -56,7 +58,7 @@ public class PureJavaRarEntry implements WrappedEntry<FileHeader> {
 
     @Override
     public String getName() {
-        return entry.getFileNameString();
+        return entry.getFileNameString().replace('\\', File.separatorChar);
     }
 
     @Override

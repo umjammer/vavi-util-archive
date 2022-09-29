@@ -7,10 +7,12 @@
 package vavi.util.archive.rar;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
 import java.util.List;
 
 import de.innosystec.unrar.exception.RarException;
@@ -20,6 +22,7 @@ import vavi.io.OutputEngine;
 import vavi.io.OutputEngineInputStream;
 import vavi.util.archive.Archive;
 import vavi.util.archive.Entry;
+import vavi.util.archive.InputStreamSupport;
 import vavi.util.archive.WrappedEntry;
 
 
@@ -30,15 +33,33 @@ import vavi.util.archive.WrappedEntry;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 120216 nsano initial version <br>
  */
-public class PureJavaRarArchive implements Archive {
+public class PureJavaRarArchive extends InputStreamSupport implements Archive {
 
     /** */
     private de.innosystec.unrar.Archive archive;
 
     /** */
+    private String name;
+
+    /** */
+    private Entry[] entries;
+
+    /** */
     public PureJavaRarArchive(File file) throws IOException {
         try {
             this.archive = new de.innosystec.unrar.Archive(file);
+            this.name = file.getPath();
+        } catch (RarException e) {
+            throw new IOException(e);
+        }
+    }
+
+    /** */
+    public PureJavaRarArchive(InputStream is) throws IOException {
+        super(is);
+        try {
+            this.archive = new de.innosystec.unrar.Archive(archiveFileForInputStream);
+            this.name = archiveFileForInputStream.getPath();
         } catch (RarException e) {
             throw new IOException(e);
         }
@@ -51,20 +72,21 @@ public class PureJavaRarArchive implements Archive {
 
     @Override
     public Entry[] entries() {
-        List<FileHeader> headers = archive.getFileHeaders();
-        Entry[] entries = new Entry[headers.size()];
-        for (int i = 0; i < headers.size(); i++) {
-            entries[i] = new PureJavaRarEntry(headers.get(i));
+        if (entries == null) {
+            List<FileHeader> headers = archive.getFileHeaders();
+            this.entries = new Entry[headers.size()];
+            for (int i = 0; i < headers.size(); i++) {
+                entries[i] = new PureJavaRarEntry(headers.get(i));
+            }
         }
         return entries;
     }
 
     @Override
     public Entry getEntry(String name) {
-        List<FileHeader> headers = archive.getFileHeaders();
-        for (FileHeader header : headers) {
-            if (header.getFileNameString().equals(name)) {
-                return new PureJavaRarEntry(header);
+        for (Entry entry : entries()) {
+            if (entry.getName().equals(name)) {
+                return entry;
             }
         }
         return null;
@@ -72,41 +94,23 @@ public class PureJavaRarArchive implements Archive {
 
     @Override
     public InputStream getInputStream(final Entry entry) throws IOException {
-        return new OutputEngineInputStream(new OutputEngine() {
-            private final int BUFFER_SIZE = 4096;
-            private InputStream in = new ByteArrayInputStream(new byte[BUFFER_SIZE]);
-            private OutputStream out;
-            public void initialize(OutputStream out) throws IOException {
-                try {
-                    archive.extractFile((FileHeader) ((WrappedEntry<?>) entry).getWrappedObject(), out);
-                } catch (RarException e) {
-                    throw new IOException(e);
-                }
-            }
-            public void execute() throws IOException {
-                byte[] buf = new byte[BUFFER_SIZE];
-                int l = in.read(buf, 0, BUFFER_SIZE);
-                if (l < 0) {
-                    out.flush();
-                    out.close();
-                } else {
-                    out.write(buf, 0, l);
-                }
-            }
-            public void finish() throws IOException {
-                in.close();
-            }
-        });
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            archive.extractFile((FileHeader) ((WrappedEntry<?>) entry).getWrappedObject(), baos);
+            return new ByteArrayInputStream(Arrays.copyOfRange(baos.toByteArray(), 0, (int) entry.getSize()));
+        } catch (RarException e) {
+            throw new IOException(e);
+        }
     }
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
     public int size() {
-        return archive.getFileHeaders().size();
+        return entries().length;
     }
 }
 

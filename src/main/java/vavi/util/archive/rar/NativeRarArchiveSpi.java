@@ -23,7 +23,7 @@ import vavi.util.archive.Archive;
  *          0.01 030128 nsano implements <br>
  *          0.02 030211 nsano use ComRarArchive <br>
  */
-public class NativeArchiveSpi extends RarArchiveSpi {
+public class NativeRarArchiveSpi extends RarArchiveSpi {
 
     /**
      * 解凍できるかどうか調べます．
@@ -46,6 +46,11 @@ public class NativeArchiveSpi extends RarArchiveSpi {
     /* */
     public Archive createArchiveInstance(Object obj) throws IOException {
         return new NativeRarArchive((File) obj);
+    }
+
+    @Override
+    public Class<?>[] getInputTypes() {
+        return new Class[] {File.class};
     }
 }
 

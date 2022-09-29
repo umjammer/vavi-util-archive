@@ -40,6 +40,11 @@ public class PureJavaRarArchiveSpi extends RarArchiveSpi {
         if (target instanceof File) {
             is = new BufferedInputStream(Files.newInputStream(((File) target).toPath()));
             needToClose = true;
+        } else if (target instanceof InputStream) {
+            is = (InputStream) target;
+            if (!is.markSupported()) {
+                throw new IllegalArgumentException("InputStream should support #mark()");
+            }
         } else {
             assert false : target.getClass().getName();
         }
@@ -49,7 +54,18 @@ public class PureJavaRarArchiveSpi extends RarArchiveSpi {
 
     @Override
     public Archive createArchiveInstance(Object obj) throws IOException {
-        return new PureJavaRarArchive((File) obj);
+        if (obj instanceof File) {
+            return new PureJavaRarArchive((File) obj);
+        } else if (obj instanceof InputStream) {
+            return new PureJavaRarArchive((InputStream) obj);
+        } else {
+            throw new IllegalArgumentException("not supported type " + obj.getClass().getName());
+        }
+    }
+
+    @Override
+    public Class<?>[] getInputTypes() {
+        return new Class[] {File.class, InputStream.class};
     }
 }
 

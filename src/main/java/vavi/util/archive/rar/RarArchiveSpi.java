@@ -6,11 +6,9 @@
 
 package vavi.util.archive.rar;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import vavi.util.archive.Archive;
 import vavi.util.archive.spi.ArchiveSpi;
 
 
@@ -47,11 +45,6 @@ public abstract class RarArchiveSpi implements ArchiveSpi {
                b[1] == 'a' &&
                b[2] == 'r' &&
                b[3] == '!';
-    }
-
-    @Override
-    public Class<?>[] getInputTypes() {
-        return new Class[] {File.class};
     }
 
     @Override
