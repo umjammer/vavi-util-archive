@@ -29,8 +29,11 @@ public class LhaArchiveSpi implements ArchiveSpi {
      * @param target {@link File} and {@link InputStream} are supported.
      */
     public boolean canExtractInput(Object target) throws IOException {
+        if (!isSupported(target)) {
+            return false;
+        }
 
-        InputStream is;
+        InputStream is = null;
         boolean needToClose = false;
 
         if (target instanceof File) {
@@ -42,7 +45,7 @@ public class LhaArchiveSpi implements ArchiveSpi {
                 throw new IllegalArgumentException("InputStream should support #mark()");
             }
         } else {
-            throw new IllegalArgumentException("not supported type " + target.getClass().getName());
+            assert false : target.getClass().getName();
         }
 
         byte[] b = new byte[5];
