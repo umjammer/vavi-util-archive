@@ -1,4 +1,4 @@
-#vavi.util.archive.stuffit.NativeStuffItArchiveSpi
+vavi.util.archive.zip.JdkZipArchiveSpi
 vavi.util.archive.lha.LhaArchiveSpi
 vavi.util.archive.rar.PureJavaRarArchiveSpi
 #vavi.util.archive.rar.JunrarRarArchiveSpi
@@ -11,5 +11,5 @@ vavi.util.archive.sevenzip.ApacheSevenZipArchiveSpi
 vavi.util.archive.cab.DorkboxCabArchiveSpi
 #vavi.util.archive.tar.TarArchiveSpi
 #vavi.util.archive.zip.AntZipArchiveSpi
-vavi.util.archive.zip.ZipArchiveSpi
 vavi.util.archive.apache.ApacheCommonsArchiveSpi
+#vavi.util.archive.stuffit.NativeStuffItArchiveSpi

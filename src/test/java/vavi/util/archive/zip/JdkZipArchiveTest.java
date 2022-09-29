@@ -7,13 +7,16 @@
 package vavi.util.archive.zip;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -28,17 +31,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 /**
- * ZipArchiveTest.
+ * JdkZipArchiveTest.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 2022-09-11 nsano initial version <br>
  */
 //@EnabledIf("localPropertiesExists")
 @PropsEntity(url = "file:local.properties")
-class ZipArchiveTest {
+class JdkZipArchiveTest {
 
     static {
         System.setProperty("vavi.util.logging.VaviFormatter.extraClassMethod", "sun\\.util\\.logging\\..*?#.*");
@@ -68,7 +72,7 @@ class ZipArchiveTest {
     @DisplayName("path")
     void test1() throws Exception {
         Path path = Paths.get(file1);
-        Archive archive = new ZipArchive(path.toFile());
+        Archive archive = new JdkZipArchive(path.toFile());
         int c = 0;
         for (Entry entry : archive.entries()) {
             System.out.println(entry.getName());
@@ -80,9 +84,9 @@ class ZipArchiveTest {
     @Test
     @DisplayName("path, encoding")
     void test2() throws Exception {
-        System.setProperty(ZipArchive.ZIP_ENCODING, "ms932");
+        System.setProperty(JdkZipArchive.ZIP_ENCODING, "ms932");
         Path path = Paths.get(file2);
-        Archive archive = new ZipArchive(path.toFile());
+        Archive archive = new JdkZipArchive(path.toFile());
         int c = 0;
         for (Entry entry : archive.entries()) {
             System.out.println(entry.getName());
@@ -93,11 +97,11 @@ class ZipArchiveTest {
 
     @Test
     @DisplayName("path, different encoding")
-    void test3() throws Exception {
-        System.setProperty(ZipArchive.ZIP_ENCODING, "utf-8");
+    void test22() throws Exception {
+        System.setProperty(JdkZipArchive.ZIP_ENCODING, "utf-8");
         Path path = Paths.get(file2);
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> {
-            Archive archive = new ZipArchive(path.toFile());
+            Archive archive = new JdkZipArchive(path.toFile());
             for (Entry entry : archive.entries()) {
                 System.out.println(entry.getName());
             }
@@ -108,10 +112,10 @@ Debug.println("exception cause: " + e.getMessage());
 
     @Test
     @DisplayName("path, failsafe encoding")
-    void test4() throws Exception {
-        System.setProperty(ZipArchive.ZIP_ENCODING, "utf-8");
+    void test23() throws Exception {
+        System.setProperty(JdkZipArchive.ZIP_ENCODING, "utf-8");
         Path path = Paths.get(file2);
-        Archive archive = new ZipArchive(path.toFile(), "ms932");
+        Archive archive = new JdkZipArchive(path.toFile(), "ms932");
         for (Entry entry : archive.entries()) {
             System.out.println(entry.getName());
         }
@@ -131,7 +135,7 @@ Debug.println("exception cause: " + e.getMessage());
         java.util.zip.ZipOutputStream zos = new java.util.zip.ZipOutputStream(os, charset);
 
         Path dir = Paths.get("tmp/zip");
-        Files.walk(dir).filter(ZipArchiveTest::isNotDir).forEach(p -> {
+        Files.walk(dir).filter(JdkZipArchiveTest::isNotDir).forEach(p -> {
             try {
 Debug.println("zipping: " + dir.relativize(p));
                 java.util.zip.ZipEntry ze = new java.util.zip.ZipEntry(dir.relativize(p).toString());
@@ -147,21 +151,37 @@ Debug.println("zipping: " + dir.relativize(p));
     }
 
     @Test
+    @DisplayName("extract")
+    public void test3() throws Exception {
+        Archive archive = new JdkZipArchive(new File("src/test/resources/test.zip"));
+        // TODO JdkZipArchive#entries() contains directory (this [0] is dir)
+        Entry entry = archive.entries()[1];
+Debug.println(entry.getName() + ", " + entry.getSize());
+        InputStream is = archive.getInputStream(entry);
+        Path out = Paths.get("tmp/out_jdkzip/" + entry.getName());
+        Files.createDirectories(out.getParent());
+        Files.copy(is, out, StandardCopyOption.REPLACE_EXISTING);
+        assertEquals(Files.size(out), entry.getSize());
+    }
+
+    @Test
     @DisplayName("inputStream")
     void test5() throws Exception {
-        Archive archive = new ZipArchive(new URL(fileN).openStream());
+        Archive archive = new JdkZipArchive(new URL(fileN).openStream());
         for (Entry entry : archive.entries()) {
-            System.out.println(entry.getName());
+            System.out.println(entry.getName() + ", " + entry.getSize());
         }
-Debug.println("entries after loop: " + archive.entries().length);
-        assertNotEquals(0, archive.entries().length);
-Debug.println("stream after loop: " + archive.getInputStream(archive.entries()[0]));
+Debug.println("entries after loop: " + archive.size());
+        assertNotEquals(0, archive.size());
+        // JdkZipArchive#getInputStream() accept directory
+Debug.println("stream after loop: " + archive.entries()[0].getName() + ", " + archive.getInputStream(archive.entries()[0]).available());
         assertNotNull(archive.getInputStream(archive.entries()[0]));
         for (Entry entry : archive.entries()) {
             if (!entry.isDirectory() && archive.getInputStream(entry).available() > 0) {
 Debug.println("stream after loop: " + archive.getInputStream(entry).available());
-                break;
+                return;
             }
         }
+        fail("no file size > 0");
     }
 }

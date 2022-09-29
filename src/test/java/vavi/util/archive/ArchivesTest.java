@@ -14,8 +14,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import vavi.util.Debug;
-import vavi.util.archive.spi.ArchiveSpi;
-import vavi.util.archive.zip.ZipArchiveSpi;
+import vavi.util.archive.zip.JdkZipArchive;
+import vavi.util.archive.zip.JdkZipArchiveSpi;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -33,7 +33,7 @@ class ArchivesTest {
 
     static Stream<Arguments> archiveProvider() {
         return Stream.of(
-                arguments("zip", vavi.util.archive.zip.ZipArchive.class),
+                arguments("zip", JdkZipArchive.class),
                 arguments("cab", vavi.util.archive.cab.DorkboxCabArchive.class),
                 arguments("7z", vavi.util.archive.sevenzip.ApacheSevenZipArchive.class),
                 arguments("rar", vavi.util.archive.rar.PureJavaRarArchive.class),
@@ -62,6 +62,7 @@ class ArchivesTest {
     void test12(String extension, Class<Archive> archiveClass) throws Exception {
         if (Arrays.asList("zip", "lzh").contains(extension)) {
             Path path = Paths.get("src/test/resources/test." + extension);
+Debug.println(path);
             Archive archive = Archives.getArchive(new BufferedInputStream(Files.newInputStream(path)));
             assertEquals(archiveClass, archive.getClass());
         }
@@ -69,7 +70,7 @@ class ArchivesTest {
 
     @Test
     void test4() throws Exception {
-        assertTrue(new ZipArchiveSpi().isSupported(new BufferedInputStream(System.in)));
+        assertTrue(new JdkZipArchiveSpi().isSupported(new BufferedInputStream(System.in)));
     }
 
     static Stream<Arguments> streamProvider() {

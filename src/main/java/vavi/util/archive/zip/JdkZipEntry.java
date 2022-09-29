@@ -6,8 +6,6 @@
 
 package vavi.util.archive.zip;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.logging.Level;
 
 import vavi.util.Debug;
@@ -20,42 +18,18 @@ import vavi.util.archive.WrappedEntry;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021104 nsano initial version <br>
  */
-public class ZipEntry implements WrappedEntry<java.util.zip.ZipEntry> {
+public class JdkZipEntry implements WrappedEntry<java.util.zip.ZipEntry> {
 
     /** */
     private java.util.zip.ZipEntry entry;
 
     /** @param entry TODO vavi-nio-filesystem-archive request to be null */
-    public ZipEntry(java.util.zip.ZipEntry entry) {
+    public JdkZipEntry(java.util.zip.ZipEntry entry) {
 if (entry == null) {
  Debug.println(Level.FINE, "*** entry is null ***");
  //new Exception("*** DUMMY ***").printStackTrace();
 }
         this.entry = entry;
-    }
-
-    /** */
-    private byte[] bytes;
-
-    /** */
-    public byte[] getBytes() {
-        return bytes;
-    }
-
-    /** TODO takes much memory */
-    public ZipEntry(java.util.zip.ZipEntry entry, java.util.zip.ZipInputStream zis) throws IOException {
-        this(entry);
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        if (!entry.isDirectory()) {
-            int len;
-            byte[] buffer = new byte[8129];
-            while ((len = zis.read(buffer)) > 0) {
-                baos.write(buffer, 0, len);
-            }
-        }
-        this.bytes = baos.toByteArray();
-Debug.println(Level.FINE, "new stream entry: " + entry.getName() + ", " + bytes.length + " bytes");
     }
 
     @Override

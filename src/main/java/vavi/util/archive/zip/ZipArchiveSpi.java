@@ -1,51 +1,30 @@
 /*
- * Copyright (c) 2002 by Naohide Sano, All rights reserved.
+ * Copyright (c) 2022 by Naohide Sano, All rights reserved.
  *
  * Programmed by Naohide Sano
  */
 
 package vavi.util.archive.zip;
 
-import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
 
-import vavi.util.archive.Archive;
 import vavi.util.archive.spi.ArchiveSpi;
 
 
 /**
- * The ZIP SPI using the JDK zip library.
+ * The ZIP SPI base.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
- * @version 0.00 021222 nsano initial version <br>
- *          0.01 030128 nsano implements <br>
+ * @version 0.00 220929 nsano initial version <br>
  */
-public class ZipArchiveSpi implements ArchiveSpi {
+public abstract class ZipArchiveSpi implements ArchiveSpi {
 
-    @Override
-    public boolean canExtractInput(Object target) throws IOException {
-
-        if (!isSupported(target)) {
-            return false;
-        }
-
-        InputStream is = null;
-        boolean needToClose = false;
-
-        if (target instanceof File) {
-            is = new BufferedInputStream(Files.newInputStream(((File) target).toPath()));
-            needToClose = true;
-        } else if (target instanceof InputStream) {
-            is = (InputStream) target;
-            if (!is.markSupported()) {
-                throw new IllegalArgumentException("InputStream should support #mark()");
-            }
-        } else {
-            assert false : target.getClass().getName();
-        }
+    /**
+     *
+     * @param is need to support mark
+     */
+    protected boolean canExtractInput(InputStream is, boolean needToClose) throws IOException {
 
         byte[] b = new byte[2];
 
@@ -62,22 +41,6 @@ public class ZipArchiveSpi implements ArchiveSpi {
 
         return b[0] == 'P' &&
                b[1] == 'K';
-    }
-
-    @Override
-    public Archive createArchiveInstance(Object obj) throws IOException {
-        if (obj instanceof File) {
-            return new ZipArchive((File) obj);
-        } else if (obj instanceof InputStream) {
-            return new ZipArchive((InputStream) obj);
-        } else {
-            throw new IllegalArgumentException("not supported type " + obj.getClass().getName());
-        }
-    }
-
-    @Override
-    public Class<?>[] getInputTypes() {
-        return new Class[] {File.class, InputStream.class};
     }
 
     @Override
