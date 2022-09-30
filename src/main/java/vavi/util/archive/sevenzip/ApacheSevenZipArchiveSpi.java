@@ -11,9 +11,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.Map;
 
 import vavi.util.archive.Archive;
-import vavi.util.archive.lha.LhaArchive;
 
 
 /**
@@ -52,7 +52,7 @@ public class ApacheSevenZipArchiveSpi extends SevenZipArchiveSpi {
     }
 
     @Override
-    public Archive createArchiveInstance(Object obj) throws IOException {
+    public Archive createArchiveInstance(Object obj, Map<String, ?> env) throws IOException {
         if (obj instanceof File) {
             return new ApacheSevenZipArchive((File) obj);
         } else if (obj instanceof InputStream) {

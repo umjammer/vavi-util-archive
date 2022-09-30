@@ -17,17 +17,23 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import vavi.util.Debug;
 import vavi.util.archive.Archive;
+import vavi.util.archive.Archives;
 import vavi.util.archive.Entry;
 import vavi.util.properties.annotation.Property;
 import vavi.util.properties.annotation.PropsEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -56,7 +62,7 @@ class JdkZipArchiveTest {
     String file1 = "src/test/resources/avif.zip";
 
     @Property(name = "archive.zip.file2")
-    String file2 = "src/test/resources/ms932.zip";
+    String file932 = "src/test/resources/ms932.zip";
 
     @Property(name = "archive.zip.fileN")
     String fileN = "file:src/test/resources/avif.zip";
@@ -85,7 +91,7 @@ class JdkZipArchiveTest {
     @DisplayName("path, encoding")
     void test2() throws Exception {
         System.setProperty(JdkZipArchive.ZIP_ENCODING, "ms932");
-        Path path = Paths.get(file2);
+        Path path = Paths.get(file932);
         Archive archive = new JdkZipArchive(path.toFile());
         int c = 0;
         for (Entry entry : archive.entries()) {
@@ -99,26 +105,55 @@ class JdkZipArchiveTest {
     @DisplayName("path, different encoding")
     void test22() throws Exception {
         System.setProperty(JdkZipArchive.ZIP_ENCODING, "utf-8");
-        Path path = Paths.get(file2);
-        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> {
+        Path path = Paths.get(file932);
+        IOException e = assertThrows(IOException.class, () -> {
             Archive archive = new JdkZipArchive(path.toFile());
             for (Entry entry : archive.entries()) {
                 System.out.println(entry.getName());
             }
         });
 Debug.println("exception cause: " + e.getMessage());
-        assertEquals("MALFORMED", e.getMessage());
+        assertInstanceOf(IllegalArgumentException.class, e.getCause());
+        assertEquals("MALFORMED", e.getCause().getMessage());
     }
 
     @Test
     @DisplayName("path, failsafe encoding")
     void test23() throws Exception {
         System.setProperty(JdkZipArchive.ZIP_ENCODING, "utf-8");
-        Path path = Paths.get(file2);
+        Path path = Paths.get(file932);
         Archive archive = new JdkZipArchive(path.toFile(), "ms932");
         for (Entry entry : archive.entries()) {
             System.out.println(entry.getName());
         }
+    }
+
+    @Test
+    @DisplayName("spi, failsafe encoding")
+    void test24() throws Exception {
+        System.setProperty(JdkZipArchive.ZIP_ENCODING, "utf-8");
+        Path path = Paths.get("src/test/resources/ms932.zip");
+//        Path path = Paths.get(file932);
+        Map<String, Object> env = new HashMap<>();
+        env.put(JdkZipArchiveSpi.ENV_KEY_FAILSAFE_ENCODING, "ms932");
+        Archive archive = Archives.getArchive(path.toFile(), env);
+        assertInstanceOf(JdkZipArchive.class, archive);
+        for (Entry entry : archive.entries()) {
+            System.out.println(entry.getName());
+        }
+    }
+
+    @Test
+    @DisplayName("spi, failsafe encoding, not set")
+    void test25() throws Exception {
+        System.setProperty(JdkZipArchive.ZIP_ENCODING, "utf-8");
+        Path path = Paths.get(file932);
+        IOException e = assertThrows(IOException.class, () -> {
+            Archives.getArchive(path.toFile());
+        });
+Debug.println("exception cause: " + e.getMessage());
+        assertInstanceOf(IllegalArgumentException.class, e.getCause());
+        assertEquals("MALFORMED", e.getCause().getMessage());
     }
 
     /** until Predicate#not release */
@@ -162,6 +197,19 @@ Debug.println(entry.getName() + ", " + entry.getSize());
         Files.createDirectories(out.getParent());
         Files.copy(is, out, StandardCopyOption.REPLACE_EXISTING);
         assertEquals(Files.size(out), entry.getSize());
+    }
+
+    @Test
+    @DisplayName("extract all")
+    public void test31() throws Exception {
+        Path inZip = Paths.get("src/test/resources/test.zip");
+        Path outDir = Paths.get("tmp/out_31");
+        Archive archive = Archives.getArchive(inZip.toFile());
+        for (Entry entry : Arrays.stream(archive.entries()).filter(e -> !e.isDirectory()).collect(Collectors.toList())) {
+            Path out = outDir.resolve(entry.getName());
+            Files.createDirectories(out.getParent());
+            Files.copy(archive.getInputStream(entry), out, StandardCopyOption.REPLACE_EXISTING);
+        }
     }
 
     @Test

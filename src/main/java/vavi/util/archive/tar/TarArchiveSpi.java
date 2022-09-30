@@ -7,10 +7,10 @@
 package vavi.util.archive.tar;
 
 import java.io.EOFException;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 import java.util.logging.Level;
 
 import vavi.util.Debug;
@@ -91,7 +91,7 @@ Debug.println(Level.FINE, "tar magic:\n" + StringUtil.getDump(b));
     }
 
     /** */
-    public Archive createArchiveInstance(Object obj) throws IOException {
+    public Archive createArchiveInstance(Object obj, Map<String, ?> env) throws IOException {
         return new TarArchive((InputStream) obj);
     }
 

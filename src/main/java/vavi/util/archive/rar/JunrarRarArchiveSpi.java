@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.Map;
 
 import vavi.util.archive.Archive;
 
@@ -28,21 +29,30 @@ public class JunrarRarArchiveSpi extends RarArchiveSpi {
      */
     @Override
     public boolean canExtractInput(Object target) throws IOException {
-        InputStream is;
-        boolean needToClose;
+        if (!isSupported(target)) {
+            return false;
+        }
+
+        InputStream is = null;
+        boolean needToClose = false;
 
         if (target instanceof File) {
             is = new BufferedInputStream(Files.newInputStream(((File) target).toPath()));
             needToClose = true;
+        } else if (target instanceof InputStream) {
+            is = (InputStream) target;
+            if (!is.markSupported()) {
+                throw new IllegalArgumentException("InputStream should support #mark()");
+            }
         } else {
-            throw new IllegalArgumentException("not supported type " + target.getClass().getName());
+            assert false : target.getClass().getName();
         }
 
         return canExtractInput(is, needToClose);
     }
 
     @Override
-    public Archive createArchiveInstance(Object obj) throws IOException {
+    public Archive createArchiveInstance(Object obj, Map<String, ?> env) throws IOException {
         return new JunrarRarArchive((File) obj);
     }
 

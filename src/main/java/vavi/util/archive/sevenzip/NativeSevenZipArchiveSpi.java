@@ -11,11 +11,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.Map;
 
-import vavi.util.Debug;
-import vavi.util.StringUtil;
 import vavi.util.archive.Archive;
-import vavi.util.archive.spi.ArchiveSpi;
 
 
 /**
@@ -32,18 +30,25 @@ public class NativeSevenZipArchiveSpi extends SevenZipArchiveSpi {
     @Override
     public boolean canExtractInput(Object target) throws IOException {
 
-        if (!(target instanceof File)) {
-            throw new IllegalArgumentException("not supported type " + target);
+        if (!isSupported(target)) {
+            return false;
         }
 
-        InputStream is =
-            new BufferedInputStream(Files.newInputStream(((File) target).toPath()));
+        InputStream is;
+        boolean needToClose;
 
-        return super.canExtractInput(is, true);
+        if (target instanceof File) {
+            is = new BufferedInputStream(Files.newInputStream(((File) target).toPath()));
+            needToClose = true;
+        } else {
+            throw new IllegalArgumentException("not supported type " + target.getClass().getName());
+        }
+
+        return canExtractInput(is, needToClose);
     }
 
     @Override
-    public Archive createArchiveInstance(Object obj) throws IOException {
+    public Archive createArchiveInstance(Object obj, Map<String, ?> env) throws IOException {
         return new NativeSevenZipArchive((File) obj);
     }
 

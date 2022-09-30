@@ -37,7 +37,18 @@ and [vavi-net-fuse](https://github.com/umjammer/vavi-apps-fuse/tree/master/vavi-
 | rpm      | archiving | 🚧     | - |         | gjt                                                                     |
 | apache   | archiving | ✅      | - | multi   | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
 
-## Library
+## Usage
+
+```java
+    Path inZip = Paths.get("foo/baa.zip");
+    Path outDir = Paths.get("foo/baa");
+    Archive archive = Archives.getArchive(inZip.toFile());
+    for (Entry entry : archive.entries()) {
+        Files.copy(archive.getInputStream(entry), outDir.resolve(entry.getName()));
+    }
+```
+
+## License
 
  * [Giant Java Tree/cpio](http://www.gjt.org/servlets/JCVSlet/list/gjt/org/gjt/archive/cpio) ... Unknown
  * [Giant Java Tree/rpm](http://www.gjt.org/servlets/JCVSlet/list/gjt/org/gjt/archive/rpm) ... Unknown
@@ -50,13 +61,13 @@ and [vavi-net-fuse](https://github.com/umjammer/vavi-apps-fuse/tree/master/vavi-
  * [truevfs](https://github.com/christian-schlichtherle/truevfs)
  * ~~apache commons-compress~~
  * https://github.com/ZIPmagic/ZIPmagic/tree/master/StuffIt%20SDK
- * https://github.com/cstroe/SevenZip-Java
+ * ~~https://github.com/cstroe/SevenZip-Java~~ (use 7zip-jbinding)
  * write!
- * jar5
+ * ~~jar5~~ (done by 7zip-jbinding)
    * ~~[@marcusvoltolim]((https://github.com/marcusvoltolim/file-processor#readme)) says [sevenzipjbinding](https://github.com/borisbrodski/sevenzipjbinding) can deal rar5 ???~~
      * it's [true](https://github.com/borisbrodski/sevenzipjbinding/issues/19#issuecomment-578636772)
    * unar v1.10.7 ... ok
    * 7zip 17.04 ... ok
- * https://github.com/prog-ai/ArchivR
- * https://github.com/Diab1o/java-7z-archiver ... yet another pure java 7zip implementation?
+ * https://github.com/prog-ai/ArchivR (wip)
+ * ~~https://github.com/Diab1o/java-7z-archiver ... yet another pure java 7zip implementation?~~ (done)
  * where is my jna 7z implementation? (in the crashed hdd?)

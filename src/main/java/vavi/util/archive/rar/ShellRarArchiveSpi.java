@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.Map;
 
 import vavi.util.archive.Archive;
 
@@ -30,6 +31,10 @@ public class ShellRarArchiveSpi extends RarArchiveSpi {
      * @param target 今のところ File しか受け付けません
      */
     public boolean canExtractInput(Object target) throws IOException {
+        if (!isSupported(target)) {
+            return false;
+        }
+
         InputStream is;
         boolean needToClose;
 
@@ -44,7 +49,7 @@ public class ShellRarArchiveSpi extends RarArchiveSpi {
     }
 
     /* */
-    public Archive createArchiveInstance(Object obj) throws IOException {
+    public Archive createArchiveInstance(Object obj, Map<String, ?> env) throws IOException {
         return new ShellRarArchive((File) obj);
     }
 

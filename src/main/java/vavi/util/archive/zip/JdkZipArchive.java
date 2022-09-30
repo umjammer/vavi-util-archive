@@ -14,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.zip.ZipFile;
 
 import vavi.util.Debug;
@@ -44,43 +45,61 @@ public class JdkZipArchive extends InputStreamSupport implements Archive {
     /** */
     private Entry[] entries;
 
-    /** */
+    /**
+     * @throws IOException MALFORMED encoding
+     */
     public JdkZipArchive(File file) throws IOException {
-        String encoding = System.getProperty(ZIP_ENCODING, StandardCharsets.UTF_8.toString());
-        this.archive = new ZipFile(file, Charset.forName(encoding));
-        this.entries = entries();
+        init(file, null);
     }
 
     /**
      * @param failsafeEncoding when open w/ {@link #ZIP_ENCODING}, try again to open using this encoding
      */
     public JdkZipArchive(File file, String failsafeEncoding) throws IOException {
+        init(file, failsafeEncoding);
+    }
+
+    /**
+     * @throws IOException MALFORMED encoding
+     */
+    public JdkZipArchive(InputStream in) throws IOException {
+        super(in);
+        init(this.archiveFileForInputStream, null);
+    }
+
+    /**
+     * @param failsafeEncoding when open w/ {@link #ZIP_ENCODING}, try again to open using this encoding
+     */
+    public JdkZipArchive(InputStream in, String failsafeEncoding) throws IOException {
+        super(in);
+        init(this.archiveFileForInputStream, failsafeEncoding);
+    }
+
+    /**
+     * @param failsafeEncoding if set: try to reopen using this encoding, null: throw error
+     * @throws IOException MALFORMED encoding when failsafeEncoding is not set
+     */
+    private void init(File file, String failsafeEncoding) throws IOException {
         try {
             String encoding = System.getProperty(ZIP_ENCODING, StandardCharsets.UTF_8.toString());
             this.archive = new ZipFile(file, Charset.forName(encoding));
             this.entries = entries();
         } catch (IllegalArgumentException e) {
-            if (e.getMessage().equals("MALFORMED")) {
+            if (failsafeEncoding != null && e.getMessage().equals("MALFORMED")) {
 Debug.println("zip reading failure by utf-8, retry using " + failsafeEncoding);
                 this.archive = new ZipFile(file, Charset.forName(failsafeEncoding));
                 this.entries = entries();
+Debug.println("entries " + entries.length);
             } else {
-                throw e;
+                // IllegalArgumentException used for next provider
+                throw new IOException(e);
             }
         }
     }
 
-    /** */
-    public JdkZipArchive(InputStream in) throws IOException {
-        super(in);
-        this.archive = new ZipFile(this.archiveFileForInputStream);
-    }
-
     @Override
     public void close() throws IOException {
-        if (archive != null) {
-            archive.close();
-        }
+        archive.close();
     }
 
     @Override
@@ -99,7 +118,8 @@ Debug.println("zip reading failure by utf-8, retry using " + failsafeEncoding);
     @Override
     public Entry getEntry(String name) {
         for (Entry entry : entries()) {
-            if (entry.getName().equals(name)) {
+Debug.printf(Level.FINER, "[%s], [%s]", entry.getName(), name);
+            if (entry.getName().replaceFirst("/$", "").equals(name)) {
                 return entry;
             }
         }

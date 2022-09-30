@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.Map;
 
 import vavi.util.Debug;
 import vavi.util.StringUtil;
@@ -55,7 +56,7 @@ Debug.println("\n" + StringUtil.getDump(b));
     }
 
     @Override
-    public abstract Archive createArchiveInstance(Object obj) throws IOException;
+    public abstract Archive createArchiveInstance(Object obj, Map<String, ?> env) throws IOException;
 
     @Override
     public String[] getFileSuffixes() {

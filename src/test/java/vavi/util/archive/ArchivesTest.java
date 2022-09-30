@@ -53,19 +53,8 @@ class ArchivesTest {
     @MethodSource("archiveProvider")
     void test11(String extension, Class<Archive> archiveClass) throws Exception {
         Path path = Paths.get("src/test/resources/test." + extension);
-        Archive archive = Archives.getArchive(path);
+        Archive archive = Archives.getArchive(new BufferedInputStream(Files.newInputStream(path)));
         assertEquals(archiveClass, archive.getClass());
-    }
-
-    @ParameterizedTest
-    @MethodSource("archiveProvider")
-    void test12(String extension, Class<Archive> archiveClass) throws Exception {
-        if (Arrays.asList("zip", "lzh").contains(extension)) {
-            Path path = Paths.get("src/test/resources/test." + extension);
-Debug.println(path);
-            Archive archive = Archives.getArchive(new BufferedInputStream(Files.newInputStream(path)));
-            assertEquals(archiveClass, archive.getClass());
-        }
     }
 
     @Test
