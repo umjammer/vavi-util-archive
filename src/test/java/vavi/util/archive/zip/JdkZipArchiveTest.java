@@ -148,9 +148,7 @@ Debug.println("exception cause: " + e.getMessage());
     void test25() throws Exception {
         System.setProperty(JdkZipArchive.ZIP_ENCODING, "utf-8");
         Path path = Paths.get(file932);
-        IOException e = assertThrows(IOException.class, () -> {
-            Archives.getArchive(path.toFile());
-        });
+        IOException e = assertThrows(IOException.class, () -> Archives.getArchive(path.toFile()));
 Debug.println("exception cause: " + e.getMessage());
         assertInstanceOf(IllegalArgumentException.class, e.getCause());
         assertEquals("MALFORMED", e.getCause().getMessage());

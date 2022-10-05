@@ -23,7 +23,6 @@ import org.junit.jupiter.api.Test;
 import vavi.util.Debug;
 import vavi.util.archive.Archive;
 import vavi.util.archive.Entry;
-import vavi.util.archive.lha.LhaArchive;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -59,9 +58,7 @@ public class JunrarRarArchiveTest {
     @Test
     @DisplayName("junrar doesn't support rar5")
     public void test2() throws Exception {
-        Exception e = assertThrows(IOException.class, () -> {
-            new JunrarRarArchive(new File("src/test/resources/rar5.rar"));
-        });
+        Exception e = assertThrows(IOException.class, () -> new JunrarRarArchive(new File("src/test/resources/rar5.rar")));
         assertInstanceOf(com.github.junrar.exception.UnsupportedRarV5Exception.class, e.getCause());
     }
 

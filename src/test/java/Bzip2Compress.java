@@ -97,7 +97,7 @@ public class Bzip2Compress {
     private static void copy(final InputStream input, final OutputStream output)
         throws IOException {
         final byte[] buffer = new byte[8024];
-        int n = 0;
+        int n;
         while (-1 != (n = input.read(buffer))) {
             output.write(buffer, 0, n);
         }

@@ -6,16 +6,12 @@
 
 package vavi.util.archive.sevenzip;
 
-import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
 import java.util.logging.Level;
 
 import vavi.util.Debug;
 import vavi.util.StringUtil;
-import vavi.util.archive.Archive;
 import vavi.util.archive.spi.ArchiveSpi;
 
 

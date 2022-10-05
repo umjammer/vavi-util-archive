@@ -303,7 +303,7 @@ typedef ARCHIVERPROC *LPARCHIVERPROC;
 #ifdef __cplusplus
 extern "C" {
 #endif
-/*LHA.DLL Ver.1.1と互換API*/
+/*LHA.DLL Ver.1.1縺ｨ莠呈鋤API*/
 int   WINAPI _export UnGCA(const HWND hWnd,LPCSTR szCmdLine,LPSTR szOutput, const DWORD dwSize);
 WORD  WINAPI _export UnGCAGetVersion(void);
 BOOL  WINAPI _export UnGCAGetRunning(void);
@@ -315,7 +315,7 @@ BOOL  WINAPI _export UnGCASetCursorMode(const BOOL bCursorMode);
 WORD  WINAPI _export UnGCAGetCursorInterval(void);
 BOOL  WINAPI _export UnGCASetCursorInterval(const WORD wInterval);
 
-/*統合アーカイバAPI*/
+/*邨ｱ蜷医い繝ｼ繧ｫ繧､繝植PI*/
 BOOL  WINAPI _export UnGCACheckArchive(LPCSTR szFileName, const int nMode);
 int   WINAPI _export UnGCAGetFileCount(LPCSTR szArcFile);
 BOOL  WINAPI _export UnGCAConfigDialog(const HWND hWnd,LPSTR szOptionBuffer, const int nMode);
@@ -329,7 +329,7 @@ BOOL WINAPI _export UnGCASetOwnerWindowEx(HWND hWnd, LPARCHIVERPROC lpArcProc);
 BOOL WINAPI _export UnGCAKillOwnerWindowEx(HWND hWnd);
 */
 
-/*OpenArchive系API*/
+/*OpenArchive邉ｻAPI*/
 HARC  WINAPI _export UnGCAOpenArchive(const HWND hWnd, LPCSTR szFileName, const DWORD dwMode);
 int   WINAPI _export UnGCACloseArchive(HARC hArc);
 int   WINAPI _export UnGCAFindFirst(HARC hArc, LPCSTR szWildName, LPINDIVIDUALINFO lpSubInfo);
@@ -371,7 +371,7 @@ DWORD WINAPI _export UnGCAGetCRC(HARC hArc);
 int   WINAPI _export UnGCAGetAttribute(HARC hArc);
 UINT  WINAPI _export UnGCAGetOSType(HARC hArc);
 
-/*UNLHA32.DLL独自API*/
+/*UNLHA32.DLL迢ｬ閾ｪAPI*/
 WORD  WINAPI _export UnGCAGetSubVersion(void);
 int   WINAPI _export UnGCAExtractMem(const HWND hWnd, LPCSTR szCmdLine, LPBYTE lpbBuffer, const DWORD dwSize, time_t *lpTime, LPWORD lpwAttr, LPDWORD lpdwWriteSize);
 

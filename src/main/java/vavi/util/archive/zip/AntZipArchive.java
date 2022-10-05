@@ -14,7 +14,6 @@ import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 
-import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipFile;
 
 import vavi.util.archive.Archive;

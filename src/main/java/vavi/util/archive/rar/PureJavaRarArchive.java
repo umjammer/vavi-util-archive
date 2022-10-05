@@ -11,15 +11,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.List;
 
 import de.innosystec.unrar.exception.RarException;
 import de.innosystec.unrar.rarfile.FileHeader;
-
-import vavi.io.OutputEngine;
-import vavi.io.OutputEngineInputStream;
 import vavi.util.archive.Archive;
 import vavi.util.archive.Entry;
 import vavi.util.archive.InputStreamSupport;

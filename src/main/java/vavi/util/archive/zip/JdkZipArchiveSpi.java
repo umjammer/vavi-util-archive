@@ -16,7 +16,6 @@ import java.util.logging.Level;
 
 import vavi.util.Debug;
 import vavi.util.archive.Archive;
-import vavi.util.archive.spi.ArchiveSpi;
 
 
 /**

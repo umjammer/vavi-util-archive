@@ -20,12 +20,10 @@ import org.junit.jupiter.api.Test;
 import vavi.util.Debug;
 import vavi.util.archive.Archive;
 import vavi.util.archive.Entry;
-import vavi.util.archive.rar.JunrarRarArchive;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 

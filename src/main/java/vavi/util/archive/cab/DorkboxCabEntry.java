@@ -62,7 +62,7 @@ public class DorkboxCabEntry implements WrappedEntry<CabEntry> {
 
     @Override
     public long getSize() {
-        return isDirectory() ? -1 : ((CabFileEntry) entry).getSize();
+        return isDirectory() ? -1 : entry.getSize();
     }
 
     @Override

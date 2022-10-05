@@ -7,7 +7,7 @@
 #define FNAME_MAX32		512
 #endif
 
-/* \‘¢‘Ì’è‹` */
+/* æ§‹é€ ä½“å®šç¾© */
 #ifndef ARC_DECSTRACT
 #define ARC_DECSTRACT
 
@@ -72,7 +72,7 @@ typedef struct {
 
 #endif /* ARC_DECSTRACT */
 
-/* ƒEƒBƒ“ƒhƒEƒƒbƒZ[ƒW */
+/* ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ */
 #ifndef WM_ARCEXTRACT
 #define	WM_ARCEXTRACT			"wm_arcextract"
 #define	ARCEXTRACT_BEGIN		0
@@ -84,12 +84,12 @@ typedef BOOL CALLBACK ARCHIVERPROC(HWND _hwnd, UINT _uMsg, UINT _nState, LPEXTRA
 typedef ARCHIVERPROC *LPARCHIVERPROC;
 #endif
 
-/* API‚ÌéŒ¾ */
+/* APIã®å®£è¨€ */
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-	/* LHA.DLLŒİŠ·API */
+	/* LHA.DLLäº’æ›API */
 	int   WINAPI SevenZip(const HWND _hwnd, LPCSTR _szCmdLine, LPSTR _szOutput, const DWORD _dwSize);
 	WORD  WINAPI SevenZipGetVersion();
 	BOOL  WINAPI SevenZipGetCursorMode();
@@ -100,13 +100,13 @@ extern "C" {
 	BOOL  WINAPI SevenZipSetCursorInterval(const WORD _Interval);
 	BOOL  WINAPI SevenZipGetRunning();
 
-	/* “‡ƒA[ƒJƒCƒo‹¤’ÊAPI */
+	/* çµ±åˆã‚¢ãƒ¼ã‚«ã‚¤ãƒå…±é€šAPI */
 	BOOL  WINAPI SevenZipConfigDialog(const HWND _hwnd, LPSTR _szOptionBuffer, const int _iMode);
 	BOOL  WINAPI SevenZipCheckArchive(LPCSTR _szFileName, const int _iMode);
 	int   WINAPI SevenZipGetFileCount(LPCSTR _szArcFile);
 	BOOL  WINAPI SevenZipQueryFunctionList(const int _iFunction);
 
-	/* OpenArchiveŒnAPI */
+	/* OpenArchiveç³»API */
 	HARC  WINAPI SevenZipOpenArchive(const HWND _hwnd, LPCSTR _szFileName, const DWORD _dwMode);
 	int   WINAPI SevenZipCloseArchive(HARC _harc);
 	int   WINAPI SevenZipFindFirst(HARC _harc, LPCSTR _szWildName, INDIVIDUALINFO *_lpSubInfo);
@@ -145,13 +145,13 @@ extern "C" {
 	BOOL  WINAPI SevenZipGetOriginalSizeEx(HARC _harc, ULHA_INT64 *_lpllSize);
 	BOOL  WINAPI SevenZipGetCompressedSizeEx(HARC _harc, ULHA_INT64 *_lpllSize);
 
-	/* SetOwnerWindowŒnAPI */	
+	/* SetOwnerWindowç³»API */	
 	BOOL WINAPI SevenZipSetOwnerWindow(HWND _hwnd);
 	BOOL WINAPI SevenZipClearOwnerWindow();
 	BOOL WINAPI SevenZipSetOwnerWindowEx(HWND _hwnd, LPARCHIVERPROC _lpArcProc);
 	BOOL WINAPI SevenZipKillOwnerWindowEx(HWND _hwnd);
 
-	/* 7-zip32.dll“Æ©API */
+	/* 7-zip32.dllç‹¬è‡ªAPI */
 	WORD WINAPI SevenZipGetSubVersion();
 	int  WINAPI SevenZipGetArchiveType(LPCSTR _szFileName);
 
@@ -159,7 +159,7 @@ extern "C" {
 }
 #endif
 
-// API‚ğ¦‚·ˆê—l‚È”’l
+// APIã‚’ç¤ºã™ä¸€æ§˜ãªæ•°å€¤
 #if !defined(ISARC_FUNCTION_START)
 #define ISARC_FUNCTION_START				0
 #define ISARC								0	/* SevenZip */
@@ -241,7 +241,7 @@ extern "C" {
 
 #endif	/* ISARC_FUNCTION_START */
 
-// ƒGƒ‰[ƒƒbƒZ[ƒW
+// ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 #if !defined(ERROR_START)
 #define ERROR_START				0x8000
 /* WARNING */
@@ -322,18 +322,18 @@ extern "C" {
 #define ERROR_END	ERROR_BROKEN_DATA
 #endif /* ERROR_START */
 
-// ƒtƒ@ƒCƒ‹‘®«
+// ãƒ•ã‚¡ã‚¤ãƒ«å±æ€§
 #ifndef FA_RDONLY
-#define FA_RDONLY		0x01			/* “Ç‚İæ‚èê—p */
-#define FA_HIDDEN		0x02			/* ‰B‚µƒtƒ@ƒCƒ‹ */
-#define FA_SYSTEM		0x04			/* ƒVƒXƒeƒ€ƒtƒ@ƒCƒ‹ */
-#define FA_LABEL		0x08			/* ƒ{ƒŠƒ…[ƒ€ƒ‰ƒxƒ‹ */
-#define FA_DIREC		0x10			/* ƒfƒBƒŒƒNƒgƒŠ */
-#define FA_ARCH 		0x20			/* ƒA[ƒJƒCƒu */
-#define FA_ENCRYPTED	0x40			/* ƒpƒXƒ[ƒh•ÛŒì */
+#define FA_RDONLY		0x01			/* èª­ã¿å–ã‚Šå°‚ç”¨ */
+#define FA_HIDDEN		0x02			/* éš ã—ãƒ•ã‚¡ã‚¤ãƒ« */
+#define FA_SYSTEM		0x04			/* ã‚·ã‚¹ãƒ†ãƒ ãƒ•ã‚¡ã‚¤ãƒ« */
+#define FA_LABEL		0x08			/* ãƒœãƒªãƒ¥ãƒ¼ãƒ ãƒ©ãƒ™ãƒ« */
+#define FA_DIREC		0x10			/* ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª */
+#define FA_ARCH 		0x20			/* ã‚¢ãƒ¼ã‚«ã‚¤ãƒ– */
+#define FA_ENCRYPTED	0x40			/* ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ä¿è­· */
 #endif /* FA_RDONLY */
 
-// 7zip32“Æ©ƒGƒ‰[ƒƒbƒZ[ƒW
+// 7zip32ç‹¬è‡ªã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 #if !defined(ERROR_7ZIP_START)
 #define ERROR_7ZIP_START						0x8100
 
@@ -346,7 +346,7 @@ extern "C" {
 #define ERROR_7ZIP_END	ERROR_FILE_CHANGED_DURING_OPERATION
 #endif /* ERROR_7ZIP_START */
 
-// ‘ŒÉŒ`®
+// æ›¸åº«å½¢å¼
 #ifndef ARCHIVETYPE_ZIP
 #define ARCHIVETYPE_ZIP		1
 #define ARCHIVETYPE_7Z		2
