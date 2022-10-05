@@ -18,11 +18,15 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIf;
 import vavi.util.Debug;
 import vavi.util.archive.Archive;
 import vavi.util.archive.Entry;
+import vavi.util.properties.annotation.Property;
+import vavi.util.properties.annotation.PropsEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -38,10 +42,25 @@ import static org.junit.jupiter.api.Assertions.fail;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2022/09/22 umjammer initial version <br>
  */
+@PropsEntity(url = "file:local.properties")
 public class JunrarRarArchiveTest {
 
     static {
         System.setProperty("vavi.util.logging.VaviFormatter.extraClassMethod", "org\\.slf4j\\.impl\\.JDK14LoggerAdapter#(log|warn)");
+    }
+
+    static boolean localPropertiesExists() {
+        return Files.exists(Paths.get("local.properties"));
+    }
+
+    @Property(name = "archive.rar.file")
+    String file;
+
+    @BeforeEach
+    void setup() throws Exception {
+        if (localPropertiesExists()) {
+            PropsEntity.Util.bind(this);
+        }
     }
 
     @Test
@@ -53,6 +72,15 @@ public class JunrarRarArchiveTest {
             c++;
         }
         assertEquals(6, c);
+    }
+
+    @Test
+    @EnabledIf("localPropertiesExists")
+    public void test1() throws Exception {
+        Archive archive = new JunrarRarArchive(new File(file));
+        for (Entry entry : archive.entries()) {
+            System.err.println(entry.getName() + "\t" + LocalDateTime.ofInstant(Instant.ofEpochMilli(entry.getTime()), ZoneId.systemDefault()));
+        }
     }
 
     @Test

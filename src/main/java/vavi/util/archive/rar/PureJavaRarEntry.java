@@ -58,7 +58,7 @@ public class PureJavaRarEntry implements WrappedEntry<FileHeader> {
 
     @Override
     public String getName() {
-        return entry.getFileNameString().replace('\\', File.separatorChar);
+        return entry.getFileName().replace('\\', File.separatorChar);
     }
 
     @Override

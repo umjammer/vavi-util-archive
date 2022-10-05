@@ -24,7 +24,7 @@ import vavi.util.archive.WrappedEntry;
 
 /**
  * Represents RAR archived file.
- * warring the library 'com.github.junrar:junrar'
+ * wrapping the library 'com.github.junrar:junrar'
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 220922 nsano initial version <br>

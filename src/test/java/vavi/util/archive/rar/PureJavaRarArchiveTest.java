@@ -18,13 +18,17 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.api.condition.EnabledIf;
 import vavi.util.Debug;
 import vavi.util.archive.Archive;
 import vavi.util.archive.Entry;
+import vavi.util.properties.annotation.Property;
+import vavi.util.properties.annotation.PropsEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -40,7 +44,22 @@ import static org.junit.jupiter.api.Assertions.fail;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2012/02/16 umjammer initial version <br>
  */
+@PropsEntity(url = "file:local.properties")
 public class PureJavaRarArchiveTest {
+
+    static boolean localPropertiesExists() {
+        return Files.exists(Paths.get("local.properties"));
+    }
+
+    @Property(name = "archive.rar.file")
+    String file;
+
+    @BeforeEach
+    void setup() throws Exception {
+        if (localPropertiesExists()) {
+            PropsEntity.Util.bind(this);
+        }
+    }
 
     @Test
     public void test() throws Exception {
@@ -51,6 +70,16 @@ public class PureJavaRarArchiveTest {
             c++;
         }
         assertEquals(6, c);
+    }
+
+    @Test
+    @EnabledIf("localPropertiesExists")
+    public void test1() throws Exception {
+        Archive archive = new PureJavaRarArchive(new File(file));
+        int c = 0;
+        for (Entry entry : archive.entries()) {
+            System.err.println(entry.getName() + "\t" + LocalDateTime.ofInstant(Instant.ofEpochMilli(entry.getTime()), ZoneId.systemDefault()));
+        }
     }
 
     @Test
@@ -70,9 +99,7 @@ Debug.println(is.available());
     @Test
     @Disabled("java-unrar accept bad jar header for corrupt rar file extraction, rar5 also")
     public void test2() throws Exception {
-        Exception e = assertThrows(IOException.class, () -> {
-            new PureJavaRarArchive(new File("src/test/resources/rar5.rar"));
-        });
+        Exception e = assertThrows(IOException.class, () -> new PureJavaRarArchive(new File("src/test/resources/rar5.rar")));
         assertInstanceOf(de.innosystec.unrar.exception.RarException.class, e.getCause());
     }
 

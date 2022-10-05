@@ -111,9 +111,10 @@ TOOD
       <version>1.9</version>
     </dependency>
     <dependency>
-      <groupId>com.github.umjammer</groupId>
+      <!-- de.innosystec, com.github.umjammer -->
+      <groupId>de.innosystec</groupId>
       <artifactId>java-unrar</artifactId>
-      <version>1.7.0</version>
+      <version>1.7.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>com.github.junrar</groupId>
