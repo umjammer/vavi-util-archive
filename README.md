@@ -40,8 +40,8 @@ and [vavi-net-fuse](https://github.com/umjammer/vavi-apps-fuse/tree/master/vavi-
 ## Usage
 
 ```java
-    Path inZip = Paths.get("foo/baa.zip");
-    Path outDir = Paths.get("foo/baa");
+    Path inZip = Paths.get("foo/bar.zip");
+    Path outDir = Paths.get("foo/bar");
     Archive archive = Archives.getArchive(inZip.toFile());
     for (Entry entry : archive.entries()) {
         Files.copy(archive.getInputStream(entry), outDir.resolve(entry.getName()));
