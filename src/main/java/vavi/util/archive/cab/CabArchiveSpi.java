@@ -9,7 +9,6 @@ package vavi.util.archive.cab;
 import java.io.IOException;
 import java.io.InputStream;
 
-import vavi.util.archive.Archive;
 import vavi.util.archive.spi.ArchiveSpi;
 
 
@@ -42,8 +41,10 @@ public abstract class CabArchiveSpi implements ArchiveSpi {
                b[3] == 'F';
     }
 
-    /** */
-    public abstract Archive createArchiveInstance(Object obj) throws IOException;
+    @Override
+    public String[] getFileSuffixes() {
+        return new String[] {"cab", "CAB"};
+    }
 }
 
 /* */

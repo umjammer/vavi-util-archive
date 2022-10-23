@@ -38,7 +38,8 @@ public class cpio {
     // UNDONE put this on top of a GJT command line package!
     private void processArguments(String[] args) throws IOException {
         for (int i = 0; i < args.length; ++i) {
-            if (args[i].equals("-i")) {
+            switch (args[i]) {
+            case "-i":
                 this.action = ACT_COPYIN;
 
                 if (this.inStream == null)
@@ -46,25 +47,36 @@ public class cpio {
 
                 if (this.extractBase == null)
                     this.extractBase = // REVIEW the default value here
-                    new File(System.getProperty("user.dir", "."));
-            } else if (args[i].equals("-o")) {
+                            new File(System.getProperty("user.dir", "."));
+                break;
+            case "-o":
                 this.action = ACT_COPYOUT;
-            } else if (args[i].equals("-p")) {
+                break;
+            case "-p":
                 this.action = ACT_PASSTHRU;
-            } else if (args[i].equals("-I")) {
+                break;
+            case "-I":
                 String archFile = args[++i];
                 this.inStream = new FileInputStream(archFile);
-            } else if (args[i].equals("--basedir")) {
+                break;
+            case "--basedir":
                 String baseDir = args[++i];
                 this.extractBase = new File(baseDir);
-            } else if (args[i].equals("--quiet")) {
+                break;
+            case "--quiet":
                 this.quiet = true;
-            } else if (args[i].equals("-t") || args[i].equals("--list")) {
+                break;
+            case "-t":
+            case "--list":
                 this.listMode = true;
-            } else if (args[i].equals("-v") || args[i].equals("--verbose")) {
+                break;
+            case "-v":
+            case "--verbose":
                 this.verbose = true;
-            } else {
+                break;
+            default:
                 System.err.println("WARNING: ignoring option '" + args[i] + "'");
+                break;
             }
         }
     }

@@ -5,6 +5,7 @@ import java.io.PrintStream;
 
 
 public class RPMLead {
+
     public byte[] magic = new byte[4];
 
     public byte major = 0;

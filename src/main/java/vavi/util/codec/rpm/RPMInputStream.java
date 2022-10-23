@@ -6,42 +6,43 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.zip.GZIPInputStream;
 
+import vavi.util.Debug;
 import vavi.util.codec.cpio.CPIOEntry;
 import vavi.util.codec.cpio.CPIOInputStream;
 
 
-public class RPMInputStream extends Object {
-    private boolean debug = false;
+public class RPMInputStream {
 
-    private InputStream rpmin = null;
+    private InputStream rpmin;
 
-    private GZIPInputStream gzin = null;
+    private GZIPInputStream gzin;
 
-    private CPIOInputStream cpio = null;
+    private CPIOInputStream cpio;
 
     @SuppressWarnings("unused")
-    private String name = null;
+    private String name;
     @SuppressWarnings("unused")
-    private String version = null;
+    private String version;
     @SuppressWarnings("unused")
-    private String release = null;
+    private String release;
     @SuppressWarnings("unused")
-    private String arch = null;
+    private String arch;
 
     private RPMLead lead = new RPMLead();
 
-    private RPMHeader sigHeader = new RPMHeader();
+    private RPMHeader sigHeader;
 
-    private RPMIndexEntry[] sigEntries = new RPMIndexEntry[0];
+    private RPMIndexEntry[] sigEntries;
 
     @SuppressWarnings("unused")
     private byte[] sigBuffer = new byte[0];
 
-    private RPMHeader headerHeader = new RPMHeader();
+    private RPMHeader headerHeader;
 
-    private RPMIndexEntry[] headerEntries = new RPMIndexEntry[0];
+    private RPMIndexEntry[] headerEntries;
 
     public RPMInputStream(InputStream in, String name, String version, String release, String arch) throws IOException {
         this.rpmin = in;
@@ -97,7 +98,7 @@ public class RPMInputStream extends Object {
     }
 
     private void readRPMLead() throws InvalidRPMFileException {
-        int numRead = 0;
+        int numRead;
 
         try {
             this.lead = new RPMLead();
@@ -153,7 +154,7 @@ public class RPMInputStream extends Object {
     }
 
     private RPMHeader readRPMHeader() throws InvalidRPMFileException {
-        int numRead = 0;
+        int numRead;
         RPMHeader result = new RPMHeader();
 
         try {
@@ -247,8 +248,7 @@ public class RPMInputStream extends Object {
                 numToRead = entry.offset - offset;
                 byte[] skipbuf = new byte[numToRead];
                 numRead = this.rpmin.read(skipbuf);
-                if (this.debug)
-                    System.err.println("skipped " + numRead + " header content bytes.");
+Debug.println(Level.FINE, "skipped " + numRead + " header content bytes.");
                 offset += numRead;
             }
 
@@ -263,9 +263,8 @@ public class RPMInputStream extends Object {
                         break;
 
                     offset += numRead;
-                    if (this.debug)
-                        System.err.println("CHAR[" + cnt + "](" + numRead + ") = '" + readBuf[0] + "'");
-                    values.add(new Character((char) readBuf[0]));
+Debug.println(Level.FINE, "CHAR[" + cnt + "](" + numRead + ") = '" + readBuf[0] + "'");
+                    values.add((char) readBuf[0]);
                     break;
 
                 case RPMIndexEntry.RPMTYPE_INT8:
@@ -275,10 +274,9 @@ public class RPMInputStream extends Object {
                         break;
 
                     offset += numRead;
-                    if (this.debug)
-                        System.err.println("INT8[" + cnt + "](" + numRead + ") = '" + readBuf[0] + "'");
+Debug.println(Level.FINE, "INT8[" + cnt + "](" + numRead + ") = '" + readBuf[0] + "'");
                     int int8 = (readBuf[0] & 0x000000FF);
-                    values.add(new Integer(int8));
+                    values.add(int8);
                     break;
 
                 case RPMIndexEntry.RPMTYPE_INT16:
@@ -289,9 +287,8 @@ public class RPMInputStream extends Object {
 
                     offset += numRead;
                     int int16 = (((readBuf[0] << 8) & 0x0000FF00) | (readBuf[1] & 0x000000FF));
-                    if (this.debug)
-                        System.err.println("INT16[" + cnt + "](" + numRead + ") = '" + int16 + "'");
-                    values.add(new Integer(int16));
+Debug.println(Level.FINE, "INT16[" + cnt + "](" + numRead + ") = '" + int16 + "'");
+                    values.add(int16);
                     break;
 
                 case RPMIndexEntry.RPMTYPE_INT32:
@@ -302,9 +299,8 @@ public class RPMInputStream extends Object {
 
                     offset += numRead;
                     int int32 = (((readBuf[0] << 24) & 0xFF000000) | ((readBuf[1] << 16) & 0x00FF0000) | ((readBuf[2] << 8) & 0x0000FF00) | (readBuf[3] & 0x000000FF));
-                    if (this.debug)
-                        System.err.println("INT32[" + cnt + "](" + numRead + ")<" + offset + "> = '" + int32 + "'");
-                    values.add(new Integer(int32));
+Debug.println(Level.FINE, "INT32[" + cnt + "](" + numRead + ")<" + offset + "> = '" + int32 + "'");
+                    values.add(int32);
                     break;
 
                 case RPMIndexEntry.RPMTYPE_INT64:
@@ -315,11 +311,11 @@ public class RPMInputStream extends Object {
                         break;
 
                     offset += numRead;
-                    values.add(new Integer(-1));
+                    values.add(-1);
                     break;
 
                 case RPMIndexEntry.RPMTYPE_STRING:
-                    StringBuffer sBuf = new StringBuffer();
+                    StringBuilder sBuf = new StringBuilder();
 
                     for (;;) {
                         numToRead = 1;
@@ -334,8 +330,7 @@ public class RPMInputStream extends Object {
                         sBuf.append((char) readBuf[0]);
                     }
 
-                    if (this.debug)
-                        System.err.println("STRING (" + sBuf.length() + ") = '" + sBuf + "'");
+Debug.println(Level.FINE, "STRING (" + sBuf.length() + ") = '" + sBuf + "'");
                     values.add(sBuf.toString());
                     break;
 
@@ -344,27 +339,24 @@ public class RPMInputStream extends Object {
 
                     numToRead = entry.count;
                     numRead = this.rpmin.read(binData, 0, numToRead);
-                    if (this.debug)
-                        System.err.println("BIN[" + cnt + "](" + numRead + ") read " + numRead + " bytes.");
+Debug.println(Level.FINE, "BIN[" + cnt + "](" + numRead + ") read " + numRead + " bytes.");
                     if (numRead < numToRead)
                         break;
 
                     offset += numRead;
-                    if (this.debug)
-                        System.err.println("BIN[" + cnt + "](" + numRead + ")<" + offset + "> = '-B I N   D A T A-'");
+Debug.println(Level.FINE, "BIN[" + cnt + "](" + numRead + ")<" + offset + "> = '-B I N   D A T A-'");
                     values.add(binData);
                     cnt = entry.count; // end outer loop...
                     break;
 
                 case RPMIndexEntry.RPMTYPE_STRING_ARRAY:
                     String[] sAry = new String[entry.count];
-                    if (this.debug)
-                        System.err.println("STRINGARRAY[" + cnt + "] has " + entry.count + " strings.");
+Debug.println(Level.FINE, "STRINGARRAY[" + cnt + "] has " + entry.count + " strings.");
 
                     for (int si = 0; si < entry.count; ++si) {
-                        StringBuffer saBuf = new StringBuffer();
+                        StringBuilder saBuf = new StringBuilder();
 
-                        for (;;) {
+                        while (true) {
                             numToRead = 1;
                             numRead = this.rpmin.read(readBuf, 0, numToRead);
                             if (numRead < numToRead)
@@ -377,8 +369,7 @@ public class RPMInputStream extends Object {
                             saBuf.append((char) readBuf[0]);
                         }
 
-                        if (this.debug)
-                            System.err.println("STRINGARRAY[" + si + "] = '" + saBuf + "'");
+Debug.println(Level.FINE, "STRINGARRAY[" + si + "] = '" + saBuf + "'");
 
                         sAry[si] = saBuf.toString();
                     }
@@ -399,13 +390,11 @@ public class RPMInputStream extends Object {
         }
 
         if (offset < contentSize) {
-            if (this.debug)
-                System.err.println("SKIP CONTENT PAD: size = " + contentSize + " offset = " + offset);
+Debug.println(Level.FINE, "SKIP CONTENT PAD: size = " + contentSize + " offset = " + offset);
             numToRead = (contentSize - offset);
             byte[] padBuf = new byte[numToRead];
             numRead = this.rpmin.read(padBuf, 0, numToRead);
-            if (this.debug)
-                System.err.println("SKIP CONTENT PAD: " + numRead + " of " + numToRead + " bytes skipped.");
+Debug.println(Level.FINE, "SKIP CONTENT PAD: " + numRead + " of " + numToRead + " bytes skipped.");
             if (numRead < numToRead)
                 throw new IOException("unexpected eof reading content pad");
         }
@@ -422,7 +411,7 @@ public class RPMInputStream extends Object {
     public void copyEntryContents(OutputStream out) throws IOException {
         byte[] buf = new byte[32 * 1024];
 
-        for (;;) {
+        while (true) {
             int numRead = this.read(buf, 0, buf.length);
             if (numRead == -1)
                 break;
@@ -459,5 +448,4 @@ public class RPMInputStream extends Object {
             throw new InvalidRPMFileException("IOException - " + ex.getMessage());
         }
     }
-
 }

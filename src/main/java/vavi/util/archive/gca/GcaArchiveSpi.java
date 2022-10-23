@@ -8,9 +8,10 @@ package vavi.util.archive.gca;
 
 import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.util.Map;
 
 import vavi.util.archive.Archive;
 import vavi.util.archive.spi.ArchiveSpi;
@@ -36,7 +37,7 @@ public abstract class GcaArchiveSpi implements ArchiveSpi {
         }
 
         InputStream is =
-            new BufferedInputStream(new FileInputStream((File) target));
+            new BufferedInputStream(Files.newInputStream(((File) target).toPath()));
 
         byte[] b = new byte[4];
 
@@ -55,7 +56,17 @@ public abstract class GcaArchiveSpi implements ArchiveSpi {
     }
 
     /** */
-    public abstract Archive createArchiveInstance(Object obj) throws IOException;
+    public abstract Archive createArchiveInstance(Object obj, Map<String, ?> env) throws IOException;
+
+    @Override
+    public Class<?>[] getInputTypes() {
+        return new Class[] {File.class};
+    }
+
+    @Override
+    public String[] getFileSuffixes() {
+        return new String[] {"gca", "GCA"};
+    }
 }
 
 /* */

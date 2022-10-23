@@ -8,6 +8,7 @@ package vavi.util.archive.stuffit;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 import vavi.util.archive.Archive;
 
@@ -21,8 +22,13 @@ import vavi.util.archive.Archive;
 public class NativeStuffItArchiveSpi extends StuffItArchiveSpi {
 
     /* */
-    public Archive createArchiveInstance(Object obj) throws IOException {
+    public Archive createArchiveInstance(Object obj, Map<String, ?> env) throws IOException {
         return new NativeStuffItArchive((File) obj);
+    }
+
+    @Override
+    public Class<?>[] getInputTypes() {
+        return new Class[] {File.class};
     }
 }
 

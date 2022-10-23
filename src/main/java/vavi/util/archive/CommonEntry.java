@@ -10,7 +10,7 @@ import vavi.util.StringUtil;
 
 
 /**
- * Common arhicve entry.
+ * Common archive entry.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030211 nsano initial version <br>
@@ -138,12 +138,12 @@ public class CommonEntry implements Entry {
     @Override
     public Object clone() {
         try {
-            CommonEntry clone = CommonEntry.class.cast(Class.forName(getClass().getName()).newInstance());
-            clone.comment = (comment == null) ? null : new String(comment);
+            CommonEntry clone = (CommonEntry) Class.forName(getClass().getName()).newInstance();
+            clone.comment = (comment == null) ? null : comment;
             clone.compressedSize = compressedSize;
             clone.crc = crc;
             clone.method = method;
-            clone.name = (name == null) ? null : new String(name);
+            clone.name = (name == null) ? null : name;
             clone.size = size;
             clone.time = time;
             clone.directory = directory;

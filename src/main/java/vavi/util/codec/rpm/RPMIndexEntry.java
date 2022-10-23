@@ -39,33 +39,33 @@ public class RPMIndexEntry {
         prefix = prefix + "      ";
 
         for (int i = 0; i < this.count; ++i) {
-            Object value = null;
+            Object value;
             switch (this.type) {
             case RPMTYPE_NULL:
                 break;
             case RPMTYPE_CHAR:
                 value = this.values.get(i);
                 Character ch = (Character) value;
-                out.println(prefix + "[" + i + "] = '" + ch.charValue() + "'");
+                out.println(prefix + "[" + i + "] = '" + ch + "'");
                 break;
             case RPMTYPE_INT8:
                 value = this.values.get(i);
-                int int8 = ((Integer) value).intValue();
+                int int8 = (Integer) value;
                 out.println(prefix + "[" + i + "] = " + int8 + "");
                 break;
             case RPMTYPE_INT16:
                 value = this.values.get(i);
-                int int16 = ((Integer) value).intValue();
+                int int16 = (Integer) value;
                 out.println(prefix + "[" + i + "] = " + int16 + "");
                 break;
             case RPMTYPE_INT32:
                 value = this.values.get(i);
-                int int32 = ((Integer) value).intValue();
+                int int32 = (Integer) value;
                 out.println(prefix + "[" + i + "] = " + int32 + "");
                 break;
             case RPMTYPE_INT64:
                 value = this.values.get(i);
-                long int64 = ((Long) value).longValue();
+                long int64 = (Long) value;
                 out.println(prefix + "[" + i + "] = " + int64 + "");
                 break;
             case RPMTYPE_STRING:

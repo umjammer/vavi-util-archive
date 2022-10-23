@@ -8,9 +8,10 @@ package vavi.util.archive.stuffit;
 
 import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.util.Map;
 
 import vavi.util.Debug;
 import vavi.util.StringUtil;
@@ -37,7 +38,7 @@ public abstract class StuffItArchiveSpi implements ArchiveSpi {
         }
 
         InputStream is =
-            new BufferedInputStream(new FileInputStream((File) target));
+            new BufferedInputStream(Files.newInputStream(((File) target).toPath()));
 
         byte[] b = new byte[8];
 
@@ -55,7 +56,12 @@ Debug.println("\n" + StringUtil.getDump(b));
     }
 
     @Override
-    public abstract Archive createArchiveInstance(Object obj) throws IOException;
+    public abstract Archive createArchiveInstance(Object obj, Map<String, ?> env) throws IOException;
+
+    @Override
+    public String[] getFileSuffixes() {
+        return new String[] {"sit", "SIT"};
+    }
 }
 
 /* */

@@ -9,11 +9,11 @@ package vavi.util.codec.lzma;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 
 
 /**
@@ -360,10 +360,8 @@ public class LzmaInputStream extends FilterInputStream {
         }
 
         for (pb = 0; prop0 >= (9 * 5); pb++, prop0 -= (9 * 5)) {
-            ;
         }
         for (lp = 0; prop0 >= 9; lp++, prop0 -= 9) {
-            ;
         }
         lc = prop0;
 
@@ -376,9 +374,6 @@ public class LzmaInputStream extends FilterInputStream {
             dictionarySize += ((properties[1 + i] & 0xFF) << (i * 8));
         }
         dictionary = new byte[dictionarySize];
-        if (dictionary == null) {
-            throw new LzmaException("LZMA : can't allocate");
-        }
 
         int numProbs = Literal + (LZMA_LIT_SIZE << (lc + lp));
 
@@ -452,7 +447,7 @@ long temps = System.currentTimeMillis();
 
             OutputStream outputHandle;
             if (args.length > 1) {
-                outputHandle = new FileOutputStream(new File(args[1]));
+                outputHandle = Files.newOutputStream(new File(args[1]).toPath());
             } else {
                 outputHandle = new ByteArrayOutputStream();
             }
@@ -468,9 +463,7 @@ long temps = System.currentTimeMillis();
             inputHandle.close();
             outputHandle.close();
 
-            outputHandle = null;
-            inputHandle = null;
-System.out.println("time : " + (System.currentTimeMillis() - temps) + " ms");
+            System.out.println("time : " + (System.currentTimeMillis() - temps) + " ms");
             System.exit(0);
         } catch (IOException e) {
             System.out.println(e.getMessage());

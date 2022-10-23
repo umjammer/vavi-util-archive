@@ -101,7 +101,7 @@ Debug.println(e);
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() {
     }
 
     @Override
@@ -122,7 +122,7 @@ Debug.println(e);
     }
 
     @Override
-    public InputStream getInputStream(Entry entry) throws IOException {
+    public InputStream getInputStream(Entry entry) {
         return null;
     }
 

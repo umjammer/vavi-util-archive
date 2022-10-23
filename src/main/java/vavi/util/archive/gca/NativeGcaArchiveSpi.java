@@ -8,6 +8,7 @@ package vavi.util.archive.gca;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 import vavi.util.archive.Archive;
 
@@ -22,7 +23,7 @@ import vavi.util.archive.Archive;
 public class NativeGcaArchiveSpi extends GcaArchiveSpi {
 
     /* */
-    public Archive createArchiveInstance(Object obj) throws IOException {
+    public Archive createArchiveInstance(Object obj, Map<String, ?> env) throws IOException {
         return new NativeGcaArchive((File) obj);
     }
 }

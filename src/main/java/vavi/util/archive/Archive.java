@@ -33,7 +33,7 @@ public interface Archive {
     /**
      * Returns an enumeration of the archived file entries.
      *
-     * @returns an enumeration of the archived file entries
+     * @return an enumeration of the archived file entries
      * @throws IllegalStateException if the archived file has been closed
      */
     Entry[] entries();
@@ -41,7 +41,7 @@ public interface Archive {
     /**
      * Returns the archived file entry for the specified name, or null if not found.
      * 
-     * @param name the name of the entry
+     * @param name the name of the entry TODO make spec. e.g zip is need to strip '/' at the head
      * @return the archived file entry, or null if not found
      * @throws IllegalStateException if the archived file has been closed
      */
@@ -55,7 +55,6 @@ public interface Archive {
      * </p>
      * @param entry the archived file entry
      * @return the input stream for reading the contents of the specified archived file entry.
-     * @throws ArchiveException if a archived format error has occurred TODO
      * @throws IOException if an I/O error has occurred
      * @throws IllegalStateException if the archived file has been closed
      */
@@ -64,7 +63,7 @@ public interface Archive {
     /**
      * Returns the path name of the archived file.
      *
-     * @returns the path name of the archived file
+     * @return the path name of the archived file
      */
     String getName();
 

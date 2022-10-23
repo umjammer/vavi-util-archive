@@ -6,9 +6,9 @@
 
 package vavi.util.archive.tar;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -67,9 +67,9 @@ public class TarArchive implements Archive {
 
     @Override
     public Entry getEntry(String name) {
-        for (int i = 0; i < entries.length; i++) {
-            if (entries[i].getName().equals(name)) {
-                return entries[i];
+        for (Entry entry : entries) {
+            if (entry.getName().equals(name)) {
+                return entry;
             }
         }
         throw new NoSuchElementException(name);
@@ -77,12 +77,12 @@ public class TarArchive implements Archive {
 
     @Override
     public InputStream getInputStream(Entry entry) throws IOException {
-        for (int i = 0; i < entries.length; i++) {
-            if (entries[i].equals(entry)) {
+        for (Entry value : entries) {
+            if (value.equals(entry)) {
                 org.apache.tools.tar.TarEntry e =
-                    (org.apache.tools.tar.TarEntry)
-                        WrappedEntry.class.cast(entries[i]).getWrappedObject();
-                return new FileInputStream(e.getFile());
+                        (org.apache.tools.tar.TarEntry)
+                                ((WrappedEntry<?>) value).getWrappedObject();
+                return Files.newInputStream(e.getFile().toPath());
             }
         }
         throw new NoSuchElementException(entry.getName());

@@ -8,9 +8,9 @@ package vavi.util.archive.sevenzip;
 
 import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,7 +44,7 @@ public class NativeSevenZipArchive implements Archive {
 
     /** */
     public NativeSevenZipArchive(File file) throws IOException {
-System.err.println("7-zip32.dll: " + getVersion());
+Debug.println("7-zip32.dll: " + getVersion());
 
         this.file = file;
 
@@ -62,8 +62,8 @@ System.err.println("7-zip32.dll: " + getVersion());
                 entry.setTime(DateUtil.dosDateTimeToLong(getCurrentDate(),
                                                          getCurrentTime()));
                 entries.add(entry);
-System.err.println(StringUtil.paramString(entry));
-System.err.println("time: " + new Date(entry.getTime()));
+Debug.println(StringUtil.paramString(entry));
+Debug.println("time: " + new Date(entry.getTime()));
             } while (findNext());
         }
     }
@@ -119,7 +119,7 @@ try {
         String temporaryFileName = temporaryDirectoryString + File.separator + entry.getName();
         File temporaryFile = new File(temporaryFileName);
         if (temporaryFile.exists()) {
-            return new BufferedInputStream(new FileInputStream(temporaryFile));
+            return new BufferedInputStream(Files.newInputStream(temporaryFile.toPath()));
         } else {
             throw new IOException("cannpt extract: " + temporaryFileName);
         }
@@ -141,7 +141,7 @@ try {
     /** <hexCode,codeText> */
     private static Properties errorCodeTable;
 
-    /** */
+    /* */
     static {
         String path = "NativeSevenZipArchive_errorCode.properties";
         try {
@@ -204,7 +204,7 @@ Debug.printStackTrace(e);
     /** 検索にマッチしたファイルの全体の圧縮率を得ます。 */
     private native int getSelectedRatio() throws IOException;
 
-    /** */
+    /* */
     static {
         System.loadLibrary("SevenZipWrapper");
     }

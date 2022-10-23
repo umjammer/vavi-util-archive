@@ -6,6 +6,9 @@
 
 package vavi.util.archive.zip;
 
+import java.util.logging.Level;
+
+import vavi.util.Debug;
 import vavi.util.archive.WrappedEntry;
 
 
@@ -15,13 +18,17 @@ import vavi.util.archive.WrappedEntry;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021104 nsano initial version <br>
  */
-public class ZipEntry implements WrappedEntry<java.util.zip.ZipEntry> {
+public class JdkZipEntry implements WrappedEntry<java.util.zip.ZipEntry> {
 
     /** */
     private java.util.zip.ZipEntry entry;
 
-    /** */
-    public ZipEntry(java.util.zip.ZipEntry entry) {
+    /** @param entry TODO vavi-nio-filesystem-archive request to be null */
+    public JdkZipEntry(java.util.zip.ZipEntry entry) {
+if (entry == null) {
+ Debug.println(Level.FINE, "*** entry is null ***");
+ //new Exception("*** DUMMY ***").printStackTrace();
+}
         this.entry = entry;
     }
 
@@ -67,7 +74,7 @@ public class ZipEntry implements WrappedEntry<java.util.zip.ZipEntry> {
 
     @Override
     public boolean isDirectory() {
-        return entry.isDirectory();
+        return entry == null || entry.isDirectory();
     }
 
     @Override

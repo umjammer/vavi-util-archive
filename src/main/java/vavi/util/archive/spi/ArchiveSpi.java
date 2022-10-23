@@ -7,6 +7,7 @@
 package vavi.util.archive.spi;
 
 import java.io.IOException;
+import java.util.Map;
 
 import vavi.util.archive.Archive;
 
@@ -22,12 +23,33 @@ import vavi.util.archive.Archive;
 public interface ArchiveSpi {
 
     /**
-     * 解凍できるかどうか調べます．
+     * Checks a target is extractable or not.
+     * @throws IllegalArgumentException next provider
      */
     boolean canExtractInput(Object target) throws IOException;
 
     /** */
-    Archive createArchiveInstance(Object obj) throws IOException;
+    Archive createArchiveInstance(Object obj, Map<String, ?> env) throws IOException;
+
+    /** TODO */
+    Class<?>[] getInputTypes();
+
+    /** TODO */
+    String[] getFileSuffixes();
+
+    /** */
+    default boolean isSupported(Object target) {
+        for (Class<?> c : getInputTypes()) {
+            if (c.isInstance(target)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static boolean isEnabled(String key, Map<String, Object> map) {
+        return map.containsKey(key) && (map.get(key) == null || (boolean) map.get(key));
+    }
 }
 
 /* */

@@ -9,6 +9,9 @@ package vavi.util.archive.tar;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
+import java.util.logging.Level;
 
 import vavi.util.Debug;
 import vavi.util.StringUtil;
@@ -56,7 +59,7 @@ Debug.println(is);
             }
             l += r;
         }
-//System.err.println(StringUtil.getDump(t));
+Debug.println(Level.FINER, StringUtil.getDump(t));
         l = 0;
         while (l < 5) {
             int r = is.read(b, l, 5 - l);
@@ -67,9 +70,9 @@ Debug.println(is);
         }
         is.reset();
 
-Debug.println("tar magic:\n" + StringUtil.getDump(b));
-        return "ustar".equals(new String(b, "ISO-8859-1")) ||
-            (b[0] == 0x00 &&    // TODO magic 無い奴がいる
+Debug.println(Level.FINE, "tar magic:\n" + StringUtil.getDump(b));
+        return "ustar".equals(new String(b, StandardCharsets.ISO_8859_1)) ||
+            (b[0] == 0x00 && // TODO magic 無い奴がいる
              b[1] == 0x00 &&
              b[2] == 0x00 &&
              b[3] == 0x00 &&
@@ -79,8 +82,8 @@ Debug.println("tar magic:\n" + StringUtil.getDump(b));
 
     /** */
     private boolean isAllAsciiAndNull(byte[] bytes) {
-        for (int i = 0; i < bytes.length; i++) {
-            if ((bytes[i] < 0x20 || bytes[i] > 0x7e) && bytes[i] != 0x00) {
+        for (byte b : bytes) {
+            if ((b < 0x20 || b > 0x7e) && b != 0x00) {
                 return false;
             }
         }
@@ -88,8 +91,18 @@ Debug.println("tar magic:\n" + StringUtil.getDump(b));
     }
 
     /** */
-    public Archive createArchiveInstance(Object obj) throws IOException {
+    public Archive createArchiveInstance(Object obj, Map<String, ?> env) throws IOException {
         return new TarArchive((InputStream) obj);
+    }
+
+    @Override
+    public Class<?>[] getInputTypes() {
+        return new Class[] {InputStream.class};
+    }
+
+    @Override
+    public String[] getFileSuffixes() {
+        return new String[] {"tar", "TAR"};
     }
 }
 
