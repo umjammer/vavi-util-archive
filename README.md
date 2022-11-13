@@ -7,35 +7,38 @@
 
 🌏 Extract the world!
 
+extract all archive types in the same way!</br>
 archives are able to mount as fuse also using [vavi-nio-file-archive](https://github.com/umjammer/vavi-apps-fuse/tree/master/vavi-nio-file-archive)
 and [vavi-net-fuse](https://github.com/umjammer/vavi-apps-fuse/tree/master/vavi-net-fuse)
 
 ## Status
 
-| name     | mathod    | read   | write | comment | library                                                                 |
-|----------|-----------|--------|--------|---------|-------------------------------------------------------------------------|
-| binhex   | archiving | ✅     | - |         | [binhex](https://github.com/umjammer/JBinHex)                           |
-| bzip2    | archiving | ✅      | - |         | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
-| cab      | archiving | ✅      | - |         | [dorkbox](https://github.com/umjammer/CabParser)                        |
-| gca      | archiving | -      | - | win only | native                                                                        |
-| gca      | archiving | -      | - |         | shell                                                                        |
-| gzip     | archiving | ✅      | - |         | jdk                                                                     |
-| lha      | archiving | ✅      | - |         | [lha](https://github.com/umjammer/jlha)                                 |
-| rar      | archiving | -      | - | win only | native                                                                    |
-| rar      | archiving | -      | - |         | shell                                                                     |
-| rar      | archiving | ✅      | - |         | [java-unrar](https://github.com/umjammer/java-unrar)                    |
-| rar      | archiving | ✅      | - | no rar5 | [junrar](https://github.com/junrar/junrar)                              |
-| sevenzip | archiving | ✅     | - | 7z only | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
-| sevenzip | archiving | -      | - |         | native                                                                        |
-| stuffit  | archiving |        | - |         | native                                                                        |
-| tar      | archiving | ✅     | - |         | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
-| tar      | stream    | ✅     | - |         | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
-| zip      | archiving | ✅      | - |         | jdk                                                                     |
-| zip      | archiving | ✅      | - |         | [ant](https://ant.apache.org/)                                          |
-| cpio     | stream    | 🚧     | - |         | gjt                                                                     |
-| lzma     | stream    | 🚧     | - |         | [p7zip](https://p7zip.sourceforge.net/)                                 |
-| rpm      | archiving | 🚧     | - |         | gjt                                                                     |
-| apache   | archiving | ✅      | - | multi   | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
+| name     | mathod    | read | write | comment | library                                                                 |
+|----------|-----------|------|--------|---------|-------------------------------------------------------------------------|
+| binhex   | archiving | ✅    | - |         | [binhex](https://github.com/umjammer/JBinHex)                           |
+| bzip2    | archiving | ✅    | - |         | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
+| cab      | archiving | ✅    | - |         | [dorkbox](https://github.com/umjammer/CabParser)                        |
+| gca      | archiving | -    | - | win only | native                                                                        |
+| gca      | archiving | -    | - |         | shell                                                                        |
+| gzip     | archiving | ✅    | - |         | jdk                                                                     |
+| lha      | archiving | ✅    | - |         | [lha](https://github.com/umjammer/jlha)                                 |
+| rar      | archiving | -    | - | win only | native                                                                    |
+| rar      | archiving | -    | - |         | shell                                                                     |
+| rar      | archiving | ✅*   | - |         | [java-unrar](https://github.com/umjammer/java-unrar)                    |
+| rar      | archiving | ✅    | - | no rar5 | [junrar](https://github.com/junrar/junrar)                              |
+| sevenzip | archiving | ✅    | - | 7z only | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
+| sevenzip | archiving | -    | - |         | native                                                                        |
+| stuffit  | archiving |      | - |         | native                                                                        |
+| tar      | archiving | ✅    | - |         | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
+| tar      | stream    | ✅    | - |         | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
+| zip      | archiving | ✅*   | - |         | jdk                                                                     |
+| zip      | archiving | ✅    | - |         | [ant](https://ant.apache.org/)                                          |
+| cpio     | stream    | 🚧   | - |         | gjt                                                                     |
+| lzma     | stream    | 🚧   | - |         | [p7zip](https://p7zip.sourceforge.net/)                                 |
+| rpm      | archiving | 🚧   | - |         | gjt                                                                     |
+| apache   | archiving | ✅    | - | multi   | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
+
+<sub>* chosen as spi</sub>
 
 ## Usage
 
