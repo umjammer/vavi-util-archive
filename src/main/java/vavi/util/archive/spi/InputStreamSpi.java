@@ -11,7 +11,7 @@ import java.io.InputStream;
 
 
 /**
- * Service Provider Interface for archived InpuStream class.
+ * Service Provider Interface class for {@link InputStream} of archived files.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040105 nsano initial version <br>
@@ -24,7 +24,10 @@ public interface InputStreamSpi {
      */
     boolean canExpandInput(Object target) throws IOException;
 
-    /** TODO should have input argument */
+    /**
+     * Creates a decompressing {@link InputStream} instance.
+     * TODO should have input argument
+     */
     InputStream createInputStreamInstance() throws IOException;
 }
 

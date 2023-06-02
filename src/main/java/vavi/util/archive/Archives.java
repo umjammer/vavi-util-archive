@@ -21,7 +21,6 @@ import java.util.Set;
 import java.util.logging.Level;
 
 import vavi.util.Debug;
-import vavi.util.StringUtil;
 import vavi.util.archive.spi.ArchiveSpi;
 import vavi.util.archive.spi.InputStreamSpi;
 
@@ -52,7 +51,7 @@ public class Archives {
         InputStream bis = new BufferedInputStream(is);
 
         for (InputStreamSpi inputStreamSpi : inputStreamSpis) {
-Debug.println(Level.FINE, "inputStreamSpi: " + StringUtil.getClassName(inputStreamSpi.getClass()));
+Debug.println(Level.FINE, "inputStreamSpi: " + inputStreamSpi.getClass().getSimpleName());
             if (inputStreamSpi.canExpandInput(bis)) {
                 InputStream inputStream = inputStreamSpi.createInputStreamInstance();
 Debug.println(Level.FINE, "inputStream: " + inputStream.getClass());

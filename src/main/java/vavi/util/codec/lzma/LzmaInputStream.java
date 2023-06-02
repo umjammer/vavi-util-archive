@@ -397,6 +397,7 @@ public class LzmaInputStream extends FilterInputStream {
     }
 
     /** */
+    @Override
     public int read(byte[] buf, int off, int len) throws IOException {
         if (closed) {
             throw new IOException("stream closed");
@@ -423,6 +424,7 @@ public class LzmaInputStream extends FilterInputStream {
     }
 
     /** */
+    @Override
     public void close() throws IOException {
         closed = true;
         super.close();

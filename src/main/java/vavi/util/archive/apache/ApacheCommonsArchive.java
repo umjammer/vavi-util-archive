@@ -29,7 +29,7 @@ import vavi.util.archive.WrappedEntry;
 
 
 /**
- * The wrapper for Apache commons compress.
+ * The wrapper for apache commons-compress.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2021/11/16 umjammer initial version <br>

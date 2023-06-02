@@ -13,7 +13,7 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 
 /**
- * CAB アーカイブを処理するサービスプロバイダです．
+ * The service provider for CAB archive.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 041002 nsano initial version <br>

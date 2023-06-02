@@ -18,7 +18,7 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 
 /**
- * GCA アーカイブを処理するサービスプロバイダです．
+ * The service provider for GCA archive.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030128 nsano initial version <br>
@@ -27,9 +27,9 @@ import vavi.util.archive.spi.ArchiveSpi;
 public abstract class GcaArchiveSpi implements ArchiveSpi {
 
     /**
-     * 解凍できるかどうか調べます．
-     * @param target 今のところ File しか受け付けません
+     * @param target currently accepts only File
      */
+    @Override
     public boolean canExtractInput(Object target) throws IOException {
 
         if (!(target instanceof File)) {
@@ -55,7 +55,7 @@ public abstract class GcaArchiveSpi implements ArchiveSpi {
                b[2] == 'A';
     }
 
-    /** */
+    @Override
     public abstract Archive createArchiveInstance(Object obj, Map<String, ?> env) throws IOException;
 
     @Override

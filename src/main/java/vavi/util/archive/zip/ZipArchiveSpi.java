@@ -13,7 +13,7 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 
 /**
- * The ZIP SPI base.
+ * The service provider for ZIP archive base.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 220929 nsano initial version <br>

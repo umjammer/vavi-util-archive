@@ -51,26 +51,26 @@ public class RPMIndexEntry {
             case RPMTYPE_INT8:
                 value = this.values.get(i);
                 int int8 = (Integer) value;
-                out.println(prefix + "[" + i + "] = " + int8 + "");
+                out.println(prefix + "[" + i + "] = " + int8);
                 break;
             case RPMTYPE_INT16:
                 value = this.values.get(i);
                 int int16 = (Integer) value;
-                out.println(prefix + "[" + i + "] = " + int16 + "");
+                out.println(prefix + "[" + i + "] = " + int16);
                 break;
             case RPMTYPE_INT32:
                 value = this.values.get(i);
                 int int32 = (Integer) value;
-                out.println(prefix + "[" + i + "] = " + int32 + "");
+                out.println(prefix + "[" + i + "] = " + int32);
                 break;
             case RPMTYPE_INT64:
                 value = this.values.get(i);
                 long int64 = (Long) value;
-                out.println(prefix + "[" + i + "] = " + int64 + "");
+                out.println(prefix + "[" + i + "] = " + int64);
                 break;
             case RPMTYPE_STRING:
                 String str = (String) this.values.get(i);
-                out.println(prefix + "[" + i + "] = " + str + "");
+                out.println(prefix + "[" + i + "] = " + str);
                 break;
             case RPMTYPE_BIN:
                 byte[] data = (byte[]) this.values.get(0);
@@ -79,7 +79,7 @@ public class RPMIndexEntry {
                 break;
             case RPMTYPE_STRING_ARRAY:
                 String[] sAry = (String[]) this.values.get(0);
-                out.println(prefix + "[" + i + "] = " + sAry[i] + "");
+                out.println(prefix + "[" + i + "] = " + sAry[i]);
                 break;
             case RPMTYPE_I18NSTRING:
                 // UNDONE

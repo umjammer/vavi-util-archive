@@ -23,7 +23,7 @@ import vavi.util.archive.WrappedEntry;
 
 
 /**
- * Represents RAR archived file.
+ * JunrarRarArchive represents RAR archived file
  * wrapping the library 'com.github.junrar:junrar'
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
@@ -89,7 +89,7 @@ public class JunrarRarArchive extends InputStreamSupport implements Archive {
     }
 
     @Override
-    public InputStream getInputStream(final Entry entry) throws IOException {
+    public InputStream getInputStream(Entry entry) throws IOException {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             archive.extractFile((FileHeader) ((WrappedEntry<?>) entry).getWrappedObject(), baos);

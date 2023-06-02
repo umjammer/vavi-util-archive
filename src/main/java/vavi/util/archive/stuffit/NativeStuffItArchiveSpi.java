@@ -14,14 +14,14 @@ import vavi.util.archive.Archive;
 
 
 /**
- * StuffIt アーカイブを処理するサービスプロバイダです．
+ * The service provider for StuffIt archive.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 060106 nsano initial version <br>
  */
 public class NativeStuffItArchiveSpi extends StuffItArchiveSpi {
 
-    /* */
+    @Override
     public Archive createArchiveInstance(Object obj, Map<String, ?> env) throws IOException {
         return new NativeStuffItArchive((File) obj);
     }

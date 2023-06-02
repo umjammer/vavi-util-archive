@@ -21,7 +21,7 @@ import vavi.util.archive.WrappedEntry;
 
 
 /**
- * Represents TAR archived file.
+ * TarArchive represents TAR archive file.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040106 nsano initial version <br>

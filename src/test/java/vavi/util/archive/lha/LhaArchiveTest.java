@@ -70,7 +70,7 @@ Debug.println(entry.getName() + ", " + entry.getSize());
     }
 
     /**
-     * @param args
+     * @param args 0: lha
      */
     public static void main(String[] args) throws Exception {
         Path target = Paths.get(System.getenv("HOME"), args[0]);

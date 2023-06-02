@@ -20,7 +20,7 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 
 /**
- * TAR アーカイブを処理するサービスプロバイダです．
+ * The service provider for TAR archive.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040106 nsano initial version <br>
@@ -31,9 +31,9 @@ public class TarArchiveSpi implements ArchiveSpi {
     private static final int SKIP = 257;
 
     /**
-     * 解凍できるかどうか調べます．
-     * @param target 今のところ InputStream しか受け付けません
+     * @param target currently accepts only InputStream
      */
+    @Override
     public boolean canExtractInput(Object target) throws IOException {
 
         if (!(target instanceof InputStream)) {
@@ -72,7 +72,7 @@ Debug.println(Level.FINER, StringUtil.getDump(t));
 
 Debug.println(Level.FINE, "tar magic:\n" + StringUtil.getDump(b));
         return "ustar".equals(new String(b, StandardCharsets.ISO_8859_1)) ||
-            (b[0] == 0x00 && // TODO magic 無い奴がいる
+            (b[0] == 0x00 && // TODO w/ magic
              b[1] == 0x00 &&
              b[2] == 0x00 &&
              b[3] == 0x00 &&
@@ -90,7 +90,7 @@ Debug.println(Level.FINE, "tar magic:\n" + StringUtil.getDump(b));
         return true;
     }
 
-    /** */
+    @Override
     public Archive createArchiveInstance(Object obj, Map<String, ?> env) throws IOException {
         return new TarArchive((InputStream) obj);
     }

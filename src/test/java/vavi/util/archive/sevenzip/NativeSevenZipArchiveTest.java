@@ -7,7 +7,6 @@
 package vavi.util.archive.sevenzip;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 
 import org.junit.jupiter.api.Test;
@@ -27,14 +26,14 @@ class NativeSevenZipArchiveTest {
 
     @Test
     @EnabledOnOs(OS.WINDOWS)
-    void test() throws IOException {
+    void test() throws Exception {
         main(new String[] { "src/test/resources/test.sit" });
     }
 
     // ----
 
     /** java NativeSevenZipArchive sevenZipFile oneOfEntry */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         NativeSevenZipArchive sevenZip = new NativeSevenZipArchive(new File(args[0]));
         Entry entry = sevenZip.getEntry(args[1]);
         InputStream is = sevenZip.getInputStream(entry);
@@ -44,7 +43,6 @@ System.err.println("is: " + is);
 //System.err.println("size: " + sevenZip.getSelectedSize());
 //System.err.println("csize: " + sevenZip.getSelectedCompressedSize());
 //System.err.println("ratio: " + sevenZip.getSelectedRatio());
-        System.exit(0);
     }
 }
 

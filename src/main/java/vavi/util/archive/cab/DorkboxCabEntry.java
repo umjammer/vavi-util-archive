@@ -15,7 +15,7 @@ import dorkbox.cabParser.structure.CabFolderEntry;
 
 
 /**
- * DorkboxCabEntry．
+ * DorkboxCabEntry represents a CAB archive entry using a library Dorkbox.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 120216 nsano initial version <br>

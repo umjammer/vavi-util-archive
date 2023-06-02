@@ -16,7 +16,7 @@ import vavi.util.archive.spi.InputStreamSpi;
 
 
 /**
- * BZip2 アーカイブを処理するサービスプロバイダです．
+ * The service provider for BZip2 archive.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040105 nsano initial version <br>
@@ -27,9 +27,9 @@ public class BZip2InputStreamSpi implements InputStreamSpi {
     private Object target;
 
     /**
-     * 伸張できるかどうか調べます．
-     * @param target 今のところ InputStream しか受け付けません
+     * @param target currently accepts only InputStream
      */
+    @Override
     public boolean canExpandInput(Object target) throws IOException {
 
         if (!(target instanceof InputStream)) {
@@ -58,7 +58,7 @@ public class BZip2InputStreamSpi implements InputStreamSpi {
                b[2] == (byte) 0x68;
     }
 
-    /** */
+    @Override
     public InputStream createInputStreamInstance()
         throws IOException {
 Debug.println(target);

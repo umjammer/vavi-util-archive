@@ -17,7 +17,7 @@ import vavi.util.archive.Archive;
 
 
 /**
- * The SPI for 7zip using Apache commons compress.
+ * The service provider for 7zip archive using apache commons-compress.
  * 
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2021/11/16 umjammer initial version <br>

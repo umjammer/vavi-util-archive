@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 
 public class cpio {
@@ -57,7 +59,7 @@ public class cpio {
                 break;
             case "-I":
                 String archFile = args[++i];
-                this.inStream = new FileInputStream(archFile);
+                this.inStream = Files.newInputStream(Paths.get(archFile));
                 break;
             case "--basedir":
                 String baseDir = args[++i];

@@ -19,7 +19,7 @@ import vavi.util.archive.Archive;
 
 
 /**
- * The ZIP SPI using the JDK zip library.
+ * The service provider for ZIP archive using the JDK zip library.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021222 nsano initial version <br>

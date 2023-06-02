@@ -18,7 +18,7 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 
 /**
- * LHA アーカイブを処理するサービスプロバイダです．
+ * The service provider for LHA archive.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021222 nsano initial version <br>
@@ -26,9 +26,9 @@ import vavi.util.archive.spi.ArchiveSpi;
 public class LhaArchiveSpi implements ArchiveSpi {
 
     /**
-     * 解凍できるかどうか調べます．
      * @param target {@link File} and {@link InputStream} are supported.
      */
+    @Override
     public boolean canExtractInput(Object target) throws IOException {
         if (!isSupported(target)) {
             return false;
@@ -71,9 +71,9 @@ public class LhaArchiveSpi implements ArchiveSpi {
 
     /**
      * @param obj {@link File} and {@link InputStream} are supported.
-     * @param env
      * @throws IllegalArgumentException unsupported type is specified to <code>obj</code>.
      */
+    @Override
     public Archive createArchiveInstance(Object obj, Map<String, ?> env) throws IOException {
         if (obj instanceof File) {
             return new LhaArchive((File) obj);
