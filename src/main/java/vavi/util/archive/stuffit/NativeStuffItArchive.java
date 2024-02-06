@@ -22,7 +22,7 @@ import vavi.util.archive.Entry;
 
 
 /**
- * StuffItWrapper.dll のラッパークラスです。
+ * NativeStuffItArchive represents a StuffIt archive wrapping StuffItWrapper.dll.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030226 nsano initial version <br>
@@ -45,25 +45,19 @@ System.err.println("StuffIt.dll: " + getVersion());
         openArchive(file.getPath(), 0);
     }
 
-    /**
-     * ファイルを閉じます。
-     */
+    @Override
     public void close() throws IOException {
         closeArchive();
     }
 
-    /**
-     * ファイルエントリの列挙を返します。
-     */
+    @Override
     public Entry[] entries() {
         Entry[] entries = new Entry[this.entries.size()];
         this.entries.toArray(entries);
         return entries;
     }
 
-    /**
-     * 指定された名前の ZIP ファイルエントリを返します。
-     */
+    @Override
     public Entry getEntry(String name) {
         for (Entry entry : entries) {
             if (entry.getName().equals(name)) {
@@ -73,10 +67,7 @@ System.err.println("StuffIt.dll: " + getVersion());
         return null;
     }
 
-    /**
-     * 指定された ファイルエントリの内容を読み込むための入力ストリームを
-     * 返します。
-     */
+    @Override
     public InputStream getInputStream(Entry entry) throws IOException {
 
         String commandLine = MessageFormat.format("e \"{0}\" \"{1}\" \"{2}\"",
@@ -96,16 +87,12 @@ Debug.println("commandLine: " + commandLine);
         }
     }
 
-    /**
-     * ファイルのパス名を返します。
-     */
+    @Override
     public String getName() {
         return file.getPath();
     }
 
-    /**
-     * ファイル中のエントリの数を返します。
-     */
+    @Override
     public int size() {
         return entries.size();
     }
@@ -147,21 +134,21 @@ Debug.println("commandLine: " + commandLine);
         entries.add(entry);
     }
 
-    // for Native method ------------------------------------------------------
+    // for Native method ----
 
-    /** インスタンス識別子 */
+    /** instance id for dll */
     private int instance;
 
-    // インターフェース
+    // interface
 
-    /** コマンド文字列を与えて，各種の書庫操作を行います。 */
+    /** processes each functionality by a command string */
     private native void exec(String command) throws IOException;
-    /** バージョンを返します。 */
+    /** gets version */
     protected native int getVersion();
 
-    /** 書庫ファイルを開きます。 */
+    /** open an archive */
     private native void openArchive(String filename, int mode) throws IOException;
-    /** 書庫ファイルを閉じます。 */
+    /** close the archive */
     private native void closeArchive() throws IOException;
 
     /* */

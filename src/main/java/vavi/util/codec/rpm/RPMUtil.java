@@ -11,7 +11,7 @@ public class RPMUtil {
     }
 
     public static String hexString(byte[] buf, int off, int len, int sepFreq, String sep) {
-        final char[] hexChars = {
+        char[] hexChars = {
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
         };
 

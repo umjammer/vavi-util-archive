@@ -25,8 +25,7 @@ import vavi.util.archive.Entry;
 
 
 /**
- * RAR アーカイブを処理するサービスプロバイダです．
- * (外部シェル起動バージョン)
+ * ShellRarArchive represents a RAR archive using shell outoput.
  * 
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021105 nsano initial version <br>
@@ -40,7 +39,7 @@ public class ShellRarArchive implements Archive {
 
     /** */
     public ShellRarArchive(File file) throws IOException {
-        final DateFormat sdf = new SimpleDateFormat("dd-MM-yy HH:mm");
+        DateFormat sdf = new SimpleDateFormat("dd-MM-yy HH:mm");
         Process p = Runtime.getRuntime().exec(new String[] { "unrar", "v", file.toString() });
         BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
         r.readLine();

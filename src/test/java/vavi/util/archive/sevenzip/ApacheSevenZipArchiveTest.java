@@ -50,7 +50,6 @@ class ApacheSevenZipArchiveTest {
         assertEquals(6, c);
     }
 
-
     @Test
     @DisplayName("inputStream")
     void test5() throws Exception {

@@ -17,7 +17,7 @@ import vavi.util.archive.Archive;
 
 
 /**
- * CAB アーカイブを処理するサービスプロバイダです．
+ * The service provider for CAB archive.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 041002 nsano initial version <br>
@@ -25,9 +25,9 @@ import vavi.util.archive.Archive;
 public class DorkboxCabArchiveSpi extends CabArchiveSpi {
 
     /**
-     * 解凍できるかどうか調べます．
-     * @param target 今のところ File, InputStream しか受け付けません
+     * @param target currently accepts File and InputStream.
      */
+    @Override
     public boolean canExtractInput(Object target) throws IOException {
         if (!isSupported(target)) {
             return false;
@@ -53,9 +53,9 @@ public class DorkboxCabArchiveSpi extends CabArchiveSpi {
 
     /**
      * @param obj {@link File} and {@link InputStream} are supported.
-     * @param env
      * @throws IllegalArgumentException unsupported type is specified to <code>obj</code>.
      */
+    @Override
     public Archive createArchiveInstance(Object obj, Map<String, ?> env) throws IOException {
         if (obj instanceof File) {
             return new DorkboxCabArchive((File) obj);

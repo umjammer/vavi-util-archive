@@ -15,7 +15,7 @@ import de.innosystec.unrar.rarfile.FileHeader;
 
 
 /**
- * Represents RAR archived file.
+ * PureJavaRarEntry represents a RAR archived file
  * warring the library 'vavi:java-unrar'
  * 
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)

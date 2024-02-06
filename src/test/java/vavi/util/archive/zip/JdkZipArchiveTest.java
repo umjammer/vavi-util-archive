@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.zip.ZipException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -37,6 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 
@@ -113,8 +115,8 @@ class JdkZipArchiveTest {
             }
         });
 Debug.println("exception cause: " + e.getMessage());
-        assertInstanceOf(IllegalArgumentException.class, e.getCause());
-        assertEquals("MALFORMED", e.getCause().getMessage());
+        assertInstanceOf(ZipException.class, e.getCause());
+        assertTrue(e.getCause().getMessage().contains("invalid CEN header"));
     }
 
     @Test
@@ -150,8 +152,8 @@ Debug.println("exception cause: " + e.getMessage());
         Path path = Paths.get(file932);
         IOException e = assertThrows(IOException.class, () -> Archives.getArchive(path.toFile()));
 Debug.println("exception cause: " + e.getMessage());
-        assertInstanceOf(IllegalArgumentException.class, e.getCause());
-        assertEquals("MALFORMED", e.getCause().getMessage());
+        assertInstanceOf(ZipException.class, e.getCause());
+        assertTrue(e.getCause().getMessage().contains("invalid CEN header"));
     }
 
     /** until Predicate#not release */

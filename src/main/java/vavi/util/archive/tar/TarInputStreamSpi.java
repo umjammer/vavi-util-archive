@@ -20,7 +20,7 @@ import vavi.util.archive.spi.InputStreamSpi;
 
 
 /**
- * Tar アーカイブを処理するサービスプロバイダです．
+ * The service provider for Tar archive.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040106 nsano initial version <br>
@@ -34,9 +34,9 @@ public class TarInputStreamSpi implements InputStreamSpi {
     private static final int SKIP = 257;
 
     /**
-     * 解凍できるかどうか調べます．
-     * @param target 今のところ {#link InputStream} しか受け付けません
+     * @param target currently accepts only {#link InputStream}
      */
+    @Override
     public boolean canExpandInput(Object target) throws IOException {
 
         if (!(target instanceof InputStream)) {
@@ -96,6 +96,7 @@ Debug.println(Level.FINE, "tar magic:\n" + StringUtil.getDump(b));
     }
 
     /** */
+    @Override
     public InputStream createInputStreamInstance() {
         return new TarArchiveInputStream((InputStream) target);
     }

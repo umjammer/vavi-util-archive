@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.logging.Level;
 
 import vavi.util.Debug;
 
@@ -34,7 +35,7 @@ public abstract class InputStreamSupport {
     protected InputStreamSupport(InputStream is) throws IOException {
         Path temp = Files.createTempFile("vavi.util.archive.InputStreamSupport@" + is.hashCode(), ".inputStream");
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-Debug.println("shutdownHook: rm: " + temp);
+Debug.println(Level.FINE, "shutdownHook: rm: " + temp);
             try {
                 Files.delete(temp);
             } catch (IOException e) {

@@ -35,9 +35,9 @@ public class BinhexInputStreamSpi implements InputStreamSpi {
     private static final int L = COMMENT.length();
 
     /**
-     * checks extractable or not.
      * @param target currently accepts {#link InputStream} only
      */
+    @Override
     public boolean canExpandInput(Object target) throws IOException {
 
         if (!(target instanceof InputStream)) {

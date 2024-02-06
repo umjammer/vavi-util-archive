@@ -25,7 +25,7 @@ import vavi.util.win32.DateUtil;
 
 
 /**
- * UnGCA32.dll のラッパークラスです。
+ * NativeGcaArchive repesents GCA archive wrapping UnGCA32.dll.
  * 
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030226 nsano initial version <br>
@@ -64,25 +64,19 @@ System.err.println("time: " + new Date(entry.getTime()));
         }
     }
 
-    /**
-     * ファイルを閉じます。
-     */
+    @Override
     public void close() throws IOException {
         closeArchive();
     }
 
-    /**
-     * ファイルエントリの列挙を返します。
-     */
+    @Override
     public Entry[] entries() {
         Entry[] entries = new Entry[this.entries.size()];
         this.entries.toArray(entries);
         return entries;
     }
 
-    /**
-     * 指定された名前の ZIP ファイルエントリを返します。
-     */
+    @Override
     public Entry getEntry(String name) {
         for (Entry entry : entries) {
             if (entry.getName().equals(name)) {
@@ -96,10 +90,9 @@ System.err.println("time: " + new Date(entry.getTime()));
     private static final String commandLineBase = "e \"{0}\" \"{1}\" \"{2}\"";
 
     /**
-     * 指定された ファイルエントリの内容を読み込むための入力ストリームを
-     * 返します。
      * TODO password, keyfile
      */
+    @Override
     public InputStream getInputStream(Entry entry) throws IOException {
 
         String commandLine = MessageFormat.format(commandLineBase,
@@ -119,70 +112,66 @@ Debug.println("commandLine: " + commandLine);
         }
     }
 
-    /**
-     * ファイルのパス名を返します。
-     */
+    @Override
     public String getName() {
         return file.getPath();
     }
 
-    /**
-     * ファイル中のエントリの数を返します。
-     */
+    @Override
     public int size() {
         return entries.size();
     }
 
-    // for Native method ------------------------------------------------------
+    // for Native method ----
 
-    /** インスタンス識別子 */
+    /** instance id for dll */
     private int instance;
 
-    /** getFileName がうまくいかんから代用 */
+    /** getFileName() doesn't work well, so this is alternative */
     private String currentFilename;
 
-    // インターフェース
+    // interface
 
-    /** コマンド文字列を与えて，各種の書庫操作を行います。 */
+    /** processes each functionality by a command string */
     private native void exec(String command) throws IOException;
-    /** バージョンを返します。 */
+    /** gets version */
     protected native int getVersion();
-    /** 動作中か否かを得ます。 */
+    /** tells is running or not */
     private native boolean isRunning();
 
-    /** 指定ファイルが書庫として正しいかどうかを返します。 */
+    /** checks the archive is valid or not */
     private native boolean checkArchive(String filename, int mode);
-    /** 指定された書庫ファイルに格納されているファイル数を得ます。 */
+    /** gets entries count in an archive */
     private native int getFileCount(String filename) throws IOException;
-    /** 書庫ファイルを開きます。 */
+    /** open an archive */
     private native void openArchive(String filename, int mode) throws IOException;
-    /** 書庫ファイルを閉じます。 */
+    /** close the archive */
     private native void closeArchive() throws IOException;
-    /** 最初の格納ファイルの情報を得ます。 */
+    /** gets the first entry */
     private native boolean findFirst(String key) throws IOException;
-    /** 2 番目以降の格納ファイルの情報を得ます。 */
+    /** gets after 2nd entry */
     private native boolean findNext();
 
-    /** 格納ファイルのファイル名を得ます。 */
+    /** gets the current entry filename */
     private native String getCurrentFileName() throws IOException;
-    /** 格納ファイルの圧縮法を得ます。 */
+    /** gets the current entry archive method */
     private native int getCurrentMethod() throws IOException;
-    /** 格納ファイルのサイズを得ます。 */
+    /** gets the current entry original size */
     private native long getCurrentOriginalSize() throws IOException;
-    /** 格納ファイルの圧縮サイズを得ます。 */
+    /** gets the current entry compressed size */
     private native long getCurrentCompressedSize() throws IOException;
-    /** 格納ファイルの日付を DOS 形式で得ます。 */
+    /** gets the current entry date in DOS format */
     private native int getCurrentDate() throws IOException;
-    /** 格納ファイルの時刻を DOS 形式で得ます。 */
+    /** gets the current entry time in DOS format */
     private native int getCurrentTime() throws IOException;
-    /** 格納ファイルのチェックサムを得ます。 */
+    /** gets the current entry checksum */
     private native long getCurrentCRC() throws IOException;
 
-    /** 検索にマッチしたファイルのサイズの合計を得ます。 */
+    /** gets a sum of selected entries size */
     private native long getSelectedSize() throws IOException;
-    /** 検索にマッチしたファイルの圧縮サイズの合計を得ます。 */
+    /** gets a sum of selected entries compressed size */
     private native long getSelectedCompressedSize() throws IOException;
-    /** 検索にマッチしたファイルの全体の圧縮率を得ます。 */
+    /** gets compression ratio of selected entries */
     private native int getSelectedRatio() throws IOException;
 
     /* */

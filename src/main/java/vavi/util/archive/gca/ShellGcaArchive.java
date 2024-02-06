@@ -24,9 +24,9 @@ import vavi.util.archive.Entry;
 
 
 /**
- * GCA アーカイブを処理するサービスプロバイダです．
+ * ShellGcaArchive represents GCA archive using shell output.
  *
- * TODO ファイル名が長い時最初 ... になってフォーマットが崩れる
+ * TODO when an entry name is long, it cannot format well because of abbreviation "...".
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030128 nsano initial version <br>
@@ -45,7 +45,7 @@ public class ShellGcaArchive implements Archive {
 
         this.file = file;
 
-        final DateFormat sdf =
+        DateFormat sdf =
             new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Process p = Runtime.getRuntime().exec(new String[] { "gcac", "l", file.toString() });
         BufferedReader r = new BufferedReader(

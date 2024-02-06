@@ -17,7 +17,7 @@ import vavi.util.archive.Archive;
 
 
 /**
- * The SPI for RAR archive using native library.
+ * The service provider for RAR archive using native library.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021222 nsano initial version <br>
@@ -27,9 +27,9 @@ import vavi.util.archive.Archive;
 public class ShellRarArchiveSpi extends RarArchiveSpi {
 
     /**
-     * 解凍できるかどうか調べます．
-     * @param target 今のところ File しか受け付けません
+     * @param target currently accepts only File
      */
+    @Override
     public boolean canExtractInput(Object target) throws IOException {
         if (!isSupported(target)) {
             return false;
@@ -48,7 +48,7 @@ public class ShellRarArchiveSpi extends RarArchiveSpi {
         return canExtractInput(is, needToClose);
     }
 
-    /* */
+    @Override
     public Archive createArchiveInstance(Object obj, Map<String, ?> env) throws IOException {
         return new ShellRarArchive((File) obj);
     }

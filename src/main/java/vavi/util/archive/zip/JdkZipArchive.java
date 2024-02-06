@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
 import vavi.util.Debug;
@@ -84,12 +85,12 @@ public class JdkZipArchive extends InputStreamSupport implements Archive {
             String encoding = System.getProperty(ZIP_ENCODING, StandardCharsets.UTF_8.toString());
             this.archive = new ZipFile(file, Charset.forName(encoding));
             this.entries = entries();
-        } catch (IllegalArgumentException e) {
-            if (failsafeEncoding != null && e.getMessage().equals("MALFORMED")) {
-Debug.println("zip reading failure by utf-8, retry using " + failsafeEncoding);
+        } catch (ZipException e) {
+            if (failsafeEncoding != null && e.getMessage().contains("invalid CEN header")) {
+Debug.println(Level.FINE, "zip reading failure by utf-8, retry using " + failsafeEncoding);
                 this.archive = new ZipFile(file, Charset.forName(failsafeEncoding));
                 this.entries = entries();
-Debug.println("entries " + entries.length);
+Debug.println(Level.FINE, "entries " + entries.length);
             } else {
                 // IllegalArgumentException used for next provider
                 throw new IOException(e);

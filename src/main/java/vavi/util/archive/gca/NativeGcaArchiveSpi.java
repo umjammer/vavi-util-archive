@@ -14,7 +14,7 @@ import vavi.util.archive.Archive;
 
 
 /**
- * GCA アーカイブを処理するサービスプロバイダです．
+ * The service provider for GCA archive.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030128 nsano initial version <br>
@@ -22,7 +22,7 @@ import vavi.util.archive.Archive;
  */
 public class NativeGcaArchiveSpi extends GcaArchiveSpi {
 
-    /* */
+    @Override
     public Archive createArchiveInstance(Object obj, Map<String, ?> env) throws IOException {
         return new NativeGcaArchive((File) obj);
     }

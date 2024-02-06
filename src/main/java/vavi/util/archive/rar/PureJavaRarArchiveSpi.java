@@ -17,7 +17,7 @@ import vavi.util.archive.Archive;
 
 
 /**
- * The SPI for RAR archive using the library 'vavi:java-unrar'.
+ * The service provider for RAR archive using the library 'vavi:java-unrar'.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021222 nsano initial version <br>

@@ -7,9 +7,9 @@
 package vavi.util.archive.gca;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
@@ -23,18 +23,19 @@ import vavi.util.archive.Entry;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2020/05/12 umjammer initial version <br>
  */
+@EnabledOnOs(OS.WINDOWS)
 class NativeGcaArchiveTest {
 
     @Test
-    @EnabledOnOs(OS.WINDOWS)
-    void test() throws IOException {
+    @Disabled("no test environment")
+    void test() throws Exception {
         main(new String[] { "src/test/resources/test.gca" });
     }
 
     // ----
 
     /** */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         NativeGcaArchive gca = new NativeGcaArchive(new File(args[0])) {
             {
 System.err.println("gca: " + getVersion());

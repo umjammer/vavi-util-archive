@@ -17,7 +17,7 @@ import vavi.util.archive.Archive;
 
 
 /**
- * The SPI for SevenZip using native library.
+ * The service provider for SevenZip archive using native library.
  * 
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030228 nsano initial version <br>

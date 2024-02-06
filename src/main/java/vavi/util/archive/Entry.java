@@ -34,72 +34,72 @@ public interface Entry extends Cloneable {
     long getCompressedSize();
 
     /**
-     * 圧縮解除されたエントリデータの CRC-32 チェックサムを返します。
+     * Returns the CRC-32 checksum of the uncompressed entry data.
      */
     long getCrc();
 
     /**
-     * エントリの補足フィールドデータを返します。
+     * Returns the extra field data for the entry.
      */
     Object getExtra();
 
     /**
-     * エントリの圧縮メソッドを返します。
+     * Returns the compression method of the entry.
      */
     int getMethod();
 
     /**
-     * エントリの名前を返します。
+     * Returns the name of the entry.
      */
     String getName();
 
     /**
-     * エントリデータの圧縮解除時のサイズを返します。
+     * Returns the uncompressed size of the entry data.
      */
     long getSize();
 
     /**
-     * エントリの修正時間を返します。
+     * Returns the last modification time of the entry.
      */
     long getTime();
 
     /**
-     * これがディレクトリエントリである場合に、true を返します。
+     * Returns true if this is a directory entry.
      */
     boolean isDirectory();
 
     /**
-     * エントリに任意指定のコメント文字列を設定します。
+     * Sets the optional comment string for the entry.
      */
     void setComment(String comment);
 
     /**
-     * 圧縮されたエントリデータのサイズを設定します。
+     * Sets the size of the compressed entry data.
      */
     void setCompressedSize(long csize);
 
     /**
-     * 圧縮解除されたエントリデータの CRC-32 チェックサムを設定します。
+     * Sets the CRC-32 checksum of the uncompressed entry data.
      */
     void setCrc(long crc);
 
     /**
-     * エントリに任意指定の補足フィールドデータを設定します。
+     * Sets the optional extra field data for the entry.
      */
     void setExtra(Object extra);
 
     /**
-     * エントリの圧縮メソッドを設定します。
+     * Sets the compression method for the entry.
      */
     void setMethod(int method);
 
     /**
-     * エントリデータの圧縮解除時のサイズを設定します。
+     * Sets the uncompressed size of the entry data.
      */
     void setSize(long size);
 
     /**
-     * エントリの修正時間を設定します。
+     * Sets the last modification time of the entry.
      */
     void setTime(long time);
 }

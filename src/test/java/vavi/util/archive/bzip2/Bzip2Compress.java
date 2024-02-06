@@ -1,5 +1,5 @@
-/*
- * $Header: /home/cvspublic/jakarta-commons-sandbox/compress/src/test/org/apache/commons/compress/bzip2/example/Bzip2Uncompress.java,v 1.1 2003/12/02 20:44:24 dirkv Exp $
+package vavi.util.archive.bzip2;/*
+ * $Header: /home/cvspublic/jakarta-commons-sandbox/compress/src/test/org/apache/commons/compress/bzip2/example/vavi.util.archive.bzip2.Bzip2Compress.java,v 1.1 2003/12/02 20:44:24 dirkv Exp $
  * $Revision: 1.1 $
  * $Date: 2003/12/02 20:44:24 $
  *
@@ -60,52 +60,28 @@
  */
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.nio.file.Files;
 
-import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
+import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream;
 
 
 /**
- * This simple example shows how to use the Bzip2 classes to uncompress a file.
+ * This simple example shows how to use the Bzip2 classes to compress a file.
  *
  * @author <a href="mailto:peter@apache.org">Peter Donald</a>
- * @author <a href="mailto:nicolaken@apache.org">Nicola Ken Barozzi</a>
  * @version $Revision: 1.1 $ $Date: 2003/12/02 20:44:24 $
  */
-public class Bzip2Uncompress {
-    public static void main(final String[] args) {
-        try {
-            if (2 != args.length) {
-                System.out.println("java Bzip2Uncompress <input> <output>");
-                System.exit(1);
-            }
-
-            final File source = new File(args[0]);
-            final File destination = new File(args[1]);
-            final FileOutputStream output = new FileOutputStream(destination);
-            final BZip2CompressorInputStream input = new BZip2CompressorInputStream(new FileInputStream(source));
-            copy(input, output);
-            input.close();
-            output.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+public class Bzip2Compress {
+    public static void main(String[] args) throws Exception {
+        if (2 != args.length) {
+            System.out.println("java vavi.util.archive.bzip2.Bzip2Compress <input> <output>");
             System.exit(1);
         }
-    }
 
-    /**
-     * Copy bytes from an <code>InputStream</code> to an <code>OutputStream</code>.
-     */
-    private static void copy(final InputStream input, final OutputStream output)
-        throws IOException {
-        final byte[] buffer = new byte[8024];
-        int n;
-        while (-1 != (n = input.read(buffer))) {
-            output.write(buffer, 0, n);
-        }
+        File source = new File(args[0]);
+        File destination = new File(args[1]);
+        BZip2CompressorOutputStream output = new BZip2CompressorOutputStream(Files.newOutputStream(destination.toPath()));
+        Files.copy(source.toPath(), output);
+        output.close();
     }
 }

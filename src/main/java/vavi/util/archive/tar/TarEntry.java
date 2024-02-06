@@ -12,7 +12,7 @@ import vavi.util.archive.WrappedEntry;
 
 
 /**
- * Wrapper for the TAR archived file entry.
+ * Wrapper for the TAR archive file entry.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040106 nsano initial version <br>
@@ -107,7 +107,7 @@ public class TarEntry implements WrappedEntry<org.apache.commons.compress.archiv
         entry.setModTime(new Date(time));
     }
 
-    /** */
+    @Override
     public org.apache.commons.compress.archivers.tar.TarArchiveEntry getWrappedObject() {
         return entry;
     }

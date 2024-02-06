@@ -113,6 +113,7 @@ public class ApacheSevenZipEntry implements WrappedEntry<SevenZArchiveEntry> {
     }
 
     /** */
+    @Override
     public SevenZArchiveEntry getWrappedObject() {
         return entry;
     }

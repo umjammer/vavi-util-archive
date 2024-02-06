@@ -20,7 +20,7 @@ import vavi.util.archive.spi.ArchiveSpi;
 
 
 /**
- * The SPI for StuffIt archived file.
+ * The service provider for StuffIt archive file.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 060106 nsano initial version <br>

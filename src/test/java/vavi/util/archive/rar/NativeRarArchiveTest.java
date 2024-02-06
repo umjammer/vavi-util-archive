@@ -7,7 +7,6 @@
 package vavi.util.archive.rar;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 
 import org.junit.jupiter.api.Disabled;
@@ -26,11 +25,11 @@ import static org.junit.jupiter.api.Assertions.fail;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2020/05/12 umjammer initial version <br>
  */
+@EnabledOnOs(OS.WINDOWS)
 class NativeRarArchiveTest {
 
     @Test
     @Disabled
-    @EnabledOnOs(OS.WINDOWS)
     void test() {
         fail("Not yet implemented");
     }
@@ -38,7 +37,7 @@ class NativeRarArchiveTest {
     // for Native method ------------------------------------------------------
 
     /** */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         NativeRarArchive rar = new NativeRarArchive(new File(args[0])) {
             {
                 System.err.println("rar: " + getVersion());
@@ -51,7 +50,6 @@ class NativeRarArchiveTest {
         Entry entry = rar.getEntry(args[1]);
         InputStream is = rar.getInputStream(entry);
 System.err.println("is: " + is);
-        System.exit(0);
     }
 }
 

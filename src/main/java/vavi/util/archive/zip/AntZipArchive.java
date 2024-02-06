@@ -22,7 +22,7 @@ import vavi.util.archive.InputStreamSupport;
 
 
 /**
- * The ZIP SPI using the Ant zip library.
+ * The service provider for ZIP archive using the Ant zip library.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021103 nsano initial version <br>
