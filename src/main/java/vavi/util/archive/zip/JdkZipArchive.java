@@ -86,7 +86,7 @@ public class JdkZipArchive extends InputStreamSupport implements Archive {
             this.archive = new ZipFile(file, Charset.forName(encoding));
             this.entries = entries();
         } catch (ZipException e) {
-            if (failsafeEncoding != null && e.getMessage().contains("invalid CEN header (bad entry name or comment)")) {
+            if (failsafeEncoding != null && e.getMessage().contains("invalid CEN header")) {
 Debug.println(Level.FINE, "zip reading failure by utf-8, retry using " + failsafeEncoding);
                 this.archive = new ZipFile(file, Charset.forName(failsafeEncoding));
                 this.entries = entries();

@@ -116,7 +116,7 @@ class JdkZipArchiveTest {
         });
 Debug.println("exception cause: " + e.getMessage());
         assertInstanceOf(ZipException.class, e.getCause());
-        assertEquals("invalid CEN header (bad entry name or comment)", e.getCause().getMessage());
+        assertTrue(e.getCause().getMessage().contains("invalid CEN header"));
     }
 
     @Test
@@ -153,7 +153,7 @@ Debug.println("exception cause: " + e.getMessage());
         IOException e = assertThrows(IOException.class, () -> Archives.getArchive(path.toFile()));
 Debug.println("exception cause: " + e.getMessage());
         assertInstanceOf(ZipException.class, e.getCause());
-        assertEquals("invalid CEN header (bad entry name or comment)", e.getCause().getMessage());
+        assertTrue(e.getCause().getMessage().contains("invalid CEN header"));
     }
 
     /** until Predicate#not release */
