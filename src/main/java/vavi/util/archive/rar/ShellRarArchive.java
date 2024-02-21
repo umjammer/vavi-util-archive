@@ -89,7 +89,7 @@ Debug.println(e);
     private static final String[] methods = { "m3e" };
 
     /** */
-    private int getMethodNumber(String method) {
+    private static int getMethodNumber(String method) {
         for (int i = 0; i < methods.length; i++) {
             if (methods[i].equals(method)) {
                 return i;

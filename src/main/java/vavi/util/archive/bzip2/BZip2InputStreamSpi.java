@@ -32,13 +32,11 @@ public class BZip2InputStreamSpi implements InputStreamSpi {
     @Override
     public boolean canExpandInput(Object target) throws IOException {
 
-        if (!(target instanceof InputStream)) {
+        if (!(target instanceof InputStream is)) {
             throw new IllegalArgumentException("not supported type " + target);
         }
 
         this.target = target; // TODO weird
-
-        InputStream is = (InputStream) target;
 
         if (!is.markSupported()) {
             throw new IllegalArgumentException("cannot mark to stream");

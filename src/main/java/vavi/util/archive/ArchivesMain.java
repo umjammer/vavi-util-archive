@@ -56,22 +56,21 @@ public class ArchivesMain {
         return sb.toString();
     }
 
-    String toHtml(Entry entry) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("<tr>");
-        sb.append("<td>");
-        sb.append(entry.getName());
-        sb.append("</td>");
-        sb.append("<td>");
-        sb.append(Instant.ofEpochMilli(entry.getTime()));
-        sb.append("</td>");
-        sb.append("<td>");
-        sb.append(entry.getSize());
-        sb.append("</td>");
-        sb.append("<td>");
-        sb.append(entry.getName());
-        sb.append("</td>");
-        sb.append("</tr>");
-        return sb.toString();
+    static String toHtml(Entry entry) {
+        String sb = "<tr>" +
+                "<td>" +
+                entry.getName() +
+                "</td>" +
+                "<td>" +
+                Instant.ofEpochMilli(entry.getTime()) +
+                "</td>" +
+                "<td>" +
+                entry.getSize() +
+                "</td>" +
+                "<td>" +
+                entry.getName() +
+                "</td>" +
+                "</tr>";
+        return sb;
     }
 }

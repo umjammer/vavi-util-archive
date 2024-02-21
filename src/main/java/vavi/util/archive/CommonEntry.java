@@ -138,7 +138,7 @@ public class CommonEntry implements Entry {
     @Override
     public Object clone() {
         try {
-            CommonEntry clone = (CommonEntry) Class.forName(getClass().getName()).newInstance();
+            CommonEntry clone = (CommonEntry) Class.forName(getClass().getName()).getDeclaredConstructor().newInstance();
             clone.comment = (comment == null) ? null : comment;
             clone.compressedSize = compressedSize;
             clone.crc = crc;

@@ -39,13 +39,11 @@ public class TarInputStreamSpi implements InputStreamSpi {
     @Override
     public boolean canExpandInput(Object target) throws IOException {
 
-        if (!(target instanceof InputStream)) {
+        if (!(target instanceof InputStream is)) {
             throw new IllegalArgumentException("not supported type " + target.getClass());
         }
 
         this.target = target;
-
-        InputStream is = (InputStream) target;
 
         if (!is.markSupported()) {
 Debug.println(is);
@@ -86,7 +84,7 @@ Debug.println(Level.FINE, "tar magic:\n" + StringUtil.getDump(b));
     }
 
     /** */
-    private boolean isAllAsciiAndNull(byte[] bytes) {
+    private static boolean isAllAsciiAndNull(byte[] bytes) {
         for (byte b : bytes) {
             if ((b < 0x20 || b > 0x7e) && b != 0x00) {
                 return false;

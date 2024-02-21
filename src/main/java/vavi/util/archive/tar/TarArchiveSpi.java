@@ -36,11 +36,9 @@ public class TarArchiveSpi implements ArchiveSpi {
     @Override
     public boolean canExtractInput(Object target) throws IOException {
 
-        if (!(target instanceof InputStream)) {
+        if (!(target instanceof InputStream is)) {
             throw new IllegalArgumentException("not supported type " + target.getClass());
         }
-
-        InputStream is = (InputStream) target;
 
         if (!is.markSupported()) {
 Debug.println(is);
@@ -81,7 +79,7 @@ Debug.println(Level.FINE, "tar magic:\n" + StringUtil.getDump(b));
     }
 
     /** */
-    private boolean isAllAsciiAndNull(byte[] bytes) {
+    private static boolean isAllAsciiAndNull(byte[] bytes) {
         for (byte b : bytes) {
             if ((b < 0x20 || b > 0x7e) && b != 0x00) {
                 return false;
