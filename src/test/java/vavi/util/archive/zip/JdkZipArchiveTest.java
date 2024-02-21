@@ -205,7 +205,7 @@ Debug.println(entry.getName() + ", " + entry.getSize());
         Path inZip = Paths.get("src/test/resources/test.zip");
         Path outDir = Paths.get("tmp/out_31");
         Archive archive = Archives.getArchive(inZip.toFile());
-        for (Entry entry : Arrays.stream(archive.entries()).filter(e -> !e.isDirectory()).collect(Collectors.toList())) {
+        for (Entry entry : Arrays.stream(archive.entries()).filter(e -> !e.isDirectory()).toList()) {
             Path out = outDir.resolve(entry.getName());
             Files.createDirectories(out.getParent());
             Files.copy(archive.getInputStream(entry), out, StandardCopyOption.REPLACE_EXISTING);

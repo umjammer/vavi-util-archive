@@ -2,10 +2,10 @@ package vavi.util.codec.rpm;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import vavi.util.Debug;
 import vavi.util.codec.cpio.CPIOEntry;
 
 
@@ -15,7 +15,7 @@ public class rpm {
     private File baseDirF = null;
     private int verbosity = 0;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         rpm app = new rpm();
 
         RPMInputStream rin = null;
@@ -27,28 +27,20 @@ public class rpm {
 
         if (args.length < 1) {
             System.err.println("no rpm file specified");
-            app.usage();
+            rpm.usage();
             System.exit(1);
         }
 
-        try {
-            fin = new FileInputStream(args[0]);
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        }
+        fin = new FileInputStream(args[0]);
 
-        try {
-            rin = new RPMInputStream(fin, "name", "version", "release", "arch");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        rin = new RPMInputStream(fin, "name", "version", "release", "arch");
 
         RPMLead lead = rin.getRPMLead();
-System.err.println(lead);
+Debug.println(lead);
         RPMHeader sigHeader = rin.getSignatureHeader();
-System.err.println(sigHeader);
+        Debug.println(sigHeader);
         RPMHeader headHeader = rin.getHeaderHeader();
-System.err.println(headHeader);
+        Debug.println(headHeader);
 
         while (true) {
             try {
@@ -57,11 +49,11 @@ System.err.println(headHeader);
                 if (entry.getHeader().filename.equals("TRAILER!!!"))
                     break;
 
-System.err.println(entry.getHeader().filename + "  " + entry.getHeader().filesize + " bytes.");
+Debug.println(entry.getHeader().filename + "  " + entry.getHeader().filesize + " bytes.");
 
                 if (app.extractOnly) {
                     if (app.verbosity > 0) {
-System.err.println(entry.getHeader().filename + "  " + entry.getHeader().filesize + " bytes");
+Debug.println(entry.getHeader().filename + "  " + entry.getHeader().filesize + " bytes");
                     }
 
                     String fName = entry.getHeader().filename;
@@ -72,13 +64,13 @@ System.err.println(entry.getHeader().filename + "  " + entry.getHeader().filesiz
                     fout.close();
                 }
             } catch (IOException ex) {
-                ex.printStackTrace();
+                Debug.printStackTrace(ex);
                 break;
             }
         }
     }
 
-    private void usage() {
+    private static void usage() {
         System.err.println("usage: rpm [options...] rpmfile");
         System.err.println("options:");
         System.err.println("   --extract-only - the same as -X");

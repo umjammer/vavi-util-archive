@@ -102,22 +102,14 @@ public class CPIOHeader {
     }
 
     public int getFilePadding() {
-        int result = 0;
+        int result = switch (this.format) {
+            case CPIOHeader.FMT_ASCII -> 0;
+            case CPIOHeader.FMT_ASCNEW, CPIOHeader.FMT_ASCCRC -> (4 - (this.filesize % 4)) % 4;
+            case CPIOHeader.FMT_BINARY, CPIOHeader.FMT_BINSWAP -> (this.filesize % 2);
+            default -> 0;
+        };
 
-        switch (this.format) {
-        case CPIOHeader.FMT_ASCII:
-            result = 0;
-            break;
-        case CPIOHeader.FMT_ASCNEW:
-        case CPIOHeader.FMT_ASCCRC:
-            result = (4 - (this.filesize % 4)) % 4;
-            break;
-        case CPIOHeader.FMT_BINARY:
-        case CPIOHeader.FMT_BINSWAP:
-            result = (this.filesize % 2);
-            break;
-        }
-Debug.println("FILEPAD: size=" + this.filesize + "  pad=" + result);
+        Debug.println("FILEPAD: size=" + this.filesize + "  pad=" + result);
         return result;
     }
 
@@ -125,19 +117,12 @@ Debug.println("FILEPAD: size=" + this.filesize + "  pad=" + result);
         int result = 0;
         int size = this.namesize + this.hdrSize;
 
-        switch (this.format) {
-        case CPIOHeader.FMT_ASCII:
-            result = 0;
-            break;
-        case CPIOHeader.FMT_ASCNEW:
-        case CPIOHeader.FMT_ASCCRC:
-            result = (4 - (size % 4)) % 4;
-            break;
-        case CPIOHeader.FMT_BINARY:
-        case CPIOHeader.FMT_BINSWAP:
-            result = (size % 2);
-            break;
-        }
+        result = switch (this.format) {
+            case CPIOHeader.FMT_ASCII -> 0;
+            case CPIOHeader.FMT_ASCNEW, CPIOHeader.FMT_ASCCRC -> (4 - (size % 4)) % 4;
+            case CPIOHeader.FMT_BINARY, CPIOHeader.FMT_BINSWAP -> (size % 2);
+            default -> result;
+        };
 
 Debug.println("NAMEPAD: size=" + size + "(nm=" + this.namesize + ")  pad=" + result);
         return result;

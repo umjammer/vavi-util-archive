@@ -2,9 +2,9 @@ package vavi.util.codec.rpm;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import vavi.util.Debug;
 import vavi.util.codec.cpio.CPIOEntry;
 
 
@@ -16,11 +16,11 @@ public class rpmdump {
     @SuppressWarnings("unused")
     private File baseDirF = null;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         rpmdump app = new rpmdump();
 
         if (args.length < 1) {
-            app.usage();
+            rpmdump.usage();
             System.exit(1);
         }
 
@@ -33,76 +33,68 @@ public class rpmdump {
 
         if (args.length < 1) {
             System.err.println("no rpm file specified");
-            app.usage();
+            rpmdump.usage();
             System.exit(1);
         }
 
-        try {
-            fin = new FileInputStream(args[0]);
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        }
+        fin = new FileInputStream(args[0]);
 
-        try {
-            rin = new RPMInputStream(fin, "name", "version", "release", "arch");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        rin = new RPMInputStream(fin, "name", "version", "release", "arch");
 
         RPMLead lead = rin.getRPMLead();
 
-        System.err.println("RPM Lead:");
+        Debug.println("RPM Lead:");
         lead.dump(System.err, "   ");
 
         RPMHeader sigHeader = rin.getSignatureHeader();
 
-        System.err.println("RPM Signature Header:");
+        Debug.println("RPM Signature Header:");
         sigHeader.dump(System.err, "   ");
 
         for (int i = 0; i < sigHeader.numEntries; ++i) {
             RPMIndexEntry entry = rin.getSignatureEntry(i);
             if (entry != null) {
-                System.err.println("   RPM Index Entry #" + i + ":");
+                Debug.println("   RPM Index Entry #" + i + ":");
                 entry.dump(System.err, "   ");
             } else {
-                System.err.println("Entry #" + i + " is null!");
+                Debug.println("Entry #" + i + " is null!");
             }
         }
 
         RPMHeader headHeader = rin.getHeaderHeader();
 
-        System.err.println("RPM Header Header:");
+        Debug.println("RPM Header Header:");
         headHeader.dump(System.err, "   ");
 
         int idx;
         for (idx = 0; idx < headHeader.numEntries; ++idx) {
             RPMIndexEntry entry = rin.getHeaderEntry(idx);
             if (entry != null) {
-                System.err.println("   RPM Index Entry #" + idx + ":");
+                Debug.println("   RPM Index Entry #" + idx + ":");
                 entry.dump(System.err, "   ");
             } else {
-                System.err.println("Entry #" + idx + " is null!");
+                Debug.println("Entry #" + idx + " is null!");
             }
         }
 
-        System.err.println("RPM Archive Files:");
-        for (;;) {
+        Debug.println("RPM Archive Files:");
+        while (true) {
             try {
                 CPIOEntry entry = rin.getNextFileEntry();
 
                 if (entry.getHeader().filename.equals("TRAILER!!!"))
                     break;
 
-                System.err.println("   " + entry.getHeader().filename + "  " + entry.getHeader().filesize + " bytes.");
+                System.out.println("   " + entry.getHeader().filename + "  " + entry.getHeader().filesize + " bytes.");
             } catch (IOException ex) {
-                ex.printStackTrace();
+                Debug.printStackTrace(ex);
                 break;
             }
         }
     }
 
-    private void usage() {
-        System.err.println("usage: rpmdump [options...] rpmfile");
+    private static void usage() {
+        System.out.println("usage: rpmdump [options...] rpmfile");
     }
 
     private String[] processArguments(String[] args) {

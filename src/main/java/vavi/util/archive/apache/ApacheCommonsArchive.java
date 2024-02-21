@@ -64,7 +64,7 @@ public class ApacheCommonsArchive extends InputStreamSupport implements Archive 
 
             List<ApacheEntry> entries = new ArrayList<>();
             try (InputStream is = new BufferedInputStream(Files.newInputStream(this.file.toPath()));
-                 ArchiveInputStream i = new ArchiveStreamFactory().createArchiveInputStream(is)) {
+                 ArchiveInputStream<?> i = new ArchiveStreamFactory().createArchiveInputStream(is)) {
                 ArchiveEntry entry;
                 while ((entry = i.getNextEntry()) != null) {
                     if (!i.canReadEntryData(entry)) {
@@ -94,7 +94,7 @@ public class ApacheCommonsArchive extends InputStreamSupport implements Archive 
     public InputStream getInputStream(Entry entry) throws IOException {
         try {
             InputStream is = new BufferedInputStream(Files.newInputStream(this.file.toPath()));
-            ArchiveInputStream i = new ArchiveStreamFactory().createArchiveInputStream(is);
+            ArchiveInputStream<?> i = new ArchiveStreamFactory().createArchiveInputStream(is);
             ArchiveEntry e;
             while ((e = i.getNextEntry()) != null) {
                 if (!i.canReadEntryData(e)) {

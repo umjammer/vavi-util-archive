@@ -39,7 +39,7 @@ Debug.println(Level.FINE, "shutdownHook: rm: " + temp);
             try {
                 Files.delete(temp);
             } catch (IOException e) {
-                e.printStackTrace();
+                Debug.printStackTrace(e);
             }
         }));
         Files.copy(is, temp, StandardCopyOption.REPLACE_EXISTING);

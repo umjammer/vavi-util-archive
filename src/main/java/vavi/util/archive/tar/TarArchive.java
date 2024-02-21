@@ -32,7 +32,7 @@ public class TarArchive implements Archive {
     private TarArchiveInputStream archive;
 
     /** */
-    private Entry[] entries;
+    private final Entry[] entries;
 
     /** */
     private String name;
@@ -43,7 +43,7 @@ public class TarArchive implements Archive {
 
         List<Entry> list = new ArrayList<>();
         while (true) {
-            org.apache.commons.compress.archivers.tar.TarArchiveEntry e = archive.getNextTarEntry();
+            org.apache.commons.compress.archivers.tar.TarArchiveEntry e = archive.getNextEntry();
             if (e == null) {
                 break;
             }
