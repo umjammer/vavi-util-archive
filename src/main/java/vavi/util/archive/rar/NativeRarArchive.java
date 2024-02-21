@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,7 +34,7 @@ import vavi.util.win32.DateUtil;
 public class NativeRarArchive implements Archive {
 
     /** */
-    private List<CommonEntry> entries = new ArrayList<>();
+    private final List<CommonEntry> entries = new ArrayList<>();
 
     /** */
     private File file;
@@ -55,8 +56,7 @@ System.err.println("file: " + file.getPath());
                 entry.setCrc(getCurrentCRC());
                 entry.setMethod(getCurrentMethod());
                 entry.setName(currentFilename);
-                entry.setTime(DateUtil.dosDateTimeToLong(getCurrentDate(),
-                                                         getCurrentTime()));
+                entry.setTime(DateUtil.dosDateTimeToLong(getCurrentDate(), getCurrentTime()));
                 entries.add(entry);
 System.err.println(StringUtil.paramString(entry));
 System.err.println("time: " + new Date(entry.getTime()));
@@ -95,20 +95,24 @@ System.err.println("time: " + new Date(entry.getTime()));
     @Override
     public InputStream getInputStream(Entry entry) throws IOException {
 
+        String tmp = System.getProperty("java.io.tmpdir");
+
         String commandLine = MessageFormat.format(commandLineBase,
                                                   file.getPath(),
-                                                  System.getProperty("java.io.tmpdir"),
+                                                  tmp,
                                                   entry.getName());
 Debug.println("commandLine: " + commandLine);
 
         exec(commandLine);
 
-        String temporaryFileName = System.getProperty("java.io.tmpdir") + entry.getName();
-        File temporaryFile = new File(temporaryFileName);
-        if (temporaryFile.exists()) {
-            return new BufferedInputStream(Files.newInputStream(temporaryFile.toPath()));
+        Path temporaryFile = Path.of(tmp, entry.getName());
+        if (!temporaryFile.normalize().startsWith(tmp)) {
+            throw new IOException("Bad zip entry: " + entry.getName());
+        }
+        if (Files.exists(temporaryFile)) {
+            return new BufferedInputStream(Files.newInputStream(temporaryFile));
         } else {
-            throw new IOException("cannot extract: " + temporaryFileName);
+            throw new IOException("cannot extract: " + temporaryFile);
         }
     }
 

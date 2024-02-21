@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,20 +71,24 @@ System.err.println("StuffIt.dll: " + getVersion());
     @Override
     public InputStream getInputStream(Entry entry) throws IOException {
 
+        String tmp = System.getProperty("java.io.tmpdir");
+
         String commandLine = MessageFormat.format("e \"{0}\" \"{1}\" \"{2}\"",
                                                   file.getPath(),
-                                                  System.getProperty("java.io.tmpdir"),
+                                                  tmp,
                                                   entry.getName());
 Debug.println("commandLine: " + commandLine);
 
         exec(commandLine);
 
-        String temporaryFileName = System.getProperty("java.io.tmpdir") + entry.getName();
-        File temporaryFile = new File(temporaryFileName);
-        if (temporaryFile.exists()) {
-            return new BufferedInputStream(Files.newInputStream(temporaryFile.toPath()));
+        Path temporaryFile = Path.of(tmp, entry.getName());
+        if (!temporaryFile.normalize().startsWith(tmp)) {
+            throw new IOException("Bad zip entry: " + entry.getName());
+        }
+        if (Files.exists(temporaryFile)) {
+            return new BufferedInputStream(Files.newInputStream(temporaryFile));
         } else {
-            throw new IOException("cannot extract: " + temporaryFileName);
+            throw new IOException("cannot extract: " + temporaryFile);
         }
     }
 

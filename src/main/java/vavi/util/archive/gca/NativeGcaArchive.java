@@ -95,15 +95,16 @@ Debug.println("time: " + new Date(entry.getTime()));
     @Override
     public InputStream getInputStream(Entry entry) throws IOException {
 
+        String tmp = System.getProperty("java.io.tmpdir");
+
         String commandLine = MessageFormat.format(commandLineBase,
                                                   file.getPath(),
-                                                  System.getProperty("java.io.tmpdir"),
+                                                  tmp,
                                                   entry.getName());
 Debug.println("commandLine: " + commandLine);
 
         exec(commandLine);
 
-        String tmp = System.getProperty("java.io.tmpdir");
         Path temporaryFile = Path.of(tmp, entry.getName());
         if (!temporaryFile.normalize().startsWith(tmp)) {
             throw new IOException("Bad zip entry: " + entry.getName());

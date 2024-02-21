@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -116,12 +117,14 @@ try {
  throw e;
 }
 
-        String temporaryFileName = temporaryDirectoryString + File.separator + entry.getName();
-        File temporaryFile = new File(temporaryFileName);
-        if (temporaryFile.exists()) {
-            return new BufferedInputStream(Files.newInputStream(temporaryFile.toPath()));
+        Path temporaryFile = Path.of(temporaryDirectoryString, entry.getName());
+        if (!temporaryFile.normalize().startsWith(temporaryDirectoryString)) {
+            throw new IOException("Bad zip entry: " + entry.getName());
+        }
+        if (Files.exists(temporaryFile)) {
+            return new BufferedInputStream(Files.newInputStream(temporaryFile));
         } else {
-            throw new IOException("cannpt extract: " + temporaryFileName);
+            throw new IOException("cannpt extract: " + temporaryFile);
         }
     }
 
