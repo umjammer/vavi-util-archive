@@ -183,5 +183,3 @@ Debug.println("commandLine: " + commandLine);
         System.loadLibrary("GcaWrapper");
     }
 }
-
-/* */

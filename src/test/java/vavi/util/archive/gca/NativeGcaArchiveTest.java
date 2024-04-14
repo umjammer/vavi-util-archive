@@ -50,5 +50,3 @@ System.err.println("gca: " + getVersion());
 System.err.println("is: " + is);
     }
 }
-
-/* */

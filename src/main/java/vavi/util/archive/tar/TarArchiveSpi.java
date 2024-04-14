@@ -103,5 +103,3 @@ Debug.println(Level.FINE, "tar magic:\n" + StringUtil.getDump(b));
         return new String[] {"tar", "TAR"};
     }
 }
-
-/* */

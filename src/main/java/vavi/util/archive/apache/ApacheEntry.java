@@ -122,5 +122,3 @@ public class ApacheEntry implements WrappedEntry<ArchiveEntry> {
         return entry;
     }
 }
-
-/* */

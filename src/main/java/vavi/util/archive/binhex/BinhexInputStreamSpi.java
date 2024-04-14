@@ -68,5 +68,3 @@ Debug.println(Level.FINE, "[" + new String(b, StandardCharsets.ISO_8859_1) + "],
         return new BinHex4InputStream((InputStream) target);
     }
 }
-
-/* */

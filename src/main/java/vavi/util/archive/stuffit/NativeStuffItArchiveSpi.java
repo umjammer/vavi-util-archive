@@ -31,5 +31,3 @@ public class NativeStuffItArchiveSpi extends StuffItArchiveSpi {
         return new Class[] {File.class};
     }
 }
-
-/* */

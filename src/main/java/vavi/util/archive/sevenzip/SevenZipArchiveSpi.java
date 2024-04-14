@@ -57,5 +57,3 @@ Debug.println(Level.FINE, "\n" + StringUtil.getDump(b));
         return new String[] {"7z", "7Z"};
     }
 }
-
-/* */

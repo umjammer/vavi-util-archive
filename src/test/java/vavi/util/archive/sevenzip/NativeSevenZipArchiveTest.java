@@ -45,5 +45,3 @@ System.err.println("is: " + is);
 //System.err.println("ratio: " + sevenZip.getSelectedRatio());
     }
 }
-
-/* */

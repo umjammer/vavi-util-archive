@@ -99,5 +99,3 @@ Debug.println(Level.FINE, "tar magic:\n" + StringUtil.getDump(b));
         return new TarArchiveInputStream((InputStream) target);
     }
 }
-
-/* */

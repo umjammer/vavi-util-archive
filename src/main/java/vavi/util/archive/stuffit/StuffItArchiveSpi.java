@@ -63,5 +63,3 @@ Debug.println("\n" + StringUtil.getDump(b));
         return new String[] {"sit", "SIT"};
     }
 }
-
-/* */

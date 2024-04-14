@@ -94,5 +94,3 @@ public class LhaArchiveSpi implements ArchiveSpi {
         return new String[] {"lha", "LHA"};
     }
 }
-
-/* */

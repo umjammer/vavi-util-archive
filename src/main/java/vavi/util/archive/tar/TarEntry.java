@@ -112,5 +112,3 @@ public class TarEntry implements WrappedEntry<org.apache.commons.compress.archiv
         return entry;
     }
 }
-
-/* */

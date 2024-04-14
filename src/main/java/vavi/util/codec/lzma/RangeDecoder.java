@@ -215,5 +215,3 @@ class RangeDecoder {
                decodeBitTree(probs, index + LenHigh, LengthNumberHighBits);
     }
 }
-
-/* */

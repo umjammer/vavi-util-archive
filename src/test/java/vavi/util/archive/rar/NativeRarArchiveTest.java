@@ -52,5 +52,3 @@ class NativeRarArchiveTest {
 System.err.println("is: " + is);
     }
 }
-
-/* */

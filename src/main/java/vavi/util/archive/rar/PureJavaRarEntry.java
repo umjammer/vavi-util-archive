@@ -118,5 +118,3 @@ public class PureJavaRarEntry implements WrappedEntry<FileHeader> {
         return entry;
     }
 }
-
-/* */

@@ -116,5 +116,3 @@ Debug.println("stream after loop: firstByte: " + firstByte);
         fail("no file size > 0");
     }
 }
-
-/* */

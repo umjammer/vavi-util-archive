@@ -103,5 +103,3 @@ public class TarArchive implements Archive {
         return entries.length;
     }
 }
-
-/* */

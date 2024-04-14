@@ -115,5 +115,3 @@ public class JunrarRarEntry implements WrappedEntry<FileHeader> {
         return entry;
     }
 }
-
-/* */

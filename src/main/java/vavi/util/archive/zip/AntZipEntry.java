@@ -115,5 +115,3 @@ public class AntZipEntry implements WrappedEntry<org.apache.tools.zip.ZipEntry> 
         return entry;
     }
 }
-
-/* */

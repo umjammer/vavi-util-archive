@@ -69,5 +69,3 @@ public class PureJavaRarArchiveSpi extends RarArchiveSpi {
         return new Class[] {File.class, InputStream.class};
     }
 }
-
-/* */

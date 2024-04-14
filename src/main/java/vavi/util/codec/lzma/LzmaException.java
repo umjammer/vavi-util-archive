@@ -18,6 +18,7 @@ import java.io.IOException;
  * @version 0.00 040916 nsano modified <br>
  */
 public class LzmaException extends IOException {
+
     /** */
     public LzmaException() {
     }
@@ -27,6 +28,3 @@ public class LzmaException extends IOException {
         super(message);
     }
 }
-
-/* */
-

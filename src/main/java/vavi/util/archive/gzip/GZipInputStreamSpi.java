@@ -60,5 +60,3 @@ public class GZipInputStreamSpi implements InputStreamSpi {
         return new GZIPInputStream((InputStream) target);
     }
 }
-
-/* */

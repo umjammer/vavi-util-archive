@@ -104,5 +104,3 @@ public class DorkboxCabArchive extends InputStreamSupport implements Archive {
         return entries().length;
     }
 }
-
-/* */

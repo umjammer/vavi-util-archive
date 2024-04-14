@@ -118,5 +118,3 @@ public class ApacheSevenZipEntry implements WrappedEntry<SevenZArchiveEntry> {
         return entry;
     }
 }
-
-/* */

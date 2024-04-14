@@ -67,5 +67,3 @@ public class ApacheSevenZipArchiveSpi extends SevenZipArchiveSpi {
         return new Class[] {File.class, InputStream.class};
     }
 }
-
-/* */

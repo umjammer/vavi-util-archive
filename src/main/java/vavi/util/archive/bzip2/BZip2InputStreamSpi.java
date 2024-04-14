@@ -63,5 +63,3 @@ Debug.println(target);
         return new BZip2CompressorInputStream((InputStream) target);
     }
 }
-
-/* */

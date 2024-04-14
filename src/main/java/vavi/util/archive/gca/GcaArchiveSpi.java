@@ -68,5 +68,3 @@ public abstract class GcaArchiveSpi implements ArchiveSpi {
         return new String[] {"gca", "GCA"};
     }
 }
-
-/* */

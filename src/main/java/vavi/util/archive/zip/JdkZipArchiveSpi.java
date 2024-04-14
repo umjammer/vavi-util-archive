@@ -74,5 +74,3 @@ Debug.println(Level.FINE, "failsafeEncoding: " + failsafeEncoding);
         return new Class[] {File.class, InputStream.class};
     }
 }
-
-/* */

@@ -34,5 +34,3 @@ class ShellRarArchiveTest {
         new ShellRarArchive(new File(args[0]));
     }
 }
-
-/* */

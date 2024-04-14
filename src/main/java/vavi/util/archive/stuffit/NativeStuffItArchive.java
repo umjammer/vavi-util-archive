@@ -161,5 +161,3 @@ Debug.println("commandLine: " + commandLine);
         System.loadLibrary("StuffItWrapper");
     }
 }
-
-/* */

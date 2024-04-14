@@ -75,5 +75,3 @@ public interface Archive {
      */
     int size();
 }
-
-/* */

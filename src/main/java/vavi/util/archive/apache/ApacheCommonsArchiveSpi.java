@@ -109,5 +109,3 @@ Debug.println(Level.FINER, compressorName + ": " + Arrays.toString(ss));
         }
     }
 }
-
-/* */

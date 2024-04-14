@@ -109,5 +109,3 @@ public class PureJavaRarArchive extends InputStreamSupport implements Archive {
         return entries().length;
     }
 }
-
-/* */

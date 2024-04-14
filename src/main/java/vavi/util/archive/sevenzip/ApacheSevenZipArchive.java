@@ -89,5 +89,3 @@ public class ApacheSevenZipArchive extends InputStreamSupport implements Archive
         return entries().length;
     }
 }
-
-/* */

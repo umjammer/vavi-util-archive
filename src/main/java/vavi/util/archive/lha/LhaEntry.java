@@ -120,5 +120,3 @@ public class LhaEntry implements WrappedEntry<LhaHeader> {
         return entry;
     }
 }
-
-/* */

@@ -58,5 +58,3 @@ public class ShellRarArchiveSpi extends RarArchiveSpi {
         return new Class[] {File.class};
     }
 }
-
-/* */

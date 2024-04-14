@@ -143,5 +143,3 @@ Debug.printf(Level.FINER, "[%s], [%s]", entry.getName(), name);
         return entries().length;
     }
 }
-
-/* */

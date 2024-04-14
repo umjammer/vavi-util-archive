@@ -37,5 +37,3 @@ public class BZip2InputStreamTest {
         }
     }
 }
-
-/* */

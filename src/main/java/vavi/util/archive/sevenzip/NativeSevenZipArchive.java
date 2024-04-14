@@ -212,5 +212,3 @@ Debug.printStackTrace(e);
         System.loadLibrary("SevenZipWrapper");
     }
 }
-
-/* */

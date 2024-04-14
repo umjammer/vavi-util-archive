@@ -58,5 +58,3 @@ public class NativeRarArchiveSpi extends RarArchiveSpi {
         return new Class[] {File.class};
     }
 }
-
-/* */

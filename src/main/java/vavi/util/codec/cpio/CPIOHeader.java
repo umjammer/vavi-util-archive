@@ -445,5 +445,3 @@ Debug.println("PARSE HEX: '" + field + "'  '" + (new String(buf, offset, length)
         return result;
     }
 }
-
-/* */

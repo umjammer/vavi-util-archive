@@ -42,5 +42,3 @@ System.err.println(header.getDataLength());
         assertInstanceOf(BinHex4InputStream.class, is);
     }
 }
-
-/* */
