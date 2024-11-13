@@ -19,7 +19,7 @@ import vavi.util.archive.WrappedEntry;
  */
 public class ApacheEntry implements WrappedEntry<ArchiveEntry> {
 
-    private ArchiveEntry entry;
+    private final ArchiveEntry entry;
 
     public ApacheEntry(ArchiveEntry entry) {
         this.entry = entry;

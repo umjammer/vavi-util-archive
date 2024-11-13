@@ -8,14 +8,15 @@ package vavi.util.archive.binhex;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.nio.charset.StandardCharsets;
-import java.util.logging.Level;
 
 import org.gjt.convert.binhex.BinHex4InputStream;
-
-import vavi.util.Debug;
 import vavi.util.StringUtil;
 import vavi.util.archive.spi.InputStreamSpi;
+
+import static java.lang.System.getLogger;
 
 
 /**
@@ -26,6 +27,8 @@ import vavi.util.archive.spi.InputStreamSpi;
  * @see "http://klomp.org/JBinHex/JBinHex.html"
  */
 public class BinhexInputStreamSpi implements InputStreamSpi {
+
+    private static final Logger logger = getLogger(BinhexInputStreamSpi.class.getName());
 
     /** */
     private Object target;
@@ -59,7 +62,7 @@ public class BinhexInputStreamSpi implements InputStreamSpi {
         }
         is.reset();
 
-Debug.println(Level.FINE, "[" + new String(b, StandardCharsets.ISO_8859_1) + "], " + COMMENT.equals(new String(b, StandardCharsets.ISO_8859_1)) + "\n\n" + StringUtil.getDump(b));
+logger.log(Level.TRACE, "[" + new String(b, StandardCharsets.ISO_8859_1) + "], " + COMMENT.equals(new String(b, StandardCharsets.ISO_8859_1)) + "\n\n" + StringUtil.getDump(b));
         return COMMENT.equals(new String(b, StandardCharsets.ISO_8859_1));
     }
 

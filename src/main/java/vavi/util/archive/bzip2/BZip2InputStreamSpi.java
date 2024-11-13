@@ -8,11 +8,13 @@ package vavi.util.archive.bzip2;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
-
-import vavi.util.Debug;
 import vavi.util.archive.spi.InputStreamSpi;
+
+import static java.lang.System.getLogger;
 
 
 /**
@@ -22,6 +24,8 @@ import vavi.util.archive.spi.InputStreamSpi;
  * @version 0.00 040105 nsano initial version <br>
  */
 public class BZip2InputStreamSpi implements InputStreamSpi {
+
+    private static final Logger logger = getLogger(BZip2InputStreamSpi.class.getName());
 
     /** */
     private Object target;
@@ -59,7 +63,7 @@ public class BZip2InputStreamSpi implements InputStreamSpi {
     @Override
     public InputStream createInputStreamInstance()
         throws IOException {
-Debug.println(target);
+logger.log(Level.DEBUG, target);
         return new BZip2CompressorInputStream((InputStream) target);
     }
 }

@@ -4,45 +4,49 @@ package vavi.util.codec.rpm;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.zip.GZIPInputStream;
 
-import vavi.util.Debug;
 import vavi.util.codec.cpio.CPIOEntry;
 import vavi.util.codec.cpio.CPIOInputStream;
+
+import static java.lang.System.getLogger;
 
 
 public class RPMInputStream {
 
-    private InputStream rpmin;
+    private static final Logger logger = getLogger(RPMInputStream.class.getName());
 
-    private GZIPInputStream gzin;
+    private final InputStream rpmin;
 
-    private CPIOInputStream cpio;
+    private final GZIPInputStream gzin;
+
+    private final CPIOInputStream cpio;
 
     @SuppressWarnings("unused")
-    private String name;
+    private final String name;
     @SuppressWarnings("unused")
-    private String version;
+    private final String version;
     @SuppressWarnings("unused")
-    private String release;
+    private final String release;
     @SuppressWarnings("unused")
-    private String arch;
+    private final String arch;
 
     private RPMLead lead = new RPMLead();
 
-    private RPMHeader sigHeader;
+    private final RPMHeader sigHeader;
 
-    private RPMIndexEntry[] sigEntries;
+    private final RPMIndexEntry[] sigEntries;
 
     @SuppressWarnings("unused")
-    private byte[] sigBuffer = new byte[0];
+    private final byte[] sigBuffer = new byte[0];
 
-    private RPMHeader headerHeader;
+    private final RPMHeader headerHeader;
 
-    private RPMIndexEntry[] headerEntries;
+    private final RPMIndexEntry[] headerEntries;
 
     public RPMInputStream(InputStream in, String name, String version, String release, String arch) throws IOException {
         this.rpmin = in;
@@ -57,7 +61,7 @@ public class RPMInputStream {
 
         this.sigEntries = this.readRPMHeaderIndex(this.sigHeader.numEntries);
 
-        // this.readSignatureContent();
+//        this.readSignatureContent();
         this.readHeaderContent(this.sigEntries, this.sigHeader.headerSize);
 
         this.skipSignaturePad(this.sigHeader.headerSize);
@@ -120,13 +124,13 @@ public class RPMInputStream {
             try {
                 this.lead.type = this.readShortInt();
             } catch (InvalidRPMFileException ex) {
-                throw new InvalidRPMFileException("while reading lead type, " + ex.getMessage());
+                throw new InvalidRPMFileException("while reading lead type, " + ex.getMessage(), ex);
             }
 
             try {
                 this.lead.archNum = this.readShortInt();
             } catch (InvalidRPMFileException ex) {
-                throw new InvalidRPMFileException("while reading lead archNum, " + ex.getMessage());
+                throw new InvalidRPMFileException("while reading lead archNum, " + ex.getMessage(), ex);
             }
 
             numRead = this.rpmin.read(this.lead.name);
@@ -136,20 +140,20 @@ public class RPMInputStream {
             try {
                 this.lead.osNum = this.readShortInt();
             } catch (InvalidRPMFileException ex) {
-                throw new InvalidRPMFileException("while reading lead osNum, " + ex.getMessage());
+                throw new InvalidRPMFileException("while reading lead osNum, " + ex.getMessage(), ex);
             }
 
             try {
                 this.lead.signatureType = this.readShortInt();
             } catch (InvalidRPMFileException ex) {
-                throw new InvalidRPMFileException("while reading lead signatureType, " + ex.getMessage());
+                throw new InvalidRPMFileException("while reading lead signatureType, " + ex.getMessage(), ex);
             }
 
             numRead = this.rpmin.read(this.lead.reserved);
             if (numRead < this.lead.reserved.length)
                 throw new InvalidRPMFileException("unexpected eof reading lead reserved bytes");
         } catch (IOException ex) {
-            throw new InvalidRPMFileException("IOException - " + ex.getMessage());
+            throw new InvalidRPMFileException("IOException - " + ex.getMessage(), ex);
         }
     }
 
@@ -174,16 +178,16 @@ public class RPMInputStream {
             try {
                 result.numEntries = this.readLongInt();
             } catch (InvalidRPMFileException ex) {
-                throw new InvalidRPMFileException("while reading header number of entries, " + ex.getMessage());
+                throw new InvalidRPMFileException("while reading header number of entries, " + ex.getMessage(), ex);
             }
 
             try {
                 result.headerSize = this.readLongInt();
             } catch (InvalidRPMFileException ex) {
-                throw new InvalidRPMFileException("while reading header size, " + ex.getMessage());
+                throw new InvalidRPMFileException("while reading header size, " + ex.getMessage(), ex);
             }
         } catch (IOException ex) {
-            throw new InvalidRPMFileException("IOException - " + ex.getMessage());
+            throw new InvalidRPMFileException("IOException - " + ex.getMessage(), ex);
         }
 
         return result;
@@ -214,7 +218,7 @@ public class RPMInputStream {
             item = "count";
             result.count = this.readLongInt();
         } catch (InvalidRPMFileException ex) {
-            throw new InvalidRPMFileException("while reading index entry " + item + ", " + ex.getMessage());
+            throw new InvalidRPMFileException("while reading index entry " + item + ", " + ex.getMessage(), ex);
         }
 
         return result;
@@ -228,7 +232,7 @@ public class RPMInputStream {
             if (numRead < skip)
                 throw new IOException("unexpected eof");
         } catch (IOException ex) {
-            throw new InvalidRPMFileException("IOException skipping signature end pad bytes - " + ex.getMessage());
+            throw new InvalidRPMFileException("IOException skipping signature end pad bytes - " + ex.getMessage(), ex);
         }
     }
 
@@ -248,7 +252,7 @@ public class RPMInputStream {
                 numToRead = entry.offset - offset;
                 byte[] skipbuf = new byte[numToRead];
                 numRead = this.rpmin.read(skipbuf);
-Debug.println(Level.FINE, "skipped " + numRead + " header content bytes.");
+logger.log(Level.DEBUG, "skipped " + numRead + " header content bytes.");
                 offset += numRead;
             }
 
@@ -263,7 +267,7 @@ Debug.println(Level.FINE, "skipped " + numRead + " header content bytes.");
                         break;
 
                     offset += numRead;
-Debug.println(Level.FINE, "CHAR[" + cnt + "](" + numRead + ") = '" + readBuf[0] + "'");
+logger.log(Level.DEBUG, "CHAR[" + cnt + "](" + numRead + ") = '" + readBuf[0] + "'");
                     values.add((char) readBuf[0]);
                     break;
 
@@ -274,7 +278,7 @@ Debug.println(Level.FINE, "CHAR[" + cnt + "](" + numRead + ") = '" + readBuf[0] 
                         break;
 
                     offset += numRead;
-Debug.println(Level.FINE, "INT8[" + cnt + "](" + numRead + ") = '" + readBuf[0] + "'");
+logger.log(Level.DEBUG, "INT8[" + cnt + "](" + numRead + ") = '" + readBuf[0] + "'");
                     int int8 = (readBuf[0] & 0x000000FF);
                     values.add(int8);
                     break;
@@ -287,7 +291,7 @@ Debug.println(Level.FINE, "INT8[" + cnt + "](" + numRead + ") = '" + readBuf[0] 
 
                     offset += numRead;
                     int int16 = (((readBuf[0] << 8) & 0x0000FF00) | (readBuf[1] & 0x000000FF));
-Debug.println(Level.FINE, "INT16[" + cnt + "](" + numRead + ") = '" + int16 + "'");
+logger.log(Level.DEBUG, "INT16[" + cnt + "](" + numRead + ") = '" + int16 + "'");
                     values.add(int16);
                     break;
 
@@ -299,7 +303,7 @@ Debug.println(Level.FINE, "INT16[" + cnt + "](" + numRead + ") = '" + int16 + "'
 
                     offset += numRead;
                     int int32 = (((readBuf[0] << 24) & 0xFF000000) | ((readBuf[1] << 16) & 0x00FF0000) | ((readBuf[2] << 8) & 0x0000FF00) | (readBuf[3] & 0x000000FF));
-Debug.println(Level.FINE, "INT32[" + cnt + "](" + numRead + ")<" + offset + "> = '" + int32 + "'");
+logger.log(Level.DEBUG, "INT32[" + cnt + "](" + numRead + ")<" + offset + "> = '" + int32 + "'");
                     values.add(int32);
                     break;
 
@@ -330,7 +334,7 @@ Debug.println(Level.FINE, "INT32[" + cnt + "](" + numRead + ")<" + offset + "> =
                         sBuf.append((char) readBuf[0]);
                     }
 
-Debug.println(Level.FINE, "STRING (" + sBuf.length() + ") = '" + sBuf + "'");
+logger.log(Level.DEBUG, "STRING (" + sBuf.length() + ") = '" + sBuf + "'");
                     values.add(sBuf.toString());
                     break;
 
@@ -339,19 +343,19 @@ Debug.println(Level.FINE, "STRING (" + sBuf.length() + ") = '" + sBuf + "'");
 
                     numToRead = entry.count;
                     numRead = this.rpmin.read(binData, 0, numToRead);
-Debug.println(Level.FINE, "BIN[" + cnt + "](" + numRead + ") read " + numRead + " bytes.");
+logger.log(Level.DEBUG, "BIN[" + cnt + "](" + numRead + ") read " + numRead + " bytes.");
                     if (numRead < numToRead)
                         break;
 
                     offset += numRead;
-Debug.println(Level.FINE, "BIN[" + cnt + "](" + numRead + ")<" + offset + "> = '-B I N   D A T A-'");
+logger.log(Level.DEBUG, "BIN[" + cnt + "](" + numRead + ")<" + offset + "> = '-B I N   D A T A-'");
                     values.add(binData);
                     cnt = entry.count; // end outer loop...
                     break;
 
                 case RPMIndexEntry.RPMTYPE_STRING_ARRAY:
                     String[] sAry = new String[entry.count];
-Debug.println(Level.FINE, "STRINGARRAY[" + cnt + "] has " + entry.count + " strings.");
+logger.log(Level.DEBUG, "STRINGARRAY[" + cnt + "] has " + entry.count + " strings.");
 
                     for (int si = 0; si < entry.count; ++si) {
                         StringBuilder saBuf = new StringBuilder();
@@ -369,7 +373,7 @@ Debug.println(Level.FINE, "STRINGARRAY[" + cnt + "] has " + entry.count + " stri
                             saBuf.append((char) readBuf[0]);
                         }
 
-Debug.println(Level.FINE, "STRINGARRAY[" + si + "] = '" + saBuf + "'");
+logger.log(Level.DEBUG, "STRINGARRAY[" + si + "] = '" + saBuf + "'");
 
                         sAry[si] = saBuf.toString();
                     }
@@ -390,11 +394,11 @@ Debug.println(Level.FINE, "STRINGARRAY[" + si + "] = '" + saBuf + "'");
         }
 
         if (offset < contentSize) {
-Debug.println(Level.FINE, "SKIP CONTENT PAD: size = " + contentSize + " offset = " + offset);
+logger.log(Level.DEBUG, "SKIP CONTENT PAD: size = " + contentSize + " offset = " + offset);
             numToRead = (contentSize - offset);
             byte[] padBuf = new byte[numToRead];
             numRead = this.rpmin.read(padBuf, 0, numToRead);
-Debug.println(Level.FINE, "SKIP CONTENT PAD: " + numRead + " of " + numToRead + " bytes skipped.");
+logger.log(Level.DEBUG, "SKIP CONTENT PAD: " + numRead + " of " + numToRead + " bytes skipped.");
             if (numRead < numToRead)
                 throw new IOException("unexpected eof reading content pad");
         }
@@ -429,7 +433,7 @@ Debug.println(Level.FINE, "SKIP CONTENT PAD: " + numRead + " of " + numToRead + 
 
             return (b1 << 8) + b2;
         } catch (IOException ex) {
-            throw new InvalidRPMFileException("IOException - " + ex.getMessage());
+            throw new InvalidRPMFileException("IOException - " + ex.getMessage(), ex);
         }
     }
 
@@ -445,7 +449,7 @@ Debug.println(Level.FINE, "SKIP CONTENT PAD: " + numRead + " of " + numToRead + 
 
             return (b1 << 24) + (b2 << 16) + (b3 << 8) + b4;
         } catch (IOException ex) {
-            throw new InvalidRPMFileException("IOException - " + ex.getMessage());
+            throw new InvalidRPMFileException("IOException - " + ex.getMessage(), ex);
         }
     }
 }

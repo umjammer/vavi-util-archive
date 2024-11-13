@@ -23,7 +23,7 @@ import dorkbox.cabParser.structure.CabFolderEntry;
 public class DorkboxCabEntry implements WrappedEntry<CabEntry> {
 
     /** */
-    private CabEntry entry;
+    private final CabEntry entry;
 
     /** */
     public DorkboxCabEntry(CabEntry entry) {

@@ -32,10 +32,10 @@ import vavi.util.archive.WrappedEntry;
 public class PureJavaRarArchive extends InputStreamSupport implements Archive {
 
     /** */
-    private de.innosystec.unrar.Archive archive;
+    private final de.innosystec.unrar.Archive archive;
 
     /** */
-    private String name;
+    private final String name;
 
     /** */
     private Entry[] entries;

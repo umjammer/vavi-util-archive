@@ -24,7 +24,7 @@ import de.innosystec.unrar.rarfile.FileHeader;
 public class PureJavaRarEntry implements WrappedEntry<FileHeader> {
 
     /** */
-    private FileHeader entry;
+    private final FileHeader entry;
 
     /** */
     public PureJavaRarEntry(FileHeader header) {

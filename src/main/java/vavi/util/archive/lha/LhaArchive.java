@@ -29,9 +29,9 @@ import vavi.util.archive.WrappedEntry;
 public class LhaArchive extends InputStreamSupport implements Archive {
 
     /** */
-    private LhaFile archive;
+    private final LhaFile archive;
 
-    private String name;
+    private final String name;
 
     /** */
     private Entry[] entries;

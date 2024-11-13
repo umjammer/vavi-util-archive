@@ -21,7 +21,7 @@ import vavi.util.archive.WrappedEntry;
 public class JunrarRarEntry implements WrappedEntry<FileHeader> {
 
     /** */
-    private FileHeader entry;
+    private final FileHeader entry;
 
     /** */
     public JunrarRarEntry(FileHeader header) {

@@ -6,7 +6,7 @@ import java.io.InputStream;
 
 
 public class CPIOEntry {
-    private CPIOHeader header;
+    private final CPIOHeader header;
 
     public CPIOEntry(InputStream in /* , boolean readContents */) throws IOException {
         this.header = new CPIOHeader(in);

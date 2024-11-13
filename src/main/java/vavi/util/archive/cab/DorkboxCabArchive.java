@@ -30,10 +30,10 @@ import vavi.util.archive.InputStreamSupport;
 public class DorkboxCabArchive extends InputStreamSupport implements Archive {
 
     /** */
-    private CabParser cab;
+    private final CabParser cab;
 
     /** */
-    private String name;
+    private final String name;
 
     /** */
     private Entry[] entries;

@@ -1,4 +1,4 @@
-package vavi.util.archive.bzip2;/*
+/*
  * $Header: /home/cvspublic/jakarta-commons-sandbox/compress/src/test/org/apache/commons/compress/bzip2/example/vavi.util.archive.bzip2.Bzip2Compress.java,v 1.1 2003/12/02 20:44:24 dirkv Exp $
  * $Revision: 1.1 $
  * $Date: 2003/12/02 20:44:24 $
@@ -58,6 +58,8 @@ package vavi.util.archive.bzip2;/*
  * <http://www.apache.org/>.
  *
  */
+
+package vavi.util.archive.bzip2;
 
 import java.io.File;
 import java.nio.file.Files;

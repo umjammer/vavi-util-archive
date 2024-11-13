@@ -18,7 +18,7 @@ import vavi.util.archive.WrappedEntry;
 public class AntZipEntry implements WrappedEntry<org.apache.tools.zip.ZipEntry> {
 
     /** */
-    private org.apache.tools.zip.ZipEntry entry;
+    private final org.apache.tools.zip.ZipEntry entry;
 
     /** */
     public AntZipEntry(org.apache.tools.zip.ZipEntry entry) {

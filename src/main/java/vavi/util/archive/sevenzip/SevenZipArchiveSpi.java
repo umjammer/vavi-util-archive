@@ -8,11 +8,13 @@ package vavi.util.archive.sevenzip;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Level;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 
-import vavi.util.Debug;
 import vavi.util.StringUtil;
 import vavi.util.archive.spi.ArchiveSpi;
+
+import static java.lang.System.getLogger;
 
 
 /**
@@ -22,6 +24,8 @@ import vavi.util.archive.spi.ArchiveSpi;
  * @version 0.00 2021/11/16 umjammer initial version <br>
  */
 public abstract class SevenZipArchiveSpi implements ArchiveSpi {
+
+    private static final Logger logger = getLogger(SevenZipArchiveSpi.class.getName());
 
     /**
      *
@@ -41,7 +45,7 @@ public abstract class SevenZipArchiveSpi implements ArchiveSpi {
             is.close();
         }
 
-Debug.println(Level.FINE, "\n" + StringUtil.getDump(b));
+logger.log(Level.DEBUG, "\n" + StringUtil.getDump(b));
         return b[0] == '7' &&
                b[1] == 'z' &&
                b[2] == (byte) 0xbc &&

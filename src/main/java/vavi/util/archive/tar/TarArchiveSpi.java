@@ -9,14 +9,16 @@ package vavi.util.archive.tar;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
-import java.util.logging.Level;
 
-import vavi.util.Debug;
 import vavi.util.StringUtil;
 import vavi.util.archive.Archive;
 import vavi.util.archive.spi.ArchiveSpi;
+
+import static java.lang.System.getLogger;
 
 
 /**
@@ -26,6 +28,8 @@ import vavi.util.archive.spi.ArchiveSpi;
  * @version 0.00 040106 nsano initial version <br>
  */
 public class TarArchiveSpi implements ArchiveSpi {
+
+    private static final Logger logger = getLogger(TarArchiveSpi.class.getName());
 
     /** */
     private static final int SKIP = 257;
@@ -41,7 +45,7 @@ public class TarArchiveSpi implements ArchiveSpi {
         }
 
         if (!is.markSupported()) {
-Debug.println(is);
+logger.log(Level.DEBUG, is);
             throw new IllegalArgumentException("cannot mark to stream");
         }
 
@@ -57,7 +61,7 @@ Debug.println(is);
             }
             l += r;
         }
-Debug.println(Level.FINER, StringUtil.getDump(t));
+logger.log(Level.TRACE, StringUtil.getDump(t));
         l = 0;
         while (l < 5) {
             int r = is.read(b, l, 5 - l);
@@ -68,7 +72,7 @@ Debug.println(Level.FINER, StringUtil.getDump(t));
         }
         is.reset();
 
-Debug.println(Level.FINE, "tar magic:\n" + StringUtil.getDump(b));
+logger.log(Level.DEBUG, "tar magic:\n" + StringUtil.getDump(b));
         return "ustar".equals(new String(b, StandardCharsets.ISO_8859_1)) ||
             (b[0] == 0x00 && // TODO w/ magic
              b[1] == 0x00 &&

@@ -29,7 +29,7 @@ import vavi.util.archive.WrappedEntry;
 public class TarArchive implements Archive {
 
     /** */
-    private TarArchiveInputStream archive;
+    private final TarArchiveInputStream archive;
 
     /** */
     private final Entry[] entries;

@@ -9,19 +9,21 @@ package vavi.util.archive.zip;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
-import vavi.util.Debug;
 import vavi.util.archive.Archive;
 import vavi.util.archive.Entry;
 import vavi.util.archive.InputStreamSupport;
+
+import static java.lang.System.getLogger;
 
 
 /**
@@ -36,6 +38,8 @@ import vavi.util.archive.InputStreamSupport;
  *          0.02 021222 nsano separate canExtractInput to spi <br>
  */
 public class JdkZipArchive extends InputStreamSupport implements Archive {
+
+    private static final Logger logger = getLogger(JdkZipArchive.class.getName());
 
     /** encoding for zip entry names */
     public static final String ZIP_ENCODING = "vavi.util.archive.zip.encoding";
@@ -87,10 +91,10 @@ public class JdkZipArchive extends InputStreamSupport implements Archive {
             this.entries = entries();
         } catch (ZipException e) {
             if (failsafeEncoding != null && e.getMessage().contains("invalid CEN header")) {
-Debug.println(Level.FINE, "zip reading failure by utf-8, retry using " + failsafeEncoding);
+logger.log(Level.DEBUG, "zip reading failure by utf-8, retry using " + failsafeEncoding);
                 this.archive = new ZipFile(file, Charset.forName(failsafeEncoding));
                 this.entries = entries();
-Debug.println(Level.FINE, "entries " + entries.length);
+logger.log(Level.DEBUG, "entries " + entries.length);
             } else {
                 // IllegalArgumentException used for next provider
                 throw new IOException(e);
@@ -119,7 +123,7 @@ Debug.println(Level.FINE, "entries " + entries.length);
     @Override
     public Entry getEntry(String name) {
         for (Entry entry : entries()) {
-Debug.printf(Level.FINER, "[%s], [%s]", entry.getName(), name);
+logger.log(Level.DEBUG, String.format("[%s], [%s]", entry.getName(), name));
             if (entry.getName().replaceFirst("/$", "").equals(name)) {
                 return entry;
             }

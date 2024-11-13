@@ -11,21 +11,23 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
 
 import org.apache.commons.compress.archivers.ArchiveEntry;
 import org.apache.commons.compress.archivers.ArchiveException;
 import org.apache.commons.compress.archivers.ArchiveInputStream;
 import org.apache.commons.compress.archivers.ArchiveStreamFactory;
-import vavi.util.Debug;
 import vavi.util.archive.Archive;
 import vavi.util.archive.Entry;
 import vavi.util.archive.InputStreamSupport;
 import vavi.util.archive.WrappedEntry;
+
+import static java.lang.System.getLogger;
 
 
 /**
@@ -37,11 +39,13 @@ import vavi.util.archive.WrappedEntry;
  */
 public class ApacheCommonsArchive extends InputStreamSupport implements Archive {
 
+    private static final Logger logger = getLogger(ApacheCommonsArchive.class.getName());
+
     /** */
     private Entry[] entries;
 
     /** */
-    private File file;
+    private final File file;
 
     /** */
     public ApacheCommonsArchive(File file) {
@@ -68,7 +72,7 @@ public class ApacheCommonsArchive extends InputStreamSupport implements Archive 
                 ArchiveEntry entry;
                 while ((entry = i.getNextEntry()) != null) {
                     if (!i.canReadEntryData(entry)) {
-                        Debug.println(Level.INFO, "can not read, skip entry: " + (file != null ? file.toPath() + "/" : "") + entry.getName());
+logger.log(Level.INFO, "can not read, skip entry: " + (file != null ? file.toPath() + "/" : "") + entry.getName());
                         continue;
                     }
                     entries.add(new ApacheEntry(entry));
@@ -98,7 +102,7 @@ public class ApacheCommonsArchive extends InputStreamSupport implements Archive 
             ArchiveEntry e;
             while ((e = i.getNextEntry()) != null) {
                 if (!i.canReadEntryData(e)) {
-Debug.println(Level.INFO, "can not read, skip entry: " + file.toPath() + "/" + entry.getName());
+logger.log(Level.INFO, "can not read, skip entry: " + file.toPath() + "/" + entry.getName());
                     continue;
                 }
                 if (((WrappedEntry<?>) entry).getWrappedObject().equals(e)) {

@@ -20,7 +20,7 @@ import vavi.util.archive.WrappedEntry;
 public class ApacheSevenZipEntry implements WrappedEntry<SevenZArchiveEntry> {
 
     /** */
-    private SevenZArchiveEntry entry;
+    private final SevenZArchiveEntry entry;
 
     /** */
     public ApacheSevenZipEntry(SevenZArchiveEntry entry) {
@@ -112,7 +112,6 @@ public class ApacheSevenZipEntry implements WrappedEntry<SevenZArchiveEntry> {
         throw new UnsupportedOperationException();
     }
 
-    /** */
     @Override
     public SevenZArchiveEntry getWrappedObject() {
         return entry;

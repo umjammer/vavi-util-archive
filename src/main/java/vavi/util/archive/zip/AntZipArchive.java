@@ -32,10 +32,10 @@ import vavi.util.archive.InputStreamSupport;
 public class AntZipArchive extends InputStreamSupport implements Archive {
 
     /** */
-    private ZipFile archive;
+    private final ZipFile archive;
 
     /** */
-    private String name;
+    private final String name;
 
     /** */
     private Entry[] entries;

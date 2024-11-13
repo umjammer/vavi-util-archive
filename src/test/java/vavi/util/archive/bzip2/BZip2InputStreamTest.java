@@ -35,5 +35,6 @@ public class BZip2InputStreamTest {
                 break;
             }
         }
+        is.close();
     }
 }

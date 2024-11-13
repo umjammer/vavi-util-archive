@@ -20,7 +20,6 @@ import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.zip.ZipException;
 
 import org.junit.jupiter.api.BeforeEach;

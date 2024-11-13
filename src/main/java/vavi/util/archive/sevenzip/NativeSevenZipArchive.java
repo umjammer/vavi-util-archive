@@ -10,6 +10,8 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.MessageFormat;
@@ -20,13 +22,14 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import vavi.util.Debug;
 import vavi.util.StringUtil;
 import vavi.util.archive.Archive;
 import vavi.util.archive.CommonEntry;
 import vavi.util.archive.Entry;
 import vavi.util.archive.gca.NativeGcaArchive;
 import vavi.util.win32.DateUtil;
+
+import static java.lang.System.getLogger;
 
 
 /**
@@ -37,15 +40,17 @@ import vavi.util.win32.DateUtil;
  */
 public class NativeSevenZipArchive implements Archive {
 
-    /** */
-    private List<CommonEntry> entries = new ArrayList<>();
+    private static final Logger logger = getLogger(NativeSevenZipArchive.class.getName());
 
     /** */
-    private File file;
+    private final List<CommonEntry> entries = new ArrayList<>();
+
+    /** */
+    private final File file;
 
     /** */
     public NativeSevenZipArchive(File file) throws IOException {
-Debug.println("7-zip32.dll: " + getVersion());
+logger.log(Level.DEBUG, "7-zip32.dll: " + getVersion());
 
         this.file = file;
 
@@ -63,8 +68,8 @@ Debug.println("7-zip32.dll: " + getVersion());
                 entry.setTime(DateUtil.dosDateTimeToLong(getCurrentDate(),
                                                          getCurrentTime()));
                 entries.add(entry);
-Debug.println(StringUtil.paramString(entry));
-Debug.println("time: " + new Date(entry.getTime()));
+logger.log(Level.DEBUG, StringUtil.paramString(entry));
+logger.log(Level.DEBUG, "time: " + new Date(entry.getTime()));
             } while (findNext());
         }
     }
@@ -96,23 +101,23 @@ Debug.println("time: " + new Date(entry.getTime()));
 
         File temporaryDirectory = new File(System.getProperty("java.io.tmpdir"));
         String temporaryDirectoryString = temporaryDirectory.getAbsolutePath();
-Debug.println("temporaryDirectory: " + temporaryDirectoryString);
+logger.log(Level.DEBUG, "temporaryDirectory: " + temporaryDirectoryString);
 
         String commandLine = MessageFormat.format("x -hide -y \"{0}\" -o\"{1}\" \"{2}\"",
                                                   file.getPath(),
                                                   temporaryDirectoryString,
                                                   entry.getName());
-Debug.println("commandLine: " + commandLine);
+logger.log(Level.DEBUG, "commandLine: " + commandLine);
 
 try {
         exec(commandLine);
 } catch (IOException e) {
  try {
   int code = Integer.parseInt(e.getMessage());
-  Debug.printf("%1$d, 0x%1$04x\n", code);
-  Debug.println(rb.getString(errorCodeTable.getProperty(String.format("0x%04X", code))));
+  logger.log(Level.TRACE, String.format("%1$d, 0x%1$04x\n", code));
+  logger.log(Level.TRACE, rb.getString(errorCodeTable.getProperty(String.format("0x%04X", code))));
  } catch (Exception e2) {
-  Debug.printStackTrace(e2);
+  logger.log(Level.ERROR, e2.getMessage(), e2);
  }
  throw e;
 }
@@ -151,7 +156,7 @@ try {
             errorCodeTable = new Properties();
             errorCodeTable.load(NativeGcaArchive.class.getResourceAsStream(path));
         } catch (Exception e) {
-Debug.printStackTrace(e);
+logger.log(Level.ERROR, e.getMessage(), e);
         }
     }
 

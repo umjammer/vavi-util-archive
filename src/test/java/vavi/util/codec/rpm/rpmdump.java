@@ -29,7 +29,7 @@ public class rpmdump {
 
         app.baseDirF = new File(System.getProperty("user.dir", "."));
 
-        args = app.processArguments(args);
+        args = rpmdump.processArguments(args);
 
         if (args.length < 1) {
             System.err.println("no rpm file specified");
@@ -97,7 +97,7 @@ public class rpmdump {
         System.out.println("usage: rpmdump [options...] rpmfile");
     }
 
-    private String[] processArguments(String[] args) {
+    private static String[] processArguments(String[] args) {
         int idx = 0;
 
         for (; idx < args.length; ++idx) {
