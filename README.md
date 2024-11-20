@@ -80,7 +80,6 @@ and [vavi-net-fuse](https://github.com/umjammer/vavi-apps-fuse/tree/master/vavi-
      * it's [true](https://github.com/borisbrodski/sevenzipjbinding/issues/19#issuecomment-578636772)
    * unar v1.10.7 ... ok
    * 7zip 17.04 ... ok
- * https://github.com/prog-ai/ArchivR (wip)
  * ~~https://github.com/Diab1o/java-7z-archiver ... yet another pure java 7zip implementation?~~ (done)
  * where is my jna 7z implementation? (in the crashed hdd?)
  * binary things ... gca.exe -> dll -> 64bit -> mach-O + winelib -> dylib
