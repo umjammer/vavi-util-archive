@@ -477,5 +477,3 @@ JNIEXPORT jint JNICALL Java_vavi_util_archive_vavi_NativeSevenZipArchive_getSele
 
     return result;
 }
-
-/* */

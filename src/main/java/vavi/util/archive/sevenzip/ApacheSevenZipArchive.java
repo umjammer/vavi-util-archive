@@ -30,10 +30,10 @@ import vavi.util.archive.WrappedEntry;
 public class ApacheSevenZipArchive extends InputStreamSupport implements Archive {
 
     /** */
-    private SevenZFile file;
+    private final SevenZFile file;
 
     /** */
-    private String name;
+    private final String name;
 
     /** */
     private Entry[] entries;
@@ -89,5 +89,3 @@ public class ApacheSevenZipArchive extends InputStreamSupport implements Archive
         return entries().length;
     }
 }
-
-/* */

@@ -57,5 +57,3 @@ public class NativeSevenZipArchiveSpi extends SevenZipArchiveSpi {
         return new Class[] {File.class};
     }
 }
-
-/* */

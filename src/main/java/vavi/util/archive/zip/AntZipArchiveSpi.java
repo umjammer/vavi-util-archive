@@ -66,5 +66,3 @@ public class AntZipArchiveSpi extends ZipArchiveSpi {
         return new Class[] {File.class};
     }
 }
-
-/* */

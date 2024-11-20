@@ -27,5 +27,3 @@ public class NativeGcaArchiveSpi extends GcaArchiveSpi {
         return new NativeGcaArchive((File) obj);
     }
 }
-
-/* */

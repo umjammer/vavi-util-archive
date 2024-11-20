@@ -10,13 +10,16 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.nio.file.Files;
 import java.util.Map;
 
-import vavi.util.Debug;
 import vavi.util.StringUtil;
 import vavi.util.archive.Archive;
 import vavi.util.archive.spi.ArchiveSpi;
+
+import static java.lang.System.getLogger;
 
 
 /**
@@ -26,6 +29,8 @@ import vavi.util.archive.spi.ArchiveSpi;
  * @version 0.00 060106 nsano initial version <br>
  */
 public abstract class StuffItArchiveSpi implements ArchiveSpi {
+
+    private static final Logger logger = getLogger(StuffItArchiveSpi.class.getName());
 
     /**
      * @param target currently accepts {@link File} only
@@ -50,7 +55,7 @@ public abstract class StuffItArchiveSpi implements ArchiveSpi {
         is.reset();
 
         is.close();
-Debug.println("\n" + StringUtil.getDump(b));
+logger.log(Level.DEBUG, "\n" + StringUtil.getDump(b));
         return new String(b).equals("StuffIt ") ||
                new String(b).equals("SIT!rRau");
     }
@@ -63,5 +68,3 @@ Debug.println("\n" + StringUtil.getDump(b));
         return new String[] {"sit", "SIT"};
     }
 }
-
-/* */

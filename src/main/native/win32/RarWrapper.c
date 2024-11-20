@@ -476,5 +476,3 @@ JNIEXPORT jint JNICALL Java_vavi_util_archive_vavi_NativeRarArchive_getSelectedR
 
     return result;
 }
-
-/* */

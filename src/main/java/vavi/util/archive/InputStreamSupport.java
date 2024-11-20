@@ -9,12 +9,13 @@ package vavi.util.archive;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.logging.Level;
 
-import vavi.util.Debug;
+import static java.lang.System.getLogger;
 
 
 /**
@@ -24,6 +25,8 @@ import vavi.util.Debug;
  * @version 0.00 2022-09-29 nsano initial version <br>
  */
 public abstract class InputStreamSupport {
+
+    private static final Logger logger = getLogger(InputStreamSupport.class.getName());
 
     /** */
     protected InputStreamSupport() {}
@@ -35,11 +38,11 @@ public abstract class InputStreamSupport {
     protected InputStreamSupport(InputStream is) throws IOException {
         Path temp = Files.createTempFile("vavi.util.archive.InputStreamSupport@" + is.hashCode(), ".inputStream");
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-Debug.println(Level.FINE, "shutdownHook: rm: " + temp);
+logger.log(Level.DEBUG, "shutdownHook: rm: " + temp);
             try {
                 Files.delete(temp);
             } catch (IOException e) {
-                Debug.printStackTrace(e);
+logger.log(Level.ERROR, e.getMessage(), e);
             }
         }));
         Files.copy(is, temp, StandardCopyOption.REPLACE_EXISTING);

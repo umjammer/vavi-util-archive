@@ -11,21 +11,23 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
-import java.util.logging.Level;
 
 import org.apache.commons.compress.archivers.ArchiveException;
 import org.apache.commons.compress.archivers.ArchiveStreamFactory;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
-import vavi.util.Debug;
 import vavi.util.StringUtil;
 import vavi.util.archive.Archive;
 import vavi.util.archive.spi.ArchiveSpi;
+
+import static java.lang.System.getLogger;
 
 
 /**
@@ -35,6 +37,8 @@ import vavi.util.archive.spi.ArchiveSpi;
  * @version 0.00 2021/11/16 umjammer initial version <br>
  */
 public class ApacheCommonsArchiveSpi implements ArchiveSpi {
+
+    private static final Logger logger = getLogger(ApacheCommonsArchiveSpi.class.getName());
 
     @Override
     public boolean canExtractInput(Object target) throws IOException {
@@ -57,9 +61,9 @@ public class ApacheCommonsArchiveSpi implements ArchiveSpi {
 
         try {
             String type = ArchiveStreamFactory.detect(is);
-Debug.println("detected: " + type);
+logger.log(Level.DEBUG, "detected: " + type);
         } catch (ArchiveException e) {
-Debug.println("not detected: " + e.getMessage());
+logger.log(Level.DEBUG, "not detected: " + e.getMessage());
             return false;
         }
 
@@ -86,10 +90,10 @@ Debug.println("not detected: " + e.getMessage());
     public String[] getFileSuffixes() {
         Set<String> suffixes = new HashSet<>();
         CompressorStreamFactory.findAvailableCompressorInputStreamProviders().forEach((name, provider) -> {
-Debug.println(Level.FINER, name + ": " + StringUtil.paramString(provider));
+logger.log(Level.TRACE, name + ": " + StringUtil.paramString(provider));
             for (String compressorName : provider.getInputStreamCompressorNames()) {
                 String[] ss = props.getProperty(compressorName).split(",", -1);
-Debug.println(Level.FINER, compressorName + ": " + Arrays.toString(ss));
+logger.log(Level.TRACE, compressorName + ": " + Arrays.toString(ss));
                 suffixes.addAll(Arrays.asList(ss));
             }
         });
@@ -97,7 +101,7 @@ Debug.println(Level.FINER, compressorName + ": " + Arrays.toString(ss));
     }
 
     /** {compressorName: suffixes} */
-    private static Properties props = new Properties();
+    private static final Properties props = new Properties();
 
     static {
         try {
@@ -109,5 +113,3 @@ Debug.println(Level.FINER, compressorName + ": " + Arrays.toString(ss));
         }
     }
 }
-
-/* */

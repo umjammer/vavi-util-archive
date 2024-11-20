@@ -3,9 +3,10 @@ package vavi.util.codec.cpio;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 
-import vavi.util.Debug;
-
+import static java.lang.System.getLogger;
 import static vavi.util.codec.cpio.CPIOInputStream.skip;
 
 
@@ -66,6 +67,8 @@ import static vavi.util.codec.cpio.CPIOInputStream.skip;
  */
 public class CPIOHeader {
 
+    private static final Logger logger = getLogger(CPIOHeader.class.getName());
+
     public static final int FMT_UNKNOWN = 0;
     public static final int FMT_BINARY = 1;
     public static final int FMT_BINSWAP = 2;
@@ -109,7 +112,7 @@ public class CPIOHeader {
             default -> 0;
         };
 
-        Debug.println("FILEPAD: size=" + this.filesize + "  pad=" + result);
+        logger.log(Level.DEBUG, "FILEPAD: size=" + this.filesize + "  pad=" + result);
         return result;
     }
 
@@ -124,7 +127,7 @@ public class CPIOHeader {
             default -> result;
         };
 
-Debug.println("NAMEPAD: size=" + size + "(nm=" + this.namesize + ")  pad=" + result);
+logger.log(Level.DEBUG, "NAMEPAD: size=" + size + "(nm=" + this.namesize + ")  pad=" + result);
         return result;
     }
 
@@ -176,8 +179,8 @@ Debug.println("NAMEPAD: size=" + size + "(nm=" + this.namesize + ")  pad=" + res
         this.hdrBytes = new byte[this.hdrSize];
         System.arraycopy(prime, 0, this.hdrBytes, 0, 6);
         numRead = in.read(this.hdrBytes, 6, (this.hdrSize - 6));
-Debug.println("FORMAT:  " + this.format);
-Debug.println("HDRSIZE: " + this.hdrSize);
+logger.log(Level.DEBUG, "FORMAT:  " + this.format);
+logger.log(Level.DEBUG, "HDRSIZE: " + this.hdrSize);
 
         if ((numRead + 6) != this.hdrBytes.length) {
             throw new IOException("unexpected eof reading header bytes");
@@ -185,7 +188,7 @@ Debug.println("HDRSIZE: " + this.hdrSize);
 
         this.parseHeader(this.hdrBytes);
 
-Debug.println("NMSIZE:  " + this.namesize);
+logger.log(Level.DEBUG, "NMSIZE:  " + this.namesize);
 
         this.nameBytes = new byte[this.namesize];
 
@@ -239,13 +242,13 @@ Debug.println("NMSIZE:  " + this.namesize);
         this.mtime = readInt(hdr, offset, "mtime");
         offset += 4;
 
-Debug.println("MTIME: " + this.mtime);
+logger.log(Level.DEBUG, "MTIME: " + this.mtime);
         this.namesize = readShort(hdr, offset, "namesize");
         offset += 2;
 
-Debug.println("NAMESIZE: " + this.namesize);
+logger.log(Level.DEBUG, "NAMESIZE: " + this.namesize);
         this.filesize = readInt(hdr, offset, "filesize");
-Debug.println("FILESIZE: " + this.filesize);
+logger.log(Level.DEBUG, "FILESIZE: " + this.filesize);
     }
 
     public void parseNewAsciiHeader(byte[] hdr) throws IOException {
@@ -286,9 +289,9 @@ Debug.println("FILESIZE: " + this.filesize);
         offset += 8;
         this.checksum = readHex(hdr, offset, 8, "checksum");
 
-        Debug.println("NAMESIZE: " + this.namesize);
-Debug.println("FILESIZE: " + this.filesize);
-Debug.println("MTIME:    " + this.mtime);
+logger.log(Level.DEBUG, "NAMESIZE: " + this.namesize);
+logger.log(Level.DEBUG, "FILESIZE: " + this.filesize);
+logger.log(Level.DEBUG, "MTIME:    " + this.mtime);
     }
 
     public void parseOldAsciiHeader(byte[] hdr) throws IOException {
@@ -325,9 +328,9 @@ Debug.println("MTIME:    " + this.mtime);
 
         this.filesize = readOctal(hdr, offset, 11, "filesize");
 
-        Debug.println("NAMESIZE: " + this.namesize);
-Debug.println("FILESIZE: " + this.filesize);
-Debug.println("MTIME:    " + this.mtime);
+logger.log(Level.DEBUG, "NAMESIZE: " + this.namesize);
+logger.log(Level.DEBUG, "FILESIZE: " + this.filesize);
+logger.log(Level.DEBUG, "MTIME:    " + this.mtime);
     }
 
     private int readShort(byte[] buf, int offset, String field) {
@@ -343,8 +346,8 @@ Debug.println("MTIME:    " + this.mtime);
             b1 = buf[offset + 0];
         }
 
-Debug.printf("READSHORT: IN [1, 0] = [ %02X, %02X ]\n", b1, b0);
-Debug.println("READSHORT: [0]'" + buf[offset + 0] + " [1]'" + buf[offset + 1] + "' b0=" + b0 + "  b1=" + b1);
+logger.log(Level.DEBUG, String.format("READSHORT: IN [1, 0] = [ %02X, %02X ]\n", b1, b0));
+logger.log(Level.DEBUG, "READSHORT: [0]'" + buf[offset + 0] + " [1]'" + buf[offset + 1] + "' b0=" + b0 + "  b1=" + b1);
 
         if (b0 < 0) {
             b0 = b0 + 256;
@@ -352,11 +355,11 @@ Debug.println("READSHORT: [0]'" + buf[offset + 0] + " [1]'" + buf[offset + 1] + 
         if (b1 < 0) {
             b1 = b1 + 256;
         }
-Debug.println("READSHORT: ADJUSTED b0=" + b0 + "  b1=" + b1);
+logger.log(Level.DEBUG, "READSHORT: ADJUSTED b0=" + b0 + "  b1=" + b1);
 
         result = (b1 << 8) + b0;
 
-Debug.println("READSHORT: result = " + result + "  swap = " + (this.format == FMT_BINSWAP));
+logger.log(Level.DEBUG, "READSHORT: result = " + result + "  swap = " + (this.format == FMT_BINSWAP));
 
         return result;
     }
@@ -365,7 +368,7 @@ Debug.println("READSHORT: result = " + result + "  swap = " + (this.format == FM
         int result;
 
         int b3, b2, b1, b0;
-Debug.printf("READINT: DATA [3, 2, 1, 0] = [ %02X, %02X, %02X, %02X ]\n", buf[offset + 0], buf[offset + 1], buf[offset + 2], buf[offset + 3]);
+logger.log(Level.DEBUG, String.format("READINT: DATA [3, 2, 1, 0] = [ %02X, %02X, %02X, %02X ]", buf[offset], buf[offset + 1], buf[offset + 2], buf[offset + 3]));
         if (this.format == FMT_BINSWAP) {
             b0 = buf[offset + 2];
             b1 = buf[offset + 3];
@@ -378,7 +381,7 @@ Debug.printf("READINT: DATA [3, 2, 1, 0] = [ %02X, %02X, %02X, %02X ]\n", buf[of
             b3 = buf[offset + 0];
         }
 
-Debug.printf("READINT: READ [3, 2, 1, 0] = [ %02X, %02X, %02X, %02X ]\n", b3, b2, b1, b0);
+logger.log(Level.DEBUG, String.format("READINT: READ [3, 2, 1, 0] = [ %02X, %02X, %02X, %02X ]", b3, b2, b1, b0));
         if (b0 < 0) {
             b0 = b0 + 256;
         }
@@ -392,16 +395,16 @@ Debug.printf("READINT: READ [3, 2, 1, 0] = [ %02X, %02X, %02X, %02X ]\n", b3, b2
             b3 = b3 + 256;
         }
 
-Debug.println("READINT: IN [3, 2, 1, 0] = [ " + b3 + "," + b2 + "," + b1 + "," + b0 + " ]");
+logger.log(Level.DEBUG, "READINT: IN [3, 2, 1, 0] = [ " + b3 + "," + b2 + "," + b1 + "," + b0 + " ]");
 
         result = (b3 << 24) + (b2 << 16) + (b1 << 8) + b0;
 
-Debug.println("READINT: result = " + result);
+logger.log(Level.DEBUG, "READINT: result = " + result);
 
         return result;
     }
 
-    private int readOctal(byte[] buf, int offset, int length, String field) throws IOException {
+    private static int readOctal(byte[] buf, int offset, int length, String field) throws IOException {
         int result = 0;
 
         for (int i = 0; i < length; ++i) {
@@ -417,7 +420,7 @@ Debug.println("READINT: result = " + result);
         return result;
     }
 
-    private int readHex(byte[] buf, int offset, int length, String field) throws IOException {
+    private static int readHex(byte[] buf, int offset, int length, String field) throws IOException {
         int result = 0;
 
         for (int i = 0; i < length; ++i) {
@@ -429,21 +432,19 @@ Debug.println("READINT: result = " + result);
 
             int dig;
 
-            if (/*ch >= (byte) '0' &&*/ ch <= (byte) '9') {
+            if (/* ch >= (byte) '0' && */ ch <= (byte) '9') {
                 dig = ch - (byte) '0';
-            } else if (/*ch >= (byte) 'A' &&*/ ch <= (byte) 'F') {
+            } else if (/* ch >= (byte) 'A' && */ ch <= (byte) 'F') {
                 dig = 10 + (ch - (byte) 'A');
-            } else /*if (ch >= (byte) 'a' && ch <= (byte) 'f')*/ {
+            } else /* if (ch >= (byte) 'a' && ch <= (byte) 'f') */ {
                 dig = 10 + (ch - (byte) 'a');
             }
 
             result = (result * 16) + dig;
         }
 
-Debug.println("PARSE HEX: '" + field + "'  '" + (new String(buf, offset, length)) + "' result = " + result);
+logger.log(Level.DEBUG, "PARSE HEX: '" + field + "'  '" + (new String(buf, offset, length)) + "' result = " + result);
 
         return result;
     }
 }
-
-/* */

@@ -48,5 +48,3 @@ public abstract class ZipArchiveSpi implements ArchiveSpi {
         return new String[] {"zip", "ZIP", "cbz", "jar", "JAR", "epub"};
     }
 }
-
-/* */

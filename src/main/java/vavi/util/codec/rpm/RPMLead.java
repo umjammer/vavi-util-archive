@@ -6,7 +6,7 @@ import java.io.PrintStream;
 
 public class RPMLead {
 
-    public byte[] magic = new byte[4];
+    public final byte[] magic = new byte[4];
 
     public byte major = 0;
 
@@ -16,13 +16,13 @@ public class RPMLead {
 
     public int archNum = 0;
 
-    public byte[] name = new byte[66];
+    public final byte[] name = new byte[66];
 
     public int osNum = 0;
 
     public int signatureType = 0;
 
-    public byte[] reserved = new byte[16];
+    public final byte[] reserved = new byte[16];
 
     public String getName() {
         int i = 0;

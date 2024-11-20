@@ -46,5 +46,3 @@ public abstract class CabArchiveSpi implements ArchiveSpi {
         return new String[] {"cab", "CAB"};
     }
 }
-
-/* */

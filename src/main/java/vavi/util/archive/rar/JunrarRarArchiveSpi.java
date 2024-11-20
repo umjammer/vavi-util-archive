@@ -62,5 +62,3 @@ public class JunrarRarArchiveSpi extends RarArchiveSpi {
         return new Class[] {File.class, InputStream.class};
     }
 }
-
-/* */

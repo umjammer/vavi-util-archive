@@ -20,7 +20,7 @@ import vavi.util.archive.WrappedEntry;
 public class TarEntry implements WrappedEntry<org.apache.commons.compress.archivers.tar.TarArchiveEntry> {
 
     /** */
-    private org.apache.commons.compress.archivers.tar.TarArchiveEntry entry;
+    private final org.apache.commons.compress.archivers.tar.TarArchiveEntry entry;
 
     /** */
     public TarEntry(org.apache.commons.compress.archivers.tar.TarArchiveEntry entry) {
@@ -112,5 +112,3 @@ public class TarEntry implements WrappedEntry<org.apache.commons.compress.archiv
         return entry;
     }
 }
-
-/* */

@@ -4,13 +4,17 @@ package vavi.util.codec.cpio;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+
+import static java.lang.System.getLogger;
 
 
 public class CPIOInputStream {
 
-    private boolean debug = false;
+    private static final Logger logger = getLogger(CPIOInputStream.class.getName());
 
-    private InputStream in;
+    private final InputStream in;
 
     private int entrySize = 0;
 
@@ -28,9 +32,7 @@ public class CPIOInputStream {
         if (this.currEntry != null) {
             int numToSkip = this.entrySize - this.entryOffset;
 
-            if (this.debug) {
-                System.err.println("CPIOStream: SKIP currENTRY '" + this.currEntry.getHeader().filename + "' SZ " + this.entrySize + " OFF " + this.entryOffset + "  skipping " + numToSkip + " bytes");
-            }
+            logger.log(Level.TRACE, "CPIOStream: SKIP currENTRY '" + this.currEntry.getHeader().filename + "' SZ " + this.entrySize + " OFF " + this.entryOffset + "  skipping " + numToSkip + " bytes");
 
             if (numToSkip > 0) {
                 skip(this.in, numToSkip);
@@ -38,18 +40,14 @@ public class CPIOInputStream {
 
             int padToSkip = this.currEntry.getHeader().getFilePadding();
 
-            if (this.debug) {
-                System.err.println("CPIOStream: SKIP PAD " + padToSkip + " bytes");
-            }
+            logger.log(Level.TRACE, "CPIOStream: SKIP PAD " + padToSkip + " bytes");
 
             skip(this.in, padToSkip);
         }
 
         this.currEntry = new CPIOEntry(this.in);
 
-        if (this.debug) {
-            System.err.println("CPIOStream: SET CURRENTLY '" + this.currEntry.getHeader().filename + "' size = " + this.currEntry.getHeader().filesize);
-        }
+        logger.log(Level.TRACE, "CPIOStream: SET CURRENTLY '" + this.currEntry.getHeader().filename + "' size = " + this.currEntry.getHeader().filesize);
 
         this.entryOffset = 0;
         this.entrySize = this.currEntry.getHeader().filesize;

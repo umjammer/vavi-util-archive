@@ -81,5 +81,3 @@ Debug.println("stream after loop: 2ndByte: " + archive.getInputStream(entry).rea
         fail("no file size > 0");
     }
 }
-
-/* */

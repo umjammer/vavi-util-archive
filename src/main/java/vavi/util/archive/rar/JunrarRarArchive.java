@@ -32,10 +32,10 @@ import vavi.util.archive.WrappedEntry;
 public class JunrarRarArchive extends InputStreamSupport implements Archive {
 
     /** */
-    private com.github.junrar.Archive archive;
+    private final com.github.junrar.Archive archive;
 
     /** */
-    private String name;
+    private final String name;
 
     /** */
     private Entry[] entries;
@@ -109,5 +109,3 @@ public class JunrarRarArchive extends InputStreamSupport implements Archive {
         return entries().length;
     }
 }
-
-/* */

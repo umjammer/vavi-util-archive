@@ -10,6 +10,8 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.MessageFormat;
@@ -17,12 +19,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import vavi.util.Debug;
 import vavi.util.StringUtil;
 import vavi.util.archive.Archive;
 import vavi.util.archive.CommonEntry;
 import vavi.util.archive.Entry;
 import vavi.util.win32.DateUtil;
+
+import static java.lang.System.getLogger;
 
 
 /**
@@ -33,18 +36,20 @@ import vavi.util.win32.DateUtil;
  */
 public class NativeRarArchive implements Archive {
 
+    private static final Logger logger = getLogger(NativeRarArchive.class.getName());
+
     /** */
     private final List<CommonEntry> entries = new ArrayList<>();
 
     /** */
-    private File file;
+    private final File file;
 
     /** Creates a RAR Archive instance. */
     public NativeRarArchive(File file) throws IOException {
 
         this.file = file;
 
-System.err.println("file: " + file.getPath());
+logger.log(Level.TRACE, "file: " + file.getPath());
         openArchive(file.getPath(), 0);
 
         if (findFirst("*")) {
@@ -58,8 +63,8 @@ System.err.println("file: " + file.getPath());
                 entry.setName(currentFilename);
                 entry.setTime(DateUtil.dosDateTimeToLong(getCurrentDate(), getCurrentTime()));
                 entries.add(entry);
-System.err.println(StringUtil.paramString(entry));
-System.err.println("time: " + new Date(entry.getTime()));
+logger.log(Level.TRACE, StringUtil.paramString(entry));
+logger.log(Level.TRACE, "time: " + new Date(entry.getTime()));
             } while (findNext());
         }
     }
@@ -101,7 +106,7 @@ System.err.println("time: " + new Date(entry.getTime()));
                                                   file.getPath(),
                                                   tmp,
                                                   entry.getName());
-Debug.println("commandLine: " + commandLine);
+logger.log(Level.DEBUG, "commandLine: " + commandLine);
 
         exec(commandLine);
 
@@ -183,5 +188,3 @@ Debug.println("commandLine: " + commandLine);
         System.loadLibrary("RarWrapper");
     }
 }
-
-/* */

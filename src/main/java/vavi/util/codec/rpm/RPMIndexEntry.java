@@ -89,30 +89,20 @@ public class RPMIndexEntry {
     }
 
     public String typeString() {
-        switch (this.type) {
-        case RPMTYPE_NULL:
-            return "NULL";
-        case RPMTYPE_CHAR:
-            return "CHAR";
-        case RPMTYPE_INT8:
-            return "INT8";
-        case RPMTYPE_INT16:
-            return "INT16";
-        case RPMTYPE_INT32:
-            return "INT32";
-        case RPMTYPE_INT64:
-            return "INT64";
-        case RPMTYPE_STRING:
-            return "STRING";
-        case RPMTYPE_BIN:
-            return "BIN";
-        case RPMTYPE_STRING_ARRAY:
-            return "STRINGARRAY";
-        case RPMTYPE_I18NSTRING:
-            return "I18NSTRING";
-        }
+        return switch (this.type) {
+            case RPMTYPE_NULL -> "NULL";
+            case RPMTYPE_CHAR -> "CHAR";
+            case RPMTYPE_INT8 -> "INT8";
+            case RPMTYPE_INT16 -> "INT16";
+            case RPMTYPE_INT32 -> "INT32";
+            case RPMTYPE_INT64 -> "INT64";
+            case RPMTYPE_STRING -> "STRING";
+            case RPMTYPE_BIN -> "BIN";
+            case RPMTYPE_STRING_ARRAY -> "STRINGARRAY";
+            case RPMTYPE_I18NSTRING -> "I18NSTRING";
+            default -> "UNKNOWN";
+        };
 
-        return "UNKNOWN";
     }
 
     public static final int RPMSIGTAG_SIZE = 1000;

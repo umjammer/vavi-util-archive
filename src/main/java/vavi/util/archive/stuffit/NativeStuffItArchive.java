@@ -10,16 +10,19 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import vavi.util.Debug;
 import vavi.util.archive.Archive;
 import vavi.util.archive.CommonEntry;
 import vavi.util.archive.Entry;
+
+import static java.lang.System.getLogger;
 
 
 /**
@@ -31,15 +34,17 @@ import vavi.util.archive.Entry;
  */
 public class NativeStuffItArchive implements Archive {
 
-    /** */
-    private List<CommonEntry> entries = new ArrayList<>();
+    private static final Logger logger = getLogger(NativeStuffItArchive.class.getName());
 
     /** */
-    private File file;
+    private final List<CommonEntry> entries = new ArrayList<>();
+
+    /** */
+    private final File file;
 
     /** */
     public NativeStuffItArchive(File file) throws IOException {
-System.err.println("StuffIt.dll: " + getVersion());
+logger.log(Level.TRACE, "StuffIt.dll: " + getVersion());
 
         this.file = file;
 
@@ -77,7 +82,7 @@ System.err.println("StuffIt.dll: " + getVersion());
                                                   file.getPath(),
                                                   tmp,
                                                   entry.getName());
-Debug.println("commandLine: " + commandLine);
+logger.log(Level.DEBUG, "commandLine: " + commandLine);
 
         exec(commandLine);
 
@@ -161,5 +166,3 @@ Debug.println("commandLine: " + commandLine);
         System.loadLibrary("StuffItWrapper");
     }
 }
-
-/* */

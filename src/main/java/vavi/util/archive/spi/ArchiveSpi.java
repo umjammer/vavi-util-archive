@@ -61,5 +61,3 @@ public interface ArchiveSpi {
         return map.containsKey(key) && (map.get(key) == null || (boolean) map.get(key));
     }
 }
-
-/* */

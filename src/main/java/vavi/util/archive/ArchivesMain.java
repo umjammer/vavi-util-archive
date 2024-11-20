@@ -26,10 +26,10 @@ public class ArchivesMain {
         Path path = Paths.get(args[0]);
         Archive archive = Archives.getArchive(path.toFile());
         ArchivesMain app = new ArchivesMain();
-        System.out.println(app.toHtml(archive));
+        System.out.println(ArchivesMain.toHtml(archive));
     }
 
-    String toHtml(Archive archive) {
+    static String toHtml(Archive archive) {
         StringBuilder sb = new StringBuilder();
         sb.append("<table>");
         sb.append("\n");

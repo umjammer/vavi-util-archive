@@ -103,5 +103,3 @@ public interface Entry extends Cloneable {
      */
     void setTime(long time);
 }
-
-/* */

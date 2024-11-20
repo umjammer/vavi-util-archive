@@ -158,5 +158,3 @@ public class CommonEntry implements Entry {
         return StringUtil.paramString(this);
     }
 }
-
-/* */

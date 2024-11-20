@@ -30,5 +30,3 @@ public interface InputStreamSpi {
      */
     InputStream createInputStreamInstance() throws IOException;
 }
-
-/* */

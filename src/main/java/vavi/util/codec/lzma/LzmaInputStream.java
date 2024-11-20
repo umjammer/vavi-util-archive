@@ -396,7 +396,6 @@ public class LzmaInputStream extends FilterInputStream {
         globalNowPosition = 0;
     }
 
-    /** */
     @Override
     public int read(byte[] buf, int off, int len) throws IOException {
         if (closed) {
@@ -423,7 +422,6 @@ public class LzmaInputStream extends FilterInputStream {
         return l;
     }
 
-    /** */
     @Override
     public void close() throws IOException {
         closed = true;
@@ -473,5 +471,3 @@ long temps = System.currentTimeMillis();
         }
     }
 }
-
-/* */

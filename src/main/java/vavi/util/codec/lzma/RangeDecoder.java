@@ -30,13 +30,13 @@ class RangeDecoder {
     /** */
     private final static int NumberMoveBits = 5;
     /** */
-    private InputStream is;
+    private final InputStream is;
     /** */
     private long range;
     /** */
     private long code;
     /** */
-    private byte[] buffer;
+    private final byte[] buffer;
     /** */
     private int bufferSize;
     /** */
@@ -215,5 +215,3 @@ class RangeDecoder {
                decodeBitTree(probs, index + LenHigh, LengthNumberHighBits);
     }
 }
-
-/* */

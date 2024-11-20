@@ -52,5 +52,3 @@ public abstract class RarArchiveSpi implements ArchiveSpi {
         return new String[] {"rar", "RAR"};
     }
 }
-
-/* */

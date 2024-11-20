@@ -5,11 +5,11 @@ import java.io.PrintStream;
 
 
 public class RPMHeader {
-    public byte[] magic = new byte[3];
+    public final byte[] magic = new byte[3];
 
     public byte version = 0;
 
-    public byte[] reserved = new byte[4];
+    public final byte[] reserved = new byte[4];
 
     public int numEntries;
 

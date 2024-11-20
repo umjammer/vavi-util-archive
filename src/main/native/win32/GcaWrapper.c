@@ -501,5 +501,3 @@ JNIEXPORT jint JNICALL Java_vavi_util_archive_vavi_NativeGcaArchive_getSelectedR
 
     return result;
 }
-
-/* */

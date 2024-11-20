@@ -27,5 +27,3 @@ public class ShellGcaArchiveSpi extends GcaArchiveSpi {
         return new ShellGcaArchive((File) obj);
     }
 }
-
-/* */

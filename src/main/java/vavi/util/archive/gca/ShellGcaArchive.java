@@ -11,16 +11,19 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import vavi.util.Debug;
 import vavi.util.archive.Archive;
 import vavi.util.archive.CommonEntry;
 import vavi.util.archive.Entry;
+
+import static java.lang.System.getLogger;
 
 
 /**
@@ -34,11 +37,13 @@ import vavi.util.archive.Entry;
  */
 public class ShellGcaArchive implements Archive {
 
-    /** */
-    private List<CommonEntry> entries = new ArrayList<>();
+    private static final Logger logger = getLogger(ShellGcaArchive.class.getName());
 
     /** */
-    private File file;
+    private final List<CommonEntry> entries = new ArrayList<>();
+
+    /** */
+    private final File file;
 
     /** */
     public ShellGcaArchive(File file) throws IOException {
@@ -70,11 +75,11 @@ public class ShellGcaArchive implements Archive {
                     @SuppressWarnings("unused")
                     String ratio = st.nextToken();
                 }
-Debug.println(entry);
+logger.log(Level.DEBUG, entry);
 
                 entries.add(entry);
             } catch (Exception e) {
-Debug.println(e);
+logger.log(Level.ERROR, e.getMessage(), e);
             }
         }
     }
@@ -115,12 +120,10 @@ Debug.println(e);
         return entries.size();
     }
 
-    //----
+    // ----
 
     /** */
     public static void main(String[] args) throws Exception {
         new ShellGcaArchive(new File(args[0]));
     }
 }
-
-/* */

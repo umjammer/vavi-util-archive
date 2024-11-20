@@ -10,6 +10,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.System.Logger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -18,11 +19,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.ServiceLoader;
 import java.util.Set;
-import java.util.logging.Level;
 
-import vavi.util.Debug;
 import vavi.util.archive.spi.ArchiveSpi;
 import vavi.util.archive.spi.InputStreamSpi;
+
+import static java.lang.System.Logger.Level.DEBUG;
+import static java.lang.System.Logger.Level.ERROR;
+import static java.lang.System.Logger.Level.TRACE;
+import static java.lang.System.getLogger;
 
 
 /**
@@ -32,6 +36,8 @@ import vavi.util.archive.spi.InputStreamSpi;
  * @version 0.00 2019/06/24 umjammer initial version <br>
  */
 public class Archives {
+
+    private static final Logger logger = getLogger(Archives.class.getName());
 
     private Archives() {
     }
@@ -51,15 +57,15 @@ public class Archives {
         InputStream bis = new BufferedInputStream(is);
 
         for (InputStreamSpi inputStreamSpi : inputStreamSpis) {
-Debug.println(Level.FINE, "inputStreamSpi: " + inputStreamSpi.getClass().getSimpleName());
+logger.log(TRACE, "inputStreamSpi: " + inputStreamSpi.getClass().getSimpleName());
             if (inputStreamSpi.canExpandInput(bis)) {
                 InputStream inputStream = inputStreamSpi.createInputStreamInstance();
-Debug.println(Level.FINE, "inputStream: " + inputStream.getClass());
+logger.log(DEBUG, "inputStream: " + inputStream.getClass());
                 return inputStream;
             }
         }
 
-Debug.println("no suitable spi found, use default stream");
+logger.log(DEBUG, "no suitable spi found, use default stream");
         return bis;
     }
 
@@ -77,13 +83,13 @@ Debug.println("no suitable spi found, use default stream");
      */
     public static Archive getArchive(Object target, Map<String, ?> env) throws IOException {
         for (ArchiveSpi archiveSpi : archiveSpis) {
-Debug.println(Level.FINE, "archiveSpi: " + archiveSpi);
+logger.log(TRACE, "archiveSpi: " + archiveSpi);
             boolean canExtract;
 
             try {
                 canExtract = archiveSpi.canExtractInput(target);
             } catch (IllegalArgumentException e) {
-Debug.println(archiveSpi.getClass().getSimpleName() + ": " + e);
+logger.log(DEBUG, archiveSpi.getClass().getSimpleName() + ": " + e);
                 continue;
             }
             if (canExtract) {
@@ -91,10 +97,10 @@ Debug.println(archiveSpi.getClass().getSimpleName() + ": " + e);
                 try {
                     archive = archiveSpi.createArchiveInstance(target, env);
                 } catch (IllegalArgumentException e) {
-Debug.println(archiveSpi.getClass().getSimpleName() + ": " + e);
+logger.log(DEBUG, archiveSpi.getClass().getSimpleName() + ": " + e);
                     continue;
                 }
-Debug.println(Level.FINE, "archive: " + archive.getClass());
+logger.log(DEBUG, "archive: " + archive.getClass());
                 return archive;
             }
         }
@@ -106,7 +112,7 @@ Debug.println(Level.FINE, "archive: " + archive.getClass());
     public static String[] getReaderFileSuffixes() {
         Set<String> suffixes = new HashSet<>();
         for (ArchiveSpi archiveSpi : archiveSpis) {
-Debug.println(Level.FINE, archiveSpi.getClass().getName() + ", " + Arrays.toString(archiveSpi.getFileSuffixes()));
+logger.log(TRACE, archiveSpi.getClass().getName() + ", " + Arrays.toString(archiveSpi.getFileSuffixes()));
             suffixes.addAll(Arrays.asList(archiveSpi.getFileSuffixes()));
         }
         return suffixes.toArray(new String[0]);
@@ -122,19 +128,17 @@ Debug.println(Level.FINE, archiveSpi.getClass().getName() + ", " + Arrays.toStri
     static {
         try {
             archiveSpis = ServiceLoader.load(vavi.util.archive.spi.ArchiveSpi.class);
-if (Debug.isLoggable(Level.FINE)) {
+if (logger.isLoggable(TRACE)) {
  archiveSpis.forEach(System.err::println);
 }
 
             inputStreamSpis = ServiceLoader.load(vavi.util.archive.spi.InputStreamSpi.class);
-if (Debug.isLoggable(Level.FINE)) {
+if (logger.isLoggable(TRACE)) {
  inputStreamSpis.forEach(System.err::println);
 }
         } catch (Exception e) {
-Debug.printStackTrace(e);
+logger.log(ERROR, e.getMessage(), e);
             System.exit(1);
         }
     }
 }
-
-/* */

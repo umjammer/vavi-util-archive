@@ -10,12 +10,14 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.nio.file.Files;
 import java.util.Map;
-import java.util.logging.Level;
 
-import vavi.util.Debug;
 import vavi.util.archive.Archive;
+
+import static java.lang.System.getLogger;
 
 
 /**
@@ -26,6 +28,8 @@ import vavi.util.archive.Archive;
  *          0.01 030128 nsano implements <br>
  */
 public class JdkZipArchiveSpi extends ZipArchiveSpi {
+
+    private static final Logger logger = getLogger(JdkZipArchiveSpi.class.getName());
 
     @Override
     public boolean canExtractInput(Object target) throws IOException {
@@ -58,7 +62,7 @@ public class JdkZipArchiveSpi extends ZipArchiveSpi {
     @Override
     public Archive createArchiveInstance(Object obj, Map<String, ?> env) throws IOException {
         String failsafeEncoding = (String) env.get(ENV_KEY_FAILSAFE_ENCODING);
-Debug.println(Level.FINE, "failsafeEncoding: " + failsafeEncoding);
+logger.log(Level.DEBUG, "failsafeEncoding: " + failsafeEncoding);
 
         if (obj instanceof File) {
             return new JdkZipArchive((File) obj, failsafeEncoding);
@@ -74,5 +78,3 @@ Debug.println(Level.FINE, "failsafeEncoding: " + failsafeEncoding);
         return new Class[] {File.class, InputStream.class};
     }
 }
-
-/* */

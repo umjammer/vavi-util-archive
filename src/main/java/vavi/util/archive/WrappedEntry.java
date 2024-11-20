@@ -21,5 +21,3 @@ public interface WrappedEntry<T> extends Entry {
      */
     T getWrappedObject();
 }
-
-/* */

@@ -23,7 +23,7 @@ import jp.gr.java_conf.dangan.util.lha.LhaHeader;
 public class LhaEntry implements WrappedEntry<LhaHeader> {
 
     /** */
-    private LhaHeader entry;
+    private final LhaHeader entry;
 
     /** */
     public LhaEntry(LhaHeader header) {
@@ -120,5 +120,3 @@ public class LhaEntry implements WrappedEntry<LhaHeader> {
         return entry;
     }
 }
-
-/* */

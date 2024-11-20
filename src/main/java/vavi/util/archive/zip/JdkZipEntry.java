@@ -6,10 +6,12 @@
 
 package vavi.util.archive.zip;
 
-import java.util.logging.Level;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 
-import vavi.util.Debug;
 import vavi.util.archive.WrappedEntry;
+
+import static java.lang.System.getLogger;
 
 
 /**
@@ -20,13 +22,15 @@ import vavi.util.archive.WrappedEntry;
  */
 public class JdkZipEntry implements WrappedEntry<java.util.zip.ZipEntry> {
 
+    private static final Logger logger = getLogger(JdkZipEntry.class.getName());
+
     /** */
-    private java.util.zip.ZipEntry entry;
+    private final java.util.zip.ZipEntry entry;
 
     /** @param entry TODO vavi-nio-filesystem-archive request to be null */
     public JdkZipEntry(java.util.zip.ZipEntry entry) {
 if (entry == null) {
- Debug.println(Level.FINE, "*** entry is null ***");
+ logger.log(Level.DEBUG, "*** entry is null ***");
  //new Exception("*** DUMMY ***").printStackTrace();
 }
         this.entry = entry;
@@ -122,5 +126,3 @@ if (entry == null) {
         return entry;
     }
 }
-
-/* */
