@@ -44,29 +44,34 @@ public class Archives {
 
     /** get an archiving stream */
     public static InputStream getInputStream(File file) throws IOException {
-        return getInputStream(Files.newInputStream(file.toPath()));
+        return getInputStream(new BufferedInputStream(Files.newInputStream(file.toPath())));
     }
 
     /** get an archiving stream */
     public static InputStream getInputStream(Path path) throws IOException {
-        return getInputStream(Files.newInputStream(path));
+        return getInputStream(new BufferedInputStream(Files.newInputStream(path)));
     }
 
-    /** get an archiving stream */
+    /**
+     * Gets an archiving stream.
+     * @param is mark must be supported
+     * @return suitable compression stream for the input or the given input stream if no suitable compression not found
+     */
     public static InputStream getInputStream(InputStream is) throws IOException {
-        InputStream bis = new BufferedInputStream(is);
+        if (!is.markSupported())
+            throw new IllegalArgumentException("argument must be supported mark");
 
         for (InputStreamSpi inputStreamSpi : inputStreamSpis) {
-logger.log(TRACE, "inputStreamSpi: " + inputStreamSpi.getClass().getSimpleName());
-            if (inputStreamSpi.canExpandInput(bis)) {
+logger.log(TRACE, "inputStreamSpi: " + inputStreamSpi.getClass().getSimpleName() + ", available: " + is.available());
+            if (inputStreamSpi.canExpandInput(is)) {
                 InputStream inputStream = inputStreamSpi.createInputStreamInstance();
-logger.log(DEBUG, "inputStream: " + inputStream.getClass());
+logger.log(DEBUG, "inputStream: " + inputStream.getClass() + ", available: " + is.available());
                 return inputStream;
             }
         }
 
-logger.log(DEBUG, "no suitable spi found, use default stream");
-        return bis;
+logger.log(DEBUG, "no suitable spi found, use default stream, available: " + is.available());
+        return is;
     }
 
     /**

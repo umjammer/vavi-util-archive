@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -85,5 +86,17 @@ class ArchivesTest {
 Debug.println("suffixes: " + Arrays.toString(suffixes));
         assertTrue(Arrays.asList(suffixes).contains("zip"));
         assertFalse(Arrays.asList(suffixes).contains("Z")); // TODO just check the logic, not semantics (means .Z may be included by some compression type)
+    }
+
+    @Test
+    @DisplayName("when no suitable spi is found, available should not be changed")
+    void test5() throws Exception {
+        Path file = Path.of("src/test/resources/test.gca");
+        InputStream in = new BufferedInputStream(Files.newInputStream(file));
+        int before = in.available();
+        InputStream is = Archives.getInputStream(in);
+        int after = is.available();
+Debug.println("result: " + is.getClass().getName());
+        assertEquals(before, after);
     }
 }

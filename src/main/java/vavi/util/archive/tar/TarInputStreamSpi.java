@@ -77,7 +77,7 @@ logger.log(Level.DEBUG, is);
         }
         is.reset();
 
-logger.log(Level.DEBUG, "tar magic:\n" + StringUtil.getDump(b));
+logger.log(Level.TRACE, "tar magic:\n" + StringUtil.getDump(b));
         return "ustar".equals(new String(b, StandardCharsets.ISO_8859_1)) ||
             (b[0] == 0x00 &&    // TODO magic 無い奴がいる
              b[1] == 0x00 &&
