@@ -11,7 +11,7 @@ extract all archive types in the same way!</br>
 archives are able to mount as fuse also using [vavi-nio-file-archive](https://github.com/umjammer/vavi-apps-fuse/tree/master/vavi-nio-file-archive)
 and [vavi-net-fuse](https://github.com/umjammer/vavi-apps-fuse/tree/master/vavi-net-fuse)
 
-## Status
+### Status
 
 | name     | mathod    | read | write | comment | library                                                                 |
 |----------|-----------|------|--------|---------|-------------------------------------------------------------------------|
@@ -40,6 +40,10 @@ and [vavi-net-fuse](https://github.com/umjammer/vavi-apps-fuse/tree/master/vavi-
 
 <sub>* chosen as spi</sub>
 
+## Install
+
+ * [maven](https://jitpack.io/#umjammer/vavi-util-archive)
+
 ## Usage
 
 ### archive extraction
@@ -58,8 +62,9 @@ and [vavi-net-fuse](https://github.com/umjammer/vavi-apps-fuse/tree/master/vavi-
     InputStream compressed = Archives.getInputStream(Paths.get("foo/bar.tar.bz").toFile());
     Files.copy(compressed, Paths.get("foo/bar.tar"));
 ```
+## References
 
-## License
+### License
 
  * [Giant Java Tree/cpio](http://www.gjt.org/servlets/JCVSlet/list/gjt/org/gjt/archive/cpio) ... Unknown
  * [Giant Java Tree/rpm](http://www.gjt.org/servlets/JCVSlet/list/gjt/org/gjt/archive/rpm) ... Unknown
@@ -68,7 +73,7 @@ and [vavi-net-fuse](https://github.com/umjammer/vavi-apps-fuse/tree/master/vavi-
 
 ## TODO
 
- * registory like IIORegistory
+ * registry like IIORegistry
  * [commons-vfs](https://commons.apache.org/proper/commons-vfs/)
  * [truevfs](https://github.com/christian-schlichtherle/truevfs)
  * ~~apache commons-compress~~
