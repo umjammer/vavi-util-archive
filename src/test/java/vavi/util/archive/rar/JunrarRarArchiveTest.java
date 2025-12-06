@@ -45,10 +45,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 @PropsEntity(url = "file:local.properties")
 public class JunrarRarArchiveTest {
 
-    static {
-        System.setProperty("vavi.util.logging.VaviFormatter.extraClassMethod", "org\\.slf4j\\.impl\\.JDK14LoggerAdapter#(log|warn)");
-    }
-
     static boolean localPropertiesExists() {
         return Files.exists(Paths.get("local.properties"));
     }

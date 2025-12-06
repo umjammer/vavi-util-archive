@@ -51,10 +51,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 @PropsEntity(url = "file:local.properties")
 class JdkZipArchiveTest {
 
-    static {
-        System.setProperty("vavi.util.logging.VaviFormatter.extraClassMethod", "sun\\.util\\.logging\\..*?#.*");
-    }
-
     static boolean localPropertiesExists() {
         return Files.exists(Paths.get("local.properties"));
     }
