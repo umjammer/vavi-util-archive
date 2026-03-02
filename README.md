@@ -5,6 +5,8 @@
 
 # vavi-util-archive
 
+<img alt="logo" src="src/test/resources/duke_trunk.png" width="160" />
+
 🌏 Extract the world!
 
 extract all archive types in the same way!</br>
@@ -91,3 +93,7 @@ and [vavi-net-fuse](https://github.com/umjammer/vavi-apps-fuse/tree/master/vavi-
    * https://github.com/gitGNU/objconv
    * https://github.com/jakeajames/dylibify
    * https://github.com/hasherezade/exe_to_dll
+
+---
+
+<sub>image designed by @umjammer, drawn by nano banana</sub>
