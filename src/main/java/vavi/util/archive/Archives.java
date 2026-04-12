@@ -54,6 +54,10 @@ public class Archives {
 
     /**
      * Gets an archiving stream.
+     * <p>
+     * if you want to use the original stream when the archiving stream is not found,
+     * you need to {@code mark} {@code is} before using ths method, and {@code reset} after this method.
+     *
      * @param is mark must be supported
      * @return suitable compression stream for the input or the given input stream if no suitable compression not found
      */
@@ -63,10 +67,14 @@ public class Archives {
 
         for (InputStreamSpi inputStreamSpi : inputStreamSpis) {
 logger.log(TRACE, "inputStreamSpi: " + inputStreamSpi.getClass().getSimpleName() + ", available: " + is.available());
-            if (inputStreamSpi.canExpandInput(is)) {
-                InputStream inputStream = inputStreamSpi.createInputStreamInstance();
+            try {
+                if (inputStreamSpi.canExpandInput(is)) {
+                    InputStream inputStream = inputStreamSpi.createInputStreamInstance();
 logger.log(DEBUG, "inputStream: " + inputStream.getClass() + ", available: " + is.available());
-                return inputStream;
+                    return inputStream;
+                }
+            } catch (IllegalArgumentException e) {
+logger.log(TRACE, e.getMessage(), e);
             }
         }
 
