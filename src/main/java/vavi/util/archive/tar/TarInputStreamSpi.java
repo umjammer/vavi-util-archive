@@ -44,7 +44,11 @@ public class TarInputStreamSpi implements InputStreamSpi {
     public boolean canExpandInput(Object target) throws IOException {
 
         if (!(target instanceof InputStream is)) {
-            throw new IllegalArgumentException("not supported type " + target.getClass());
+            throw new IllegalArgumentException("not supported type: " + target.getClass());
+        }
+
+        if (is.available() < SKIP + 5) {
+            throw new IllegalArgumentException("not enough size: " + is.available());
         }
 
         this.target = target;

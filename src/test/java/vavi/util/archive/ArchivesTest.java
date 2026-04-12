@@ -94,9 +94,58 @@ Debug.println("suffixes: " + Arrays.toString(suffixes));
         Path file = Path.of("src/test/resources/test.gca");
         InputStream in = new BufferedInputStream(Files.newInputStream(file));
         int before = in.available();
+Debug.println("before: " + in + ", before: " + before);
         InputStream is = Archives.getInputStream(in);
         int after = is.available();
-Debug.println("result: " + is.getClass().getName());
+Debug.println("result: " + is + ", after: " + after);
         assertEquals(before, after);
+Debug.println("original: " + in + ", after: " + in.available());
+        assertEquals(before, in.available());
+    }
+
+    @Test
+    @DisplayName("bzip2, available should not be changed")
+    void test6() throws Exception {
+        Path file = Path.of("src/test/resources/test.tar.bz2");
+        InputStream in = new BufferedInputStream(Files.newInputStream(file));
+        int before = in.available();
+Debug.println("before: " + in + ", before: " + before);
+        in.mark(10);
+        InputStream is = Archives.getInputStream(in);
+Debug.println("result: " + is + ", after: " + is.available());
+        in.reset();
+Debug.println("original: " + in + ", after: " + in.available());
+        assertEquals(before, in.available());
+    }
+
+    @Test
+    @DisplayName("gzip, available should not be changed")
+    void test7() throws Exception {
+        Path file = Path.of("src/test/resources/test.tar.gz");
+        InputStream in = new BufferedInputStream(Files.newInputStream(file));
+        int before = in.available();
+Debug.println("before: " + in + ", before: " + before);
+        in.mark(10);
+        InputStream is = Archives.getInputStream(in);
+        int after = is.available();
+Debug.println("result: " + is + ", after: " + after);
+        in.reset();
+Debug.println("original: " + in + ", after: " + in.available());
+        assertEquals(before, in.available());
+    }
+
+    @Test
+    @DisplayName("tar, available should not be changed")
+    void test8() throws Exception {
+        Path file = Path.of("src/test/resources/test.tar");
+        InputStream in = new BufferedInputStream(Files.newInputStream(file));
+        int before = in.available();
+Debug.println("before: " + in + ", before: " + before);
+        in.mark(10);
+        InputStream is = Archives.getInputStream(in);
+Debug.println("result: " + is);
+        in.reset();
+Debug.println("original: " + in + ", after: " + in.available());
+        assertEquals(before, in.available());
     }
 }
