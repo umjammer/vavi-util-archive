@@ -71,7 +71,7 @@
       <dependency>
         <groupId>org.junit</groupId>
         <artifactId>junit-bom</artifactId>
-        <version>6.0.2</version>
+        <version>6.0.3</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -112,7 +112,7 @@
     <dependency>
       <groupId>com.github.junrar</groupId>
       <artifactId>junrar</artifactId>
-      <version>7.5.8</version>
+      <version>7.5.10</version>
     </dependency>
     <dependency>
       <groupId>com.github.umjammer</groupId>
