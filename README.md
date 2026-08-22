@@ -1,7 +1,7 @@
 [![](https://jitpack.io/v/umjammer/vavi-util-archive.svg)](https://jitpack.io/#umjammer/vavi-util-archive)
 [![Java CI](https://github.com/umjammer/vavi-util-archive/actions/workflows/maven.yml/badge.svg)](https://github.com/umjammer/vavi-util-archive/actions/workflows/maven.yml)
 [![CodeQL](https://github.com/umjammer/vavi-util-archive/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/umjammer/vavi-util-archive/actions/workflows/codeql-analysis.yml)
-![Java](https://img.shields.io/badge/Java-17-b07219)
+![Java](https://img.shields.io/badge/Java-25-b07219)
 
 # vavi-util-archive
 
@@ -15,30 +15,31 @@ and [vavi-net-fuse](https://github.com/umjammer/vavi-apps-fuse/tree/master/vavi-
 
 ### Status
 
-| name     | mathod    | read | write | comment | library                                                                 |
-|----------|-----------|------|--------|---------|-------------------------------------------------------------------------|
-| binhex   | archiving | ✅    | - |         | [binhex](https://github.com/umjammer/JBinHex)                           |
-| bzip2    | archiving | ✅    | - |         | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
-| cab      | archiving | ✅    | - |         | [dorkbox](https://github.com/umjammer/CabParser)                        |
-| gca      | archiving | -    | - | win only | native                                                                        |
-| gca      | archiving | -    | - |         | shell                                                                        |
-| gzip     | archiving | ✅    | - |         | jdk                                                                     |
-| lha      | archiving | ✅    | - |         | [lha](https://github.com/umjammer/jlha)                                 |
-| rar      | archiving | -    | - | win only | native                                                                    |
-| rar      | archiving | -    | - |         | shell                                                                     |
-| rar      | archiving | ✅*   | - |         | [java-unrar](https://github.com/umjammer/java-unrar)                    |
-| rar      | archiving | ✅    | - | no rar5 | [junrar](https://github.com/junrar/junrar)                              |
-| sevenzip | archiving | ✅    | - | 7z only | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
-| sevenzip | archiving | -    | - |         | native                                                                        |
-| stuffit  | archiving |      | - |         | native                                                                        |
-| tar      | archiving | ✅    | - |         | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
-| tar      | stream    | ✅    | - |         | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
-| zip      | archiving | ✅*   | - |         | jdk                                                                     |
-| zip      | archiving | ✅    | - |         | [ant](https://ant.apache.org/)                                          |
-| cpio     | stream    | 🚧   | - |         | gjt                                                                     |
-| lzma     | stream    | 🚧   | - |         | [p7zip](https://p7zip.sourceforge.net/)                                 |
-| rpm      | archiving | 🚧   | - |         | gjt                                                                     |
-| apache   | archiving | ✅    | - | multi   | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
+| name     | mathod    | read | write | comment        | library                                                                 |
+|----------|-----------|:----:|:-----:|----------------|-------------------------------------------------------------------------|
+| binhex   | archiving |  ✅   |   -   |                | [binhex](https://github.com/umjammer/JBinHex)                           |
+| bzip2    | archiving |  ✅   |   -   |                | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
+| cab      | archiving |  ✅   |   -   |                | [dorkbox](https://github.com/umjammer/CabParser)                        |
+| gca      | archiving |  -   |   -   | win only       | native                                                                  |
+| gca      | archiving |  -   |   -   |                | shell                                                                   |
+| gca      | archiving |  ✅*  |   -   | needs gcac.exe | [jdosbox](https://github.com/umjammer/vavi-apps-dosbox)                 |
+| gzip     | archiving |  ✅   |   -   |                | jdk                                                                     |
+| lha      | archiving |  ✅   |   -   |                | [lha](https://github.com/umjammer/jlha)                                 |
+| rar      | archiving |  -   |   -   | win only       | native                                                                  |
+| rar      | archiving |  -   |   -   |                | shell                                                                   |
+| rar      | archiving |  ✅*  |   -   |                | [java-unrar](https://github.com/umjammer/java-unrar)                    |
+| rar      | archiving |  ✅   |   -   | no rar5        | [junrar](https://github.com/junrar/junrar)                              |
+| sevenzip | archiving |  ✅   |   -   | 7z only        | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
+| sevenzip | archiving |  -   |   -   |                | native                                                                  |
+| stuffit  | archiving |      |   -   |                | native                                                                  |
+| tar      | archiving |  ✅   |   -   |                | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
+| tar      | stream    |  ✅   |   -   |                | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
+| zip      | archiving |  ✅*  |   -   |                | jdk                                                                     |
+| zip      | archiving |  ✅   |   -   |                | [ant](https://ant.apache.org/)                                          |
+| cpio     | stream    |  🚧  |   -   |                | gjt                                                                     |
+| lzma     | stream    |  🚧  |   -   |                | [p7zip](https://p7zip.sourceforge.net/)                                 |
+| rpm      | archiving |  🚧  |   -   |                | gjt                                                                     |
+| apache   | archiving |  ✅   |   -   | multi          | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
 
 <sub>* chosen as spi</sub>
 
@@ -51,18 +52,18 @@ and [vavi-net-fuse](https://github.com/umjammer/vavi-apps-fuse/tree/master/vavi-
 ### archive extraction
 
 ```java
-    Archive archive = Archives.getArchive(Paths.get("foo/bar.rar").toFile());
-    Path outDir = Paths.get("foo/bar");
-    for (Entry entry : archive.entries()) {
-        Files.copy(archive.getInputStream(entry), outDir.resolve(entry.getName()));
-    }
+Archive archive = Archives.getArchive(Path.of("foo/bar.rar").toFile());
+Path outDir = Paths.get("foo/bar");
+for (Entry entry : archive.entries()) {
+  Files.copy(archive.getInputStream(entry), outDir.resolve(entry.getName()));
+}
 ```
 
 ### archive decompression
 
 ```java
-    InputStream compressed = Archives.getInputStream(Paths.get("foo/bar.tar.bz").toFile());
-    Files.copy(compressed, Paths.get("foo/bar.tar"));
+InputStream compressed = Archives.getInputStream(Paths.get("foo/bar.tar.bz").toFile());
+Files.copy(compressed, Paths.get("foo/bar.tar"));
 ```
 ## References
 

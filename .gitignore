@@ -1,2 +1,4 @@
 tmp/
 local.properties
+.dosbox/
+AGENTS.md

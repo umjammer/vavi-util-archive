@@ -8,7 +8,7 @@
 
   <groupId>vavi</groupId>
   <artifactId>vavi-util-archive</artifactId>
-  <version>1.1.13</version>
+  <version>1.1.14</version>
 
   <name>Vavi Archiving SPI</name>
   <url>https://github.com/umjammer/vavi-util-archive</url>
@@ -27,7 +27,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.12.1</version>
         <configuration>
-          <release>17</release>
+          <release>25</release>
         </configuration>
       </plugin>
       <plugin>
@@ -82,12 +82,12 @@
     <dependency>
       <groupId>com.github.umjammer</groupId>
       <artifactId>vavi-commons</artifactId>
-      <version>1.1.17</version>
+      <version>1.1.19</version>
     </dependency>
     <dependency>
       <groupId>com.github.umjammer</groupId>
       <artifactId>jlha</artifactId>
-      <version>0.0.10</version>
+      <version>0.0.11</version>
     </dependency>
     <dependency>
       <groupId>com.github.umjammer</groupId>
@@ -126,6 +126,17 @@
     </dependency>
 
     <dependency>
+      <groupId>com.github.umjammer.vavi-apps-dosbox</groupId> <!-- com.acclash.jdosbox / com.github.umjammer.vavi-apps-dosbox -->
+      <artifactId>jdosbox</artifactId>
+      <version>0.74.35v</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.umjammer.vavi-apps-dosbox</groupId> <!-- com.acclash.jdosbox / com.github.umjammer.vavi-apps-dosbox -->
+      <artifactId>jdosbox-win</artifactId>
+      <version>0.74.35v</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <scope>test</scope>
@@ -156,7 +167,7 @@
 
   <profiles>
     <profile>
-      <!-- mvn -P list antrun:run -Darchive='archive' -->
+      <!-- mvn -P list antrun:run -Darchive='archive' -resource='resource' -->
       <id>list</id>
       <build>
         <plugins>
@@ -175,10 +186,11 @@
                     <path refid="maven.compile.classpath"/>
                     <path refid="maven.test.classpath"/>
                   </classpath>
-                  <jvmarg value="-Djava.util.logging.config.file=${project.build.testOutputDirectory}/logging.properties" />
+                  <jvmarg value="-Djava.util.logging.config.file=${resource}/logging.properties" />
                   <arg value="${archive}" />
                 </java>
               </target>
+              <failOnError>true</failOnError>
             </configuration>
           </plugin>
         </plugins>

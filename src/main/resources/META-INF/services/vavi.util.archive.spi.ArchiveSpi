@@ -6,6 +6,7 @@ vavi.util.archive.rar.PureJavaRarArchiveSpi
 #vavi.util.archive.rar.NativeRarArchiveSpi
 #vavi.util.archive.gca.NativeGcaArchiveSpi
 #vavi.util.archive.gca.ShellGcaArchiveSpi
+vavi.util.archive.gca.DosboxGcaArchiveSpi
 #vavi.util.archive.sevenzip.NativeSevenZipArchiveSpi
 vavi.util.archive.sevenzip.ApacheSevenZipArchiveSpi
 vavi.util.archive.cab.DorkboxCabArchiveSpi
