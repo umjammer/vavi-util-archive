@@ -1,7 +1,7 @@
 [![](https://jitpack.io/v/umjammer/vavi-util-archive.svg)](https://jitpack.io/#umjammer/vavi-util-archive)
 [![Java CI](https://github.com/umjammer/vavi-util-archive/actions/workflows/maven.yml/badge.svg)](https://github.com/umjammer/vavi-util-archive/actions/workflows/maven.yml)
 [![CodeQL](https://github.com/umjammer/vavi-util-archive/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/umjammer/vavi-util-archive/actions/workflows/codeql-analysis.yml)
-![Java](https://img.shields.io/badge/Java-17-b07219)
+![Java](https://img.shields.io/badge/Java-25-b07219)
 
 # vavi-util-archive
 
