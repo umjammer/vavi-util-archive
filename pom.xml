@@ -126,6 +126,17 @@
     </dependency>
 
     <dependency>
+      <groupId>com.github.umjammer.vavi-apps-dosbox</groupId> <!-- com.acclash.jdosbox / com.github.umjammer.vavi-apps-dosbox -->
+      <artifactId>jdosbox</artifactId>
+      <version>0.74.35v</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.umjammer.vavi-apps-dosbox</groupId> <!-- com.acclash.jdosbox / com.github.umjammer.vavi-apps-dosbox -->
+      <artifactId>jdosbox-win</artifactId>
+      <version>0.74.35v</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <scope>test</scope>

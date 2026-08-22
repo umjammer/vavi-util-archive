@@ -22,6 +22,7 @@ and [vavi-net-fuse](https://github.com/umjammer/vavi-apps-fuse/tree/master/vavi-
 | cab      | archiving | ✅    | - |         | [dorkbox](https://github.com/umjammer/CabParser)                        |
 | gca      | archiving | -    | - | win only | native                                                                        |
 | gca      | archiving | -    | - |         | shell                                                                        |
+| gca      | archiving |  ✅*  |   -   | needs gcac.exe | [jdosbox](https://github.com/umjammer/vavi-apps-dosbox)                 |
 | gzip     | archiving | ✅    | - |         | jdk                                                                     |
 | lha      | archiving | ✅    | - |         | [lha](https://github.com/umjammer/jlha)                                 |
 | rar      | archiving | -    | - | win only | native                                                                    |
