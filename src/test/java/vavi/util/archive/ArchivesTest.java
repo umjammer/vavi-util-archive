@@ -38,7 +38,8 @@ class ArchivesTest {
                 arguments("cab", vavi.util.archive.cab.DorkboxCabArchive.class),
                 arguments("7z", vavi.util.archive.sevenzip.ApacheSevenZipArchive.class),
                 arguments("rar", vavi.util.archive.rar.PureJavaRarArchive.class),
-                arguments("lzh", vavi.util.archive.lha.LhaArchive.class)
+                arguments("lzh", vavi.util.archive.lha.LhaArchive.class),
+                arguments("m3u", vavi.util.archive.m3u.M3uArchive.class)
         );
     }
 

@@ -14,3 +14,4 @@ vavi.util.archive.cab.DorkboxCabArchiveSpi
 #vavi.util.archive.zip.AntZipArchiveSpi
 vavi.util.archive.apache.ApacheCommonsArchiveSpi
 #vavi.util.archive.stuffit.NativeStuffItArchiveSpi
+vavi.util.archive.m3u.M3uArchiveSpi
