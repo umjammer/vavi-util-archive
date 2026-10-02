@@ -53,6 +53,8 @@ public class M3uArchive extends InputStreamSupport implements Archive {
 
     private final File file;
     private final Path basePath;
+    /** used when the playlist is not UTF-8 */
+    private final Charset charset;
     private Playlist playlist;
     private Entry[] entries;
 
@@ -61,8 +63,16 @@ public class M3uArchive extends InputStreamSupport implements Archive {
     }
 
     public M3uArchive(File file, Path basePath) throws IOException {
+        this(file, basePath, null);
+    }
+
+    /**
+     * @param charset used when the playlist is not UTF-8, null means the platform default
+     */
+    public M3uArchive(File file, Path basePath, Charset charset) throws IOException {
         this.file = file;
         this.basePath = basePath != null ? basePath : (file != null ? file.toPath().toAbsolutePath().getParent() : null);
+        this.charset = charset != null ? charset : Charset.defaultCharset();
         init(readLines(file.toPath()));
     }
 
@@ -71,17 +81,25 @@ public class M3uArchive extends InputStreamSupport implements Archive {
     }
 
     public M3uArchive(InputStream is, Path basePath) throws IOException {
+        this(is, basePath, null);
+    }
+
+    /**
+     * @param charset used when the playlist is not UTF-8, null means the platform default
+     */
+    public M3uArchive(InputStream is, Path basePath, Charset charset) throws IOException {
         super(is);
         this.file = this.archiveFileForInputStream;
         this.basePath = basePath;
+        this.charset = charset != null ? charset : Charset.defaultCharset();
         init(readLines(this.file.toPath()));
     }
 
-    private static List<String> readLines(Path path) throws IOException {
+    private List<String> readLines(Path path) throws IOException {
         try {
             return Files.readAllLines(path, StandardCharsets.UTF_8);
         } catch (MalformedInputException e) {
-            return Files.readAllLines(path, Charset.defaultCharset());
+            return Files.readAllLines(path, charset);
         }
     }
 

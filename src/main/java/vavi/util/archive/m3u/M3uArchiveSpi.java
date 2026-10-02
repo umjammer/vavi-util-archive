@@ -10,6 +10,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -28,6 +29,9 @@ import vavi.util.archive.spi.ArchiveSpi;
 public class M3uArchiveSpi implements ArchiveSpi {
 
     public static final String ENV_KEY_BASE_PATH = "basePath";
+
+    /** the charset of a playlist that is not UTF-8, a {@link Charset} or its name */
+    public static final String ENV_KEY_CHARSET = "charset";
 
     @Override
     public boolean canExtractInput(Object target) throws IOException {
@@ -93,10 +97,20 @@ public class M3uArchiveSpi implements ArchiveSpi {
             }
         }
 
+        Charset charset = null;
+        if (env.containsKey(ENV_KEY_CHARSET)) {
+            Object val = env.get(ENV_KEY_CHARSET);
+            if (val instanceof Charset) {
+                charset = (Charset) val;
+            } else if (val instanceof String) {
+                charset = Charset.forName((String) val);
+            }
+        }
+
         if (obj instanceof File) {
-            return new M3uArchive((File) obj, basePath);
+            return new M3uArchive((File) obj, basePath, charset);
         } else if (obj instanceof InputStream) {
-            return new M3uArchive((InputStream) obj, basePath);
+            return new M3uArchive((InputStream) obj, basePath, charset);
         } else {
             throw new IllegalArgumentException("not supported type " + obj.getClass().getName());
         }
