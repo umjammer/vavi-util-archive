@@ -28,7 +28,7 @@ and [vavi-net-fuse](https://github.com/umjammer/vavi-apps-fuse/tree/master/vavi-
 | rar      | archiving |  -   |   -   | win only       | native                                                                  |
 | rar      | archiving |  -   |   -   |                | shell                                                                   |
 | rar      | archiving |  ✅*  |   -   |                | [java-unrar](https://github.com/umjammer/java-unrar)                    |
-| rar      | archiving |  ✅   |   -   | no rar5        | [junrar](https://github.com/junrar/junrar)                              |
+| rar      | archiving |  ✅   |   -   | ~~no rar5~~    | [junrar](https://github.com/junrar/junrar)                              |
 | sevenzip | archiving |  ✅   |   -   | 7z only        | [commons-compress](https://commons.apache.org/proper/commons-compress/) |
 | sevenzip | archiving |  -   |   -   |                | native                                                                  |
 | stuffit  | archiving |      |   -   |                | native                                                                  |
@@ -90,10 +90,13 @@ Files.copy(compressed, Paths.get("foo/bar.tar"));
    * 7zip 17.04 ... ok
  * ~~https://github.com/Diab1o/java-7z-archiver ... yet another pure java 7zip implementation?~~ (done)
  * where is my jna 7z implementation? (in the crashed hdd?)
- * binary things ... gca.exe -> dll -> 64bit -> mach-O + winelib -> dylib
+ * ~~binary things ... gca.exe -> dll -> 64bit -> mach-O + winelib -> dylib~~ → jdosbox
    * https://github.com/gitGNU/objconv
    * https://github.com/jakeajames/dylibify
    * https://github.com/hasherezade/exe_to_dll
+ * ~~m3u~~
+ * ~~canExtract(InputStream)'s argument InputStream should be an Object? ... see ImageIO~~
+ * ~~getXXXInstance(File) should be no argument?~~
 
 ---
 

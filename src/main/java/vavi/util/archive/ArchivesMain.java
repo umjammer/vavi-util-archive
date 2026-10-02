@@ -6,9 +6,12 @@
 
 package vavi.util.archive;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
+
+import org.apache.tika.Tika;
 
 
 /**
@@ -26,10 +29,10 @@ public class ArchivesMain {
         Path path = Paths.get(args[0]);
         Archive archive = Archives.getArchive(path.toFile());
         ArchivesMain app = new ArchivesMain();
-        System.out.println(ArchivesMain.toHtml(archive));
+        System.out.println(app.toHtml(archive));
     }
 
-    static String toHtml(Archive archive) {
+    String toHtml(Archive archive) throws IOException {
         StringBuilder sb = new StringBuilder();
         sb.append("<table>");
         sb.append("\n");
@@ -49,14 +52,15 @@ public class ArchivesMain {
         sb.append("</tr>");
         sb.append("\n");
         for (Entry entry : archive.entries()) {
-            sb.append(toHtml(entry));
+            sb.append(toHtml(archive, entry));
             sb.append("\n");
         }
         sb.append("</table>");
         return sb.toString();
     }
 
-    static String toHtml(Entry entry) {
+    String toHtml(Archive archive, Entry entry) throws IOException {
+        Tika tika = new Tika();
         String sb = "<tr>" +
                 "<td>" +
                 entry.getName() +
@@ -68,7 +72,7 @@ public class ArchivesMain {
                 entry.getSize() +
                 "</td>" +
                 "<td>" +
-                entry.getName() +
+                tika.detect(archive.getInputStream(entry)) +
                 "</td>" +
                 "</tr>";
         return sb;

@@ -1,0 +1,6 @@
+#EXTM3U
+#EXT-X-TARGETDURATION:10
+#EXTINF:10.0,Duke Trunk
+duke_trunk.png
+#EXTINF:5.0,Test Zip
+test.zip

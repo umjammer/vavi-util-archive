@@ -80,10 +80,10 @@ public class JunrarRarArchiveTest {
     }
 
     @Test
-    @DisplayName("junrar doesn't support rar5")
+    @DisplayName("junrar supports rar5")
     public void test2() throws Exception {
-        Exception e = assertThrows(IOException.class, () -> new JunrarRarArchive(new File("src/test/resources/rar5.rar")));
-        assertInstanceOf(com.github.junrar.exception.UnsupportedRarV5Exception.class, e.getCause());
+        Archive archive = new JunrarRarArchive(new File("src/test/resources/rar5.rar"));
+        assertEquals(2, archive.size());
     }
 
     @Test
